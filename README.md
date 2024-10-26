@@ -1,8 +1,8 @@
-📢 Introducing YO Group Matcher – A Powerful Script for Adobe After Effects!
+Introducing **YO Group Matcher** – A Script for Adobe After Effects!
 
 YO Group Matcher is a robust script designed for Adobe After Effects that significantly simplifies and optimizes the process of managing layers and effects within your compositions. Whether you’re creating complex animations or simple videos, YO Group Matcher will become an indispensable tool in your arsenal!
 
-🔍 Key Features:
+_Key Features:_
 
 1.	Creating and Managing Groups: Layer Groups: Organize your layers into groups to easily manage their visibility, locking, and other parameters. Effect Groups: Group effects for quick application and editing of multiple effects simultaneously.
 
@@ -19,7 +19,7 @@ Solo Groups: Highlight specific groups by hiding all others, allowing you to foc
 
 8.	Update Checking:Automatic Checking: Always stay up-to-date with the latest updates and improvements of the script directly from the control panel.Simple Update Link: Easily navigate to the download page for new versions with a direct link.
 
-🔧 How It Works:
+_How It Works:_
 
 1.	Creating a Group:Click the “Create a New Layer Group” or “Create a New Effects Group” button. Enter the group name, prefix, and select a color label. Add the selected layers or effects to the created group for easy management.
 
