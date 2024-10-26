@@ -32,6 +32,8 @@ _How It Works:_
 Links:
 
 • Download Script: [GitHub Releases](https://github.com/yo-romlogunov/YO-Group-Matcher/releases)
+
 • User Manual: [Manual](https://romlogunov.notion.site/Manual-YO-Group-Matcher-122dc723a706801ca52edde6ac3920d6?pvs=74)
+
 • Community and Support: [Telegram](https://t.me/vtb_blog)
 
