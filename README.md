@@ -28,3 +28,10 @@ _How It Works:_
 3.	Visibility and Solo Management: Toggle group visibility or use the Solo function to highlight necessary groups, hiding the rest.
 
 4.	Saving and Loading Presets: Save group settings for use in future projects or load previously saved presets for quick setup.
+
+Links:
+
+• Download Script: [GitHub Releases](https://github.com/yo-romlogunov/YO-Group-Matcher/releases)
+• User Manual: [Manual](https://romlogunov.notion.site/Manual-YO-Group-Matcher-122dc723a706801ca52edde6ac3920d6?pvs=74)
+• Community and Support: [Telegram](https://t.me/vtb_blog)
+
