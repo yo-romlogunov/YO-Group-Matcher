@@ -6,17 +6,18 @@ YO Group Matcher is a robust script designed for Adobe After Effects that signif
 
 1.	Creating and Managing Groups: Layer Groups: Organize your layers into groups to easily manage their visibility, locking, and other parameters. Effect Groups: Group effects for quick application and editing of multiple effects simultaneously.
 
-2.	Convenient Visibility Management:Toggle Visibility: Easily toggle the visibility of an entire group of layers or effects with a single click.Solo Groups: Highlight specific groups by hiding all others, allowing you to focus on the necessary elements without unnecessary clutter.
+2.	Convenient Visibility Management: Toggle Visibility: Easily toggle the visibility of an entire group of layers or effects with a single click.
+Solo Groups: Highlight specific groups by hiding all others, allowing you to focus on the necessary elements without unnecessary clutter.
 
-3.	Additional Layer Functions:Hide Layers (Shy Feature): Hide layers in the timeline without disabling their visibility in the composition, making your workspace cleaner.Lock Layers: Lock groups of layers to prevent accidental changes.
+4.	Additional Layer Functions:Hide Layers (Shy Feature): Hide layers in the timeline without disabling their visibility in the composition, making your workspace cleaner. Lock Layers: Lock groups of layers to prevent accidental changes.
 
-4.	Color Labels:Assign color labels to your groups for quick visual differentiation and organization.
+5.	Color Labels:Assign color labels to your groups for quick visual differentiation and organization.
 
-5.	Import and Export Settings:Save Presets: Save current settings of layer and effect groups into .pgm files for reuse in other projects.Load Presets: Quickly load previously saved presets, saving you time when setting up new projects.
+6.	Import and Export Settings:Save Presets: Save current settings of layer and effect groups into .pgm files for reuse in other projects.Load Presets: Quickly load previously saved presets, saving you time when setting up new projects.
 
-6.	Intuitive Interface:Control panel with convenient buttons and checkboxes for quick access to main functions.Icons and tooltips to facilitate navigation and understanding of the script’s capabilities.
+7.	Intuitive Interface:Control panel with convenient buttons and checkboxes for quick access to main functions. Icons and tooltips to facilitate navigation and understanding of the script’s capabilities.
 
-7.	Update Checking:Automatic Checking: Always stay up-to-date with the latest updates and improvements of the script directly from the control panel.Simple Update Link: Easily navigate to the download page for new versions with a direct link.
+8.	Update Checking:Automatic Checking: Always stay up-to-date with the latest updates and improvements of the script directly from the control panel.Simple Update Link: Easily navigate to the download page for new versions with a direct link.
 
 🔧 How It Works:
 
