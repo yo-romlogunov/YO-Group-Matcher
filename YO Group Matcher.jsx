@@ -2,7 +2,7 @@ var panelGlobal = this;
 
 /*
 Code for Import https://scriptui.joonas.me — (Triple click to select): 
-{"items":{"item-0":{"id":0,"type":"Dialog","parentId":false,"style":{"enabled":true,"varName":null,"windowType":"Palette","creationProps":{"su1PanelCoordinates":false,"maximizeButton":true,"minimizeButton":false,"independent":false,"closeButton":true,"borderless":false,"resizeable":true},"text":"YO Group Matcher 2.1.3","preferredSize":[384,490],"margins":0,"orientation":"row","spacing":11,"alignChildren":["center","top"]}},"item-1":{"id":1,"type":"TabbedPanel","parentId":0,"style":{"enabled":true,"varName":null,"preferredSize":[0,0],"margins":10,"alignment":null,"selection":4}},"item-3":{"id":3,"type":"Tab","parentId":1,"style":{"enabled":true,"varName":"tab_layers","text":"Layers Group","orientation":"column","spacing":10,"alignChildren":["center","top"]}},"item-4":{"id":4,"type":"Tab","parentId":1,"style":{"enabled":true,"varName":"tab_effects","text":"Effects Group","orientation":"column","spacing":10,"alignChildren":["left","top"]}},"item-5":{"id":5,"type":"Tab","parentId":1,"style":{"enabled":true,"varName":"tab_settings","text":"Settings","orientation":"column","spacing":8,"alignChildren":["center","top"]}},"item-6":{"id":6,"type":"IconButton","parentId":7,"style":{"enabled":true,"varName":"save_my_presets_button","text":"Save  My Preset","preferredSize":[173,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAC0SURBVHgB7ZLRDcIwDEQdxACMkBFghG4CGzBCN4ER2KArdAPYgG4QfMIWEUodV+pPqz7Jiu2412sTolWQUroiaC5Y7InwzO5oZjbBH3wIEeHtK/sRsQMvneRNLib9geNEFjzcpi9R6rPUuDJvCc2PmVvQmg5BCOHOg0hvf1sN7/Vjz5mHAlFeLlIONTHTYcFpXxNzCaooOSkJRnHkIVqC+jkdTeelSci7uCqlt1bAv33QYvgAT85zTj/6nZ8AAAAASUVORK5CYII="],"alignment":null,"helpTip":"Save current Layer and Effect Groups to a .pgm file"}},"item-7":{"id":7,"type":"Panel","parentId":5,"style":{"enabled":true,"varName":"panel_import_export","creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Import/Export","preferredSize":[131,73],"margins":18,"orientation":"row","spacing":20,"alignChildren":["left","center"],"alignment":"fill"}},"item-8":{"id":8,"type":"IconButton","parentId":7,"style":{"enabled":true,"varName":"load_my_presets_button","text":"Load  My Preset","preferredSize":[168,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADrSURBVHgBtZQNEcIwDIWzHQKQMAdYGBJQwHCAA4YCJNA5mAOQgIRKmIPycgSu9Nou5efd5dql6bckW0v0Y1WhwznXYmgS8VNVVSNpBVjn5nXIMRbBcyvjLhK7hJ1gPaCETI+kyNBwCom1RpNpTZ+rj0G/AT6he9+xIL0mWNg3znCV3JHrYSKedfZ9qpKxacumiZ0tWUBG5vy7DLn4WgsTmblM6wysEZilxweZZG5kLapkySjNYuMG0xvsIu41rOW1YqBAR8n29RJ6b0EZ0JNVxsWBfOsEriHhz4uPkStX5zNKL9hQFn290j91BzcC1hWKioZ7AAAAAElFTkSuQmCC"],"alignment":null,"helpTip":"Load Layer and Effect Groups from a .pgm file"}},"item-9":{"id":9,"type":"Panel","parentId":5,"style":{"enabled":true,"varName":"panel_settings","creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Settings","preferredSize":[0,0],"margins":18,"orientation":"row","spacing":20,"alignChildren":["left","center"],"alignment":"fill"}},"item-11":{"id":11,"type":"EditText","parentId":5,"style":{"enabled":true,"varName":"about_text_group","creationProps":{"noecho":false,"readonly":true,"multiline":true,"scrollable":true,"borderless":false,"enterKeySignalsOnChange":false},"softWrap":true,"text":"\nYO Group Matcher\n\nDownload Updates:\nhttps://github.com/yo-romlogunov/YO-Group-Matcher/releases\n\nManual:\nhttps://goo.su/5jGwMYu\n\nThis script allows you to manage Layer Groups \nand Effect Groups within your compositions. \nYou can add, edit, and delete groups, toggle visibility, \nsolo groups, and hide layers using the Shy feature.\n\nFeatures:\n- Create and manage Layer Groups and Effect Groups\n- Toggle visibility of entire groups\n- Solo specific Layer Groups\n- Hide layers in the timeline without disabling them\n\nFor more information, visit @romlogunov - t.me/vtb_blogGroups\n- Hide layers in the timeline without disabling them\n\nFor more information, visit @romlogunov - t.me/vtb_blog\n","justify":"left","preferredSize":[476,381],"alignment":"fill","helpTip":null}},"item-12":{"id":12,"type":"IconButton","parentId":5,"style":{"enabled":true,"varName":"updates_check_button","text":"Check For Updates - You Version 2.1.3","preferredSize":[275,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAETSURBVHgB1VNREcIwDE05BCAhEiYBCaCA4QAHFAXgYHMADpAADjoUgIOSsjcuV7qWT3h377JrX97SNCX6dZiSwHtfSWDhI9AYc01oWNa7nMlMuBXe/SecsFbaoLM5M0aSh+EhGICt2rsI9/i2ucpcVtTrbFT1WzuJtHvq+7WTnlhlsAiVK52jElDdq0eJvXffwiX5T9hBO1V5c8Qd5cHCdbR2TRlWiB1lIK045fYn9B3CDK6iPg7HD+3YpAw7RE4YLoU3ocOosNIypU6lLuVMI8CMngdDiQ1yeCyhhWBFBWCUAhoqVODwQuqC2R1apsKf9dM74slVWK9xZP+VWWTa+nE0Y2amZEz9fOoZPcksPuhv8QRky34p3fzEMwAAAABJRU5ErkJggg=="],"alignment":null,"helpTip":"Check for Updates"}},"item-13":{"id":13,"type":"StaticText","parentId":5,"style":{"enabled":true,"varName":"status_updates_text","creationProps":{"truncate":"none","multiline":false,"scrolling":false},"softWrap":false,"text":"Status","justify":"center","preferredSize":[0,24],"alignment":"fill","helpTip":null}},"item-14":{"id":14,"type":"Divider","parentId":5,"style":{"enabled":true,"varName":null}},"item-15":{"id":15,"type":"Panel","parentId":3,"style":{"enabled":true,"varName":"layer_group_default","creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Layer Group  Default [X]","preferredSize":[0,0],"margins":[10,5,10,15],"orientation":"row","spacing":20,"alignChildren":["center","center"],"alignment":"fill"}},"item-16":{"id":16,"type":"Checkbox","parentId":15,"style":{"enabled":true,"varName":"view_layers_checkbox","text":"View","preferredSize":[0,0],"alignment":null,"helpTip":"Toggle visibility of layers in this group across all compositions","checked":true}},"item-17":{"id":17,"type":"IconButton","parentId":15,"style":{"enabled":true,"varName":"add_layer_button","text":"Add Layer","preferredSize":[115,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAD0SURBVHgBrZSBEcIgDEVDzwF0A7qBI+AGbmRXcIK6iY7QDWCDdoOYCHhcS1qK/rsUGriXlCYA/FlqawMinmlgm8icUmqAvSLIkexGNuJSlqwn06UwI4ByYLMFu+J+GQmmQ1QpG2mNv+aYA/YoSweT1EWOSoCWBi2cRhtGK6xP9PdPPGkCzKzASsRVwaUFh+iYbXBkl/hC0V0I3CZ7nrMkeD40ArBaMcN59WtIzivJzK6wHD8+GYZ2mqBe35ZsEucd6vVaeND371hR2OzX2TDo+3ivDKwJfT/bAtC4CUug3GYPAcygDnP9C+UXrAZfq0PVBfuL3rs+9VbgXdmxAAAAAElFTkSuQmCC"],"alignment":null,"helpTip":"Add selected layers to this group across all compositions"}},"item-18":{"id":18,"type":"IconButton","parentId":15,"style":{"enabled":true,"varName":"edit_group_layers_button","text":"","preferredSize":[40,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgB7ZPRCYAwDESv4gCO4AiOoBs5Qp3AEXQUN9ENdIMYacVaihDrV/HBwf300UACJAsRtZwSX8CigQxztPQQcFa6uEkzCOCHva0NZ7O95NSQ4o/JqexPNaQ4MvKkBaQEZCctpDzINKT8Mg0pZG4zWuZeSminOqWUxkthtOwgd/rk9IVlI5JkB/RNJEiR+ykNAAAAAElFTkSuQmCC"],"alignment":null,"helpTip":"Rename and settings this Group"}},"item-19":{"id":19,"type":"Checkbox","parentId":15,"style":{"enabled":true,"varName":"solo_layers_checkbox","text":"Solo","preferredSize":[0,0],"alignment":null,"helpTip":"Solo this group: show only layers in this group and hide all others"}},"item-20":{"id":20,"type":"Checkbox","parentId":15,"style":{"enabled":true,"varName":"hide_layers_checkbox","text":"Hide","preferredSize":[0,0],"alignment":null,"helpTip":"Mark layers in this group as Shy: hide them in the timeline without disabling"}},"item-22":{"id":22,"type":"IconButton","parentId":15,"style":{"enabled":true,"varName":"delete_group_layers_button","text":"","preferredSize":[40,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAB+SURBVHgB7ZQ9EcAgDEa/1EAtIKVSsFAnlVAJlVAJdQAScJBmYKL8ZOiQgXeXCwR4FwYArEO9RWZ2knxRPokoqoUiOSStebpJuGJLlLjzOIl8x6CrwHrCsMMsdVBQu3pLyNAJP+cX/MwUTqFl4YMxsVbsvWWPNkni6n1jdnkBjcFLWju67I0AAAAASUVORK5CYII="],"alignment":null,"helpTip":"Delete this Layer Group"}},"item-23":{"id":23,"type":"Panel","parentId":4,"style":{"enabled":true,"varName":"effect_group_default","creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Effect Group Default [X]","preferredSize":[0,0],"margins":[10,5,10,15],"orientation":"row","spacing":20,"alignChildren":["center","center"],"alignment":"fill"}},"item-24":{"id":24,"type":"Checkbox","parentId":23,"style":{"enabled":true,"varName":"view_effects_checkbox","text":"View","preferredSize":[0,0],"alignment":null,"helpTip":"Toggle visibility of effects in this group across all compositions","checked":true}},"item-25":{"id":25,"type":"IconButton","parentId":23,"style":{"enabled":true,"varName":"edit_group_effects_button","text":"Edit Group","preferredSize":[125,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgB7ZPRCYAwDESv4gCO4AiOoBs5Qp3AEXQUN9ENdIMYacVaihDrV/HBwf300UACJAsRtZwSX8CigQxztPQQcFa6uEkzCOCHva0NZ7O95NSQ4o/JqexPNaQ4MvKkBaQEZCctpDzINKT8Mg0pZG4zWuZeSminOqWUxkthtOwgd/rk9IVlI5JkB/RNJEiR+ykNAAAAAElFTkSuQmCC"],"alignment":null,"helpTip":"Rename and settings this Group"}},"item-26":{"id":26,"type":"IconButton","parentId":23,"style":{"enabled":true,"varName":"add_effect_button","text":"Add Effect","preferredSize":[115,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAD0SURBVHgBrZSBEcIgDEVDzwF0A7qBI+AGbmRXcIK6iY7QDWCDdoOYCHhcS1qK/rsUGriXlCYA/FlqawMinmlgm8icUmqAvSLIkexGNuJSlqwn06UwI4ByYLMFu+J+GQmmQ1QpG2mNv+aYA/YoSweT1EWOSoCWBi2cRhtGK6xP9PdPPGkCzKzASsRVwaUFh+iYbXBkl/hC0V0I3CZ7nrMkeD40ArBaMcN59WtIzivJzK6wHD8+GYZ2mqBe35ZsEucd6vVaeND371hR2OzX2TDo+3ivDKwJfT/bAtC4CUug3GYPAcygDnP9C+UXrAZfq0PVBfuL3rs+9VbgXdmxAAAAAElFTkSuQmCC"],"alignment":null,"helpTip":"Add selected effects to this group across all compositions"}},"item-27":{"id":27,"type":"IconButton","parentId":3,"style":{"enabled":true,"varName":"create_group_layers_button","text":"Create a New Layer Group","preferredSize":[200,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADRSURBVHgB1VRREcIwDE05/pmEooBawAESkICESZgELKAACeCAOVgdlBeW3bXQG8voB3t3b9lytzR5aUL07zD8CCE4mAPp4MGzMcYnXgSrwEeYh+v7KSuwAi3Ng80FLIp19H4XTkVec+hgRY+aFBDdbzSSoRZ76vUvExDXpc35f2qKlH0qFpD6a7OLHeqSuYkwx8jlpKEeMjTqLnOJI5NTqUt+ZUG0FTIuwzfPdVzyRsqZErSVbNl0ScdlOXRBByf/1mAyMcP6spQK/Q3Nx9paDJ7kC+DeMHTqtgAAAABJRU5ErkJggg=="],"alignment":"fill","helpTip":"Create a new Layer Group"}},"item-28":{"id":28,"type":"IconButton","parentId":23,"style":{"enabled":true,"varName":"delete_group_effects_button","text":"Delete Group","preferredSize":[120,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAB+SURBVHgB7ZQ9EcAgDEa/1EAtIKVSsFAnlVAJlVAJdQAScJBmYKL8ZOiQgXeXCwR4FwYArEO9RWZ2knxRPokoqoUiOSStebpJuGJLlLjzOIl8x6CrwHrCsMMsdVBQu3pLyNAJP+cX/MwUTqFl4YMxsVbsvWWPNkni6n1jdnkBjcFLWju67I0AAAAASUVORK5CYII="],"alignment":null,"helpTip":"Delete this Effects Group"}},"item-30":{"id":30,"type":"IconButton","parentId":4,"style":{"enabled":true,"varName":"create_group_effects_button","text":"Create a New Effects Group","preferredSize":[200,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADRSURBVHgB1VRREcIwDE05/pmEooBawAESkICESZgELKAACeCAOVgdlBeW3bXQG8voB3t3b9lytzR5aUL07zD8CCE4mAPp4MGzMcYnXgSrwEeYh+v7KSuwAi3Ng80FLIp19H4XTkVec+hgRY+aFBDdbzSSoRZ76vUvExDXpc35f2qKlH0qFpD6a7OLHeqSuYkwx8jlpKEeMjTqLnOJI5NTqUt+ZUG0FTIuwzfPdVzyRsqZErSVbNl0ScdlOXRBByf/1mAyMcP6spQK/Q3Nx9paDJ7kC+DeMHTqtgAAAABJRU5ErkJggg=="],"alignment":"fill","helpTip":"Create a new Effect Group"}},"item-32":{"id":32,"type":"Divider","parentId":15,"style":{"enabled":true,"varName":null}},"item-34":{"id":34,"type":"Divider","parentId":23,"style":{"enabled":true,"varName":null}},"item-36":{"id":36,"type":"Divider","parentId":15,"style":{"enabled":true,"varName":null}},"item-37":{"id":37,"type":"IconButton","parentId":9,"style":{"enabled":true,"varName":"restore_presets_button","text":"Restore Default Preset","preferredSize":[217,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEPSURBVHgBnVQLEYMwDC13E4CESkACEpCAg+EAJOBgSJgD5gAJxQE4yBJIj9DPKHt3uR3Ley9NmqtSPwAAOUaLMWIssGPh7xpDq1Qg+SlMrJGBM+i7TjFrhajHKJ18iTEITptiRtWLi8KV6KIKEbSoqlUC2NSOJHeTL0526gZE+42bMLHT8Y1XkVzJutEVEKaAQItZGa+1nbO1/eAb1BiWlItV+GRZNuNvLfLEJc3b8Zy3HFc34GMItGSHr2MnlC2ZkJkQFDT0iFkRmqE19cyuILbDu2WtbgKO3V3+0btmhRhVd0WmyiMEXhU4XqElyYxFHZwxcQHj/N+oVPApBwg/W31oZtkNc1psihWXfY3xvqAwDphc/wUqAAAAAElFTkSuQmCC"],"alignment":null,"helpTip":null}},"item-38":{"id":38,"type":"IconButton","parentId":9,"style":{"enabled":true,"varName":"sort_button","text":"Sort Footage in Projects","preferredSize":[201,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABhSURBVHgB7dGxDYAwDETRO0TPCqzCJrABIzASbMAIbEA2CXZBFxe20iVPSnVSXHxmgYoGVDbKW9AUSpMDfifJp7jkmNW6pFFu+CV0P638GtslJXc4aZTZ2CYE6IebsSUEfJdFSIxfXw8FAAAAAElFTkSuQmCC"],"alignment":null,"helpTip":null}},"item-39":{"id":39,"type":"DropDownList","parentId":42,"style":{"enabled":true,"varName":"default_presets_dropdown","text":"DropDownList","listItems":"Select Preset, 3D, Shapes, VFX","preferredSize":[133,0],"alignment":null,"selection":0,"helpTip":null}},"item-40":{"id":40,"type":"Button","parentId":42,"style":{"enabled":true,"varName":"apply_preset_button","text":"Apply Preset","justify":"center","preferredSize":[0,0],"alignment":null,"helpTip":null}},"item-42":{"id":42,"type":"Panel","parentId":5,"style":{"enabled":true,"varName":"panel_default_presets","creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Default Presets","preferredSize":[0,0],"margins":17,"orientation":"row","spacing":10,"alignChildren":["left","top"],"alignment":"fill"}}},"order":[0,1,3,15,16,17,32,19,20,36,18,22,27,4,23,24,26,34,25,28,30,5,42,39,40,7,6,8,9,37,38,11,12,14,13],"settings":{"importJSON":true,"indentSize":false,"cepExport":false,"includeCSSJS":true,"showDialog":true,"functionWrapper":false,"afterEffectsDockable":true,"itemReferenceList":"None"},"activeId":4}
+{"items":{"item-0":{"id":0,"type":"Dialog","parentId":false,"style":{"enabled":true,"varName":null,"windowType":"Palette","creationProps":{"su1PanelCoordinates":false,"maximizeButton":true,"minimizeButton":false,"independent":false,"closeButton":true,"borderless":false,"resizeable":true},"text":"YO Group Matcher 2.2.5","preferredSize":[384,490],"margins":0,"orientation":"row","spacing":11,"alignChildren":["center","top"]}},"item-1":{"id":1,"type":"TabbedPanel","parentId":0,"style":{"enabled":true,"varName":null,"preferredSize":[0,0],"margins":10,"alignment":null,"selection":4}},"item-3":{"id":3,"type":"Tab","parentId":1,"style":{"enabled":true,"varName":"tab_layers","text":"Layers Group","orientation":"column","spacing":10,"alignChildren":["center","top"]}},"item-4":{"id":4,"type":"Tab","parentId":1,"style":{"enabled":true,"varName":"tab_effects","text":"Effects Group","orientation":"column","spacing":10,"alignChildren":["left","top"]}},"item-5":{"id":5,"type":"Tab","parentId":1,"style":{"enabled":true,"varName":"tab_settings","text":"Settings","orientation":"column","spacing":8,"alignChildren":["center","top"]}},"item-6":{"id":6,"type":"IconButton","parentId":7,"style":{"enabled":true,"varName":"save_my_presets_button","text":"Save  My Preset","preferredSize":[173,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAC0SURBVHgB7ZLRDcIwDEQdxACMkBFghG4CGzBCN4ER2KArdAPYgG4QfMIWEUodV+pPqz7Jiu2412sTolWQUroiaC5Y7InwzO5oZjbBH3wIEeHtK/sRsQMvneRNLib9geNEFjzcpi9R6rPUuDJvCc2PmVvQmg5BCOHOg0hvf1sN7/Vjz5mHAlFeLlIONTHTYcFpXxNzCaooOSkJRnHkIVqC+jkdTeelSci7uCqlt1bAv33QYvgAT85zTj/6nZ8AAAAASUVORK5CYII="],"alignment":null,"helpTip":"Save current Layer and Effect Groups to a .pgm file"}},"item-7":{"id":7,"type":"Panel","parentId":5,"style":{"enabled":true,"varName":"panel_import_export","creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Import/Export","preferredSize":[131,73],"margins":18,"orientation":"row","spacing":20,"alignChildren":["left","center"],"alignment":"fill"}},"item-8":{"id":8,"type":"IconButton","parentId":7,"style":{"enabled":true,"varName":"load_my_presets_button","text":"Load  My Preset","preferredSize":[168,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADrSURBVHgBtZQNEcIwDIWzHQKQMAdYGBJQwHCAA4YCJNA5mAOQgIRKmIPycgSu9Nou5efd5dql6bckW0v0Y1WhwznXYmgS8VNVVSNpBVjn5nXIMRbBcyvjLhK7hJ1gPaCETI+kyNBwCom1RpNpTZ+rj0G/AT6he9+xIL0mWNg3znCV3JHrYSKedfZ9qpKxacumiZ0tWUBG5vy7DLn4WgsTmblM6wysEZilxweZZG5kLapkySjNYuMG0xvsIu41rOW1YqBAR8n29RJ6b0EZ0JNVxsWBfOsEriHhz4uPkStX5zNKL9hQFn290j91BzcC1hWKioZ7AAAAAElFTkSuQmCC"],"alignment":null,"helpTip":"Load Layer and Effect Groups from a .pgm file"}},"item-9":{"id":9,"type":"Panel","parentId":5,"style":{"enabled":true,"varName":"panel_settings","creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Settings","preferredSize":[0,0],"margins":18,"orientation":"row","spacing":20,"alignChildren":["left","center"],"alignment":"fill"}},"item-11":{"id":11,"type":"EditText","parentId":5,"style":{"enabled":true,"varName":"about_text_group","creationProps":{"noecho":false,"readonly":true,"multiline":true,"scrollable":true,"borderless":false,"enterKeySignalsOnChange":false},"softWrap":true,"text":"\nYO Group Matcher\n\nDownload Updates:\nhttps://github.com/yo-romlogunov/YO-Group-Matcher/releases\n\nManual:\nhttps://goo.su/5jGwMYu\n\nThis script allows you to manage Layer Groups \nand Effect Groups within your compositions. \nYou can add, edit, and delete groups, toggle visibility, \nsolo groups, and hide layers using the Shy feature.\n\nFeatures:\n- Create and manage Layer Groups and Effect Groups\n- Toggle visibility of entire groups\n- Solo specific Layer Groups\n- Hide layers in the timeline without disabling them\n\nFor more information, visit @romlogunov - t.me/vtb_blogGroups\n- Hide layers in the timeline without disabling them\n\nFor more information, visit @romlogunov - t.me/vtb_blog\n","justify":"left","preferredSize":[476,381],"alignment":"fill","helpTip":null}},"item-12":{"id":12,"type":"IconButton","parentId":5,"style":{"enabled":true,"varName":"updates_check_button","text":"Check For Updates - You Version 2.2.5","preferredSize":[275,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAETSURBVHgB1VNREcIwDE05BCAhEiYBCaCA4QAHFAXgYHMADpAADjoUgIOSsjcuV7qWT3h377JrX97SNCX6dZiSwHtfSWDhI9AYc01oWNa7nMlMuBXe/SecsFbaoLM5M0aSh+EhGICt2rsI9/i2ucpcVtTrbFT1WzuJtHvq+7WTnlhlsAiVK52jElDdq0eJvXffwiX5T9hBO1V5c8Qd5cHCdbR2TRlWiB1lIK045fYn9B3CDK6iPg7HD+3YpAw7RE4YLoU3ocOosNIypU6lLuVMI8CMngdDiQ1yeCyhhWBFBWCUAhoqVODwQuqC2R1apsKf9dM74slVWK9xZP+VWWTa+nE0Y2amZEz9fOoZPcksPuhv8QRky34p3fzEMwAAAABJRU5ErkJggg=="],"alignment":null,"helpTip":"Check for Updates"}},"item-13":{"id":13,"type":"StaticText","parentId":5,"style":{"enabled":true,"varName":"status_updates_text","creationProps":{"truncate":"none","multiline":false,"scrolling":false},"softWrap":false,"text":"Status","justify":"center","preferredSize":[0,24],"alignment":"fill","helpTip":null}},"item-14":{"id":14,"type":"Divider","parentId":5,"style":{"enabled":true,"varName":null}},"item-15":{"id":15,"type":"Panel","parentId":3,"style":{"enabled":true,"varName":"layer_group_default","creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Layer Group  Default [X]","preferredSize":[0,0],"margins":[10,5,10,15],"orientation":"row","spacing":20,"alignChildren":["center","center"],"alignment":"fill"}},"item-16":{"id":16,"type":"Checkbox","parentId":15,"style":{"enabled":true,"varName":"view_layers_checkbox","text":"View","preferredSize":[0,0],"alignment":null,"helpTip":"Toggle visibility of layers in this group across all compositions","checked":true}},"item-17":{"id":17,"type":"IconButton","parentId":15,"style":{"enabled":true,"varName":"add_layer_button","text":"Add Layer","preferredSize":[115,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAD0SURBVHgBrZSBEcIgDEVDzwF0A7qBI+AGbmRXcIK6iY7QDWCDdoOYCHhcS1qK/rsUGriXlCYA/FlqawMinmlgm8icUmqAvSLIkexGNuJSlqwn06UwI4ByYLMFu+J+GQmmQ1QpG2mNv+aYA/YoSweT1EWOSoCWBi2cRhtGK6xP9PdPPGkCzKzASsRVwaUFh+iYbXBkl/hC0V0I3CZ7nrMkeD40ArBaMcN59WtIzivJzK6wHD8+GYZ2mqBe35ZsEucd6vVaeND371hR2OzX2TDo+3ivDKwJfT/bAtC4CUug3GYPAcygDnP9C+UXrAZfq0PVBfuL3rs+9VbgXdmxAAAAAElFTkSuQmCC"],"alignment":null,"helpTip":"Add selected layers to this group across all compositions"}},"item-18":{"id":18,"type":"IconButton","parentId":15,"style":{"enabled":true,"varName":"edit_group_layers_button","text":"","preferredSize":[40,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgB7ZPRCYAwDESv4gCO4AiOoBs5Qp3AEXQUN9ENdIMYacVaihDrV/HBwf300UACJAsRtZwSX8CigQxztPQQcFa6uEkzCOCHva0NZ7O95NSQ4o/JqexPNaQ4MvKkBaQEZCctpDzINKT8Mg0pZG4zWuZeSminOqWUxkthtOwgd/rk9IVlI5JkB/RNJEiR+ykNAAAAAElFTkSuQmCC"],"alignment":null,"helpTip":"Rename and settings this Group"}},"item-19":{"id":19,"type":"Checkbox","parentId":15,"style":{"enabled":true,"varName":"solo_layers_checkbox","text":"Solo","preferredSize":[0,0],"alignment":null,"helpTip":"Solo this group: show only layers in this group and hide all others"}},"item-20":{"id":20,"type":"Checkbox","parentId":15,"style":{"enabled":true,"varName":"hide_layers_checkbox","text":"Hide","preferredSize":[0,0],"alignment":null,"helpTip":"Mark layers in this group as Shy: hide them in the timeline without disabling"}},"item-22":{"id":22,"type":"IconButton","parentId":15,"style":{"enabled":true,"varName":"delete_group_layers_button","text":"","preferredSize":[40,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAB+SURBVHgB7ZQ9EcAgDEa/1EAtIKVSsFAnlVAJlVAJdQAScJBmYKL8ZOiQgXeXCwR4FwYArEO9RWZ2knxRPokoqoUiOSStebpJuGJLlLjzOIl8x6CrwHrCsMMsdVBQu3pLyNAJP+cX/MwUTqFl4YMxsVbsvWWPNkni6n1jdnkBjcFLWju67I0AAAAASUVORK5CYII="],"alignment":null,"helpTip":"Delete this Layer Group"}},"item-23":{"id":23,"type":"Panel","parentId":4,"style":{"enabled":true,"varName":"effect_group_default","creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Effect Group Default [X]","preferredSize":[0,0],"margins":[10,5,10,15],"orientation":"row","spacing":20,"alignChildren":["center","center"],"alignment":"fill"}},"item-24":{"id":24,"type":"Checkbox","parentId":23,"style":{"enabled":true,"varName":"view_effects_checkbox","text":"View","preferredSize":[0,0],"alignment":null,"helpTip":"Toggle visibility of effects in this group across all compositions","checked":true}},"item-25":{"id":25,"type":"IconButton","parentId":23,"style":{"enabled":true,"varName":"edit_group_effects_button","text":"Edit Group","preferredSize":[125,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgB7ZPRCYAwDESv4gCO4AiOoBs5Qp3AEXQUN9ENdIMYacVaihDrV/HBwf300UACJAsRtZwSX8CigQxztPQQcFa6uEkzCOCHva0NZ7O95NSQ4o/JqexPNaQ4MvKkBaQEZCctpDzINKT8Mg0pZG4zWuZeSminOqWUxkthtOwgd/rk9IVlI5JkB/RNJEiR+ykNAAAAAElFTkSuQmCC"],"alignment":null,"helpTip":"Rename and settings this Group"}},"item-26":{"id":26,"type":"IconButton","parentId":23,"style":{"enabled":true,"varName":"add_effect_button","text":"Add Effect","preferredSize":[115,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAD0SURBVHgBrZSBEcIgDEVDzwF0A7qBI+AGbmRXcIK6iY7QDWCDdoOYCHhcS1qK/rsUGriXlCYA/FlqawMinmlgm8icUmqAvSLIkexGNuJSlqwn06UwI4ByYLMFu+J+GQmmQ1QpG2mNv+aYA/YoSweT1EWOSoCWBi2cRhtGK6xP9PdPPGkCzKzASsRVwaUFh+iYbXBkl/hC0V0I3CZ7nrMkeD40ArBaMcN59WtIzivJzK6wHD8+GYZ2mqBe35ZsEucd6vVaeND371hR2OzX2TDo+3ivDKwJfT/bAtC4CUug3GYPAcygDnP9C+UXrAZfq0PVBfuL3rs+9VbgXdmxAAAAAElFTkSuQmCC"],"alignment":null,"helpTip":"Add selected effects to this group across all compositions"}},"item-27":{"id":27,"type":"IconButton","parentId":3,"style":{"enabled":true,"varName":"create_group_layers_button","text":"Create a New Layer Group","preferredSize":[200,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADRSURBVHgB1VRREcIwDE05/pmEooBawAESkICESZgELKAACeCAOVgdlBeW3bXQG8voB3t3b9lytzR5aUL07zD8CCE4mAPp4MGzMcYnXgSrwEeYh+v7KSuwAi3Ng80FLIp19H4XTkVec+hgRY+aFBDdbzSSoRZ76vUvExDXpc35f2qKlH0qFpD6a7OLHeqSuYkwx8jlpKEeMjTqLnOJI5NTqUt+ZUG0FTIuwzfPdVzyRsqZErSVbNl0ScdlOXRBByf/1mAyMcP6spQK/Q3Nx9paDJ7kC+DeMHTqtgAAAABJRU5ErkJggg=="],"alignment":"fill","helpTip":"Create a new Layer Group"}},"item-28":{"id":28,"type":"IconButton","parentId":23,"style":{"enabled":true,"varName":"delete_group_effects_button","text":"Delete Group","preferredSize":[120,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAB+SURBVHgB7ZQ9EcAgDEa/1EAtIKVSsFAnlVAJlVAJdQAScJBmYKL8ZOiQgXeXCwR4FwYArEO9RWZ2knxRPokoqoUiOSStebpJuGJLlLjzOIl8x6CrwHrCsMMsdVBQu3pLyNAJP+cX/MwUTqFl4YMxsVbsvWWPNkni6n1jdnkBjcFLWju67I0AAAAASUVORK5CYII="],"alignment":null,"helpTip":"Delete this Effects Group"}},"item-30":{"id":30,"type":"IconButton","parentId":4,"style":{"enabled":true,"varName":"create_group_effects_button","text":"Create a New Effects Group","preferredSize":[200,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADRSURBVHgB1VRREcIwDE05/pmEooBawAESkICESZgELKAACeCAOVgdlBeW3bXQG8voB3t3b9lytzR5aUL07zD8CCE4mAPp4MGzMcYnXgSrwEeYh+v7KSuwAi3Ng80FLIp19H4XTkVec+hgRY+aFBDdbzSSoRZ76vUvExDXpc35f2qKlH0qFpD6a7OLHeqSuYkwx8jlpKEeMjTqLnOJI5NTqUt+ZUG0FTIuwzfPdVzyRsqZErSVbNl0ScdlOXRBByf/1mAyMcP6spQK/Q3Nx9paDJ7kC+DeMHTqtgAAAABJRU5ErkJggg=="],"alignment":"fill","helpTip":"Create a new Effect Group"}},"item-32":{"id":32,"type":"Divider","parentId":15,"style":{"enabled":true,"varName":null}},"item-34":{"id":34,"type":"Divider","parentId":23,"style":{"enabled":true,"varName":null}},"item-36":{"id":36,"type":"Divider","parentId":15,"style":{"enabled":true,"varName":null}},"item-37":{"id":37,"type":"IconButton","parentId":9,"style":{"enabled":true,"varName":"restore_presets_button","text":"Restore Default Preset","preferredSize":[217,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEPSURBVHgBnVQLEYMwDC13E4CESkACEpCAg+EAJOBgSJgD5gAJxQE4yBJIj9DPKHt3uR3Ley9NmqtSPwAAOUaLMWIssGPh7xpDq1Qg+SlMrJGBM+i7TjFrhajHKJ18iTEITptiRtWLi8KV6KIKEbSoqlUC2NSOJHeTL0526gZE+42bMLHT8Y1XkVzJutEVEKaAQItZGa+1nbO1/eAb1BiWlItV+GRZNuNvLfLEJc3b8Zy3HFc34GMItGSHr2MnlC2ZkJkQFDT0iFkRmqE19cyuILbDu2WtbgKO3V3+0btmhRhVd0WmyiMEXhU4XqElyYxFHZwxcQHj/N+oVPApBwg/W31oZtkNc1psihWXfY3xvqAwDphc/wUqAAAAAElFTkSuQmCC"],"alignment":null,"helpTip":null}},"item-38":{"id":38,"type":"IconButton","parentId":9,"style":{"enabled":true,"varName":"sort_button","text":"Sort Footage in Projects","preferredSize":[201,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABhSURBVHgB7dGxDYAwDETRO0TPCqzCJrABIzASbMAIbEA2CXZBFxe20iVPSnVSXHxmgYoGVDbKW9AUSpMDfifJp7jkmNW6pFFu+CV0P638GtslJXc4aZTZ2CYE6IebsSUEfJdFSIxfXw8FAAAAAElFTkSuQmCC"],"alignment":null,"helpTip":null}},"item-39":{"id":39,"type":"DropDownList","parentId":42,"style":{"enabled":true,"varName":"default_presets_dropdown","text":"DropDownList","listItems":"Select Preset, 3D, Shapes, VFX","preferredSize":[133,0],"alignment":null,"selection":0,"helpTip":null}},"item-40":{"id":40,"type":"Button","parentId":42,"style":{"enabled":true,"varName":"apply_preset_button","text":"Apply Preset","justify":"center","preferredSize":[0,0],"alignment":null,"helpTip":null}},"item-42":{"id":42,"type":"Panel","parentId":5,"style":{"enabled":true,"varName":"panel_default_presets","creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Default Presets","preferredSize":[0,0],"margins":17,"orientation":"row","spacing":10,"alignChildren":["left","top"],"alignment":"fill"}}},"order":[0,1,3,15,16,17,32,19,20,36,18,22,27,4,23,24,26,34,25,28,30,5,42,39,40,7,6,8,9,37,38,11,12,14,13],"settings":{"importJSON":true,"indentSize":false,"cepExport":false,"includeCSSJS":true,"showDialog":true,"functionWrapper":false,"afterEffectsDockable":true,"itemReferenceList":"None"},"activeId":4}
 */ 
 
 // PALETTE
@@ -49,7 +49,7 @@ var layer_group_default = tab_layers.add("panel", undefined, undefined, {name: "
 // layer_group_default.orientation = "row"; 
 // layer_group_default.alignChildren = ["center","center"]; 
 // layer_group_default.spacing = 20; 
-//layer_group_default.margins = [15,10,5,10]; 
+// layer_group_default.margins = [15,10,5,10]; 
 // layer_group_default.alignment = ["fill","top"]; 
 
     var none_color_label_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%10%00%00%00%10%08%06%00%00%00%1F%C3%B3%C3%BFa%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%ADIDATx%01%C2%A5S%C2%B1%11%C3%820%0C%C2%94EE%07%5D.U6%20E%0AJ%C2%98%20Y%C2%81%0D%C3%98%C2%80%C2%B0%01l%01%1DL%00%23h%03%5C%C2%A6%C2%A4%C2%A4Jxq%0E%C2%84%14%C2%80%C3%8D%17%C2%B1%C3%AC%C3%A8_%3A%C3%B9m%C2%A8%C2%87%2C%C3%8Bfu%5D%C3%A7M%C3%93%14%C3%98%26%C3%AEX%C2%8C1%C2%82%C3%B3%C2%B5%C2%88%C3%98n%C2%BEi%C2%834MG%C3%8C%C2%BC%02qI%1F%00%C2%A1%C2%8D%13%C2%BA%3E%05%C2%94%C2%8C%1F'%0D%C3%A97%08%0A%C3%8DU%C2%84u%C2%A7%C2%95%3D%C3%88%C2%8F%C2%9A%C2%8EC%06%C3%95%13T%C2%BFP%00%C2%B4%0Bn%C2%95B%00n%C3%81P%C3%B1i%C2%BD%C3%9FA%C2%AE3%08%16%00%12%C2%A6%3F%C2%A1%02%C2%96%C3%82!%C2%8C%1B8R%20%C3%94%C2%9D%0CW%1D(%10%C3%AA%C3%88AUU6%C2%8E%C3%A31%C3%B6S%1F2n%60%0B'%C3%AE%C3%98)%C2%95X%C3%84%C2%83%C2%AF%C2%B9%C2%A5%06%03%C3%BD%C2%A0%C2%8B%5B%14E%7B%18c%C3%B8%C2%AD%13%C2%AD%C2%8Ce%C3%B1%C3%B6%C2%98%C2%BAp%C3%96.%11N%C3%A8%C3%A5%11%C2%AB%C3%83%C3%96y%C2%81x%C3%AE%C3%A6%C3%9F%01%C2%8Ecc%C3%BE%C3%9CD%C3%80%C2%BE%00%00%00%00IEND%C2%AEB%60%C2%82"; 
@@ -210,38 +210,38 @@ var create_group_effects_button = tab_effects.add("iconbutton", undefined, File.
 // EFFECT_GROUP_DEFAULT
 // ====================
 var effect_group_default = tab_effects.add("panel", undefined, undefined, {name: "effect_group_default"}); 
-    effect_group_default.text = "Effect Group Default [X]"; 
-    effect_group_default.orientation = "row"; 
-    effect_group_default.alignChildren = ["center","center"]; 
-    effect_group_default.spacing = 20; 
-    effect_group_default.margins = [15,10,5,10]; 
-    effect_group_default.alignment = ["fill","top"]; 
+    //effect_group_default.text = "Effect Group Default [X]"; 
+    //effect_group_default.orientation = "row"; 
+    //effect_group_default.alignChildren = ["center","center"]; 
+    //effect_group_default.spacing = 20; 
+    //effect_group_default.margins = [15,10,5,10]; 
+    //effect_group_default.alignment = ["fill","top"]; 
 
 var view_effects_checkbox = effect_group_default.add("checkbox", undefined, undefined, {name: "view_effects_checkbox"}); 
-    view_effects_checkbox.helpTip = "Toggle visibility of effects in this group across all compositions"; 
-    view_effects_checkbox.text = "View"; 
-    view_effects_checkbox.value = true; 
+   // view_effects_checkbox.helpTip = "Toggle visibility of effects in this group across all compositions"; 
+   // view_effects_checkbox.text = "View"; 
+   // view_effects_checkbox.value = true; 
 
 var add_effect_button = effect_group_default.add("iconbutton", undefined, File.decode(add_layer_button_imgString), {name: "add_effect_button", style: "toolbutton"}); 
-    add_effect_button.helpTip = "Add selected effects to this group across all compositions"; 
-    add_effect_button.text = "Add Effect"; 
-    add_effect_button.preferredSize.width = 115; 
-    add_effect_button.preferredSize.height = 40; 
+   // add_effect_button.helpTip = "Add selected effects to this group across all compositions"; 
+   // add_effect_button.text = "Add Effect"; 
+   // add_effect_button.preferredSize.width = 115; 
+   // add_effect_button.preferredSize.height = 40; 
 
 var divider3 = effect_group_default.add("panel", undefined, undefined, {name: "divider3"}); 
     divider3.alignment = "fill"; 
 
 var edit_group_effects_button = effect_group_default.add("iconbutton", undefined, File.decode(edit_group_layers_button_imgString), {name: "edit_group_effects_button", style: "toolbutton"}); 
-    edit_group_effects_button.helpTip = "Rename and settings this Group"; 
-    edit_group_effects_button.text = "Edit Group"; 
-    edit_group_effects_button.preferredSize.width = 125; 
-    edit_group_effects_button.preferredSize.height = 40; 
+   // edit_group_effects_button.helpTip = "Rename and settings this Group"; 
+    //edit_group_effects_button.text = "Edit Group"; 
+   // edit_group_effects_button.preferredSize.width = 125; 
+    //edit_group_effects_button.preferredSize.height = 40; 
 
 var delete_group_effects_button = effect_group_default.add("iconbutton", undefined, File.decode(delete_group_layers_button_imgString), {name: "delete_group_effects_button", style: "toolbutton"}); 
-    delete_group_effects_button.helpTip = "Delete this Effects Group"; 
-    delete_group_effects_button.text = "Delete Group"; 
-    delete_group_effects_button.preferredSize.width = 120; 
-    delete_group_effects_button.preferredSize.height = 40; 
+    //delete_group_effects_button.helpTip = "Delete this Effects Group"; 
+    //delete_group_effects_button.text = ""; 
+   //delete_group_effects_button.preferredSize.width = 120; 
+    //delete_group_effects_button.preferredSize.height = 40; 
 
 // TAB_SETTINGS
 // ============
@@ -327,7 +327,7 @@ var about_text_group = tab_settings.add('edittext {size: [476,340], properties: 
 var updates_check_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%14%00%00%00%14%08%06%00%00%00%C2%8D%C2%89%1D%0D%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%13IDATx%01%C3%95SQ%11%C3%820%0CM9%04%20!%12%26%01%09%C2%A0%C2%80%C3%A1%00%07%14%05%C3%A0%60s%00%0E%C2%90%00%0E%3A%14%C2%80%C2%83%C2%92%C2%B27.W%C2%BA%C2%96Oxw%C3%AF%C2%B2k_%C3%9E%C3%924%25%C3%BAu%C2%98%C2%92%C3%80%7B_I%60%C3%A1%23%C3%90%18sMhX%C3%96%C2%BB%C2%9C%C3%89L%C2%B8%15%C3%9E%C3%BD'%C2%9C%C2%B0V%C3%9A%C2%A0%C2%B393F%C2%92%C2%87%C3%A1!%18%C2%80%C2%AD%C3%9A%C2%BB%08%C3%B7%C3%B8%C2%B6%C2%B9%C3%8A%5CV%C3%94%C3%ABlT%C3%B5%5B%3B%C2%89%C2%B4%7B%C3%AA%C3%BB%C2%B5%C2%93%C2%9EXe%C2%B0%08%C2%95%2B%C2%9D%C2%A3%12P%C3%9D%C2%ABG%C2%89%C2%BDw%C3%9F%C3%82%25%C3%B9O%C3%98A%3BUys%C3%84%1D%C3%A5%C3%81%C3%82u%C2%B4vM%19V%C2%88%1De%20%C2%AD8%C3%A5%C3%B6'%C3%B4%1D%C3%82%0C%C2%AE%C2%A2%3E%0E%C3%87%0F%C3%AD%C3%98%C2%A4%0C%3BDN%18.%C2%857%C2%A1%C3%83%C2%A8%C2%B0%C3%922%C2%A5N%C2%A5.%C3%A5L%23%C3%80%C2%8C%C2%9E%07C%C2%89%0Drx%2C%C2%A1%C2%85%60E%05%60%C2%94%02%1A*T%C3%A0%C3%B0B%C3%AA%C2%82%C3%99%1DZ%C2%A6%C3%82%C2%9F%C3%B5%C3%93%3B%C3%A2%C3%89UX%C2%AFqd%C3%BF%C2%95Yd%C3%9A%C3%BAq4cf%C2%A6dL%C3%BD%7C%C3%AA%19%3D%C3%89%2C%3E%C3%A8o%C3%B1%04d%C3%8B~)%C3%9D%C3%BC%C3%843%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 var updates_check_button = tab_settings.add("iconbutton", undefined, File.decode(updates_check_button_imgString), {name: "updates_check_button", style: "toolbutton"}); 
     updates_check_button.helpTip = "Check for Updates"; 
-    updates_check_button.text = "Check For Updates - You Version 2.1.3"; 
+    updates_check_button.text = "Check For Updates - You Version 2.2.5"; 
     updates_check_button.preferredSize.width = 275; 
     updates_check_button.preferredSize.height = 40; 
 
@@ -346,14 +346,14 @@ palette.onResizing = palette.onResize = function () { this.layout.resize(); }
 
 if ( palette instanceof Window ) palette.show();
 
-// Теперь добавляем функциональность
+// FUNCTIONS
 
 // Arrays to store Layer Groups and Effect Groups
 var layerGroups = [];
 var effectGroups = [];
 
 // Define current version
-var currentVersion = "2.1.3"; // Adjust as needed
+var currentVersion = "2.2.5"; // Adjust as needed
 
 // Function to compare versions and check for updates
 function compareVersions(v1, v2) {
@@ -445,8 +445,68 @@ function getSelectedLayersInActiveComp() {
     return selectedLayers;
 }
 
+// Function to check if a character is an English letter
+function isEnglishLetter(ch) {
+    return /^[A-Za-z]$/.test(ch);
+}
+
+// Function to check if a string contains only English letters and digits
+function containsOnlyEnglishLetters(str) {
+    return /^[A-Za-z0-9\s]+$/.test(str);
+}
+
+// Function to generate a unique prefix based on the group name
+function generateUniquePrefix(groupName) {
+    // Define English vowels
+    var vowels = "aeiouyAEIOUY";
+    var prefix = "";
+
+    // Extract trailing digits
+    var trailingDigits = groupName.match(/\d+$/);
+    trailingDigits = trailingDigits ? trailingDigits[0] : "";
+
+    // Remove trailing digits from groupName
+    var nameWithoutDigits = groupName.replace(/\d+$/, '');
+
+    // Remove spaces and get all consonants
+    for (var i = 0; i < nameWithoutDigits.length; i++) {
+        var ch = nameWithoutDigits.charAt(i);
+        if (vowels.indexOf(ch) === -1 && isEnglishLetter(ch)) {
+            prefix += ch;
+        }
+    }
+
+    if (trailingDigits !== "") {
+        // If there are trailing digits, take first 3 consonants and append digits
+        prefix = prefix.substring(0, 3).toUpperCase() + trailingDigits;
+    } else {
+        // If no trailing digits, take first 4 consonants
+        prefix = prefix.substring(0, 4).toUpperCase();
+    }
+
+    // Ensure the prefix is unique
+    var basePrefix = prefix;
+    var suffix = 1;
+    while (isPrefixUsed(prefix)) {
+        prefix = basePrefix + suffix;
+        suffix++;
+    }
+    return prefix;
+}
+
+
+// Function to check if a prefix is already used
+function isPrefixUsed(prefix) {
+    for (var i = 0; i < layerGroups.length; i++) {
+        if (layerGroups[i].prefix === prefix) {
+            return true;
+        }
+    }
+    return false;
+}
+
 // Function to create a new Layer Group UI
-function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColor) {
+function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColor, guideCheckboxValue, lockCheckboxValue) {
     var groupPanel = tab_layers.add("panel", undefined, undefined, {name: "layer_group_" + prefix});
     groupPanel.text = groupName + " [" + prefix + "]";
     groupPanel.orientation = "row";
@@ -467,9 +527,8 @@ function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColo
 
     // Добавляем обработчик события onClick
     color_label_button.onClick = function() {
-    showGroupCompositions(groupData);
-};
-
+        showGroupCompositions(groupData);
+    };
 
     var view_layers_checkbox = groupPanel.add("checkbox", undefined, undefined, {name: "view_layers_checkbox_" + prefix});
     view_layers_checkbox.helpTip = "Toggle visibility of layers in this group across all compositions";
@@ -501,23 +560,23 @@ function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColo
     delete_group_layers_button.preferredSize.height = 35;
 
     // Save group data
-var groupData = {
-    name: groupName,
-    prefix: prefix,
-    panel: groupPanel,
-    viewCheckbox: view_layers_checkbox,
-    addButton: add_layer_button,
-    deleteButton: delete_group_layers_button,
-    soloCheckbox: solo_layers_checkbox,
-    hideCheckbox: hide_layers_checkbox,
-    editButton: edit_group_layers_button,
-    labelColorIndex: labelColorIndex,
-    disableLabelColor: disableLabelColor,
-    colorLabelButton: color_label_button, // существующее свойство
-    // **Новые свойства**
-    guideCheckbox: { value: false }, // По умолчанию отключено
-    lockCheckbox: { value: false }   // По умолчанию отключено
-};
+    var groupData = {
+        name: groupName,
+        prefix: prefix,
+        panel: groupPanel,
+        viewCheckbox: view_layers_checkbox,
+        addButton: add_layer_button,
+        deleteButton: delete_group_layers_button,
+        soloCheckbox: solo_layers_checkbox,
+        hideCheckbox: hide_layers_checkbox,
+        editButton: edit_group_layers_button,
+        labelColorIndex: labelColorIndex,
+        disableLabelColor: disableLabelColor,
+        colorLabelButton: color_label_button, // существующее свойство
+        // **Новые свойства**
+        guideCheckbox: { value: guideCheckboxValue }, // Устанавливаем полученное значение
+        lockCheckbox: { value: lockCheckboxValue }   // Устанавливаем полученное значение
+    };
     // Объект для хранения оригинальных состояний слоев для функции Solo
     var originalLayerStates = {};
 
@@ -546,44 +605,44 @@ var groupData = {
     };
 
     // Event handler for the Add Layer button
-add_layer_button.onClick = function() {
-    var layers = getSelectedLayersInActiveComp();
-    if (!layers) return;
+    add_layer_button.onClick = function() {
+        var layers = getSelectedLayersInActiveComp();
+        if (!layers) return;
 
-    app.beginUndoGroup("Add Layers to " + groupName);
-    var layersFound = false;
+        app.beginUndoGroup("Add Layers to " + groupName);
+        var layersFound = false;
 
-    for (var i = 0; i < layers.length; i++) {
-        var layer = layers[i];
-        var newName = "[" + prefix + "] " + layer.name.replace(/^\[.*?\]\s*/, "");
-        layer.name = newName;
-        layersFound = true;
+        for (var i = 0; i < layers.length; i++) {
+            var layer = layers[i];
+            var newName = "[" + prefix + "] " + layer.name.replace(/^\[.*?\]\s*/, "");
+            layer.name = newName;
+            layersFound = true;
 
-        // Применение цвета метки, если не отключено
-        if (!groupData.disableLabelColor) {
-            layer.label = groupData.labelColorIndex;
+            // Применение цвета метки, если не отключено
+            if (!groupData.disableLabelColor) {
+                layer.label = groupData.labelColorIndex;
+            }
+
+            // Установка состояния Guide Layer
+            if (groupData.guideCheckbox && typeof groupData.guideCheckbox.value !== 'undefined') {
+                layer.guideLayer = groupData.guideCheckbox.value;
+            }
+
+            // Установка состояния Lock Layers
+            if (groupData.lockCheckbox && typeof groupData.lockCheckbox.value !== 'undefined') {
+                layer.locked = groupData.lockCheckbox.value;
+            }
+
+            // Set layer enabled state according to view_layers_checkbox
+            layer.enabled = view_layers_checkbox.value;
         }
 
-        // Установка состояния Guide Layer
-        if (groupData.guideCheckbox) {
-            layer.guideLayer = groupData.guideCheckbox.value;
+        if (!layersFound) {
+            alert("Please select layers to add to " + groupName + ".");
         }
 
-        // Установка состояния Lock Layers
-        if (groupData.lockCheckbox) {
-            layer.locked = groupData.lockCheckbox.value;
-        }
-
-        // Set layer enabled state according to view_layers_checkbox
-        layer.enabled = view_layers_checkbox.value;
-    }
-
-    if (!layersFound) {
-        alert("Please select layers to add to " + groupName + ".");
-    }
-
-    app.endUndoGroup();
-};
+        app.endUndoGroup();
+    };
 
     // Event handler for the Solo checkbox
     solo_layers_checkbox.onClick = function() {
@@ -622,6 +681,7 @@ add_layer_button.onClick = function() {
             }
 
         } else {
+
             // Восстановление всех слоёв до их исходных состояний Shy
             var comps = getAllCompositions();
             for (var c = 0; c < comps.length; c++) {
@@ -640,7 +700,6 @@ add_layer_button.onClick = function() {
 
         app.endUndoGroup();
     };
-
     // Event handler for the Hide checkbox
     hide_layers_checkbox.onClick = function() {
         app.beginUndoGroup("Toggle Hide for " + groupName);
@@ -667,82 +726,143 @@ add_layer_button.onClick = function() {
 
     // Event handler for the Edit button
 edit_group_layers_button.onClick = function() {
-    var dialog = new Window("dialog", "Edit Layer Group");
+    var dialog = new Window("dialog", "Settings Layer Group");
     dialog.orientation = "column";
     dialog.alignChildren = ["fill", "top"];
 
-    var groupNameGroup = dialog.add("group");
+    // Первая группа - Name and Prefix
+    var namePrefixPanel = dialog.add("panel", undefined, "Name and Prefix");
+    namePrefixPanel.orientation = "column";
+    namePrefixPanel.alignChildren = ["fill", "top"];
+    namePrefixPanel.margins = [10, 15, 10, 10];
+
+    var groupNameGroup = namePrefixPanel.add("group");
     groupNameGroup.add("statictext", undefined, "Group Name:");
     var groupNameInput = groupNameGroup.add("edittext", undefined, groupData.name);
     groupNameInput.characters = 15;
 
-    var prefixGroup = dialog.add("group");
+    var prefixGroup = namePrefixPanel.add("group");
     prefixGroup.add("statictext", undefined, "Prefix:");
     var prefixInput = prefixGroup.add("edittext", undefined, groupData.prefix);
     prefixInput.characters = 5;
 
-    // Добавление выбора цвета метки
-    var labelColorGroup = dialog.add("group");
-    labelColorGroup.add("statictext", undefined, "Label Color:");
-    var labelColorDropdown = labelColorGroup.add("dropdownlist", undefined, [
-        "None", "Red", "Yellow", "Aqua", "Pink", "Lavender", "Peach", "Sea Foam",
-        "Blue", "Green", "Purple", "Orange", "Brown", "Fuchsia", "Cyan", "Sandstone"
-    ]);
-    labelColorDropdown.selection = groupData.labelColorIndex;
-    labelColorDropdown.helpTip = "Select a label color for layers in this group";
+    // Добавление чекбокса для автогенерации префикса
+    var autoPrefixGroup = namePrefixPanel.add("group");
+    autoPrefixGroup.orientation = "row";
+    autoPrefixGroup.alignChildren = ["left", "center"];
+    autoPrefixGroup.add("statictext", undefined, "Auto-generate Prefix:");
+    var autoPrefixCheckbox = autoPrefixGroup.add("checkbox", undefined, "");
+    autoPrefixCheckbox.value = false; // При редактировании группы по умолчанию выключено
 
-    // Добавление чекбокса для отключения назначения цвета метки
-    var disableLabelColorCheckbox = dialog.add("checkbox", undefined, "Disable label color assignment");
-    disableLabelColorCheckbox.value = groupData.disableLabelColor;
-    disableLabelColorCheckbox.helpTip = "Disable automatic label color assignment to layers in this group";
+    // Если автогенерация включена, отключаем ввод префикса
+    prefixInput.enabled = !autoPrefixCheckbox.value;
 
-    // Добавление чекбокса для Guide Layer
-    var guideLayerGroup = dialog.add("group");
-    guideLayerGroup.orientation = "row";
-    guideLayerGroup.alignChildren = ["left", "center"];
-    guideLayerGroup.spacing = 10;
-
-    guideLayerGroup.add("statictext", undefined, "Guide Layer:");
-    var guideLayerCheckbox = guideLayerGroup.add("checkbox", undefined, "Enable Guide Layer");
-    guideLayerCheckbox.value = groupData.guideCheckbox ? groupData.guideCheckbox.value : false; // Устанавливаем текущее состояние
-    guideLayerCheckbox.helpTip = "Enable or disable Guide Layer mode for layers in this group";
-
-    // **Добавление чекбокса для Lock Layers**
-    var lockLayerGroup = dialog.add("group");
-    lockLayerGroup.orientation = "row";
-    lockLayerGroup.alignChildren = ["left", "center"];
-    lockLayerGroup.spacing = 10;
-
-    lockLayerGroup.add("statictext", undefined, "Lock Layers (Beta):");
-    var lockLayerCheckbox = lockLayerGroup.add("checkbox", undefined, "Enable Lock Layers");
-    lockLayerCheckbox.value = groupData.lockCheckbox ? groupData.lockCheckbox.value : false; // Устанавливаем текущее состояние
-    lockLayerCheckbox.helpTip = "Enable or disable locking of layers in this group";
-
-    // **Вставляем обработчик события для Lock Layers**
-    lockLayerCheckbox.onClick = function() {
-        app.beginUndoGroup("Toggle Lock Layers for " + groupName);
-        var comps = getAllCompositions();
-        var layersFound = false;
-
-        for (var c = 0; c < comps.length; c++) {
-            var comp = comps[c];
-            for (var l = 1; l <= comp.numLayers; l++) {
-                var layer = comp.layer(l);
-                if (layer.name.indexOf("[" + prefix + "]") === 0) {
-                    layer.locked = lockLayerCheckbox.value;
-                    layersFound = true;
-                }
+    // Обработчик для изменения состояния чекбокса
+    autoPrefixCheckbox.onClick = function() {
+        prefixInput.enabled = !autoPrefixCheckbox.value;
+        if (autoPrefixCheckbox.value) {
+            if (containsOnlyEnglishLetters(groupNameInput.text)) {
+                prefixInput.text = generateUniquePrefix(groupNameInput.text);
+            } else {
+                autoPrefixCheckbox.value = false;
+                prefixInput.enabled = true;
+                alert("Auto-prefix generation is disabled for group names containing non-English characters or special symbols.");
             }
         }
-
-        if (!layersFound) {
-            alert("Layers for group '" + groupName + "' not found in any composition.");
-        }
-        app.endUndoGroup();
     };
 
+    // Обработчик для изменения имени группы
+    groupNameInput.onChanging = function() {
+        if (autoPrefixCheckbox.value) {
+            if (containsOnlyEnglishLetters(groupNameInput.text)) {
+                prefixInput.text = generateUniquePrefix(groupNameInput.text);
+            } else {
+                autoPrefixCheckbox.value = false;
+                prefixInput.enabled = true;
+                prefixInput.text = "";
+                alert("Auto-prefix generation is disabled for group names containing non-English characters or special symbols.");
+            }
+        }
+    };
+        // Вторая группа - Color Label
+        var colorLabelPanel = dialog.add("panel", undefined, "Color Label");
+        colorLabelPanel.orientation = "column";
+        colorLabelPanel.alignChildren = ["fill", "top"];
+        colorLabelPanel.margins = [10, 15, 10, 10];
 
-    var buttonsGroup = dialog.add("group");
+        var labelColorGroup = colorLabelPanel.add("group");
+        labelColorGroup.add("statictext", undefined, "Label Color:");
+        var labelColorDropdown = labelColorGroup.add("dropdownlist", undefined, [
+            "None", "Red", "Yellow", "Aqua", "Pink", "Lavender", "Peach", "Sea Foam",
+            "Blue", "Green", "Purple", "Orange", "Brown", "Fuchsia", "Cyan", "Sandstone"
+        ]);
+        labelColorDropdown.selection = groupData.labelColorIndex;
+        labelColorDropdown.helpTip = "Select a label color for layers in this group";
+
+        var disableLabelColorCheckbox = colorLabelPanel.add("checkbox", undefined, "Disable label color assignment");
+        disableLabelColorCheckbox.value = groupData.disableLabelColor;
+        disableLabelColorCheckbox.helpTip = "Disable automatic label color assignment to layers in this group";
+
+        // Установка начального состояния выпадающего списка
+        labelColorDropdown.enabled = !disableLabelColorCheckbox.value;
+
+        // Обработчик события для чекбокса
+        disableLabelColorCheckbox.onClick = function() {
+            labelColorDropdown.enabled = !disableLabelColorCheckbox.value;
+        };
+
+        // Третья группа - Parameters
+        var parametersPanel = dialog.add("panel", undefined, "Parameters");
+        parametersPanel.orientation = "column";
+        parametersPanel.alignChildren = ["fill", "top"];
+        parametersPanel.margins = [10, 15, 10, 10];
+
+        // Добавление чекбокса для Guide Layer
+        var guideLayerGroup = parametersPanel.add("group");
+        guideLayerGroup.orientation = "row";
+        guideLayerGroup.alignChildren = ["left", "center"];
+        guideLayerGroup.spacing = 10;
+
+        guideLayerGroup.add("statictext", undefined, "Guide Layer:");
+        var guideLayerCheckbox = guideLayerGroup.add("checkbox", undefined, "Enable Guide Layer");
+        guideLayerCheckbox.value = groupData.guideCheckbox ? groupData.guideCheckbox.value : false;
+        guideLayerCheckbox.helpTip = "Enable or disable Guide Layer mode for layers in this group";
+
+        // Добавление чекбокса для Lock Layers
+        var lockLayerGroup = parametersPanel.add("group");
+        lockLayerGroup.orientation = "row";
+        lockLayerGroup.alignChildren = ["left", "center"];
+        lockLayerGroup.spacing = 10;
+
+        lockLayerGroup.add("statictext", undefined, "Lock Layers (Beta):");
+        var lockLayerCheckbox = lockLayerGroup.add("checkbox", undefined, "Enable Lock Layers");
+        lockLayerCheckbox.value = groupData.lockCheckbox ? groupData.lockCheckbox.value : false;
+        lockLayerCheckbox.helpTip = "Enable or disable locking of layers in this group";
+
+        // Обработчик события для Lock Layers
+        lockLayerCheckbox.onClick = function() {
+            app.beginUndoGroup("Toggle Lock Layers for " + groupNameInput.text);
+            var comps = getAllCompositions();
+            var layersFound = false;
+
+            for (var c = 0; c < comps.length; c++) {
+                var comp = comps[c];
+                for (var l = 1; l <= comp.numLayers; l++) {
+                    var layer = comp.layer(l);
+                    if (layer.name.indexOf("[" + prefixInput.text + "]") === 0) {
+                        layer.locked = lockLayerCheckbox.value;
+                        layersFound = true;
+                    }
+                }
+            }
+
+            if (!layersFound) {
+                alert("Layers for group '" + groupNameInput.text + "' not found in any composition.");
+            }
+            app.endUndoGroup();
+        };
+
+        var buttonsGroup = dialog.add("group");
     buttonsGroup.alignment = "center";
     var okButton = buttonsGroup.add("button", undefined, "OK");
     okButton.helpTip = "Confirm changes to the Layer Group";
@@ -754,55 +874,65 @@ edit_group_layers_button.onClick = function() {
         var newPrefix = prefixInput.text;
         var newLabelColorIndex = labelColorDropdown.selection ? labelColorDropdown.selection.index : 0;
         var newDisableLabelColor = disableLabelColorCheckbox.value;
-        var newGuideLayer = guideLayerCheckbox.value; // Новая переменная
-        var newLockLayers = lockLayerCheckbox.value; // Новая переменная
+        var newGuideLayer = guideLayerCheckbox.value;
+        var newLockLayers = lockLayerCheckbox.value;
 
-        if (newGroupName === "" || newPrefix === "") {
-            alert("Please enter both a group name and prefix.");
-        } else {
-            app.beginUndoGroup("Edit Layer Group " + groupData.name);
+        if (newGroupName === "") {
+            alert("Please enter a group name.");
+            return;
+        }
 
-            var comps = getAllCompositions();
-            for (var c = 0; c < comps.length; c++) {
-                var comp = comps[c];
-                for (var l = 1; l <= comp.numLayers; l++) {
-                    var layer = comp.layer(l);
-                    if (layer.name.indexOf("[" + groupData.prefix + "]") === 0) {
-                        var baseName = layer.name.replace("[" + groupData.prefix + "] ", "");
-                        layer.name = "[" + newPrefix + "] " + baseName;
+        if (newPrefix === "") {
+            if (autoPrefixCheckbox.value) {
+                newPrefix = generateUniquePrefix(newGroupName);
+                prefixInput.text = newPrefix;
+            } else {
+                alert("Please enter a prefix.");
+                return;
+            }
+        }
 
-                        // Обновление цвета метки, если не отключено
-                        if (!newDisableLabelColor) {
-                            layer.label = newLabelColorIndex;
-                        }
+        app.beginUndoGroup("Edit Layer Group " + groupData.name);
 
-                        // Обновление состояния Guide Layer
-                        layer.guideLayer = newGuideLayer;
+        var comps = getAllCompositions();
+        for (var c = 0; c < comps.length; c++) {
+            var comp = comps[c];
+            for (var l = 1; l <= comp.numLayers; l++) {
+                var layer = comp.layer(l);
+                if (layer.name.indexOf("[" + groupData.prefix + "]") === 0) {
+                    var baseName = layer.name.replace("[" + groupData.prefix + "] ", "");
+                    layer.name = "[" + newPrefix + "] " + baseName;
 
-                        // Обновление состояния Lock Layers
-                        layer.locked = newLockLayers;
+                    // Обновление цвета метки, если не отключено
+                    if (!newDisableLabelColor) {
+                        layer.label = newLabelColorIndex;
                     }
+
+                    // Обновление состояния Guide Layer
+                    layer.guideLayer = newGuideLayer;
+
+                    // Обновление состояния Lock Layers
+                    layer.locked = newLockLayers;
                 }
             }
-
-            // Обновление информации о группе
-            groupData.name = newGroupName;
-            groupData.prefix = newPrefix;
-            groupData.labelColorIndex = newLabelColorIndex;
-            groupData.disableLabelColor = newDisableLabelColor;
-            groupData.guideCheckbox.value = newGuideLayer; // Обновляем состояние чекбокса
-            groupData.lockCheckbox = lockLayerCheckbox; // Сохраняем чекбокс Lock Layers
-            groupPanel.text = newGroupName + " [" + newPrefix + "]";
-
-            // Обновление иконки кнопки color_label_button
-            setColorLabelButtonIcon(groupData.colorLabelButton, newLabelColorIndex);
-
-            palette.layout.layout(true);
-            palette.layout.resize();
-
-            app.endUndoGroup();
-            dialog.close();
         }
+        // Обновление информации о группе
+        groupData.name = newGroupName;
+        groupData.prefix = newPrefix;
+        groupData.labelColorIndex = newLabelColorIndex;
+        groupData.disableLabelColor = newDisableLabelColor;
+        groupData.guideCheckbox.value = newGuideLayer;
+        groupData.lockCheckbox.value = newLockLayers;
+        groupPanel.text = newGroupName + " [" + newPrefix + "]";
+
+        // Обновление иконки кнопки color_label_button
+        setColorLabelButtonIcon(groupData.colorLabelButton, newLabelColorIndex);
+
+        palette.layout.layout(true);
+        palette.layout.resize();
+
+        app.endUndoGroup();
+        dialog.close();
     };
 
     cancelButton.onClick = function() {
@@ -858,24 +988,77 @@ function toggleSolo(groupData, isSolo) {
     // Implement as needed
 }
 
-// Event handler for the Create a New Layer Group button
+// Добавляем функцию trim
+function trim(str) {
+    return str.replace(/^\s+|\s+$/g, '');
+}
+
+// Обработчик события для кнопки "Create a New Layer Group"
 create_group_layers_button.onClick = function() {
     var dialog = new Window("dialog", "Add New Layer Group");
     dialog.orientation = "column";
     dialog.alignChildren = ["fill", "top"];
 
-    var groupNameGroup = dialog.add("group");
+    // Первая группа: Name and Prefix
+    var nameAndPrefixPanel = dialog.add("panel", undefined, "Name and Prefix");
+    nameAndPrefixPanel.orientation = "column";
+    nameAndPrefixPanel.alignChildren = ["fill", "top"];
+
+    var groupNameGroup = nameAndPrefixPanel.add("group");
     groupNameGroup.add("statictext", undefined, "Group Name:");
     var groupNameInput = groupNameGroup.add("edittext", undefined, "");
     groupNameInput.characters = 15;
 
-    var prefixGroup = dialog.add("group");
+    var prefixGroup = nameAndPrefixPanel.add("group");
     prefixGroup.add("statictext", undefined, "Prefix:");
     var prefixInput = prefixGroup.add("edittext", undefined, "");
     prefixInput.characters = 5;
 
-    // Добавление выбора цвета метки
-    var labelColorGroup = dialog.add("group");
+    // Добавление чекбокса для автогенерации префикса
+    var autoPrefixGroup = nameAndPrefixPanel.add("group");
+    autoPrefixGroup.orientation = "row";
+    autoPrefixGroup.alignChildren = ["left", "center"];
+    autoPrefixGroup.add("statictext", undefined, "Auto-generate Prefix:");
+    var autoPrefixCheckbox = autoPrefixGroup.add("checkbox", undefined, "");
+    autoPrefixCheckbox.value = true;
+
+    // Если автогенерация включена, отключаем ввод префикса
+    prefixInput.enabled = !autoPrefixCheckbox.value;
+
+    // Обработчик для изменения состояния чекбокса
+    autoPrefixCheckbox.onClick = function() {
+        prefixInput.enabled = !autoPrefixCheckbox.value;
+        if (autoPrefixCheckbox.value) {
+            if (containsOnlyEnglishLetters(groupNameInput.text)) {
+                prefixInput.text = generateUniquePrefix(groupNameInput.text);
+            } else {
+                autoPrefixCheckbox.value = false;
+                prefixInput.enabled = true;
+                alert("Auto-prefix generation is disabled for group names containing non-English characters.");
+            }
+        }
+    };
+
+    // Обработчик для изменения имени группы
+    groupNameInput.onChanging = function() {
+        if (autoPrefixCheckbox.value) {
+            if (containsOnlyEnglishLetters(groupNameInput.text)) {
+                prefixInput.text = generateUniquePrefix(groupNameInput.text);
+            } else {
+                autoPrefixCheckbox.value = false;
+                prefixInput.enabled = true;
+                prefixInput.text = "";
+                alert("Auto-prefix generation is disabled for group names containing non-English characters.");
+            }
+        }
+    };
+
+    // Вторая группа: Color Label
+    var colorLabelPanel = dialog.add("panel", undefined, "Color Label");
+    colorLabelPanel.orientation = "column";
+    colorLabelPanel.alignChildren = ["fill", "top"];
+
+    var labelColorGroup = colorLabelPanel.add("group");
     labelColorGroup.add("statictext", undefined, "Label Color:");
     var labelColorDropdown = labelColorGroup.add("dropdownlist", undefined, [
         "None", "Red", "Yellow", "Aqua", "Pink", "Lavender", "Peach", "Sea Foam",
@@ -885,7 +1068,7 @@ create_group_layers_button.onClick = function() {
     labelColorDropdown.helpTip = "Select a label color for layers in this group";
 
     // Добавление чекбокса для отключения назначения цвета метки
-    var disableLabelColorCheckbox = dialog.add("checkbox", undefined, "Disable label color assignment");
+    var disableLabelColorCheckbox = colorLabelPanel.add("checkbox", undefined, "Disable label color assignment");
     disableLabelColorCheckbox.value = false;
     disableLabelColorCheckbox.helpTip = "Disable automatic label color assignment to layers in this group";
 
@@ -908,12 +1091,23 @@ create_group_layers_button.onClick = function() {
         var labelColorIndex = labelColorDropdown.selection ? labelColorDropdown.selection.index : 0; // Индекс выбранного цвета
         var disableLabelColor = disableLabelColorCheckbox.value;
 
-        if (groupName === "" || prefix === "") {
-            alert("Please enter both a group name and a prefix.");
-        } else {
-            createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColor);
-            dialog.close();
+        if (groupName === "") {
+            alert("Please enter a group name.");
+            return;
         }
+
+        if (prefix === "") {
+            if (autoPrefixCheckbox.value) {
+                prefix = generateUniquePrefix(groupName);
+                prefixInput.text = prefix;
+            } else {
+                alert("Please enter a prefix.");
+                return;
+            }
+        }
+
+        createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColor, false, false);
+        dialog.close();
     };
 
     cancelButton.onClick = function() {
@@ -922,7 +1116,7 @@ create_group_layers_button.onClick = function() {
 
     dialog.center();
     dialog.show();
-}
+};
 
 function showGroupCompositions(groupData) {
     var groupName = groupData.name;
@@ -960,6 +1154,7 @@ function showGroupCompositions(groupData) {
     if (compsWithGroup.length === 0) {
         dialog.add("statictext", undefined, "No compositions containing this group.");
     } else {
+
         // Добавляем выпадающий список для выбора порядка сортировки
         var sortGroup = dialog.add("group");
         sortGroup.orientation = "row";
@@ -1013,7 +1208,6 @@ function showGroupCompositions(groupData) {
             var itemText = compName + " [" + layerCount + " layer" + (layerCount !== 1 ? "s" : "") + "]";
             listbox.add("item", itemText);
         }
-        
 
         // Добавляем обработчик двойного клика на элемент списка
         listbox.onDoubleClick = function() {
@@ -1044,7 +1238,8 @@ function showGroupCompositions(groupData) {
     dialog.show();
 }
 
-// Далее аналогично реализуем функции для групп эффектов (Effect Groups)
+//EFFECTS GROUP
+
 // Function to create a new Effect Group UI
 function createEffectGroupUI(groupName, prefix) {
     var groupPanel = tab_effects.add("panel", undefined, undefined, {name: "effect_group_" + prefix});
@@ -1066,28 +1261,75 @@ function createEffectGroupUI(groupName, prefix) {
     add_effect_button.preferredSize.width = 115;
     add_effect_button.preferredSize.height = 35;
 
+    // Add the Solo checkbox after the Add Effect button
+var solo_checkbox = groupPanel.add("checkbox", undefined, undefined, {name: "solo_checkbox_" + prefix});
+solo_checkbox.text = "Solo";
+solo_checkbox.helpTip = "Toggle solo mode for this effects group";
+solo_checkbox.value = false;
+
+// Event handler for the Solo checkbox
+solo_checkbox.onClick = function() {
+    app.beginUndoGroup("Toggle Solo for " + groupName);
+    
+    var comps = getAllCompositions();
+    for (var c = 0; c < comps.length; c++) {
+        var comp = comps[c];
+        for (var l = 1; l <= comp.numLayers; l++) {
+            var layer = comp.layer(l);
+            if (layer.property("Effects")) {
+                var hasGroupEffect = false;
+                var effects = layer.property("Effects");
+                // Check if this layer has effects from this group
+                for (var i = 1; i <= effects.numProperties; i++) {
+                    var effect = effects.property(i);
+                    if (effect.name.indexOf("[" + prefix + "]") === 0) {
+                        hasGroupEffect = true;
+                        break;
+                    }
+                }
+                
+                if (hasGroupEffect) {
+                    // Enable or disable effects based on solo state
+                    for (var i = 1; i <= effects.numProperties; i++) {
+                        var effect = effects.property(i);
+                        if (effect.name.indexOf("[" + prefix + "]") === 0) {
+                            // Effects from this group
+                            effect.enabled = groupData.viewCheckbox.value;
+                        } else {
+                            // Other effects
+                            effect.enabled = !solo_checkbox.value;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    app.endUndoGroup();
+};
+
     var edit_group_effects_button = groupPanel.add("iconbutton", undefined, File.decode(edit_group_layers_button_imgString), {name: "edit_group_effects_button_" + prefix, style: "toolbutton"});
     edit_group_effects_button.helpTip = "Rename and settings this Group";
     edit_group_effects_button.text = "Edit Group";
     edit_group_effects_button.preferredSize.width = 125;
     edit_group_effects_button.preferredSize.height = 35;
 
-    var delete_group_effects_button = groupPanel.add("iconbutton", undefined, File.decode(delete_group_layers_button_imgString),{name: "delete_group_effects_button_" + prefix, style: "toolbutton"});
+    var delete_group_effects_button = groupPanel.add("iconbutton", undefined, File.decode(delete_group_layers_button_imgString), {name: "delete_group_effects_button_" + prefix, style: "toolbutton"});
     delete_group_effects_button.helpTip = "Delete this Effects Group";
-    delete_group_effects_button.text = "Delete Group";
-    delete_group_effects_button.preferredSize.width = 120;
+    delete_group_effects_button.text = "";
+    delete_group_effects_button.preferredSize.width = 35;
     delete_group_effects_button.preferredSize.height = 35;
 
     // Save group data
-    var groupData = {
-        name: groupName,
-        prefix: prefix,
-        panel: groupPanel,
-        viewCheckbox: view_effects_checkbox,
-        addButton: add_effect_button,
-        deleteButton: delete_group_effects_button,
-        editButton: edit_group_effects_button
-    };
+var groupData = {
+    name: groupName,
+    prefix: prefix,
+    panel: groupPanel,
+    viewCheckbox: view_effects_checkbox,
+    addButton: add_effect_button,
+    deleteButton: delete_group_effects_button,
+    editButton: edit_group_effects_button,
+    soloCheckbox: solo_checkbox // Добавьте эту строку
+};
 
     // Event handler for the View checkbox
     view_effects_checkbox.onClick = function() {
@@ -1156,15 +1398,60 @@ function createEffectGroupUI(groupName, prefix) {
         dialog.orientation = "column";
         dialog.alignChildren = ["fill", "top"];
 
-        var groupNameGroup = dialog.add("group");
+        // Первая группа - Name and Prefix
+        var namePrefixPanel = dialog.add("panel", undefined, "Name and Prefix");
+        namePrefixPanel.orientation = "column";
+        namePrefixPanel.alignChildren = ["fill", "top"];
+        namePrefixPanel.margins = [10, 15, 10, 10];
+
+        var groupNameGroup = namePrefixPanel.add("group");
         groupNameGroup.add("statictext", undefined, "Group Name:");
         var groupNameInput = groupNameGroup.add("edittext", undefined, groupData.name);
         groupNameInput.characters = 15;
 
-        var prefixGroup = dialog.add("group");
+        var prefixGroup = namePrefixPanel.add("group");
         prefixGroup.add("statictext", undefined, "Prefix:");
         var prefixInput = prefixGroup.add("edittext", undefined, groupData.prefix);
         prefixInput.characters = 5;
+
+        // Добавление чекбокса для автогенерации префикса
+        var autoPrefixGroup = namePrefixPanel.add("group");
+        autoPrefixGroup.orientation = "row";
+        autoPrefixGroup.alignChildren = ["left", "center"];
+        autoPrefixGroup.add("statictext", undefined, "Auto-generate Prefix:");
+        var autoPrefixCheckbox = autoPrefixGroup.add("checkbox", undefined, "");
+        autoPrefixCheckbox.value = false; // При редактировании группы по умолчанию выключено
+
+        // Если автогенерация включена, отключаем ввод префикса
+        prefixInput.enabled = !autoPrefixCheckbox.value;
+
+        // Обработчик для изменения состояния чекбокса
+        autoPrefixCheckbox.onClick = function() {
+            prefixInput.enabled = !autoPrefixCheckbox.value;
+            if (autoPrefixCheckbox.value) {
+                if (containsOnlyEnglishLetters(groupNameInput.text)) {
+                    prefixInput.text = generateUniquePrefix(groupNameInput.text);
+                } else {
+                    autoPrefixCheckbox.value = false;
+                    prefixInput.enabled = true;
+                    alert("Auto-prefix generation is disabled for group names containing non-English characters or special symbols.");
+                }
+            }
+        };
+
+        // Обработчик для изменения имени группы
+        groupNameInput.onChanging = function() {
+            if (autoPrefixCheckbox.value) {
+                if (containsOnlyEnglishLetters(groupNameInput.text)) {
+                    prefixInput.text = generateUniquePrefix(groupNameInput.text);
+                } else {
+                    autoPrefixCheckbox.value = false;
+                    prefixInput.enabled = true;
+                    prefixInput.text = "";
+                    alert("Auto-prefix generation is disabled for group names containing non-English characters or special symbols.");
+                }
+            }
+        };
 
         var buttonsGroup = dialog.add("group");
         buttonsGroup.alignment = "center";
@@ -1246,7 +1533,7 @@ function createEffectGroupUI(groupName, prefix) {
         }
 
         tab_effects.remove(groupPanel);
-        
+
         palette.layout.layout(true);
         palette.layout.resize();
 
@@ -1270,15 +1557,59 @@ create_group_effects_button.onClick = function() {
     dialog.orientation = "column";
     dialog.alignChildren = ["fill", "top"];
 
-    var groupNameGroup = dialog.add("group");
+    // Первая группа: Name and Prefix
+    var nameAndPrefixPanel = dialog.add("panel", undefined, "Name and Prefix");
+    nameAndPrefixPanel.orientation = "column";
+    nameAndPrefixPanel.alignChildren = ["fill", "top"];
+
+    var groupNameGroup = nameAndPrefixPanel.add("group");
     groupNameGroup.add("statictext", undefined, "Group Name:");
     var groupNameInput = groupNameGroup.add("edittext", undefined, "");
     groupNameInput.characters = 15;
 
-    var prefixGroup = dialog.add("group");
+    var prefixGroup = nameAndPrefixPanel.add("group");
     prefixGroup.add("statictext", undefined, "Prefix:");
     var prefixInput = prefixGroup.add("edittext", undefined, "");
     prefixInput.characters = 5;
+
+    // Добавление чекбокса для автогенерации префикса
+    var autoPrefixGroup = nameAndPrefixPanel.add("group");
+    autoPrefixGroup.orientation = "row";
+    autoPrefixGroup.alignChildren = ["left", "center"];
+    autoPrefixGroup.add("statictext", undefined, "Auto-generate Prefix:");
+    var autoPrefixCheckbox = autoPrefixGroup.add("checkbox", undefined, "");
+    autoPrefixCheckbox.value = true;
+
+    // Если автогенерация включена, отключаем ввод префикса
+    prefixInput.enabled = !autoPrefixCheckbox.value;
+
+    // Обработчик для изменения состояния чекбокса
+    autoPrefixCheckbox.onClick = function() {
+        prefixInput.enabled = !autoPrefixCheckbox.value;
+        if (autoPrefixCheckbox.value) {
+            if (containsOnlyEnglishLetters(groupNameInput.text)) {
+                prefixInput.text = generateUniquePrefix(groupNameInput.text);
+            } else {
+                autoPrefixCheckbox.value = false;
+                prefixInput.enabled = true;
+                alert("Auto-prefix generation is disabled for group names containing non-English characters or special symbols.");
+            }
+        }
+    };
+
+    // Обработчик для изменения имени группы
+    groupNameInput.onChanging = function() {
+        if (autoPrefixCheckbox.value) {
+            if (containsOnlyEnglishLetters(groupNameInput.text)) {
+                prefixInput.text = generateUniquePrefix(groupNameInput.text);
+            } else {
+                autoPrefixCheckbox.value = false;
+                prefixInput.enabled = true;
+                prefixInput.text = "";
+                alert("Auto-prefix generation is disabled for group names containing non-English characters or special symbols.");
+            }
+        }
+    };
 
     var buttonsGroup = dialog.add("group");
     buttonsGroup.alignment = "center";
@@ -1289,12 +1620,23 @@ create_group_effects_button.onClick = function() {
         var groupName = groupNameInput.text;
         var prefix = prefixInput.text;
 
-        if (groupName === "" || prefix === "") {
-            alert("Please enter both a group name and a prefix.");
-        } else {
-            createEffectGroupUI(groupName, prefix);
-            dialog.close();
+        if (groupName === "") {
+            alert("Please enter a group name.");
+            return;
         }
+
+        if (prefix === "") {
+            if (autoPrefixCheckbox.value) {
+                prefix = generateUniquePrefix(groupName);
+                prefixInput.text = prefix;
+            } else {
+                alert("Please enter a prefix.");
+                return;
+            }
+        }
+
+        createEffectGroupUI(groupName, prefix);
+        dialog.close();
     };
 
     cancelButton.onClick = function() {
@@ -1304,6 +1646,8 @@ create_group_effects_button.onClick = function() {
     dialog.center();
     dialog.show();
 }
+
+
 // Назначение обработчиков для кнопок Save и Load
 save_my_presets_button.onClick = function() {
     saveData();
@@ -1317,10 +1661,11 @@ load_my_presets_button.onClick = function() {
 clear_all_panels_button.onClick = function() {
     app.beginUndoGroup("Clear All Groups and Reset Names");
 
-    // Удаление всех существующих групп слоев и сброс префиксов слоев
+// Удаление всех существующих групп слоев и сброс префиксов слоев
     for (var i = layerGroups.length - 1; i >= 0; i--) {
         var lg = layerGroups[i];
-        // Сброс префиксов слоев
+
+// Сброс префиксов слоев
         var comps = getAllCompositions();
         for (var c = 0; c < comps.length; c++) {
             var comp = comps[c];
@@ -1338,10 +1683,11 @@ clear_all_panels_button.onClick = function() {
     }
     layerGroups = [];
 
-    // Удаление всех существующих групп эффектов и сброс префиксов эффектов
+// Удаление всех существующих групп эффектов и сброс префиксов эффектов
     for (var i = effectGroups.length - 1; i >= 0; i--) {
         var eg = effectGroups[i];
-        // Сброс префиксов эффектов
+        
+// Сброс префиксов эффектов
         var comps = getAllCompositions();
         for (var c = 0; c < comps.length; c++) {
             var comp = comps[c];
@@ -1378,7 +1724,7 @@ function saveData() {
     saveWindow.spacing = 10;
     saveWindow.margins = 15;
 
-    // Group for selecting save path
+// Group for selecting save path
     var pathGroup = saveWindow.add("group");
     pathGroup.orientation = "row";
     pathGroup.alignChildren = ["left", "center"];
@@ -1394,7 +1740,7 @@ function saveData() {
         }
     };
 
-    // Group for entering file name
+// Group for entering file name
     var fileGroup = saveWindow.add("group");
     fileGroup.orientation = "row";
     fileGroup.alignChildren = ["left", "center"];
@@ -1402,12 +1748,12 @@ function saveData() {
     var fileEdit = fileGroup.add("edittext", undefined, "My_Preset_Project.pgm");
     fileEdit.size = [200, 25];
 
-    // Buttons group
+// Buttons group
     var buttonsGroup = saveWindow.add("group");
     buttonsGroup.orientation = "row";
     buttonsGroup.alignChildren = ["fill", "center"];
 
-    // Export button
+// Export button
     var exportButton = buttonsGroup.add("button", undefined, "Export", {name: "ok"});
 
     exportButton.onClick = function() {
@@ -1426,9 +1772,9 @@ function saveData() {
             try {
                 var dataLines = [];
 
-                // Сохранение групп слоев
-                dataLines.push("LayerGroups:");
-                for (var i = 0; i < layerGroups.length; i++) {
+// Сохранение групп слоев
+dataLines.push("LayerGroups:");
+for (var i = 0; i < layerGroups.length; i++) {
                     var lg = layerGroups[i];
                     dataLines.push("GroupType: LayerGroup");
                     dataLines.push("Name: " + lg.name);
@@ -1438,14 +1784,14 @@ function saveData() {
                     dataLines.push(""); // Пустая строка для разделения групп
                 }
 
-                // Сохранение групп эффектов
+// Сохранение групп эффектов
                 dataLines.push("EffectGroups:");
                 for (var j = 0; j < effectGroups.length; j++) {
                     var eg = effectGroups[j];
                     dataLines.push("GroupType: EffectGroup");
                     dataLines.push("Name: " + eg.name);
                     dataLines.push("Prefix: " + eg.prefix);
-                    // Добавьте другие свойства эффектов, если они есть
+// Добавьте другие свойства эффектов, если они есть
                     dataLines.push(""); // Пустая строка для разделения групп
                 }
 
@@ -1462,7 +1808,7 @@ function saveData() {
         }
     };
 
-    // Cancel button
+// Cancel button
     var cancelButton = buttonsGroup.add("button", undefined, "Cancel", {name: "cancel"});
     cancelButton.onClick = function() {
         saveWindow.close();
@@ -1479,7 +1825,7 @@ function loadData() {
     importWindow.spacing = 10;
     importWindow.margins = 15;
 
-    // Поле для выбора файла импорта
+// Поле для выбора файла импорта
     var fileGroup = importWindow.add("group");
     fileGroup.orientation = "row";
     fileGroup.alignChildren = ["left", "center"];
@@ -1495,12 +1841,12 @@ function loadData() {
         }
     };
 
-    // Группа кнопок
+// Группа кнопок
     var buttonsGroup = importWindow.add("group");
     buttonsGroup.orientation = "row";
     buttonsGroup.alignChildren = ["fill", "center"];
 
-    // Кнопка Import
+// Кнопка Import
     var importButton = buttonsGroup.add("button", undefined, "Import", {name: "ok"});
 
     importButton.onClick = function() {
@@ -1517,29 +1863,29 @@ function loadData() {
                 var content = file.read();
                 file.close();
 
-                // Разделяем содержимое файла по строкам
+// Разделяем содержимое файла по строкам
                 var lines = content.split(/\r\n|\n|\r/);
                 var currentSection = "";
                 var currentGroup = {};
 
-                // Очистка существующих групп слоёв
+// Очистка существующих групп слоёв
                 for (var i = layerGroups.length - 1; i >= 0; i--) {
                     var lg = layerGroups[i];
                     tab_layers.remove(lg.panel);
                 }
                 layerGroups = [];
 
-                // Очистка существующих групп эффектов
+// Очистка существующих групп эффектов
                 for (var i = effectGroups.length - 1; i >= 0; i--) {
                     var eg = effectGroups[i];
                     tab_effects.remove(eg.panel);
                 }
                 effectGroups = [];
 
-                // Обновление интерфейса после удаления групп
+// Обновление интерфейса после удаления групп
                 palette.layout.layout(true);
 
-                // Разбор файла и создание групп
+// Разбор файла и создание групп
                 for (var i = 0; i < lines.length; i++) {
                     var line = trim(lines[i]);
                     if (line === "LayerGroups:") {
@@ -1564,7 +1910,7 @@ function loadData() {
                             currentGroup.disableLabelColor = (trim(line.split(":")[1]).toLowerCase() === "true");
                         }
                     
-                        // Если все поля собраны, создаём группу
+// Если все поля собраны, создаём группу
                         if (currentGroup.name && currentGroup.prefix && typeof currentGroup.labelColorIndex !== 'undefined' && typeof currentGroup.disableLabelColor !== 'undefined' && currentGroup.type === "LayerGroup") {
                             createLayerGroupUI(
                                 currentGroup.name,
@@ -1584,7 +1930,7 @@ function loadData() {
                             currentGroup.prefix = trim(line.split(":")[1]);
                         }
 
-                        // Если все поля собраны, создаём группу
+// Если все поля собраны, создаём группу
                         if (currentGroup.name && currentGroup.prefix && currentGroup.type === "EffectGroup") {
                             createEffectGroupUI(
                                 currentGroup.name,
@@ -1604,7 +1950,7 @@ function loadData() {
         }
     };
 
-    // Кнопка Cancel
+// Кнопка Cancel
     var cancelButton = buttonsGroup.add("button", undefined, "Cancel", {name: "cancel"});
     cancelButton.onClick = function() {
         importWindow.close();
