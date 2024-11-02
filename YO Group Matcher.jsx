@@ -1,15 +1,10 @@
 var panelGlobal = this;
 
-/*
-Code for Import https://scriptui.joonas.me — (Triple click to select): 
-{"items":{"item-0":{"id":0,"type":"Dialog","parentId":false,"style":{"enabled":true,"varName":null,"windowType":"Palette","creationProps":{"su1PanelCoordinates":false,"maximizeButton":true,"minimizeButton":false,"independent":false,"closeButton":true,"borderless":false,"resizeable":true},"text":"YO Group Matcher 2.3.0","preferredSize":[384,490],"margins":0,"orientation":"row","spacing":11,"alignChildren":["center","top"]}},"item-1":{"id":1,"type":"TabbedPanel","parentId":0,"style":{"enabled":true,"varName":null,"preferredSize":[0,0],"margins":10,"alignment":null,"selection":4}},"item-3":{"id":3,"type":"Tab","parentId":1,"style":{"enabled":true,"varName":"tab_layers","text":"Layers Group","orientation":"column","spacing":10,"alignChildren":["center","top"]}},"item-4":{"id":4,"type":"Tab","parentId":1,"style":{"enabled":true,"varName":"tab_effects","text":"Effects Group","orientation":"column","spacing":10,"alignChildren":["left","top"]}},"item-5":{"id":5,"type":"Tab","parentId":1,"style":{"enabled":true,"varName":"tab_settings","text":"Settings","orientation":"column","spacing":8,"alignChildren":["center","top"]}},"item-6":{"id":6,"type":"IconButton","parentId":7,"style":{"enabled":true,"varName":"save_my_presets_button","text":"Save  My Preset","preferredSize":[173,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAC0SURBVHgB7ZLRDcIwDEQdxACMkBFghG4CGzBCN4ER2KArdAPYgG4QfMIWEUodV+pPqz7Jiu2412sTolWQUroiaC5Y7InwzO5oZjbBH3wIEeHtK/sRsQMvneRNLib9geNEFjzcpi9R6rPUuDJvCc2PmVvQmg5BCOHOg0hvf1sN7/Vjz5mHAlFeLlIONTHTYcFpXxNzCaooOSkJRnHkIVqC+jkdTeelSci7uCqlt1bAv33QYvgAT85zTj/6nZ8AAAAASUVORK5CYII="],"alignment":null,"helpTip":"Save current Layer and Effect Groups to a .pgm file"}},"item-7":{"id":7,"type":"Panel","parentId":5,"style":{"enabled":true,"varName":"panel_import_export","creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Import/Export","preferredSize":[131,73],"margins":18,"orientation":"row","spacing":20,"alignChildren":["left","center"],"alignment":"fill"}},"item-8":{"id":8,"type":"IconButton","parentId":7,"style":{"enabled":true,"varName":"load_my_presets_button","text":"Load  My Preset","preferredSize":[168,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADrSURBVHgBtZQNEcIwDIWzHQKQMAdYGBJQwHCAA4YCJNA5mAOQgIRKmIPycgSu9Nou5efd5dql6bckW0v0Y1WhwznXYmgS8VNVVSNpBVjn5nXIMRbBcyvjLhK7hJ1gPaCETI+kyNBwCom1RpNpTZ+rj0G/AT6he9+xIL0mWNg3znCV3JHrYSKedfZ9qpKxacumiZ0tWUBG5vy7DLn4WgsTmblM6wysEZilxweZZG5kLapkySjNYuMG0xvsIu41rOW1YqBAR8n29RJ6b0EZ0JNVxsWBfOsEriHhz4uPkStX5zNKL9hQFn290j91BzcC1hWKioZ7AAAAAElFTkSuQmCC"],"alignment":null,"helpTip":"Load Layer and Effect Groups from a .pgm file"}},"item-9":{"id":9,"type":"Panel","parentId":5,"style":{"enabled":true,"varName":"panel_settings","creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Settings","preferredSize":[0,0],"margins":18,"orientation":"row","spacing":20,"alignChildren":["left","center"],"alignment":"fill"}},"item-11":{"id":11,"type":"EditText","parentId":5,"style":{"enabled":true,"varName":"about_text_group","creationProps":{"noecho":false,"readonly":true,"multiline":true,"scrollable":true,"borderless":false,"enterKeySignalsOnChange":false},"softWrap":true,"text":"\nYO Group Matcher\n\nDownload Updates:\nhttps://github.com/yo-romlogunov/YO-Group-Matcher/releases\n\nManual:\nhttps://goo.su/5jGwMYu\n\nThis script allows you to manage Layer Groups \nand Effect Groups within your compositions. \nYou can add, edit, and delete groups, toggle visibility, \nsolo groups, and hide layers using the Shy feature.\n\nFeatures:\n- Create and manage Layer Groups and Effect Groups\n- Toggle visibility of entire groups\n- Solo specific Layer Groups\n- Hide layers in the timeline without disabling them\n\nFor more information, visit @romlogunov - t.me/vtb_blogGroups\n- Hide layers in the timeline without disabling them\n\nFor more information, visit @romlogunov - t.me/vtb_blog\n","justify":"left","preferredSize":[476,381],"alignment":"fill","helpTip":null}},"item-12":{"id":12,"type":"IconButton","parentId":5,"style":{"enabled":true,"varName":"updates_check_button","text":"Check For Updates - You Version 2.3.0","preferredSize":[275,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAETSURBVHgB1VNREcIwDE05BCAhEiYBCaCA4QAHFAXgYHMADpAADjoUgIOSsjcuV7qWT3h377JrX97SNCX6dZiSwHtfSWDhI9AYc01oWNa7nMlMuBXe/SecsFbaoLM5M0aSh+EhGICt2rsI9/i2ucpcVtTrbFT1WzuJtHvq+7WTnlhlsAiVK52jElDdq0eJvXffwiX5T9hBO1V5c8Qd5cHCdbR2TRlWiB1lIK045fYn9B3CDK6iPg7HD+3YpAw7RE4YLoU3ocOosNIypU6lLuVMI8CMngdDiQ1yeCyhhWBFBWCUAhoqVODwQuqC2R1apsKf9dM74slVWK9xZP+VWWTa+nE0Y2amZEz9fOoZPcksPuhv8QRky34p3fzEMwAAAABJRU5ErkJggg=="],"alignment":null,"helpTip":"Check for Updates"}},"item-13":{"id":13,"type":"StaticText","parentId":5,"style":{"enabled":true,"varName":"status_updates_text","creationProps":{"truncate":"none","multiline":false,"scrolling":false},"softWrap":false,"text":"Status","justify":"center","preferredSize":[0,24],"alignment":"fill","helpTip":null}},"item-14":{"id":14,"type":"Divider","parentId":5,"style":{"enabled":true,"varName":null}},"item-15":{"id":15,"type":"Panel","parentId":3,"style":{"enabled":true,"varName":"layer_group_default","creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Layer Group  Default [X]","preferredSize":[0,0],"margins":[10,5,10,15],"orientation":"row","spacing":20,"alignChildren":["center","center"],"alignment":"fill"}},"item-16":{"id":16,"type":"Checkbox","parentId":15,"style":{"enabled":true,"varName":"view_layers_checkbox","text":"View","preferredSize":[0,0],"alignment":null,"helpTip":"Toggle visibility of layers in this group across all compositions","checked":true}},"item-17":{"id":17,"type":"IconButton","parentId":15,"style":{"enabled":true,"varName":"add_layer_button","text":"Add Layer","preferredSize":[115,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAD0SURBVHgBrZSBEcIgDEVDzwF0A7qBI+AGbmRXcIK6iY7QDWCDdoOYCHhcS1qK/rsUGriXlCYA/FlqawMinmlgm8icUmqAvSLIkexGNuJSlqwn06UwI4ByYLMFu+J+GQmmQ1QpG2mNv+aYA/YoSweT1EWOSoCWBi2cRhtGK6xP9PdPPGkCzKzASsRVwaUFh+iYbXBkl/hC0V0I3CZ7nrMkeD40ArBaMcN59WtIzivJzK6wHD8+GYZ2mqBe35ZsEucd6vVaeND371hR2OzX2TDo+3ivDKwJfT/bAtC4CUug3GYPAcygDnP9C+UXrAZfq0PVBfuL3rs+9VbgXdmxAAAAAElFTkSuQmCC"],"alignment":null,"helpTip":"Add selected layers to this group across all compositions"}},"item-18":{"id":18,"type":"IconButton","parentId":15,"style":{"enabled":true,"varName":"edit_group_layers_button","text":"","preferredSize":[40,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgB7ZPRCYAwDESv4gCO4AiOoBs5Qp3AEXQUN9ENdIMYacVaihDrV/HBwf300UACJAsRtZwSX8CigQxztPQQcFa6uEkzCOCHva0NZ7O95NSQ4o/JqexPNaQ4MvKkBaQEZCctpDzINKT8Mg0pZG4zWuZeSminOqWUxkthtOwgd/rk9IVlI5JkB/RNJEiR+ykNAAAAAElFTkSuQmCC"],"alignment":null,"helpTip":"Rename and settings this Group"}},"item-19":{"id":19,"type":"Checkbox","parentId":15,"style":{"enabled":true,"varName":"solo_layers_checkbox","text":"Solo","preferredSize":[0,0],"alignment":null,"helpTip":"Solo this group: show only layers in this group and hide all others"}},"item-20":{"id":20,"type":"Checkbox","parentId":15,"style":{"enabled":true,"varName":"hide_layers_checkbox","text":"Hide","preferredSize":[0,0],"alignment":null,"helpTip":"Mark layers in this group as Shy: hide them in the timeline without disabling"}},"item-22":{"id":22,"type":"IconButton","parentId":15,"style":{"enabled":true,"varName":"delete_group_layers_button","text":"","preferredSize":[40,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAB+SURBVHgB7ZQ9EcAgDEa/1EAtIKVSsFAnlVAJlVAJdQAScJBmYKL8ZOiQgXeXCwR4FwYArEO9RWZ2knxRPokoqoUiOSStebpJuGJLlLjzOIl8x6CrwHrCsMMsdVBQu3pLyNAJP+cX/MwUTqFl4YMxsVbsvWWPNkni6n1jdnkBjcFLWju67I0AAAAASUVORK5CYII="],"alignment":null,"helpTip":"Delete this Layer Group"}},"item-23":{"id":23,"type":"Panel","parentId":4,"style":{"enabled":true,"varName":"effect_group_default","creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Effect Group Default [X]","preferredSize":[0,0],"margins":[10,5,10,15],"orientation":"row","spacing":20,"alignChildren":["center","center"],"alignment":"fill"}},"item-24":{"id":24,"type":"Checkbox","parentId":23,"style":{"enabled":true,"varName":"view_effects_checkbox","text":"View","preferredSize":[0,0],"alignment":null,"helpTip":"Toggle visibility of effects in this group across all compositions","checked":true}},"item-25":{"id":25,"type":"IconButton","parentId":23,"style":{"enabled":true,"varName":"edit_group_effects_button","text":"Edit Group","preferredSize":[125,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgB7ZPRCYAwDESv4gCO4AiOoBs5Qp3AEXQUN9ENdIMYacVaihDrV/HBwf300UACJAsRtZwSX8CigQxztPQQcFa6uEkzCOCHva0NZ7O95NSQ4o/JqexPNaQ4MvKkBaQEZCctpDzINKT8Mg0pZG4zWuZeSminOqWUxkthtOwgd/rk9IVlI5JkB/RNJEiR+ykNAAAAAElFTkSuQmCC"],"alignment":null,"helpTip":"Rename and settings this Group"}},"item-26":{"id":26,"type":"IconButton","parentId":23,"style":{"enabled":true,"varName":"add_effect_button","text":"Add Effect","preferredSize":[115,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAD0SURBVHgBrZSBEcIgDEVDzwF0A7qBI+AGbmRXcIK6iY7QDWCDdoOYCHhcS1qK/rsUGriXlCYA/FlqawMinmlgm8icUmqAvSLIkexGNuJSlqwn06UwI4ByYLMFu+J+GQmmQ1QpG2mNv+aYA/YoSweT1EWOSoCWBi2cRhtGK6xP9PdPPGkCzKzASsRVwaUFh+iYbXBkl/hC0V0I3CZ7nrMkeD40ArBaMcN59WtIzivJzK6wHD8+GYZ2mqBe35ZsEucd6vVaeND371hR2OzX2TDo+3ivDKwJfT/bAtC4CUug3GYPAcygDnP9C+UXrAZfq0PVBfuL3rs+9VbgXdmxAAAAAElFTkSuQmCC"],"alignment":null,"helpTip":"Add selected effects to this group across all compositions"}},"item-27":{"id":27,"type":"IconButton","parentId":3,"style":{"enabled":true,"varName":"create_group_layers_button","text":"Create a New Layer Group","preferredSize":[200,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADRSURBVHgB1VRREcIwDE05/pmEooBawAESkICESZgELKAACeCAOVgdlBeW3bXQG8voB3t3b9lytzR5aUL07zD8CCE4mAPp4MGzMcYnXgSrwEeYh+v7KSuwAi3Ng80FLIp19H4XTkVec+hgRY+aFBDdbzSSoRZ76vUvExDXpc35f2qKlH0qFpD6a7OLHeqSuYkwx8jlpKEeMjTqLnOJI5NTqUt+ZUG0FTIuwzfPdVzyRsqZErSVbNl0ScdlOXRBByf/1mAyMcP6spQK/Q3Nx9paDJ7kC+DeMHTqtgAAAABJRU5ErkJggg=="],"alignment":"fill","helpTip":"Create a new Layer Group"}},"item-28":{"id":28,"type":"IconButton","parentId":23,"style":{"enabled":true,"varName":"delete_group_effects_button","text":"Delete Group","preferredSize":[120,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAB+SURBVHgB7ZQ9EcAgDEa/1EAtIKVSsFAnlVAJlVAJdQAScJBmYKL8ZOiQgXeXCwR4FwYArEO9RWZ2knxRPokoqoUiOSStebpJuGJLlLjzOIl8x6CrwHrCsMMsdVBQu3pLyNAJP+cX/MwUTqFl4YMxsVbsvWWPNkni6n1jdnkBjcFLWju67I0AAAAASUVORK5CYII="],"alignment":null,"helpTip":"Delete this Effects Group"}},"item-30":{"id":30,"type":"IconButton","parentId":4,"style":{"enabled":true,"varName":"create_group_effects_button","text":"Create a New Effects Group","preferredSize":[200,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADRSURBVHgB1VRREcIwDE05/pmEooBawAESkICESZgELKAACeCAOVgdlBeW3bXQG8voB3t3b9lytzR5aUL07zD8CCE4mAPp4MGzMcYnXgSrwEeYh+v7KSuwAi3Ng80FLIp19H4XTkVec+hgRY+aFBDdbzSSoRZ76vUvExDXpc35f2qKlH0qFpD6a7OLHeqSuYkwx8jlpKEeMjTqLnOJI5NTqUt+ZUG0FTIuwzfPdVzyRsqZErSVbNl0ScdlOXRBByf/1mAyMcP6spQK/Q3Nx9paDJ7kC+DeMHTqtgAAAABJRU5ErkJggg=="],"alignment":"fill","helpTip":"Create a new Effect Group"}},"item-32":{"id":32,"type":"Divider","parentId":15,"style":{"enabled":true,"varName":null}},"item-34":{"id":34,"type":"Divider","parentId":23,"style":{"enabled":true,"varName":null}},"item-36":{"id":36,"type":"Divider","parentId":15,"style":{"enabled":true,"varName":null}},"item-37":{"id":37,"type":"IconButton","parentId":9,"style":{"enabled":true,"varName":"restore_presets_button","text":"Restore Default Preset","preferredSize":[217,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEPSURBVHgBnVQLEYMwDC13E4CESkACEpCAg+EAJOBgSJgD5gAJxQE4yBJIj9DPKHt3uR3Ley9NmqtSPwAAOUaLMWIssGPh7xpDq1Qg+SlMrJGBM+i7TjFrhajHKJ18iTEITptiRtWLi8KV6KIKEbSoqlUC2NSOJHeTL0526gZE+42bMLHT8Y1XkVzJutEVEKaAQItZGa+1nbO1/eAb1BiWlItV+GRZNuNvLfLEJc3b8Zy3HFc34GMItGSHr2MnlC2ZkJkQFDT0iFkRmqE19cyuILbDu2WtbgKO3V3+0btmhRhVd0WmyiMEXhU4XqElyYxFHZwxcQHj/N+oVPApBwg/W31oZtkNc1psihWXfY3xvqAwDphc/wUqAAAAAElFTkSuQmCC"],"alignment":null,"helpTip":null}},"item-38":{"id":38,"type":"IconButton","parentId":9,"style":{"enabled":true,"varName":"sort_button","text":"Sort Footage in Projects","preferredSize":[201,40],"creationProps":{"style":"toolbutton","toggle":false},"iconButtonStroke":false,"image":["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABhSURBVHgB7dGxDYAwDETRO0TPCqzCJrABIzASbMAIbEA2CXZBFxe20iVPSnVSXHxmgYoGVDbKW9AUSpMDfifJp7jkmNW6pFFu+CV0P638GtslJXc4aZTZ2CYE6IebsSUEfJdFSIxfXw8FAAAAAElFTkSuQmCC"],"alignment":null,"helpTip":null}},"item-39":{"id":39,"type":"DropDownList","parentId":42,"style":{"enabled":true,"varName":"default_presets_dropdown","text":"DropDownList","listItems":"Select Preset, 3D, Shapes, VFX","preferredSize":[133,0],"alignment":null,"selection":0,"helpTip":null}},"item-40":{"id":40,"type":"Button","parentId":42,"style":{"enabled":true,"varName":"apply_preset_button","text":"Apply Preset","justify":"center","preferredSize":[0,0],"alignment":null,"helpTip":null}},"item-42":{"id":42,"type":"Panel","parentId":5,"style":{"enabled":true,"varName":"panel_default_presets","creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Default Presets","preferredSize":[0,0],"margins":17,"orientation":"row","spacing":10,"alignChildren":["left","top"],"alignment":"fill"}}},"order":[0,1,3,15,16,17,32,19,20,36,18,22,27,4,23,24,26,34,25,28,30,5,42,39,40,7,6,8,9,37,38,11,12,14,13],"settings":{"importJSON":true,"indentSize":false,"cepExport":false,"includeCSSJS":true,"showDialog":true,"functionWrapper":false,"afterEffectsDockable":true,"itemReferenceList":"None"},"activeId":4}
-*/ 
-
 // PALETTE
 // =======
 var palette = (panelGlobal instanceof Panel) ? panelGlobal : new Window("palette", undefined, undefined, {maximizeButton: true, resizeable: true}); 
     if ( !(panelGlobal instanceof Panel) ) palette.text = "YO Group Matcher"; 
-    palette.preferredSize.width = 350; 
+    palette.preferredSize.width = 395; 
     palette.preferredSize.height = 490; 
     palette.orientation = "row"; 
     palette.alignChildren = ["center","top"]; 
@@ -94,9 +89,14 @@ var create_group_layers_button = tab_layers.add("iconbutton", undefined, File.de
     
     var solo_off_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0E%00%00%00%0B%08%06%00%00%00O%C2%85%C2%BCb%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00AIDATx%01%C2%BD%C3%8EA%0D%C3%800%0CCQ%7B%0A%C2%90%0D%C3%A96%40%09%C2%A5BI%5B%0A%C3%BF%C3%90'%C3%B9%C3%B8%25%C2%BB%C2%AAZ%40t%C3%B7%C2%AF%C2%93%C2%BC%C2%AE%0E%01%C2%B1v%0B%C2%B8%04%C3%A1%10sf~%02%C3%82%C3%B6%2B%60%C2%87%C2%8F%C2%80%09%C2%875%0C%C3%95%10%C2%B0%C3%9Aj%00%00%00%00IEND%C2%AEB%60%C2%82"; 
     
-    // Объект, связывающий индекс цвета метки с соответствующей строкой изображения
+    var add_layer_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0E%00%00%00%0E%08%06%00%00%00%1FH-%C3%91%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%25IDATx%01%C2%95RKn%C2%830%10%C2%B5%0D%2B%C3%84%C3%82%2B%04%C2%BBp%C2%82%C2%B6G%C3%A8IBO%C2%90%C3%A6%04mn%C3%80%0D%0A'%C3%A9%11%C3%8A%0D%C2%9C%1D%C2%82%0D%C2%AC%10%12%1F%C3%B7%0D%C2%AAi%C2%82%C2%88B%C2%9Ed%C2%8D%3D%C2%BF7%C2%9E%19%C3%8E.%C2%A0%C2%94%C2%92%C2%AE%C3%AB%1E%C3%86q%C2%8C%C3%B0%C3%9C%C3%BD%C2%A93%C3%8Ey6%0C%C3%83)%08%C2%82%C2%B3%C3%B1%C3%A5%C3%A6R%C2%96%C3%A5%1E%22%C3%96ZK%C2%B6%C2%8E%1A%C2%B6%C2%93%C3%AF%C3%BB%C3%B1%1C%C2%88%C2%A0%03%C2%941%C3%9B%00%C2%B0G%C2%9E%C3%A7%C2%A5%3C%C3%8F%C3%B3%C2%9DeY%3FK%268%24%24%C2%A1%C2%8F%C2%96%C3%8CM%C3%93%C2%84%02A%1Fk%C3%A5!0%C3%85%C2%BF%C3%92%15R%C3%A98%C3%8E%C2%BB%40%C3%903%7B%1C%7B%5E%14%C2%85%C2%BEP%C2%A4%C3%A8hB%C2%97%C2%B6m3)%25%C3%89)%C2%B1%10%22%C2%A2%00%C3%A3(%16%C3%A5i%C3%9B%C2%B6%19%C2%9D%C3%A93u%C3%8D%C3%8C%C2%9BlW%C2%BE%60T%C3%AC%7Ff3%C3%80%C3%B0%C3%9A%C3%B7%3D%C3%89%C3%AF%C2%A5%C2%8D%C3%A6*P%C3%9AZ%03%C3%AE!%C3%A3UU%C3%89%C2%AE%C3%AB%C3%94%C3%96q%40_%C2%A3%C3%9B%2F%C3%93%02%60%C2%96%11J%C3%BAb%1B%C2%80DG%C3%9A%C2%9E%C2%A99%C3%98%C3%81%04Y%C2%8E%C2%94%C3%ADV%00%C3%99%C3%B0%C2%AD%C2%B7%C2%AB%C2%953%C2%A0-%02%C3%B3'%C2%AEO8f%C2%BEg%C3%AA%03%C3%86%12%C2%87a8'%C3%BE%05%C2%A5m%C2%8E%C2%B3%C2%97s%C2%8C%5E%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+
+    var edit_group_layers_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%12%00%00%00%12%08%06%00%00%00V%C3%8E%C2%8EW%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01UIDATx%01%C2%BDS%C3%9Bm%C2%83%40%10%3C%C2%B0%0B%C3%A0%C2%87%C3%A7%C2%97%C3%93%01%25%C3%84%15D%C2%A9%C3%80%C2%A1%C2%82%C2%A4%03%C2%8B%0Ab*%40%C2%A9%20q%05P%02%1D%C3%A4%3E%C2%81%2F%0A%C3%A0%C2%91Y%0BN%C3%87%01%17E%C2%8A%3C%C3%92%C2%89%C2%85%C3%9D%C2%9B%C2%9D9%C3%B6%18%C3%BB'%18%C2%BAd%5D%C3%97%C2%A1a%18%16%C3%85m%C3%9Br%C3%9F%C3%B7%C3%B9V%C3%AD%5EG4%0CC%C2%8A%15Rl%C2%9A%26%C3%87%C3%A3a%C2%AB%C3%96dz%C2%84R%7C%C3%90%15%C3%8E%C2%AC%C3%81JJ%1B%60%C3%A7%0A%25OX%C2%8FJ%3D%C2%87%C2%B2%C2%84r%C3%B4%C3%A28%C3%8EqA%04%C2%92%17%C2%B2%C3%82%C3%BE%00%C2%90%1Em%C3%9B%C3%8Eo%C3%B1%C3%B4%11%24g%C2%B5%10%C3%8Ar%C2%AC%08%C3%A13V%C2%A1%C3%A6%C3%BB%C2%BE%17%C2%8D%C3%85aw%5D%C2%97%C3%ACv%C2%BBw%C2%A9%C2%AE%C2%90%C2%A5%03_P%C2%9DMv%C3%91%C2%A0%01Q%22%C3%94MA%10%04%C2%97%C2%B1%C3%BB%C2%84%C2%98-%C3%B1!%C2%A9%C2%89%3D%C3%8F%C2%BB%2C%C2%88%C3%86%C2%A4%25%C3%99%C2%B2T%16%C2%A8i%C3%84F%C3%93l%C3%A4%C2%9C%20%C2%82%C3%ACW%24%C3%A5s%3A%C2%B1%25%C3%8E%12iZ%C2%96%C3%A5%C2%9Bh%3C%05UU%7D3eV%C2%A0%C2%AA%C3%80%C2%86xTwZ%1B%07%C3%97uoC%C2%BA%C2%97lEP%C2%94%C2%B1%C2%B9%15%1A%C3%88O%3C%C3%99%1A%C3%A8%C2%9C%16%C2%8AF%7B%C3%99Xp%C2%85%0A%C2%B2%16*%0As%C3%8A%C2%A1!%0D%24%C3%87_%C2%8DV%C2%89T%C3%80%C3%AEL%0All%C3%96%C3%BFv%C3%97%C2%B8%C2%A4%C2%A6%C3%90%15jo%3Fl%C3%90%40%1E(%C3%86%C2%B06%C3%AC%1E%C3%B8%01%C2%9DB%C2%90%C2%81%C3%86%C3%9C%C2%A7%0D%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+
+    var delete_group_layers_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0B%00%00%00%0F%08%06%00%00%002%3D50%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%ADIDATx%01%C2%95R%C2%B1%0D%C2%830%10%C3%84%C3%A0%C2%8A%C3%8A%14%08!!%C2%85%11%C2%92%11%18!%13%C2%84%0D%C2%B2%02%C2%8C%C2%90%112%01%C3%99%20l%C2%90d%03w%08(%C2%A0%C2%A3%02r%C2%8F%20!%C3%88%12%C3%A4%24%C3%8B%C3%BF%C3%96%C3%B9%C3%AF%C3%BEm%C2%96e%C2%99%C2%AF%01%C2%86a%C2%88%C2%BE%C3%AF%13%C2%84C%3EB2%C3%86%C2%8Em%C3%9B%C3%96%C2%94%C2%B0%3C%C3%8F%7Bm%238V%C2%BC%C2%99%0C%C2%99%1B%C3%A4%C3%8Fk%C3%84%C2%AE%C3%ABb%0E%3FB%C3%97%C3%B5p%C2%B5*%C3%A7W%5D%C3%BB%03%3Fd%C3%98%C2%B9%60%C2%93c*%C3%87%5CI%C2%96M%C3%93D%C3%B0%16%C2%A0%C2%8F%C2%94v%C3%8A%11%C3%97%1F%2B3%C2%B2o%C2%9A%C3%A6%C3%9Dq%C2%9C%03%C3%A2%C2%80%0E0%C3%96%07%C2%AA%0B%C2%A5%0D%40L%C2%8FTU%15%C2%91%C2%84%C3%92%06%C3%89%C2%91%C2%B4%C3%AB%C2%BA%C2%B2(%C2%8A%C3%90%C2%B2%C2%AC%C2%9A%5EOi%C2%83%C3%A40%C3%82%3D%C2%A4O%C2%88%C2%A3%C2%B2%2Cw%C2%B8%C3%BC%C2%9AW%C3%A7%0B%1B%C3%89%14%C2%8084%C2%87%C2%8B_%1B%C3%93'Qa%C3%9E%C3%9C%40%C3%B6%3C%C3%AF%C2%B9%C2%9C%C3%A7%124J%C3%9B%C2%B6%C3%937%C3%B7%C3%9Cs%C2%B3g%5D%C3%BB_%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+    
     var labelColorIcons = {
-    0: none_color_label_button_imgString, // По умолчанию
+    0: none_color_label_button_imgString, // default
     1: red_color_label_button_imgString,
     2: yellow_color_label_button_imgString,
     3: aqua_color_label_button_imgString,
@@ -116,45 +116,45 @@ var create_group_layers_button = tab_layers.add("iconbutton", undefined, File.de
 };
 
 function setColorLabelButtonIcon(button, labelColorIndex) {
-    var imgString = labelColorIcons[labelColorIndex] || default_color_label_button_imgString;
-    var decodedImgString = decodeURIComponent(imgString);
+var imgString = labelColorIcons[labelColorIndex] || default_color_label_button_imgString;
+var decodedImgString = decodeURIComponent(imgString);
 
-    // Генерируем уникальное имя файла с использованием метки времени
-    var timestamp = new Date().getTime();
-    var tempFile = new File(Folder.temp.fsName + "/temp_label_icon_" + labelColorIndex + "_" + timestamp + ".png");
+// Генерируем уникальное имя файла с использованием метки времени
+var timestamp = new Date().getTime();
+var tempFile = new File(Folder.temp.fsName + "/temp_label_icon_" + labelColorIndex + "_" + timestamp + ".png");
 
-    // Записываем декодированную строку в файл
-    tempFile.open("w");
-    tempFile.encoding = "BINARY";
-    tempFile.write(decodedImgString);
-    tempFile.close();
+// Записываем декодированную строку в файл
+tempFile.open("w");
+tempFile.encoding = "BINARY";
+tempFile.write(decodedImgString);
+tempFile.close();
 
-    // Назначаем изображение кнопке
-    button.image = tempFile;
+// Назначаем изображение кнопке
+button.image = tempFile;
 
-    // Принудительно перерисовываем кнопку
-    button.notify("onDraw");
+// Принудительно перерисовываем кнопку
+button.notify("onDraw");
 }
 
 // Добавьте функцию setViewButtonIcon
 function setViewButtonIcon(button, imgString) {
-    var decodedImgString = decodeURIComponent(imgString);
+var decodedImgString = decodeURIComponent(imgString);
 
-    // Генерируем уникальное имя файла с использованием метки времени
-    var timestamp = new Date().getTime();
-    var tempFile = new File(Folder.temp.fsName + "/temp_view_icon_" + timestamp + ".png");
+// Генерируем уникальное имя файла с использованием метки времени
+var timestamp = new Date().getTime();
+var tempFile = new File(Folder.temp.fsName + "/temp_view_icon_" + timestamp + ".png");
 
-    // Записываем декодированную строку в файл
-    tempFile.open("w");
-    tempFile.encoding = "BINARY";
-    tempFile.write(decodedImgString);
-    tempFile.close();
+// Записываем декодированную строку в файл
+tempFile.open("w");
+tempFile.encoding = "BINARY";
+tempFile.write(decodedImgString);
+tempFile.close();
 
-    // Назначаем изображение кнопке
-    button.image = tempFile;
+// Назначаем изображение кнопке
+button.image = tempFile;
 
-    // Принудительно перерисовываем кнопку
-    button.notify("onDraw");
+// Принудительно перерисовываем кнопку
+button.notify("onDraw");
 }
 
 
@@ -162,45 +162,6 @@ function setViewButtonIcon(button, imgString) {
 function trim(str) {
     return str.replace(/^\s+|\s+$/g, '');
 }
-
-var view_layers_checkbox = layer_group_default.add("checkbox", undefined, undefined, {name: "view_layers_checkbox"}); 
-   // view_layers_checkbox.helpTip = "Toggle visibility of layers in this group across all compositions"; 
-   // view_layers_checkbox.text = "View"; 
-   // view_layers_checkbox.value = true; 
-
-var add_layer_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0E%00%00%00%0E%08%06%00%00%00%1FH-%C3%91%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%25IDATx%01%C2%95RKn%C2%830%10%C2%B5%0D%2B%C3%84%C3%82%2B%04%C2%BBp%C2%82%C2%B6G%C3%A8IBO%C2%90%C3%A6%04mn%C3%80%0D%0A'%C3%A9%11%C3%8A%0D%C2%9C%1D%C2%82%0D%C2%AC%10%12%1F%C3%B7%0D%C2%AAi%C2%82%C2%88B%C2%9Ed%C2%8D%3D%C2%BF7%C2%9E%19%C3%8E.%C2%A0%C2%94%C2%92%C2%AE%C3%AB%1E%C3%86q%C2%8C%C3%B0%C3%9C%C3%BD%C2%A93%C3%8Ey6%0C%C3%83)%08%C2%82%C2%B3%C3%B1%C3%A5%C3%A6R%C2%96%C3%A5%1E%22%C3%96ZK%C2%B6%C2%8E%1A%C2%B6%C2%93%C3%AF%C3%BB%C3%B1%1C%C2%88%C2%A0%03%C2%941%C3%9B%00%C2%B0G%C2%9E%C3%A7%C2%A5%3C%C3%8F%C3%B3%C2%9DeY%3FK%268%24%24%C2%A1%C2%8F%C2%96%C3%8CM%C3%93%C2%84%02A%1Fk%C3%A5!0%C3%85%C2%BF%C3%92%15R%C3%A98%C3%8E%C2%BB%40%C3%903%7B%1C%7B%5E%14%C2%85%C2%BEP%C2%A4%C3%A8hB%C2%97%C2%B6m3)%25%C3%89)%C2%B1%10%22%C2%A2%00%C3%A3(%16%C3%A5i%C3%9B%C2%B6%19%C2%9D%C3%A93u%C3%8D%C3%8C%C2%9BlW%C2%BE%60T%C3%AC%7Ff3%C3%80%C3%B0%C3%9A%C3%B7%3D%C3%89%C3%AF%C2%A5%C2%8D%C3%A6*P%C3%9AZ%03%C3%AE!%C3%A3UU%C3%89%C2%AE%C3%AB%C3%94%C3%96q%40_%C2%A3%C3%9B%2F%C3%93%02%60%C2%96%11J%C3%BAb%1B%C2%80DG%C3%9A%C2%9E%C2%A99%C3%98%C3%81%04Y%C2%8E%C2%94%C3%ADV%00%C3%99%C3%B0%C2%AD%C2%B7%C2%AB%C2%953%C2%A0-%02%C3%B3'%C2%AEO8f%C2%BEg%C3%AA%03%C3%86%12%C2%87a8'%C3%BE%05%C2%A5m%C2%8E%C2%B3%C2%97s%C2%8C%5E%00%00%00%00IEND%C2%AEB%60%C2%82"; 
-var add_layer_button = layer_group_default.add("iconbutton", undefined, File.decode(add_layer_button_imgString), {name: "add_layer_button", style: "toolbutton"}); 
-   // add_layer_button.helpTip = "Add selected layers to this group across all compositions"; 
-   // add_layer_button.text = "Add Layer"; 
-   // add_layer_button.preferredSize.width = 115; 
-   // add_layer_button.preferredSize.height = 20; 
-
-var divider1 = layer_group_default.add("panel", undefined, undefined, {name: "divider1"}); 
-    divider1.alignment = "fill"; 
-
-var solo_layers_checkbox = layer_group_default.add("checkbox", undefined, undefined, {name: "solo_layers_checkbox"}); 
-   // solo_layers_checkbox.helpTip = "Solo this group: show only layers in this group and hide all others"; 
-   // solo_layers_checkbox.text = "Solo"; 
-
-var hide_layers_checkbox = layer_group_default.add("checkbox", undefined, undefined, {name: "hide_layers_checkbox"}); 
-    //hide_layers_checkbox.helpTip = "Mark layers in this group as Shy: hide them in the timeline without disabling"; 
-   // hide_layers_checkbox.text = "Hide"; 
-
-var divider2 = layer_group_default.add("panel", undefined, undefined, {name: "divider2"}); 
-    divider2.alignment = "fill"; 
-
-var edit_group_layers_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%12%00%00%00%12%08%06%00%00%00V%C3%8E%C2%8EW%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01UIDATx%01%C2%BDS%C3%9Bm%C2%83%40%10%3C%C2%B0%0B%C3%A0%C2%87%C3%A7%C2%97%C3%93%01%25%C3%84%15D%C2%A9%C3%80%C2%A1%C2%82%C2%A4%03%C2%8B%0Ab*%40%C2%A9%20q%05P%02%1D%C3%A4%3E%C2%81%2F%0A%C3%A0%C2%91Y%0BN%C3%87%01%17E%C2%8A%3C%C3%92%C2%89%C2%85%C3%9D%C2%9B%C2%9D9%C3%B6%18%C3%BB'%18%C2%BAd%5D%C3%97%C2%A1a%18%16%C3%85m%C3%9Br%C3%9F%C3%B7%C3%B9V%C3%AD%5EG4%0CC%C2%8A%15Rl%C2%9A%26%C3%87%C3%A3a%C2%AB%C3%96dz%C2%84R%7C%C3%90%15%C3%8E%C2%AC%C3%81JJ%1B%60%C3%A7%0A%25OX%C2%8FJ%3D%C2%87%C2%B2%C2%84r%C3%B4%C3%A28%C3%8EqA%04%C2%92%17%C2%B2%C3%82%C3%BE%00%C2%90%1Em%C3%9B%C3%8Eo%C3%B1%C3%B4%11%24g%C2%B5%10%C3%8Ar%C2%AC%08%C3%A13V%C2%A1%C3%A6%C3%BB%C2%BE%17%C2%8D%C3%85aw%5D%C2%97%C3%ACv%C2%BBw%C2%A9%C2%AE%C2%90%C2%A5%03_P%C2%9DMv%C3%91%C2%A0%01Q%22%C3%94MA%10%04%C2%97%C2%B1%C3%BB%C2%84%C2%98-%C3%B1!%C2%A9%C2%89%3D%C3%8F%C2%BB%2C%C2%88%C3%86%C2%A4%25%C3%99%C2%B2T%16%C2%A8i%C3%84F%C3%93l%C3%A4%C2%9C%20%C2%82%C3%ACW%24%C3%A5s%3A%C2%B1%25%C3%8E%12iZ%C2%96%C3%A5%C2%9Bh%3C%05UU%7D3eV%C2%A0%C2%AA%C3%80%C2%86xTwZ%1B%07%C3%97uoC%C2%BA%C2%97lEP%C2%94%C2%B1%C2%B9%15%1A%C3%88O%3C%C3%99%1A%C3%A8%C2%9C%16%C2%8AF%7B%C3%99Xp%C2%85%0A%C2%B2%16*%0As%C3%8A%C2%A1!%0D%24%C3%87_%C2%8DV%C2%89T%C3%80%C3%AEL%0All%C3%96%C3%BFv%C3%97%C2%B8%C2%A4%C2%A6%C3%90%15jo%3Fl%C3%90%40%1E(%C3%86%C2%B06%C3%AC%1E%C3%B8%01%C2%9DB%C2%90%C2%81%C3%86%C3%9C%C2%A7%0D%00%00%00%00IEND%C2%AEB%60%C2%82"; 
-var edit_group_layers_button = layer_group_default.add("iconbutton", undefined, File.decode(edit_group_layers_button_imgString), {name: "edit_group_layers_button", style: "toolbutton"}); 
-   // edit_group_layers_button.helpTip = "Rename and settings this Group"; 
-   // edit_group_layers_button.preferredSize.width = 40; 
-   // edit_group_layers_button.preferredSize.height = 20; 
-
-var delete_group_layers_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0B%00%00%00%0F%08%06%00%00%002%3D50%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%ADIDATx%01%C2%95R%C2%B1%0D%C2%830%10%C3%84%C3%A0%C2%8A%C3%8A%14%08!!%C2%85%11%C2%92%11%18!%13%C2%84%0D%C2%B2%02%C2%8C%C2%90%112%01%C3%99%20l%C2%90d%03w%08(%C2%A0%C2%A3%02r%C2%8F%20!%C3%88%12%C3%A4%24%C3%8B%C3%BF%C3%96%C3%B9%C3%AF%C3%BEm%C2%96e%C2%99%C2%AF%01%C2%86a%C2%88%C2%BE%C3%AF%13%C2%84C%3EB2%C3%86%C2%8Em%C3%9B%C3%96%C2%94%C2%B0%3C%C3%8F%7Bm%238V%C2%BC%C2%99%0C%C2%99%1B%C3%A4%C3%8Fk%C3%84%C2%AE%C3%ABb%0E%3FB%C3%97%C3%B5p%C2%B5*%C3%A7W%5D%C3%BB%03%3Fd%C3%98%C2%B9%60%C2%93c*%C3%87%5CI%C2%96M%C3%93D%C3%B0%16%C2%A0%C2%8F%C2%94v%C3%8A%11%C3%97%1F%2B3%C2%B2o%C2%9A%C3%A6%C3%9Dq%C2%9C%03%C3%A2%C2%80%0E0%C3%96%07%C2%AA%0B%C2%A5%0D%40L%C2%8FTU%15%C2%91%C2%84%C3%92%06%C3%89%C2%91%C2%B4%C3%AB%C2%BA%C2%B2(%C2%8A%C3%90%C2%B2%C2%AC%C2%9A%5EOi%C2%83%C3%A40%C3%82%3D%C2%A4O%C2%88%C2%A3%C2%B2%2Cw%C2%B8%C3%BC%C2%9AW%C3%A7%0B%1B%C3%89%14%C2%8084%C2%87%C2%8B_%1B%C3%93'Qa%C3%9E%C3%9C%40%C3%B6%3C%C3%AF%C2%B9%C2%9C%C3%A7%124J%C3%9B%C2%B6%C3%937%C3%B7%C3%9Cs%C2%B3g%5D%C3%BB_%00%00%00%00IEND%C2%AEB%60%C2%82"; 
-var delete_group_layers_button = layer_group_default.add("iconbutton", undefined, File.decode(delete_group_layers_button_imgString), {name: "delete_group_layers_button", style: "toolbutton"}); 
-   // delete_group_layers_button.helpTip = "Delete this Layer Group"; 
-   // delete_group_layers_button.preferredSize.width = 40; 
-   // delete_group_layers_button.preferredSize.height = 20; 
-
 
 // TAB_EFFECTS
 // ===========
@@ -228,14 +189,10 @@ var view_effects_checkbox = effect_group_default.add("checkbox", undefined, unde
   
 var add_effect_button = effect_group_default.add("iconbutton", undefined, File.decode(add_layer_button_imgString), {name: "add_effect_button", style: "toolbutton"}); 
    
-var divider3 = effect_group_default.add("panel", undefined, undefined, {name: "divider3"}); 
-    divider3.alignment = "fill"; 
-
 var edit_group_effects_button = effect_group_default.add("iconbutton", undefined, File.decode(edit_group_layers_button_imgString), {name: "edit_group_effects_button", style: "toolbutton"}); 
   
 var delete_group_effects_button = effect_group_default.add("iconbutton", undefined, File.decode(delete_group_layers_button_imgString), {name: "delete_group_effects_button", style: "toolbutton"}); 
   
-
 // TAB_SETTINGS
 // ============
 var tab_settings = tpanel1.add("tab", undefined, undefined, {name: "tab_settings"}); 
@@ -257,23 +214,23 @@ var panel_import_export = tab_settings.add("panel", undefined, undefined, {name:
     panel_import_export.preferredSize.height = 73; 
     panel_import_export.orientation = "row"; 
     panel_import_export.alignChildren = ["left","center"]; 
-    panel_import_export.spacing = 20; 
-    panel_import_export.margins = 18; 
+    panel_import_export.spacing = 15; 
+    panel_import_export.margins = 15; 
     panel_import_export.alignment = ["fill","top"]; 
 
 var save_my_presets_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%14%00%00%00%14%08%06%00%00%00%C2%8D%C2%89%1D%0D%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C2%B4IDATx%01%C3%AD%C2%92%C3%91%0D%C3%820%0CD%1D%C3%84%00%C2%8C%C2%90%11%60%C2%84n%02%1B0B7%C2%81%11%C3%98%C2%A0%2Bt%03%C3%98%C2%80n%10%7C%C3%82%16%11J%1DW%C3%AAO%C2%AB%3E%C3%89%C2%8A%C3%AD%C2%B8%C3%97k%13%C2%A2U%C2%90R%C2%BA%22h.X%C3%AC%C2%89%C3%B0%C3%8C%C3%AEhf6%C3%81%1F%7C%08%11%C3%A1%C3%AD%2B%C3%BB%11%C2%B1%03%2F%C2%9D%C3%A4M.%26%C3%BD%C2%81%C3%A3D%16%3C%C3%9C%C2%A6%2FQ%C3%AA%C2%B3%C3%94%C2%B82o%09%C3%8D%C2%8F%C2%99%5B%C3%90%C2%9A%0EA%08%C3%A1%C3%8E%C2%83Ho%7F%5B%0D%C3%AF%C3%B5c%C3%8F%C2%99%C2%87%02Q%5E.R%0E51%C3%93a%C3%81i_%13s%09%C2%AA(9)%09Fq%C3%A4!Z%C2%82%C3%BA9%1DM%C3%A7%C2%A5I%C3%88%C2%BB%C2%B8*%C2%A5%C2%B7V%C3%80%C2%BF%7D%C3%90b%C3%B8%00O%C3%8EsN%3F%C3%BA%C2%9D%C2%9F%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 var save_my_presets_button = panel_import_export.add("iconbutton", undefined, File.decode(save_my_presets_button_imgString), {name: "save_my_presets_button", style: "toolbutton"}); 
     save_my_presets_button.helpTip = "Save current Layer and Effect Groups to a .pgm file"; 
     save_my_presets_button.text = "Save My Preset"; 
-    save_my_presets_button.preferredSize.width = 173; 
-    save_my_presets_button.preferredSize.height = 40; 
+    save_my_presets_button.preferredSize.width = 160; 
+    save_my_presets_button.preferredSize.height = 35; 
 
 var load_my_presets_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%14%00%00%00%14%08%06%00%00%00%C2%8D%C2%89%1D%0D%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%ABIDATx%01%C2%B5%C2%94%0D%11%C3%820%0C%C2%85%C2%B3%1D%02%C2%900%07X%18%12P%C3%80p%C2%80%03%C2%86%02%24%C3%909%C2%98%03%C2%90%C2%80%C2%84J%C2%98%C2%83%C3%B2r%04%C2%AE%C3%B4%C3%9A.%C3%A5%C3%A7%C3%9D%C3%A5%C3%9A%C2%A5%C3%A9%C2%B7%24%5BK%C3%B4cU%C2%A1%C3%839%C3%97bh%12%C3%B1SUU%23i%05X%C3%A7%C3%A6u%C3%881%16%C3%81s%2B%C3%A3.%12%C2%BB%C2%84%C2%9D%60%3D%C2%A0%C2%84L%C2%8F%C2%A4%C3%88%C3%90p%0A%C2%89%C2%B5F%C2%93iM%C2%9F%C2%AB%C2%8FA%C2%BF%01%3E%C2%A1%7B%C3%9F%C2%B1%20%C2%BD%26X%C3%987%C3%8Ep%C2%95%C3%9C%C2%91%C3%ABa%22%C2%9Eu%C3%B6%7D%C2%AA%C2%92%C2%B1i%C3%8B%C2%A6%C2%89%C2%9D-Y%40F%C3%A6%C3%BC%C2%BB%0C%C2%B9%C3%B8Z%0B%13%C2%99%C2%B9L%C3%AB%0C%C2%AC%11%C2%98%C2%A5%C3%87%07%C2%99dnd-%C2%AAd%C3%89(%C3%8Db%C3%A3%06%C3%93%1B%C3%AC%22%C3%AE5%C2%AC%C3%A5%C2%B5b%C2%A0%40G%C3%89%C3%B6%C3%B5%12zoA%19%C3%90%C2%93U%C3%86%C3%85%C2%81%7C%C3%AB%04%C2%AE!%C3%A1%C3%8F%C2%8B%C2%8F%C2%91%2BW%C3%A73J%2F%C3%98P%16%7D%C2%BD%C3%92%3Fu%077%02%C3%96%15%C2%8A%C2%8A%C2%86%7B%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 var load_my_presets_button = panel_import_export.add("iconbutton", undefined, File.decode(load_my_presets_button_imgString), {name: "load_my_presets_button", style: "toolbutton"}); 
     load_my_presets_button.helpTip = "Load Layer and Effect Groups from a .pgm file"; 
     load_my_presets_button.text = "Load My Preset"; 
     load_my_presets_button.preferredSize.width = 168; 
-    load_my_presets_button.preferredSize.height = 40; 
+    load_my_presets_button.preferredSize.height = 35; 
     
 
 // PANEL_SETTINGS
@@ -282,29 +239,29 @@ var panel_settings = tab_settings.add("panel", undefined, undefined, {name: "pan
     panel_settings.text = "Settings"; 
     panel_settings.orientation = "row"; 
     panel_settings.alignChildren = ["left","center"]; 
-    panel_settings.spacing = 20; 
-    panel_settings.margins = 18; 
+    panel_settings.spacing = 15; 
+    panel_settings.margins = 15; 
     panel_settings.alignment = ["fill","top"]; 
 
-   var clear_all_panels_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%14%00%00%00%12%08%06%00%00%00%5B%C3%90%C3%BE%10%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%0FIDATx%01%C2%9DT%0B%11%C2%830%0C-w%13%C2%80%C2%84J%40%02%12%C2%90%C2%80%C2%83%C3%A1%00%24%C3%A0%60H%C2%98%03%C3%A6%00%09%C3%85%018%C3%88%12H%C2%8F%C3%90%C3%8F(%7Bw%C2%B9%1D%C3%8B%7B%2FM%C2%9A%C2%ABR%3F%00%009F%C2%8B1b%2C%C2%B0c%C3%A1%C3%AF%1AC%C2%ABT%20%C3%B9)L%C2%AC%C2%91%C2%813%C3%A8%C2%BBN1k%C2%85%C2%A8%C3%87(%C2%9D%7C%C2%891%08N%C2%9BbF%C3%95%C2%8B%C2%8B%C3%82%C2%95%C3%A8%C2%A2%0A%11%C2%B4%C2%A8%C2%AAU%02%C3%98%C3%94%C2%8E%24w%C2%93%2FNv%C3%AA%06D%C3%BB%C2%8D%C2%9B0%C2%B1%C3%93%C3%B1%C2%8DW%C2%91%5C%C3%89%C2%BA%C3%91%15%10%C2%A6%C2%80%40%C2%8BY%19%C2%AF%C2%B5%C2%9D%C2%B3%C2%B5%C3%BD%C3%A0%1B%C3%94%18%C2%96%C2%94%C2%8BU%C3%B8dY6%C3%A3o-%C3%B2%C3%84%25%C3%8D%C3%9B%C3%B1%C2%9C%C2%B7%1CW7%C3%A0c%08%C2%B4d%C2%87%C2%AFc'%C2%94-%C2%99%C2%90%C2%99%10%144%C3%B4%C2%88Y%11%C2%9A%C2%A15%C3%B5%C3%8C%C2%AE%20%C2%B6%C3%83%C2%BBe%C2%ADn%02%C2%8E%C3%9D%5D%C3%BE%C3%91%C2%BBf%C2%85%18UwE%C2%A6%C3%8A%23%04%5E%158%5E%C2%A1%25%C3%89%C2%8CE%1D%C2%9C1q%01%C3%A3%C3%BC%C3%9F%C2%A8T%C3%B0)%07%08%3F%5B%7Dhf%C3%99%0DsZl%C2%8A%15%C2%97%7D%C2%8D%C3%B1%C2%BE%C2%A00%0E%C2%98%5C%C3%BF%05*%00%00%00%00IEND%C2%AEB%60%C2%82"; 
-   var clear_all_panels_button = panel_settings.add("iconbutton", undefined, File.decode(clear_all_panels_button_imgString), {name: "clear_all_panels_button", style: "toolbutton"}); 
-       clear_all_panels_button.helpTip = "Clear All Panels"; 
-       clear_all_panels_button.text = "Clear All Panels"; 
-       clear_all_panels_button.preferredSize.width = 157; 
-       clear_all_panels_button.preferredSize.height = 40; 
+var clear_all_panels_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%14%00%00%00%12%08%06%00%00%00%5B%C3%90%C3%BE%10%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%0FIDATx%01%C2%9DT%0B%11%C2%830%0C-w%13%C2%80%C2%84J%40%02%12%C2%90%C2%80%C2%83%C3%A1%00%24%C3%A0%60H%C2%98%03%C3%A6%00%09%C3%85%018%C3%88%12H%C2%8F%C3%90%C3%8F(%7Bw%C2%B9%1D%C3%8B%7B%2FM%C2%9A%C2%ABR%3F%00%009F%C2%8B1b%2C%C2%B0c%C3%A1%C3%AF%1AC%C2%ABT%20%C3%B9)L%C2%AC%C2%91%C2%813%C3%A8%C2%BBN1k%C2%85%C2%A8%C3%87(%C2%9D%7C%C2%891%08N%C2%9BbF%C3%95%C2%8B%C2%8B%C3%82%C2%95%C3%A8%C2%A2%0A%11%C2%B4%C2%A8%C2%AAU%02%C3%98%C3%94%C2%8E%24w%C2%93%2FNv%C3%AA%06D%C3%BB%C2%8D%C2%9B0%C2%B1%C3%93%C3%B1%C2%8DW%C2%91%5C%C3%89%C2%BA%C3%91%15%10%C2%A6%C2%80%40%C2%8BY%19%C2%AF%C2%B5%C2%9D%C2%B3%C2%B5%C3%BD%C3%A0%1B%C3%94%18%C2%96%C2%94%C2%8BU%C3%B8dY6%C3%A3o-%C3%B2%C3%84%25%C3%8D%C3%9B%C3%B1%C2%9C%C2%B7%1CW7%C3%A0c%08%C2%B4d%C2%87%C2%AFc'%C2%94-%C2%99%C2%90%C2%99%10%144%C3%B4%C2%88Y%11%C2%9A%C2%A15%C3%B5%C3%8C%C2%AE%20%C2%B6%C3%83%C2%BBe%C2%ADn%02%C2%8E%C3%9D%5D%C3%BE%C3%91%C2%BBf%C2%85%18UwE%C2%A6%C3%8A%23%04%5E%158%5E%C2%A1%25%C3%89%C2%8CE%1D%C2%9C1q%01%C3%A3%C3%BC%C3%9F%C2%A8T%C3%B0)%07%08%3F%5B%7Dhf%C3%99%0DsZl%C2%8A%15%C2%97%7D%C2%8D%C3%B1%C2%BE%C2%A00%0E%C2%98%5C%C3%BF%05*%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+var clear_all_panels_button = panel_settings.add("iconbutton", undefined, File.decode(clear_all_panels_button_imgString), {name: "clear_all_panels_button", style: "toolbutton"}); 
+    clear_all_panels_button.helpTip = "Clear All Panels"; 
+    clear_all_panels_button.text = "Clear All Panels"; 
+    clear_all_panels_button.preferredSize.width = 157; 
+    clear_all_panels_button.preferredSize.height = 35; 
    
 
 // TAB_SETTINGS
 // ============
-var about_text_group = tab_settings.add('edittext {size: [380,350], properties: {name: "about_text_group", readonly: true, multiline: true, scrollable: true}}'); 
+var about_text_group = tab_settings.add('edittext {size: [395,240], properties: {name: "about_text_group", readonly: true, multiline: true, scrollable: true}}'); 
     about_text_group.text = "\rYO Group Matcher\r\rDownload Updates:\rhttps://github.com/yo-romlogunov/YO-Group-Matcher/releases\r\rManual:\rhttps://goo.su/5jGwMYu\r\rThis script allows you to manage Layer Groups \rand Effect Groups within your compositions. \rYou can add, edit, and delete groups, toggle visibility, \rsolo groups, and hide layers using the Shy feature.\r\rFeatures:\r- Create and manage Layer Groups and Effect Groups\r- Toggle visibility of entire groups\r- Solo specific Layer Groups\r- Hide layers in the timeline without disabling them\r\rFor more information, visit @romlogunov - t.me/vtb_blog\r"; 
 
 var updates_check_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%14%00%00%00%14%08%06%00%00%00%C2%8D%C2%89%1D%0D%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%13IDATx%01%C3%95SQ%11%C3%820%0CM9%04%20!%12%26%01%09%C2%A0%C2%80%C3%A1%00%07%14%05%C3%A0%60s%00%0E%C2%90%00%0E%3A%14%C2%80%C2%83%C2%92%C2%B27.W%C2%BA%C2%96Oxw%C3%AF%C2%B2k_%C3%9E%C3%924%25%C3%BAu%C2%98%C2%92%C3%80%7B_I%60%C3%A1%23%C3%90%18sMhX%C3%96%C2%BB%C2%9C%C3%89L%C2%B8%15%C3%9E%C3%BD'%C2%9C%C2%B0V%C3%9A%C2%A0%C2%B393F%C2%92%C2%87%C3%A1!%18%C2%80%C2%AD%C3%9A%C2%BB%08%C3%B7%C3%B8%C2%B6%C2%B9%C3%8A%5CV%C3%94%C3%ABlT%C3%B5%5B%3B%C2%89%C2%B4%7B%C3%AA%C3%BB%C2%B5%C2%93%C2%9EXe%C2%B0%08%C2%95%2B%C2%9D%C2%A3%12P%C3%9D%C2%ABG%C2%89%C2%BDw%C3%9F%C3%82%25%C3%B9O%C3%98A%3BUys%C3%84%1D%C3%A5%C3%81%C3%82u%C2%B4vM%19V%C2%88%1De%20%C2%AD8%C3%A5%C3%B6'%C3%B4%1D%C3%82%0C%C2%AE%C2%A2%3E%0E%C3%87%0F%C3%AD%C3%98%C2%A4%0C%3BDN%18.%C2%857%C2%A1%C3%83%C2%A8%C2%B0%C3%922%C2%A5N%C2%A5.%C3%A5L%23%C3%80%C2%8C%C2%9E%07C%C2%89%0Drx%2C%C2%A1%C2%85%60E%05%60%C2%94%02%1A*T%C3%A0%C3%B0B%C3%AA%C2%82%C3%99%1DZ%C2%A6%C3%82%C2%9F%C3%B5%C3%93%3B%C3%A2%C3%89UX%C2%AFqd%C3%BF%C2%95Yd%C3%9A%C3%BAq4cf%C2%A6dL%C3%BD%7C%C3%AA%19%3D%C3%89%2C%3E%C3%A8o%C3%B1%04d%C3%8B~)%C3%9D%C3%BC%C3%843%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 var updates_check_button = tab_settings.add("iconbutton", undefined, File.decode(updates_check_button_imgString), {name: "updates_check_button", style: "toolbutton"}); 
     updates_check_button.helpTip = "Check for Updates"; 
-    updates_check_button.text = "Check For Updates - You Version 2.3.0"; 
+    updates_check_button.text = "Check For Updates - You Version 2.3.1"; 
     updates_check_button.preferredSize.width = 275; 
-    updates_check_button.preferredSize.height = 40; 
+    updates_check_button.preferredSize.height = 35; 
 
 var divider4 = tab_settings.add("panel", undefined, undefined, {name: "divider4"}); 
     divider4.alignment = "fill"; 
@@ -328,7 +285,7 @@ var layerGroups = [];
 var effectGroups = [];
 
 // Define current version
-var currentVersion = "2.3.0"; // Adjust as needed
+var currentVersion = "2.3.1"; // Adjust as needed
 
 // Function to compare versions and check for updates
 function compareVersions(v1, v2) {
@@ -1750,63 +1707,105 @@ load_my_presets_button.onClick = function() {
     loadData();
 };
 
-// Назначение обработчика для кнопки Clear All Panels
+// Назначение обработчика для кнопки Clear All Panels с исправлением проверки и обновлением массивов
 clear_all_panels_button.onClick = function() {
-    app.beginUndoGroup("Clear All Groups and Reset Names");
+    // Отображаем диалоговое окно подтверждения на английском
+    var confirmClear = confirm("Are you sure you want to clear all groups and reset layer and effect prefixes? This action cannot be undone.");
+    if (!confirmClear) {
+        return; // Пользователь отменил операцию
+    }
 
-// Удаление всех существующих групп слоев и сброс префиксов слоев
-    for (var i = layerGroups.length - 1; i >= 0; i--) {
-        var lg = layerGroups[i];
+    try {
+        app.beginUndoGroup("Clear All Groups and Reset Names");
 
-// Сброс префиксов слоев
-        var comps = getAllCompositions();
-        for (var c = 0; c < comps.length; c++) {
-            var comp = comps[c];
-            for (var l = comp.numLayers; l >= 1; l--) {
-                var layer = comp.layer(l);
-                if (layer.name.indexOf("[" + lg.prefix + "]") === 0) {
-                    var originalName = layer.name.replace("[" + lg.prefix + "] ", "");
-                    layer.name = originalName;
+        // Проверяем, что контейнеры существуют
+        if (!tab_layers || !tab_effects) {
+            alert("Error: 'tab_layers' or 'tab_effects' is not defined.");
+            app.endUndoGroup();
+            return;
+        }
+
+        // Удаление всех существующих групп слоёв и сброс префиксов слоёв
+        for (var i = layerGroups.length - 1; i >= 0; i--) {
+            var lg = layerGroups[i];
+
+            // Сброс префиксов слоёв
+            var comps = getAllCompositions();
+            for (var c = 0; c < comps.length; c++) {
+                var comp = comps[c];
+                for (var l = comp.numLayers; l >= 1; l--) {
+                    var layer = comp.layer(l);
+                    if (layer.name.indexOf("[" + lg.prefix + "]") === 0) {
+                        var originalName = layer.name.replace("[" + lg.prefix + "] ", "");
+                        layer.name = originalName;
+                    }
                 }
             }
-        }
-        tab_layers.remove(lg.panel);
-        palette.layout.layout(true);
-        palette.layout.resize();
-    }
-    layerGroups = [];
 
-// Удаление всех существующих групп эффектов и сброс префиксов эффектов
-    for (var i = effectGroups.length - 1; i >= 0; i--) {
-        var eg = effectGroups[i];
-        
-// Сброс префиксов эффектов
-        var comps = getAllCompositions();
-        for (var c = 0; c < comps.length; c++) {
-            var comp = comps[c];
-            for (var l = 1; l <= comp.numLayers; l++) {
-                var layer = comp.layer(l);
-                if (layer.property("Effects")) {
-                    for (var e = layer.property("Effects").numProperties; e >=1; e--) {
-                        var effect = layer.property("Effects").property(e);
-                        if (effect.name.indexOf("[" + eg.prefix + "]") === 0) {
-                            var originalName = effect.name.replace("[" + eg.prefix + "] ", "");
-                            effect.name = originalName;
+            // Удаление UI панели группы слоёв, если она существует и является дочерним элементом tab_layers
+            if (lg.panel && lg.panel.parent === tab_layers) {
+                try {
+                    tab_layers.remove(lg.panel);
+                } catch (removeError) {
+                    alert("Failed to remove layer group panel for '" + lg.name + "': " + removeError.toString());
+                }
+            } else {
+                alert("Layer group panel for '" + lg.name + "' has already been removed or does not exist.");
+            }
+
+            // Удаление группы из массива после успешного удаления панели
+            layerGroups.splice(i, 1);
+        }
+
+        // Удаление всех существующих групп эффектов и сброс префиксов эффектов
+        for (var i = effectGroups.length - 1; i >= 0; i--) {
+            var eg = effectGroups[i];
+
+            // Сброс префиксов эффектов
+            var comps = getAllCompositions();
+            for (var c = 0; c < comps.length; c++) {
+                var comp = comps[c];
+                for (var l = 1; l <= comp.numLayers; l++) {
+                    var layer = comp.layer(l);
+                    if (layer.property("Effects")) {
+                        for (var e = layer.property("Effects").numProperties; e >=1; e--) {
+                            var effect = layer.property("Effects").property(e);
+                            if (effect.name.indexOf("[" + eg.prefix + "]") === 0) {
+                                var originalName = effect.name.replace("[" + eg.prefix + "] ", "");
+                                effect.name = originalName;
+                            }
                         }
                     }
                 }
             }
+
+            // Удаление UI панели группы эффектов, если она существует и является дочерним элементом tab_effects
+            if (eg.panel && eg.panel.parent === tab_effects) {
+                try {
+                    tab_effects.remove(eg.panel);
+                } catch (removeError) {
+                    alert("Failed to remove effect group panel for '" + eg.name + "': " + removeError.toString());
+                }
+            } else {
+                alert("Effect group panel for '" + eg.name + "' has already been removed or does not exist.");
+            }
+
+            // Удаление группы из массива после успешного удаления панели
+            effectGroups.splice(i, 1);
         }
-        tab_effects.remove(eg.panel);
+
+        // Обновление интерфейса после удаления групп
         palette.layout.layout(true);
         palette.layout.resize();
+
+        // Отображение уведомления о завершении очистки на английском
+        alert("All groups have been cleared and layer and effect prefixes have been reset.");
+
+        app.endUndoGroup();
+    } catch (error) {
+        alert("An error occurred while clearing groups: " + error.toString());
+        app.endUndoGroup();
     }
-    effectGroups = [];
-
-    // Обновление интерфейса после удаления групп
-    palette.layout.layout(true);
-
-    app.endUndoGroup();
 };
 
 // Function to save data to a .pgm file
@@ -1918,7 +1917,7 @@ function loadData() {
     importWindow.spacing = 10;
     importWindow.margins = 15;
 
-// Поле для выбора файла импорта
+    // Поле для выбора файла импорта
     var fileGroup = importWindow.add("group");
     fileGroup.orientation = "row";
     fileGroup.alignChildren = ["left", "center"];
@@ -1934,12 +1933,12 @@ function loadData() {
         }
     };
 
-// Группа кнопок
+    // Группа кнопок
     var buttonsGroup = importWindow.add("group");
     buttonsGroup.orientation = "row";
     buttonsGroup.alignChildren = ["fill", "center"];
 
-// Кнопка Import
+    // Кнопка Import
     var importButton = buttonsGroup.add("button", undefined, "Import", {name: "ok"});
 
     importButton.onClick = function() {
@@ -1956,29 +1955,88 @@ function loadData() {
                 var content = file.read();
                 file.close();
 
-// Разделяем содержимое файла по строкам
+                // Разделяем содержимое файла по строкам
                 var lines = content.split(/\r\n|\n|\r/);
                 var currentSection = "";
                 var currentGroup = {};
 
-// Очистка существующих групп слоёв
-                for (var i = layerGroups.length - 1; i >= 0; i--) {
-                    var lg = layerGroups[i];
-                    tab_layers.remove(lg.panel);
+                // Начинаем группу Undo для полной очистки и импорта
+                app.beginUndoGroup("Import Preset and Reset Groups");
+
+                // Создаём копии массивов для безопасной итерации
+                var layerGroupsCopy = layerGroups.slice();
+                var effectGroupsCopy = effectGroups.slice();
+
+                // Полная очистка существующих групп слоёв
+                for (var i = layerGroupsCopy.length - 1; i >= 0; i--) {
+                    var lg = layerGroupsCopy[i];
+
+                    // Сброс префиксов слоёв
+                    var comps = getAllCompositions();
+                    for (var c = 0; c < comps.length; c++) {
+                        var comp = comps[c];
+                        for (var l = comp.numLayers; l >= 1; l--) {
+                            var layer = comp.layer(l);
+                            if (layer.name.indexOf("[" + lg.prefix + "]") === 0) {
+                                var originalName = layer.name.replace("[" + lg.prefix + "] ", "");
+                                layer.name = originalName;
+                            }
+                        }
+                    }
+
+                    // Удаление UI панели группы слоёв, если она существует и является дочерним элементом tab_layers
+                    if (lg.panel && lg.panel.parent === tab_layers) {
+                        try {
+                            tab_layers.remove(lg.panel);
+                        } catch (removeError) {
+                            alert("Failed to remove layer group panel for '" + lg.name + "': " + removeError.toString());
+                        }
+                    } else {
+                        $.writeln("Layer group panel for '" + lg.name + "' has already been removed or does not exist.");
+                    }
                 }
                 layerGroups = [];
 
-// Очистка существующих групп эффектов
-                for (var i = effectGroups.length - 1; i >= 0; i--) {
-                    var eg = effectGroups[i];
-                    tab_effects.remove(eg.panel);
+                // Полная очистка существующих групп эффектов
+                for (var i = effectGroupsCopy.length - 1; i >= 0; i--) {
+                    var eg = effectGroupsCopy[i];
+
+                    // Сброс префиксов эффектов
+                    var comps = getAllCompositions();
+                    for (var c = 0; c < comps.length; c++) {
+                        var comp = comps[c];
+                        for (var l = 1; l <= comp.numLayers; l++) {
+                            var layer = comp.layer(l);
+                            if (layer.property("Effects")) {
+                                for (var e = layer.property("Effects").numProperties; e >=1; e--) {
+                                    var effect = layer.property("Effects").property(e);
+                                    if (effect.name.indexOf("[" + eg.prefix + "]") === 0) {
+                                        var originalName = effect.name.replace("[" + eg.prefix + "] ", "");
+                                        effect.name = originalName;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // Удаление UI панели группы эффектов, если она существует и является дочерним элементом tab_effects
+                    if (eg.panel && eg.panel.parent === tab_effects) {
+                        try {
+                            tab_effects.remove(eg.panel);
+                        } catch (removeError) {
+                            alert("Failed to remove effect group panel for '" + eg.name + "': " + removeError.toString());
+                        }
+                    } else {
+                        $.writeln("Effect group panel for '" + eg.name + "' has already been removed or does not exist.");
+                    }
                 }
                 effectGroups = [];
 
-// Обновление интерфейса после удаления групп
+                // Обновление интерфейса после удаления групп
                 palette.layout.layout(true);
+                palette.layout.resize();
 
-// Разбор файла и создание групп
+                // Разбор файла и создание новых групп
                 for (var i = 0; i < lines.length; i++) {
                     var line = trim(lines[i]);
                     if (line === "LayerGroups:") {
@@ -2002,14 +2060,23 @@ function loadData() {
                         } else if (line.indexOf("DisableLabelColor:") === 0) {
                             currentGroup.disableLabelColor = (trim(line.split(":")[1]).toLowerCase() === "true");
                         }
-                    
-// Если все поля собраны, создаём группу
+
+                        // Если все поля собраны, создаём группу
                         if (currentGroup.name && currentGroup.prefix && typeof currentGroup.labelColorIndex !== 'undefined' && typeof currentGroup.disableLabelColor !== 'undefined' && currentGroup.type === "LayerGroup") {
+                            // Проверяем уникальность префикса
+                            if (isPrefixUsed(currentGroup.prefix)) {
+                                // Генерируем уникальный префикс
+                                currentGroup.prefix = generateUniquePrefix(currentGroup.name);
+                                alert("Prefix for group '" + currentGroup.name + "' was already in use. A new unique prefix '" + currentGroup.prefix + "' has been generated.");
+                            }
+
                             createLayerGroupUI(
                                 currentGroup.name,
                                 currentGroup.prefix,
                                 currentGroup.labelColorIndex,
-                                currentGroup.disableLabelColor
+                                currentGroup.disableLabelColor,
+                                false, // guideCheckboxValue (можно настроить по необходимости)
+                                false  // lockCheckboxValue (можно настроить по необходимости)
                             );
                             currentGroup = {};
                         }
@@ -2023,8 +2090,15 @@ function loadData() {
                             currentGroup.prefix = trim(line.split(":")[1]);
                         }
 
-// Если все поля собраны, создаём группу
+                        // Если все поля собраны, создаём группу
                         if (currentGroup.name && currentGroup.prefix && currentGroup.type === "EffectGroup") {
+                            // Проверяем уникальность префикса
+                            if (isPrefixUsed(currentGroup.prefix)) {
+                                // Генерируем уникальный префикс
+                                currentGroup.prefix = generateUniquePrefix(currentGroup.name);
+                                alert("Prefix for effect group '" + currentGroup.name + "' was already in use. A new unique prefix '" + currentGroup.prefix + "' has been generated.");
+                            }
+
                             createEffectGroupUI(
                                 currentGroup.name,
                                 currentGroup.prefix
@@ -2033,17 +2107,26 @@ function loadData() {
                         }
                     }
                 }
-                alert("Preset successfully loaded.");
+
+                // Обновление интерфейса после создания новых групп
+                palette.layout.layout(true);
+                palette.layout.resize();
+
+                // Уведомление об успешном импорте
+                alert("Preset successfully loaded and all existing groups have been cleared.");
+
+                app.endUndoGroup();
                 importWindow.close();
             } catch (e) {
                 alert("Error reading the preset: " + e.toString());
+                app.endUndoGroup();
             }
         } else {
             alert("The file does not exist or cannot be opened.");
         }
     };
 
-// Кнопка Cancel
+    // Кнопка Cancel
     var cancelButton = buttonsGroup.add("button", undefined, "Cancel", {name: "cancel"});
     cancelButton.onClick = function() {
         importWindow.close();
