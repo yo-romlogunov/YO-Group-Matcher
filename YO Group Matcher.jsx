@@ -95,6 +95,19 @@ var create_group_layers_button = tab_layers.add("iconbutton", undefined, File.de
 
     var delete_group_layers_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0B%00%00%00%0F%08%06%00%00%002%3D50%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%ADIDATx%01%C2%95R%C2%B1%0D%C2%830%10%C3%84%C3%A0%C2%8A%C3%8A%14%08!!%C2%85%11%C2%92%11%18!%13%C2%84%0D%C2%B2%02%C2%8C%C2%90%112%01%C3%99%20l%C2%90d%03w%08(%C2%A0%C2%A3%02r%C2%8F%20!%C3%88%12%C3%A4%24%C3%8B%C3%BF%C3%96%C3%B9%C3%AF%C3%BEm%C2%96e%C2%99%C2%AF%01%C2%86a%C2%88%C2%BE%C3%AF%13%C2%84C%3EB2%C3%86%C2%8Em%C3%9B%C3%96%C2%94%C2%B0%3C%C3%8F%7Bm%238V%C2%BC%C2%99%0C%C2%99%1B%C3%A4%C3%8Fk%C3%84%C2%AE%C3%ABb%0E%3FB%C3%97%C3%B5p%C2%B5*%C3%A7W%5D%C3%BB%03%3Fd%C3%98%C2%B9%60%C2%93c*%C3%87%5CI%C2%96M%C3%93D%C3%B0%16%C2%A0%C2%8F%C2%94v%C3%8A%11%C3%97%1F%2B3%C2%B2o%C2%9A%C3%A6%C3%9Dq%C2%9C%03%C3%A2%C2%80%0E0%C3%96%07%C2%AA%0B%C2%A5%0D%40L%C2%8FTU%15%C2%91%C2%84%C3%92%06%C3%89%C2%91%C2%B4%C3%AB%C2%BA%C2%B2(%C2%8A%C3%90%C2%B2%C2%AC%C2%9A%5EOi%C2%83%C3%A40%C3%82%3D%C2%A4O%C2%88%C2%A3%C2%B2%2Cw%C2%B8%C3%BC%C2%9AW%C3%A7%0B%1B%C3%89%14%C2%8084%C2%87%C2%8B_%1B%C3%93'Qa%C3%9E%C3%9C%40%C3%B6%3C%C3%AF%C2%B9%C2%9C%C3%A7%124J%C3%9B%C2%B6%C3%937%C3%B7%C3%9Cs%C2%B3g%5D%C3%BB_%00%00%00%00IEND%C2%AEB%60%C2%82"; 
     
+    var guide_on_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0E%00%00%00%0E%08%06%00%00%00%1FH-%C3%91%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C2%ABIDATx%01%C2%BD%C2%92%C3%9B%0D%C3%820%0CE%C2%AF%2B%06%C3%A8%08%1D%C2%A1%1B%C3%80%26%C2%8C%C3%80%0A%C2%AC%C3%902%01%C2%83%10%C3%84%06l%C3%90%C2%8E%C2%90%7FJ%C2%8C%C2%9D%C3%84%C2%A2j%11H%7C%C3%84%C2%92%C2%AD%1C%3B%C3%B2C6%C2%90%C2%A5w%C3%8F%C2%A1%C2%BB%3C%C2%8E%C3%86'7%5DU%C2%8D5%C3%96%C2%BBi0%C2%AE%C3%B0%C2%A7%C2%90VJOn%C3%84xq%C3%B9%C3%8C%C2%B5%18Q%1A%3F%C3%B1%C2%869%C2%9Cc%06%C2%A2%03%01%C3%B7%C3%80%C3%A1%C2%96%C2%B8%C3%9Ak%22%C2%8BWD%5B%06Zc%C2%94%C2%9F%C3%91%C2%B2J%1B%3B%C3%AD%C2%9F%C3%80c%C3%A66~%C2%90%C3%B6%13S%C2%A3s%1A%C3%8F%2Bz%C3%BC%C2%96z%C3%A5)7%C2%A3Uy%C2%AF%C2%83%C3%A7%C3%AB%C3%80z%1D%C3%9C%C3%85%C3%B8%C2%97%03X%C3%B2%C3%A2%20J%C3%8F%C3%B8%02%C3%A1%7F%C2%8D%C3%9F%C2%A9%24R!%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+
+    var guide_off_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0E%00%00%00%0E%08%06%00%00%00%1FH-%C3%91%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C2%92IDATx%01%C3%85%C2%92%5D%0D%C2%800%0C%C2%84%3B%C2%82%00%24%20%01%07%C3%A0%04%09X%C3%80%02%12%10%C2%B0Y%208%C2%98%03%C2%90%C2%80%C2%83%C2%B1%C2%92k%C2%B2%C2%8C%C2%BF%C2%84%C2%87%C3%91%C2%A4i%C2%BEm%C2%B9%C3%AE%C3%92%12!%C2%8C1%C2%8B%C3%96%C2%BA%0Fx%C3%A2%14%C3%A6%3B~%23%C2%9C%C3%91%C3%87P%C2%81J%C3%A9sCr%14%C3%88%C3%B5%C2%8As%C3%A7%C3%9Cx((%C3%95%C3%B9b%3D%C3%8F%C3%A0%C2%96E%C2%82%C3%BB%C3%9A%C2%97J%C2%98%C3%A8%0F%C2%8F%C2%A2%C3%9A%C3%A0%C3%BF%2B%C2%B8B%C2%B5%C2%A8%25%3C%C3%9A%C2%B8%C3%A3F%C3%AFQ%C2%9CN%C3%92y%C2%94.7%C3%A3%C2%A0%C2%8Bq%0C%07%3F%2C%40%C3%8C%C3%B1B%24%C3%B6%C2%B8%03%3A%C3%BDy%C2%9BY.~%C2%94%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+
+    var lock_on_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0C%00%00%00%10%08%06%00%00%00%22a%C2%9E%07%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%ACIDATx%01%C2%95R%C3%91M%C3%830%14%C2%BC%C2%B3%C3%83%7FF%08%13%00%13Ta%11%C3%A0%C2%93%2F%C3%88%060%01%02!%C3%B1%09Y%C2%840B7hF%C3%887%C3%849%C3%BC%C3%94%C2%A6r%C2%95%C2%AAMO%C2%B2t%C3%8F%C3%AF%C3%AE9g%C2%87H%C3%B0%C3%91%C2%A8%C3%A8%15%3E%05%5C%C3%862w%C3%84%C2%97%C2%87%7F%C2%BE%2F%C3%99%C2%8E%1A%C2%A6%C3%A2%3F%0D%0D%C2%A0%5CR%0D*'%C3%BC%C3%82z%C2%81%C3%AE%C2%AA*%C3%99%19%C3%8FF%C3%83%C3%AF%C3%90%3F%C2%92%2C%02%C3%BDyu%C2%BD%C2%9E%C3%B8%12%C2%87x%C2%85%C2%95%C2%8B%C2%BDX%3E%C3%99%C2%9E%1B%0D%C2%8E%C2%BC%C2%88%C3%87%C3%BDT%C3%89%C3%B1%C3%86%09.co%C2%B1%C3%95%C3%A1(%C3%94%C2%A5%15%C3%9F%1B%C3%9DH%C3%A1v%13%C3%94B-w%C3%A4%C3%A9%3E%C3%B1%C3%8A%C2%B7%C3%AF%5E%C2%98%C2%8Fn%C3%86'%C3%AD%20%3F%C3%95%C2%B0%2F4%5B%C2%BBZ%5B%C3%86%C2%8F%1A%C2%A4%C2%A1%C2%B6%C3%AB%C2%B4e%7C2n%1A%C2%9A%C3%AD%19%5Dil%C3%B3%C3%B2E%C3%9A%C3%8D0%C2%81%C3%BD%22a%C2%85%C3%B9%19%0E%C3%83%0C%C3%9D)%C2%86%C2%8C%C3%84%5D%7C%C3%8E%C2%879b%09%C3%B5%3FiJ_%C2%A3%C3%B5j%0F%16%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+
+    var lock_off_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0C%00%00%00%10%08%06%00%00%00%22a%C2%9E%07%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%B9IDATx%01%C2%95Q%C3%AD%11%C2%820%0Cm%7B%0C%C3%80%06%C3%A2%06%3A%C2%82%1B%08%0C%C2%80n%C2%80%13%C2%88%1B%C3%88%04%C3%A0%00%C2%80L%C2%A0%1B%C3%88%08l%C2%A0%C3%BE%C3%A7%C3%83%C2%97%C2%B3%C3%A5z%08%C2%9C%C2%BC%C2%BB%5C%C3%924y%7DI9%C3%93%C2%90e%C2%99%C3%95%C2%B6m%C2%84pEg%C3%8E%C3%B9%15%C3%AEd%C3%9Bv%C2%A9jx%C2%AF%C3%B8F1%C3%BCE6x%C3%92%C2%AF%C3%91%C3%B4%C2%A2%C3%98P%0D(%C3%B2%C3%A1L%C2%BAt%1C%C2%A7%C2%94%241%C3%B2%C2%8F%C2%A6i%C3%A8.%C2%A0%C2%9C%C3%90%25%C3%A12%C3%94%C2%9F%C2%A7%18%04w%C3%98J%C3%A5%C2%BA%17%C3%80%C3%AA%C2%B3%01%C2%80%C3%A4%0D%C2%B7%C3%A8f%C3%88%C3%B3%C3%9C%C2%AB%C2%AAj%0B%16%C2%93%0DC%C2%B1%17%C2%90%16%1Au%5D%C2%9FQL%03%C2%95%23%0D%C2%85%C3%B4%C2%96%10%22%22I%26iw%5D7%60%13H%C2%92%24%00%C3%B1Q%C2%B0%C2%990%C3%BA%09%C3%BD%3F%C3%80%C2%B8%C3%91%C2%B7F%C3%B8y%01%C2%83%C3%ADH%2F%C2%99%C2%8C%C3%99d%03%06%C2%8B%C3%99w%01%C2%A5%C2%8C%C2%A7%25I%09K6%C2%82%C3%99C%C3%B34M%C2%9F%C3%B0S%C3%BF%C2%A0%60%C3%81L%C2%81M%C3%AC%C3%BF(%C2%A6%C2%8D%15%C2%B0%C3%83%07%3A%C3%B2g%C2%8BJEv8%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+
+    var view_button_fx_off_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0D%00%00%00%0E%08%06%00%00%00%C3%B4%7F%C2%96%C3%92%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%0DIDATx%01%C2%8DR%0B%C2%91%C3%820%10MR%04T%02%C3%A7%C3%A0%C3%8E%01%C2%A7%C3%A0%C2%AE%C2%AD%01%1C%14%14P%1C%C2%80%02%40%40%C2%A7S%05T%02(%00%09%18h%C3%8B%7B%C3%8C%26%C2%B3%C3%BCy3%C2%9D%C3%AC%C2%BE%C3%ACK%C3%9Enj%C2%8DB%5D%C3%97y%C3%9B%C2%B6%05%C3%82%C3%98s%C3%96%C3%9A%C2%AF%24I%C2%8E%C2%BAn%C3%A0%C2%83%C2%AA%C2%AAb%11%C2%B0p%C2%ADjN%C3%A6%06A%04%C3%81%C3%889%17%C3%B7%7D%3FM%C3%93ta%5E%C3%80%C3%B9%20%C2%8A%C2%A2%C2%BF%0B%C3%A1%5Cc%C3%9E%C3%80%C3%92%16%7B%C3%80%0D%5B%C2%AE%C2%B0%C3%B6%C2%A3%0Bt%3F%C2%A8%1D%5E%0EFq%C2%85%C3%AF%C2%80x(%C3%A2%C2%83%C3%BE%C3%8A%C2%B2%2CD0c%C3%9Eu%C3%9Dx%C2%80%C2%93%C3%A7H%C3%B6%C3%A0s%C2%ACsm%0F%C3%B9%0C%C3%BB9%04%08%C3%BB%C2%82%C3%BBY%C2%96%15VNY%C2%81%18%C3%93%1A%C3%AC%C3%AC%C2%94%C2%9D%C2%91%C3%986%5E%10%06%01%C3%A2%1B%C3%8BI%0B%04a%C3%9Cp%10%26%C3%AAd%10%14%5D%09%C3%98%C2%B4%C3%9C%C3%920G%2F%C2%93%20%12%01%C2%B1%7F%208%C3%A2%C3%8D~)dow%22%C2%90%C2%8D'q*%7B%C3%99%C2%80Kdo%C2%8A%7C%C3%A9G%C3%8Ew%C3%A2h%C3%BE%1F%C3%BDc%C3%8F%C3%A0%C3%94%10%3E%12%10gup%C2%AC%C2%BD%C3%A7%C3%BASp%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+
+    var view_button_fx_on_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0D%00%00%00%0E%08%06%00%00%00%C3%B4%7F%C2%96%C3%92%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01AIDATx%01%C2%8D%C2%92%C3%8BM%C3%83%40%10%C2%86g6N%C3%8E.%01%3AH%3A%C2%88%C2%95%02%C2%80%0ErEB%04W%10%C2%A7%02%C2%88%C2%8C%C3%841PA*%40%C3%AB%12H%05%C2%A4%C2%84%1C8%20%C3%AC%C3%9D%C2%9F%C2%99%0Dv%16%C3%84k%24%C3%8B%C3%A3%C2%99%C3%BD%C3%A6%C3%B1%C2%AF%C2%99%22%2B%C2%AD%C2%9B%01(%C3%84M%C3%9B%C2%98%C3%A3%C3%9Eq%C2%9E%C3%B16%3E%C2%97%C2%B4%C3%8E%C2%B5E%0A8%05%C3%88%C2%80%C3%AE%0F%10%C3%AD%C3%A8%C2%8BuP%C3%A2%C3%9C%18F%3A%C3%80%C3%A7%17%C2%93%C3%81%0D%C3%BDb%C2%A6u%C2%B8G'%C2%A1%C2%B2%C2%A1%C2%8A%C3%BE0%5E%C3%89X%C2%AF%C2%B2C%0Do%C2%89%C2%90%C3%B6%C2%B97%C2%8A%0F%C2%9CG%C3%BB%C3%9CY%1C%C2%85N%2Fp%C3%AB%1A%C3%AEY%00%0D%C2%A4%C3%AA%C3%87%C3%8F%C3%B2%C2%B1.%C3%B4%C2%A0%C2%884%C3%97%C3%AF7%C3%9FL%13b%2C%C3%A0i%C3%83%C3%8C%C2%AA%C3%9C%C3%82%C3%84%C3%A3%C2%81%C3%A7%24q%01%C2%A0%C2%AAj~6%C3%A9%17%C2%AC%C2%B9%5B%C3%9B%C2%AC%3Ch%C3%AA%C3%98%C2%8F%C3%B2l%C3%B0%C3%942%C2%A5%C2%AD%C3%87%00%C3%9B%C3%80%7F%00%C2%9D%10%C2%92%18%C3%8Ak%17%03%C3%BB%24%3A%C2%B9%C2%BDI%3AEM%C2%B8%1F%C3%82PZ~%02ti%07c%C2%89%C3%B7%C3%A3%1A%C3%9F%5CuPB%C3%8D0T%0261%C2%A0j2%C3%B1%C3%B62K2)X%C3%A9%C3%8E%1D%04%C2%8F%00%19%C3%83U%1B%C2%AC%C2%BD%5C4%C3%BCC%C3%83%C3%A6%2C%C3%A4%C3%98%C3%A7%C2%B2%C3%93%C2%B2%C2%95%C2%9CK%C3%9B%C2%AC%01%3A%C3%BD%C3%AE%1F%C3%BB%C3%89%C3%8CA%C2%84%C3%BF%01j%C3%AF%C2%83%C2%BD%C2%BA%C2%93!%C3%A8%C2%BFM%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+ 
+
     var labelColorIcons = {
     0: none_color_label_button_imgString, // default
     1: red_color_label_button_imgString,
@@ -155,6 +168,102 @@ button.image = tempFile;
 
 // Принудительно перерисовываем кнопку
 button.notify("onDraw");
+}
+
+// Добавьте функцию setGuideButtonIcon
+function setGuideButtonIcon(button, imgString) {
+    var decodedImgString = decodeURIComponent(imgString);
+    
+    // Генерируем уникальное имя файла с использованием метки времени
+    var timestamp = new Date().getTime();
+    var tempFile = new File(Folder.temp.fsName + "/temp_guide_icon_" + timestamp + ".png");
+    
+    // Записываем декодированную строку в файл
+    tempFile.open("w");
+    tempFile.encoding = "BINARY";
+    tempFile.write(decodedImgString);
+    tempFile.close();
+    
+    // Назначаем изображение кнопке
+    button.image = tempFile;
+    
+    // Принудительно перерисовываем кнопку
+    button.notify("onDraw");
+}
+
+// Добавьте функцию setLockButtonIcon
+function setLockButtonIcon(button, imgString) {
+    var decodedImgString = decodeURIComponent(imgString);
+    
+    // Генерируем уникальное имя файла с использованием метки времени
+    var timestamp = new Date().getTime();
+    var tempFile = new File(Folder.temp.fsName + "/temp_lock_icon_" + timestamp + ".png");
+    
+    // Записываем декодированную строку в файл
+    tempFile.open("w");
+    tempFile.encoding = "BINARY";
+    tempFile.write(decodedImgString);
+    tempFile.close();
+    
+    // Назначаем изображение кнопке
+    button.image = tempFile;
+    
+    // Принудительно перерисовываем кнопку
+    button.notify("onDraw");
+}
+
+// Функция для установки иконки кнопки View в группе эффектов
+function setViewButtonIconEffects(button, imgString) {
+    try {
+        var decodedImgString = decodeURIComponent(imgString);
+        
+        // Генерируем уникальное имя файла с использованием метки времени
+        var timestamp = new Date().getTime();
+        var tempFile = new File(Folder.temp.fsName + "/temp_view_icon_effects_" + timestamp + ".png");
+        
+        // Записываем декодированную строку в файл
+        if (!tempFile.open("w+b")) {
+            throw new Error("Не удалось открыть файл для записи: " + tempFile.fsName);
+        }
+        tempFile.encoding = "BINARY";
+        tempFile.write(decodedImgString);
+        tempFile.close();
+        
+        // Назначаем изображение кнопке
+        button.image = tempFile;
+        
+        // Принудительная перерисовка кнопки
+        button.notify("onDraw");
+    } catch (e) {
+        alert("Ошибка при установке иконки View для группы эффектов: " + e.message);
+    }
+}
+
+// Функция для установки иконки кнопки Solo в группе эффектов
+function setSoloButtonIconEffects(button, imgString) {
+    try {
+        var decodedImgString = decodeURIComponent(imgString);
+        
+        // Генерируем уникальное имя файла с использованием метки времени
+        var timestamp = new Date().getTime();
+        var tempFile = new File(Folder.temp.fsName + "/temp_solo_icon_effects_" + timestamp + ".png");
+        
+        // Записываем декодированную строку в файл
+        if (!tempFile.open("w+b")) {
+            throw new Error("Не удалось открыть файл для записи: " + tempFile.fsName);
+        }
+        tempFile.encoding = "BINARY";
+        tempFile.write(decodedImgString);
+        tempFile.close();
+        
+        // Назначаем изображение кнопке
+        button.image = tempFile;
+        
+        // Принудительная перерисовка кнопки
+        button.notify("onDraw");
+    } catch (e) {
+        alert("Ошибка при установке иконки Solo для группы эффектов: " + e.message);
+    }
 }
 
 
@@ -259,7 +368,7 @@ var about_text_group = tab_settings.add('edittext {size: [395,240], properties: 
 var updates_check_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%14%00%00%00%14%08%06%00%00%00%C2%8D%C2%89%1D%0D%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%13IDATx%01%C3%95SQ%11%C3%820%0CM9%04%20!%12%26%01%09%C2%A0%C2%80%C3%A1%00%07%14%05%C3%A0%60s%00%0E%C2%90%00%0E%3A%14%C2%80%C2%83%C2%92%C2%B27.W%C2%BA%C2%96Oxw%C3%AF%C2%B2k_%C3%9E%C3%924%25%C3%BAu%C2%98%C2%92%C3%80%7B_I%60%C3%A1%23%C3%90%18sMhX%C3%96%C2%BB%C2%9C%C3%89L%C2%B8%15%C3%9E%C3%BD'%C2%9C%C2%B0V%C3%9A%C2%A0%C2%B393F%C2%92%C2%87%C3%A1!%18%C2%80%C2%AD%C3%9A%C2%BB%08%C3%B7%C3%B8%C2%B6%C2%B9%C3%8A%5CV%C3%94%C3%ABlT%C3%B5%5B%3B%C2%89%C2%B4%7B%C3%AA%C3%BB%C2%B5%C2%93%C2%9EXe%C2%B0%08%C2%95%2B%C2%9D%C2%A3%12P%C3%9D%C2%ABG%C2%89%C2%BDw%C3%9F%C3%82%25%C3%B9O%C3%98A%3BUys%C3%84%1D%C3%A5%C3%81%C3%82u%C2%B4vM%19V%C2%88%1De%20%C2%AD8%C3%A5%C3%B6'%C3%B4%1D%C3%82%0C%C2%AE%C2%A2%3E%0E%C3%87%0F%C3%AD%C3%98%C2%A4%0C%3BDN%18.%C2%857%C2%A1%C3%83%C2%A8%C2%B0%C3%922%C2%A5N%C2%A5.%C3%A5L%23%C3%80%C2%8C%C2%9E%07C%C2%89%0Drx%2C%C2%A1%C2%85%60E%05%60%C2%94%02%1A*T%C3%A0%C3%B0B%C3%AA%C2%82%C3%99%1DZ%C2%A6%C3%82%C2%9F%C3%B5%C3%93%3B%C3%A2%C3%89UX%C2%AFqd%C3%BF%C2%95Yd%C3%9A%C3%BAq4cf%C2%A6dL%C3%BD%7C%C3%AA%19%3D%C3%89%2C%3E%C3%A8o%C3%B1%04d%C3%8B~)%C3%9D%C3%BC%C3%843%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 var updates_check_button = tab_settings.add("iconbutton", undefined, File.decode(updates_check_button_imgString), {name: "updates_check_button", style: "toolbutton"}); 
     updates_check_button.helpTip = "Check for Updates"; 
-    updates_check_button.text = "Check For Updates - You Version 2.3.1"; 
+    updates_check_button.text = "Check For Updates - You Version 2.3.3"; 
     updates_check_button.preferredSize.width = 275; 
     updates_check_button.preferredSize.height = 35; 
 
@@ -285,7 +394,7 @@ var layerGroups = [];
 var effectGroups = [];
 
 // Define current version
-var currentVersion = "2.3.1"; // Adjust as needed
+var currentVersion = "2.3.3"; // Adjust as needed
 
 // Function to compare versions and check for updates
 function compareVersions(v1, v2) {
@@ -551,103 +660,102 @@ function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColo
     };
 
     // Создаём кнопку для Solo
-var solo_button = groupPanel.add("iconbutton", undefined, undefined, {name: "solo_button_" + prefix, style: "toolbutton"});
-solo_button.helpTip = "Solo this group: show only layers in this group and hide all others";
-solo_button.preferredSize.width = 30;
-solo_button.preferredSize.height = 30;
+    var solo_button = groupPanel.add("iconbutton", undefined, undefined, {name: "solo_button_" + prefix, style: "toolbutton"});
+    solo_button.helpTip = "Solo this group: show only layers in this group and hide all others";
+    solo_button.preferredSize.width = 30;
+    solo_button.preferredSize.height = 30;
 
-// Инициализируем состояние Solo
-var soloState = false;
-setSoloButtonIcon(solo_button, soloState ? solo_on_button_imgString : solo_off_button_imgString);
+    // Инициализируем состояние Solo
+    var soloState = false;
+    setSoloButtonIcon(solo_button, soloState ? solo_on_button_imgString : solo_off_button_imgString);
 
-// Обработчик нажатия на кнопку Solo
-solo_button.onClick = function() {
-    soloState = !soloState; // Переключаем состояние Solo
+    // Обработчик нажатия на кнопку Solo
+    solo_button.onClick = function() {
+        soloState = !soloState; // Переключаем состояние Solo
 
-    // Меняем иконку в зависимости от состояния
-    if (soloState) {
-        setSoloButtonIcon(solo_button, solo_on_button_imgString);
-    } else {
-        setSoloButtonIcon(solo_button, solo_off_button_imgString);
-    }
+        // Меняем иконку в зависимости от состояния
+        if (soloState) {
+            setSoloButtonIcon(solo_button, solo_on_button_imgString);
+        } else {
+            setSoloButtonIcon(solo_button, solo_off_button_imgString);
+        }
 
-    // Начинаем группу отмены действий
-    app.beginUndoGroup("Solo Group " + groupName);
-    var layersFound = false;
+        // Начинаем группу отмены действий
+        app.beginUndoGroup("Solo Group " + groupName);
+        var layersFound = false;
 
-    var comps = getAllCompositions();
-    for (var c = 0; c < comps.length; c++) {
-        var comp = comps[c];
-        for (var l = 1; l <= comp.numLayers; l++) {
-            var layer = comp.layer(l);
-            if (layer.name.indexOf("[" + prefix + "]") === 0) {
-                layer.shy = false; // Показываем слои в выбранной группе
-                layersFound = true;
-            } else {
-                layer.shy = soloState; // Скрываем все остальные слои, если Solo активен
+        var comps = getAllCompositions();
+        for (var c = 0; c < comps.length; c++) {
+            var comp = comps[c];
+            for (var l = 1; l <= comp.numLayers; l++) {
+                var layer = comp.layer(l);
+                if (layer.name.indexOf("[" + prefix + "]") === 0) {
+                    layer.shy = false; // Показываем слои в выбранной группе
+                    layersFound = true;
+                } else {
+                    layer.shy = soloState; // Скрываем все остальные слои, если Solo активен
+                }
             }
         }
-    }
 
-    if (soloState) {
-        // Если Solo активен, отключаем Solo для других групп
-        for (var i = 0; i < layerGroups.length; i++) {
-            if (layerGroups[i].soloButton !== solo_button && layerGroups[i].soloState) {
-                layerGroups[i].soloState = false;
-                setSoloButtonIcon(layerGroups[i].soloButton, solo_off_button_imgString);
+        if (soloState) {
+            // Если Solo активен, отключаем Solo для других групп
+            for (var i = 0; i < layerGroups.length; i++) {
+                if (layerGroups[i].soloButton !== solo_button && layerGroups[i].soloState) {
+                    layerGroups[i].soloState = false;
+                    setSoloButtonIcon(layerGroups[i].soloButton, solo_off_button_imgString);
+                }
             }
         }
-    }
 
-    if (!layersFound) {
-        alert("Layers for group '" + groupName + "' not found in any composition.");
-    }
-    app.endUndoGroup();
-};
+        if (!layersFound) {
+            alert("Layers for group '" + groupName + "' not found in any composition.");
+        }
+        app.endUndoGroup();
+    };
 
+    // Создаём кнопку для Hide
+    var hide_button = groupPanel.add("iconbutton", undefined, undefined, {name: "hide_button_" + prefix, style: "toolbutton"});
+    hide_button.helpTip = "Toggle hide for layers in this group without disabling them";
+    hide_button.preferredSize.width = 30;
+    hide_button.preferredSize.height = 30;
 
-   // Создаём кнопку для Hide
-var hide_button = groupPanel.add("iconbutton", undefined, undefined, {name: "hide_button_" + prefix, style: "toolbutton"});
-hide_button.helpTip = "Toggle hide for layers in this group without disabling them";
-hide_button.preferredSize.width = 30;
-hide_button.preferredSize.height = 30;
+    // Инициализируем состояние Hide
+    var hideState = false;
+    setHideButtonIcon(hide_button, hideState ? hide_on_button_imgString : hide_off_button_imgString);
 
-// Инициализируем состояние Hide
-var hideState = false;
-setHideButtonIcon(hide_button, hideState ? hide_on_button_imgString : hide_off_button_imgString);
+    // Обработчик нажатия на кнопку Hide
+    hide_button.onClick = function() {
+        hideState = !hideState; // Переключаем состояние
 
-// Обработчик нажатия на кнопку Hide
-hide_button.onClick = function() {
-    hideState = !hideState; // Переключаем состояние
+        // Меняем иконку в зависимости от состояния
+        if (hideState) {
+            setHideButtonIcon(hide_button, hide_on_button_imgString);
+        } else {
+            setHideButtonIcon(hide_button, hide_off_button_imgString);
+        }
 
-    // Меняем иконку в зависимости от состояния
-    if (hideState) {
-        setHideButtonIcon(hide_button, hide_on_button_imgString);
-    } else {
-        setHideButtonIcon(hide_button, hide_off_button_imgString);
-    }
+        // Начинаем группу отмены действий
+        app.beginUndoGroup("Toggle Hide for " + groupName);
+        var layersFound = false;
 
-    // Начинаем группу отмены действий
-    app.beginUndoGroup("Toggle Hide for " + groupName);
-    var layersFound = false;
-
-    var comps = getAllCompositions();
-    for (var c = 0; c < comps.length; c++) {
-        var comp = comps[c];
-        for (var l = 1; l <= comp.numLayers; l++) {
-            var layer = comp.layer(l);
-            if (layer.name.indexOf("[" + prefix + "]") === 0) {
-                layer.shy = hideState; // Устанавливаем состояние shy
-                layersFound = true;
+        var comps = getAllCompositions();
+        for (var c = 0; c < comps.length; c++) {
+            var comp = comps[c];
+            for (var l = 1; l <= comp.numLayers; l++) {
+                var layer = comp.layer(l);
+                if (layer.name.indexOf("[" + prefix + "]") === 0) {
+                    layer.shy = hideState; // Устанавливаем состояние shy
+                    layersFound = true;
+                }
             }
         }
-    }
 
-    if (!layersFound) {
-        alert("Layers for group '" + groupName + "' not found in any composition.");
-    }
-    app.endUndoGroup();
-};
+        if (!layersFound) {
+            alert("Layers for group '" + groupName + "' not found in any composition.");
+        }
+        app.endUndoGroup();
+    };
 
     // Добавляем разделитель между Hide и Add Layer
     var divider1 = groupPanel.add("panel", undefined, undefined, {name: "divider1"});
@@ -671,8 +779,8 @@ hide_button.onClick = function() {
     delete_group_layers_button.preferredSize.width = 35;
     delete_group_layers_button.preferredSize.height = 35;
 
-      // Сохраняем данные группы
-      var groupData = {
+    // Сохраняем данные группы
+    var groupData = {
         name: groupName,
         prefix: prefix,
         panel: groupPanel,
@@ -735,66 +843,67 @@ hide_button.onClick = function() {
         app.endUndoGroup();
     };   
 
-    // Event handler for the Edit button
+    // Обработчик события для кнопки Edit Group Layers
     edit_group_layers_button.onClick = function() {
-    var dialog = new Window("dialog", "Settings Layer Group");
-    dialog.orientation = "column";
-    dialog.alignChildren = ["fill", "top"];
+        var dialog = new Window("dialog", "Settings Layer Group");
+        dialog.orientation = "column";
+        dialog.alignChildren = ["fill", "top"];
 
-    // Первая группа - Name and Prefix
-    var namePrefixPanel = dialog.add("panel", undefined, "Name and Prefix");
-    namePrefixPanel.orientation = "column";
-    namePrefixPanel.alignChildren = ["fill", "top"];
-    namePrefixPanel.margins = [10, 15, 10, 10];
+        // Первая группа - Name and Prefix
+        var namePrefixPanel = dialog.add("panel", undefined, "Name and Prefix");
+        namePrefixPanel.orientation = "column";
+        namePrefixPanel.alignChildren = ["fill", "top"];
+        namePrefixPanel.margins = [10, 15, 10, 10];
 
-    var groupNameGroup = namePrefixPanel.add("group");
-    groupNameGroup.add("statictext", undefined, "Group Name:");
-    var groupNameInput = groupNameGroup.add("edittext", undefined, groupData.name);
-    groupNameInput.characters = 15;
+        var groupNameGroup = namePrefixPanel.add("group");
+        groupNameGroup.add("statictext", undefined, "Group Name:");
+        var groupNameInput = groupNameGroup.add("edittext", undefined, groupData.name);
+        groupNameInput.characters = 15;
 
-    var prefixGroup = namePrefixPanel.add("group");
-    prefixGroup.add("statictext", undefined, "Prefix:");
-    var prefixInput = prefixGroup.add("edittext", undefined, groupData.prefix);
-    prefixInput.characters = 5;
+        var prefixGroup = namePrefixPanel.add("group");
+        prefixGroup.add("statictext", undefined, "Prefix:");
+        var prefixInput = prefixGroup.add("edittext", undefined, groupData.prefix);
+        prefixInput.characters = 5;
 
-    // Добавление чекбокса для автогенерации префикса
-    var autoPrefixGroup = namePrefixPanel.add("group");
-    autoPrefixGroup.orientation = "row";
-    autoPrefixGroup.alignChildren = ["left", "center"];
-    autoPrefixGroup.add("statictext", undefined, "Auto-generate Prefix:");
-    var autoPrefixCheckbox = autoPrefixGroup.add("checkbox", undefined, "");
-    autoPrefixCheckbox.value = false; // При редактировании группы по умолчанию выключено
+        // Добавление чекбокса для автогенерации префикса
+        var autoPrefixGroup = namePrefixPanel.add("group");
+        autoPrefixGroup.orientation = "row";
+        autoPrefixGroup.alignChildren = ["left", "center"];
+        autoPrefixGroup.add("statictext", undefined, "Auto-generate Prefix:");
+        var autoPrefixCheckbox = autoPrefixGroup.add("checkbox", undefined, "");
+        autoPrefixCheckbox.value = false; // При редактировании группы по умолчанию выключено
 
-    // Если автогенерация включена, отключаем ввод префикса
-    prefixInput.enabled = !autoPrefixCheckbox.value;
-
-    // Обработчик для изменения состояния чекбокса
-    autoPrefixCheckbox.onClick = function() {
+        // Если автогенерация включена, отключаем ввод префикса
         prefixInput.enabled = !autoPrefixCheckbox.value;
-        if (autoPrefixCheckbox.value) {
-            if (containsOnlyEnglishLetters(groupNameInput.text)) {
-                prefixInput.text = generateUniquePrefix(groupNameInput.text);
-            } else {
-                autoPrefixCheckbox.value = false;
-                prefixInput.enabled = true;
-                alert("Auto-prefix generation is disabled for group names containing non-English characters or special symbols.");
-            }
-        }
-    };
 
-    // Обработчик для изменения имени группы
-    groupNameInput.onChanging = function() {
-        if (autoPrefixCheckbox.value) {
-            if (containsOnlyEnglishLetters(groupNameInput.text)) {
-                prefixInput.text = generateUniquePrefix(groupNameInput.text);
-            } else {
-                autoPrefixCheckbox.value = false;
-                prefixInput.enabled = true;
-                prefixInput.text = "";
-                alert("Auto-prefix generation is disabled for group names containing non-English characters or special symbols.");
+        // Обработчик для изменения состояния чекбокса
+        autoPrefixCheckbox.onClick = function() {
+            prefixInput.enabled = !autoPrefixCheckbox.value;
+            if (autoPrefixCheckbox.value) {
+                if (containsOnlyEnglishLetters(groupNameInput.text)) {
+                    prefixInput.text = generateUniquePrefix(groupNameInput.text);
+                } else {
+                    autoPrefixCheckbox.value = false;
+                    prefixInput.enabled = true;
+                    alert("Auto-prefix generation is disabled for group names containing non-English characters or special symbols.");
+                }
             }
-        }
-    };
+        };
+
+        // Обработчик для изменения имени группы
+        groupNameInput.onChanging = function() {
+            if (autoPrefixCheckbox.value) {
+                if (containsOnlyEnglishLetters(groupNameInput.text)) {
+                    prefixInput.text = generateUniquePrefix(groupNameInput.text);
+                } else {
+                    autoPrefixCheckbox.value = false;
+                    prefixInput.enabled = true;
+                    prefixInput.text = "";
+                    alert("Auto-prefix generation is disabled for group names containing non-English characters or special symbols.");
+                }
+            }
+        };
+
         // Вторая группа - Color Label
         var colorLabelPanel = dialog.add("panel", undefined, "Color Label");
         colorLabelPanel.orientation = "column";
@@ -828,131 +937,124 @@ hide_button.onClick = function() {
         parametersPanel.alignChildren = ["fill", "top"];
         parametersPanel.margins = [10, 15, 10, 10];
 
-        // Добавление чекбокса для Guide Layer
-        var guideLayerGroup = parametersPanel.add("group");
-        guideLayerGroup.orientation = "row";
-        guideLayerGroup.alignChildren = ["left", "center"];
-        guideLayerGroup.spacing = 10;
+        // Добавляем кнопку для Guide Layers с текстом и иконкой
+        var guideLayerButton = parametersPanel.add("iconbutton", undefined, undefined, {name: "guide_layer_button", style: "toolbutton"});
+        guideLayerButton.text = "Guide Layers"; // Добавляем текст
+        guideLayerButton.preferredSize.width = 150; // Установите подходящий размер
+        guideLayerButton.preferredSize.height = 30;
+        guideLayerButton.helpTip = "Toggle Guide Layer for this group";
 
-        guideLayerGroup.add("statictext", undefined, "Guide Layer:");
-        var guideLayerCheckbox = guideLayerGroup.add("checkbox", undefined, "Enable Guide Layer");
-        guideLayerCheckbox.value = groupData.guideCheckbox ? groupData.guideCheckbox.value : false;
-        guideLayerCheckbox.helpTip = "Enable or disable Guide Layer mode for layers in this group";
+        // Устанавливаем иконку в зависимости от текущего состояния
+        setGuideButtonIcon(guideLayerButton, groupData.guideCheckbox.value ? guide_on_imgString : guide_off_imgString);
 
-        // Добавление чекбокса для Lock Layers
-        var lockLayerGroup = parametersPanel.add("group");
-        lockLayerGroup.orientation = "row";
-        lockLayerGroup.alignChildren = ["left", "center"];
-        lockLayerGroup.spacing = 10;
+        // Обработчик нажатия на кнопку Guide Layers
+        guideLayerButton.onClick = function() {
+            groupData.guideCheckbox.value = !groupData.guideCheckbox.value;
+            setGuideButtonIcon(guideLayerButton, groupData.guideCheckbox.value ? guide_on_imgString : guide_off_imgString);
+        };
 
-        lockLayerGroup.add("statictext", undefined, "Lock Layers (Beta):");
-        var lockLayerCheckbox = lockLayerGroup.add("checkbox", undefined, "Enable Lock Layers");
-        lockLayerCheckbox.value = groupData.lockCheckbox ? groupData.lockCheckbox.value : false;
-        lockLayerCheckbox.helpTip = "Enable or disable locking of layers in this group";
+        // Добавляем кнопку для Lock Layers с текстом и иконкой
+        var lockLayerButton = parametersPanel.add("iconbutton", undefined, undefined, {name: "lock_layer_button", style: "toolbutton"});
+        lockLayerButton.text = "Lock Layers (Beta)"; // Добавляем текст
+        lockLayerButton.preferredSize.width = 150; // Установите подходящий размер
+        lockLayerButton.preferredSize.height = 30;
+        lockLayerButton.helpTip = "Toggle Lock Layers for this group";
 
-        // Обработчик события для Lock Layers
-        lockLayerCheckbox.onClick = function() {
-            app.beginUndoGroup("Toggle Lock Layers for " + groupNameInput.text);
+        // Устанавливаем иконку в зависимости от текущего состояния
+        setLockButtonIcon(lockLayerButton, groupData.lockCheckbox.value ? lock_on_imgString : lock_off_imgString);
+
+        // Обработчик нажатия на кнопку Lock Layers
+        lockLayerButton.onClick = function() {
+            groupData.lockCheckbox.value = !groupData.lockCheckbox.value;
+            setLockButtonIcon(lockLayerButton, groupData.lockCheckbox.value ? lock_on_imgString : lock_off_imgString);
+        };
+
+        var buttonsGroup = dialog.add("group");
+        buttonsGroup.alignment = "center";
+        var okButton = buttonsGroup.add("button", undefined, "OK");
+        okButton.helpTip = "Confirm changes to the Layer Group";
+        var cancelButton = buttonsGroup.add("button", undefined, "Cancel");
+        cancelButton.helpTip = "Cancel editing the Layer Group";
+
+        okButton.onClick = function() {
+            var newGroupName = trim(groupNameInput.text);
+            var newPrefix = trim(prefixInput.text);
+            var newLabelColorIndex = labelColorDropdown.selection ? labelColorDropdown.selection.index : 0;
+            var newDisableLabelColor = disableLabelColorCheckbox.value;
+            var newGuideLayer = groupData.guideCheckbox.value;
+            var newLockLayers = groupData.lockCheckbox.value;
+
+            if (newGroupName === "") {
+                alert("Please enter a group name.");
+                return;
+            }
+
+            if (newPrefix === "") {
+                if (autoPrefixCheckbox.value) {
+                    newPrefix = generateUniquePrefix(newGroupName);
+                    prefixInput.text = newPrefix;
+                } else {
+                    alert("Please enter a prefix.");
+                    return;
+                }
+            }
+
+            app.beginUndoGroup("Edit Layer Group " + groupData.name);
+
             var comps = getAllCompositions();
-            var layersFound = false;
-
             for (var c = 0; c < comps.length; c++) {
                 var comp = comps[c];
                 for (var l = 1; l <= comp.numLayers; l++) {
                     var layer = comp.layer(l);
-                    if (layer.name.indexOf("[" + prefixInput.text + "]") === 0) {
-                        layer.locked = lockLayerCheckbox.value;
-                        layersFound = true;
+                    if (layer.name.indexOf("[" + groupData.prefix + "]") === 0) {
+                        var baseName = layer.name.replace("[" + groupData.prefix + "] ", "");
+                        layer.name = "[" + newPrefix + "] " + baseName;
+
+                        // Обновление цвета метки, если не отключено
+                        if (!newDisableLabelColor) {
+                            layer.label = newLabelColorIndex;
+                        }
+
+                        // Обновление состояния Guide Layer
+                        layer.guideLayer = newGuideLayer;
+
+                        // Обновление состояния Lock Layers
+                        layer.locked = newLockLayers;
                     }
                 }
             }
+            // Обновление информации о группе
+            groupData.name = newGroupName;
+            groupData.prefix = newPrefix;
+            groupData.labelColorIndex = newLabelColorIndex;
+            groupData.disableLabelColor = newDisableLabelColor;
+            groupData.guideCheckbox.value = newGuideLayer;
+            groupData.lockCheckbox.value = newLockLayers;
+            groupPanel.text = newGroupName + " [" + newPrefix + "]";
 
-            if (!layersFound) {
-                alert("Layers for group '" + groupNameInput.text + "' not found in any composition.");
-            }
+            // Обновление иконки кнопки color_label_button
+            setColorLabelButtonIcon(groupData.colorLabelButton, newLabelColorIndex);
+
+            // Обновление иконок Guide и Lock кнопок в диалоге (если необходимо)
+            setGuideButtonIcon(guideLayerButton, groupData.guideCheckbox.value ? guide_on_imgString : guide_off_imgString);
+            setLockButtonIcon(lockLayerButton, groupData.lockCheckbox.value ? lock_on_imgString : lock_off_imgString);
+
+            palette.layout.layout(true);
+            palette.layout.resize();
+
             app.endUndoGroup();
+            dialog.close();
         };
 
-        var buttonsGroup = dialog.add("group");
-    buttonsGroup.alignment = "center";
-    var okButton = buttonsGroup.add("button", undefined, "OK");
-    okButton.helpTip = "Confirm changes to the Layer Group";
-    var cancelButton = buttonsGroup.add("button", undefined, "Cancel");
-    cancelButton.helpTip = "Cancel editing the Layer Group";
+        cancelButton.onClick = function() {
+            dialog.close();
+        };
 
-    okButton.onClick = function() {
-        var newGroupName = groupNameInput.text;
-        var newPrefix = prefixInput.text;
-        var newLabelColorIndex = labelColorDropdown.selection ? labelColorDropdown.selection.index : 0;
-        var newDisableLabelColor = disableLabelColorCheckbox.value;
-        var newGuideLayer = guideLayerCheckbox.value;
-        var newLockLayers = lockLayerCheckbox.value;
+        dialog.center();
+        dialog.show();
+    }
 
-        if (newGroupName === "") {
-            alert("Please enter a group name.");
-            return;
-        }
 
-        if (newPrefix === "") {
-            if (autoPrefixCheckbox.value) {
-                newPrefix = generateUniquePrefix(newGroupName);
-                prefixInput.text = newPrefix;
-            } else {
-                alert("Please enter a prefix.");
-                return;
-            }
-        }
-
-        app.beginUndoGroup("Edit Layer Group " + groupData.name);
-
-        var comps = getAllCompositions();
-        for (var c = 0; c < comps.length; c++) {
-            var comp = comps[c];
-            for (var l = 1; l <= comp.numLayers; l++) {
-                var layer = comp.layer(l);
-                if (layer.name.indexOf("[" + groupData.prefix + "]") === 0) {
-                    var baseName = layer.name.replace("[" + groupData.prefix + "] ", "");
-                    layer.name = "[" + newPrefix + "] " + baseName;
-
-                    // Обновление цвета метки, если не отключено
-                    if (!newDisableLabelColor) {
-                        layer.label = newLabelColorIndex;
-                    }
-
-                    // Обновление состояния Guide Layer
-                    layer.guideLayer = newGuideLayer;
-
-                    // Обновление состояния Lock Layers
-                    layer.locked = newLockLayers;
-                }
-            }
-        }
-        // Обновление информации о группе
-        groupData.name = newGroupName;
-        groupData.prefix = newPrefix;
-        groupData.labelColorIndex = newLabelColorIndex;
-        groupData.disableLabelColor = newDisableLabelColor;
-        groupData.guideCheckbox.value = newGuideLayer;
-        groupData.lockCheckbox.value = newLockLayers;
-        groupPanel.text = newGroupName + " [" + newPrefix + "]";
-
-        // Обновление иконки кнопки color_label_button
-        setColorLabelButtonIcon(groupData.colorLabelButton, newLabelColorIndex);
-
-        palette.layout.layout(true);
-        palette.layout.resize();
-
-        app.endUndoGroup();
-        dialog.close();
-    };
-
-    cancelButton.onClick = function() {
-        dialog.close();
-    };
-
-    dialog.center();
-    dialog.show();
-};
     // Event handler for the Delete Group button
     delete_group_layers_button.onClick = function() {
         app.beginUndoGroup("Delete Layer Group " + groupName);
@@ -1286,9 +1388,6 @@ function showGroupCompositions(groupData) {
 }
 
 
-//EFFECTS GROUP
-
-// Function to create a new Effect Group UI
 function createEffectGroupUI(groupName, prefix) {
     var groupPanel = tab_effects.add("panel", undefined, undefined, {name: "effect_group_" + prefix});
     groupPanel.text = groupName + " [" + prefix + "]";
@@ -1298,64 +1397,31 @@ function createEffectGroupUI(groupName, prefix) {
     groupPanel.margins = [5, 15, 5, 10];
     groupPanel.alignment = ["fill", "top"];
 
-    var view_effects_checkbox = groupPanel.add("checkbox", undefined, undefined, {name: "view_effects_checkbox_" + prefix});
-    view_effects_checkbox.helpTip = "Toggle visibility of effects in this group across all compositions";
-    view_effects_checkbox.text = "View";
-    view_effects_checkbox.value = true;
+    // Создаём кнопку View вместо чекбокса
+    var view_button = groupPanel.add("iconbutton", undefined, undefined, {name: "view_button_" + prefix, style: "toolbutton"});
+    view_button.helpTip = "Toggle visibility of effects in this group across all compositions";
+    view_button.preferredSize.width = 30;
+    view_button.preferredSize.height = 30;
 
-        // Add the Solo checkbox after the Add Effect button
-    var solo_checkbox = groupPanel.add("checkbox", undefined, undefined, {name: "solo_checkbox_" + prefix});
-    solo_checkbox.text = "Solo";
-    solo_checkbox.helpTip = "Toggle solo mode for this effects group";
-    solo_checkbox.value = false;
+    // Инициализируем состояние View
+    var viewState = true; // Начальное состояние
+    setViewButtonIconEffects(view_button, viewState ? view_button_fx_on_imgString : view_button_fx_off_imgString);
 
-    
+    // Создаём кнопку Solo вместо чекбокса
+    var solo_button = groupPanel.add("iconbutton", undefined, undefined, {name: "solo_button_" + prefix, style: "toolbutton"});
+    solo_button.helpTip = "Toggle solo mode for this effects group";
+    solo_button.preferredSize.width = 30;
+    solo_button.preferredSize.height = 30;
+
+    // Инициализируем состояние Solo
+    var soloState = false; // Начальное состояние
+    setSoloButtonIconEffects(solo_button, soloState ? solo_on_button_imgString : solo_off_button_imgString);
+
     var add_effect_button = groupPanel.add("iconbutton", undefined, File.decode(add_layer_button_imgString), {name: "add_effect_button_" + prefix, style: "toolbutton"});
     add_effect_button.helpTip = "Add selected effects to this group across all compositions";
     add_effect_button.text = "Add Effect";
     add_effect_button.preferredSize.width = 120;
     add_effect_button.preferredSize.height = 35;
-
-
-// Event handler for the Solo checkbox
-solo_checkbox.onClick = function() {
-    app.beginUndoGroup("Toggle Solo for " + groupName);
-    
-    var comps = getAllCompositions();
-    for (var c = 0; c < comps.length; c++) {
-        var comp = comps[c];
-        for (var l = 1; l <= comp.numLayers; l++) {
-            var layer = comp.layer(l);
-            if (layer.property("Effects")) {
-                var hasGroupEffect = false;
-                var effects = layer.property("Effects");
-                // Check if this layer has effects from this group
-                for (var i = 1; i <= effects.numProperties; i++) {
-                    var effect = effects.property(i);
-                    if (effect.name.indexOf("[" + prefix + "]") === 0) {
-                        hasGroupEffect = true;
-                        break;
-                    }
-                }
-                
-                if (hasGroupEffect) {
-                    // Enable or disable effects based on solo state
-                    for (var i = 1; i <= effects.numProperties; i++) {
-                        var effect = effects.property(i);
-                        if (effect.name.indexOf("[" + prefix + "]") === 0) {
-                            // Effects from this group
-                            effect.enabled = groupData.viewCheckbox.value;
-                        } else {
-                            // Other effects
-                            effect.enabled = !solo_checkbox.value;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    app.endUndoGroup();
-};
 
     var edit_group_effects_button = groupPanel.add("iconbutton", undefined, File.decode(edit_group_layers_button_imgString), {name: "edit_group_effects_button_" + prefix, style: "toolbutton"});
     edit_group_effects_button.helpTip = "Rename and settings this Group";
@@ -1369,47 +1435,117 @@ solo_checkbox.onClick = function() {
     delete_group_effects_button.preferredSize.width = 35;
     delete_group_effects_button.preferredSize.height = 35;
 
-    // Save group data
-var groupData = {
-    name: groupName,
-    prefix: prefix,
-    panel: groupPanel,
-    viewCheckbox: view_effects_checkbox,
-    addButton: add_effect_button,
-    deleteButton: delete_group_effects_button,
-    editButton: edit_group_effects_button,
-    soloCheckbox: solo_checkbox // Добавьте эту строку
+    // Сохраняем данные группы
+    var groupData = {
+        name: groupName,
+        prefix: prefix,
+        panel: groupPanel,
+        viewButton: view_button,
+        viewState: viewState,
+        soloButton: solo_button,
+        soloState: soloState,
+        addButton: add_effect_button,
+        deleteButton: delete_group_effects_button,
+        editButton: edit_group_effects_button
+    };
+
+    // Функции для установки иконок
+    function setViewButtonIcon(button, imageData) {
+        button.image = ScriptUI.newImage(File.decode(imageData));
+    }
+
+    function setSoloButtonIcon(button, imageData) {
+        button.image = ScriptUI.newImage(File.decode(imageData));
+    }
+
+// Обработчик нажатия на кнопку View
+view_button.onClick = function() {
+    groupData.viewState = !groupData.viewState; // Переключаем состояние
+
+    // Меняем иконку в зависимости от состояния
+    if (groupData.viewState) {
+        setViewButtonIconEffects(view_button, view_button_fx_on_imgString);
+    } else {
+        setViewButtonIconEffects(view_button, view_button_fx_off_imgString);
+    }
+
+    // Начинаем группу отмены действий
+    app.beginUndoGroup("Toggle View for " + groupName);
+    var effectsFound = false;
+
+    var comps = getAllCompositions();
+    for (var c = 0; c < comps.length; c++) {
+        var comp = comps[c];
+        for (var l = 1; l <= comp.numLayers; l++) {
+            var layer = comp.layer(l);
+            if (layer.property("Effects")) {
+                for (var i = 1; i <= layer.property("Effects").numProperties; i++) {
+                    var effect = layer.property("Effects").property(i);
+                    if (effect.name.indexOf("[" + prefix + "]") === 0) {
+                        effect.enabled = groupData.viewState; // Устанавливаем видимость эффекта
+                        effectsFound = true;
+                    }
+                }
+            }
+        }
+    }
+
+    if (!effectsFound) {
+        alert("Effects for group '" + groupName + "' not found in any composition.");
+    }
+    app.endUndoGroup();
 };
 
-    // Event handler for the View checkbox
-    view_effects_checkbox.onClick = function() {
-        app.beginUndoGroup("Toggle View for " + groupName);
-        var effectsFound = false;
+// Обработчик нажатия на кнопку Solo
+solo_button.onClick = function() {
+    groupData.soloState = !groupData.soloState; // Переключаем состояние
 
-        var comps = getAllCompositions();
-        for (var c = 0; c < comps.length; c++) {
-            var comp = comps[c];
-            for (var l = 1; l <= comp.numLayers; l++) {
-                var layer = comp.layer(l);
-                if (layer.property("Effects")) {
-                    for (var i = 1; i <= layer.property("Effects").numProperties; i++) {
-                        var effect = layer.property("Effects").property(i);
+    // Меняем иконку в зависимости от состояния
+    if (groupData.soloState) {
+        setSoloButtonIconEffects(solo_button, solo_on_button_imgString);
+    } else {
+        setSoloButtonIconEffects(solo_button, solo_off_button_imgString);
+    }
+
+    app.beginUndoGroup("Toggle Solo for " + groupName);
+
+    var comps = getAllCompositions();
+    for (var c = 0; c < comps.length; c++) {
+        var comp = comps[c];
+        for (var l = 1; l <= comp.numLayers; l++) {
+            var layer = comp.layer(l);
+            if (layer.property("Effects")) {
+                var hasGroupEffect = false;
+                var effects = layer.property("Effects");
+                // Проверяем, есть ли эффекты из этой группы
+                for (var i = 1; i <= effects.numProperties; i++) {
+                    var effect = effects.property(i);
+                    if (effect.name.indexOf("[" + prefix + "]") === 0) {
+                        hasGroupEffect = true;
+                        break;
+                    }
+                }
+
+                if (hasGroupEffect) {
+                    // Включаем или выключаем эффекты на основе состояния Solo
+                    for (var i = 1; i <= effects.numProperties; i++) {
+                        var effect = effects.property(i);
                         if (effect.name.indexOf("[" + prefix + "]") === 0) {
-                            effect.enabled = view_effects_checkbox.value;
-                            effectsFound = true;
+                            // Эффекты из этой группы
+                            effect.enabled = groupData.viewState; // Устанавливаем видимость эффекта
+                        } else {
+                            // Другие эффекты
+                            effect.enabled = !groupData.soloState; // Устанавливаем видимость для остальных эффектов
                         }
                     }
                 }
             }
         }
+    }
+    app.endUndoGroup();
+};
 
-        if (!effectsFound) {
-            alert("Effects for group '" + groupName + "' not found in any composition.");
-        }
-        app.endUndoGroup();
-    };
-
-    // Event handler for the Add Effect button
+    // Обработчик для кнопки Add Effect
     add_effect_button.onClick = function() {
         var layers = getSelectedLayersInActiveComp();
         if (!layers) return;
@@ -1441,6 +1577,7 @@ var groupData = {
 
         app.endUndoGroup();
     };
+
 
     // Event handler for the Edit button
     edit_group_effects_button.onClick = function() {
