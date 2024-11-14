@@ -58,11 +58,11 @@ var palette = (panelGlobal instanceof Panel) ? panelGlobal : new Window("palette
    
    var solo_off_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0E%00%00%00%0B%08%06%00%00%00O%C2%85%C2%BCb%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00AIDATx%01%C2%BD%C3%8EA%0D%C3%800%0CCQ%7B%0A%C2%90%0D%C3%A96%40%09%C2%A5BI%5B%0A%C3%BF%C3%90'%C3%B9%C3%B8%25%C2%BB%C2%AAZ%40t%C3%B7%C2%AF%C2%93%C2%BC%C2%AE%0E%01%C2%B1v%0B%C2%B8%04%C3%A1%10sf~%02%C3%82%C3%B6%2B%60%C2%87%C2%8F%C2%80%09%C2%875%0C%C3%95%10%C2%B0%C3%9Aj%00%00%00%00IEND%C2%AEB%60%C2%82"; 
    
-   var add_layer_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0E%00%00%00%0E%08%06%00%00%00%1FH-%C3%91%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%25IDATx%01%C2%95RKn%C2%830%10%C2%B5%0D%2B%C3%84%C3%82%2B%04%C2%BBp%C2%82%C2%B6G%C3%A8IBO%C2%90%C3%A6%04mn%C3%80%0D%0A'%C3%A9%11%C3%8A%0D%C2%9C%1D%C2%82%0D%C2%AC%10%12%1F%C3%B7%0D%C2%AAi%C2%82%C2%88B%C2%9Ed%C2%8D%3D%C2%BF7%C2%9E%19%C3%8E.%C2%A0%C2%94%C2%92%C2%AE%C3%AB%1E%C3%86q%C2%8C%C3%B0%C3%9C%C3%BD%C2%A93%C3%8Ey6%0C%C3%83)%08%C2%82%C2%B3%C3%B1%C3%A5%C3%A6R%C2%96%C3%A5%1E%22%C3%96ZK%C2%B6%C2%8E%1A%C2%B6%C2%93%C3%AF%C3%BB%C3%B1%1C%C2%88%C2%A0%03%C2%941%C3%9B%00%C2%B0G%C2%9E%C3%A7%C2%A5%3C%C3%8F%C3%B3%C2%9DeY%3FK%268%24%24%C2%A1%C2%8F%C2%96%C3%8CM%C3%93%C2%84%02A%1Fk%C3%A5!0%C3%85%C2%BF%C3%92%15R%C3%A98%C3%8E%C2%BB%40%C3%903%7B%1C%7B%5E%14%C2%85%C2%BEP%C2%A4%C3%A8hB%C2%97%C2%B6m3)%25%C3%89)%C2%B1%10%22%C2%A2%00%C3%A3(%16%C3%A5i%C3%9B%C2%B6%19%C2%9D%C3%A93u%C3%8D%C3%8C%C2%9BlW%C2%BE%60T%C3%AC%7Ff3%C3%80%C3%B0%C3%9A%C3%B7%3D%C3%89%C3%AF%C2%A5%C2%8D%C3%A6*P%C3%9AZ%03%C3%AE!%C3%A3UU%C3%89%C2%AE%C3%AB%C3%94%C3%96q%40_%C2%A3%C3%9B%2F%C3%93%02%60%C2%96%11J%C3%BAb%1B%C2%80DG%C3%9A%C2%9E%C2%A99%C3%98%C3%81%04Y%C2%8E%C2%94%C3%ADV%00%C3%99%C3%B0%C2%AD%C2%B7%C2%AB%C2%953%C2%A0-%02%C3%B3'%C2%AEO8f%C2%BEg%C3%AA%03%C3%86%12%C2%87a8'%C3%BE%05%C2%A5m%C2%8E%C2%B3%C2%97s%C2%8C%5E%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+   var add_layer_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0E%00%00%00%0E%08%06%00%00%00%1FH-%C3%91%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%99IDATx%01%C2%9DR%0B%0D%C3%820%10%C2%BD6%08%C2%98%C2%84%C3%A2%00%140%C2%9C%C2%80%02%C2%82%C2%81%7D%0D%C2%80%02%2C%C3%A0%60%C2%930%07%C2%AB%C2%84%19%C3%98%C3%86%3B%C3%92B!kKxI%C3%93%C3%AB%C3%B5%C3%9E%7B%C2%BB%C3%AB%049%C2%A8%C2%AA%C2%AA%C2%99%C3%A79%C2%A5%08%C2%84%10%17a%0Fu%5D%C2%A7%C3%9345%C3%B4%23VL%18%C3%87Q%7B%C2%94%5B%C2%88%1D%C2%B1%C2%B3%C2%A0r%C3%AF%24%C2%BBH)S%C2%9FrQ%14z%C3%91%C3%91So%C2%8B%07%C3%A3%C2%AC%C3%91%C2%BB%C2%BDS%3E%C2%A2%C3%8E%C3%B3%7C%C3%AD%26%C2%B2%2C%C3%9B%1Bw%05%C2%91%C3%9EGLx%C2%BA%26%C3%AE%40%3A%C3%A3%7Cc'%C2%B8%26%C2%A1OM%C3%AC%C2%93%40%C3%BD%C2%990g%C3%A5%16I%C3%BA%13A%22%3B%C2%95e%C3%99%7F%C2%BB%7D%10%C3%B1%C2%96%1D%C2%BD%C2%A7%C3%A9B-%C3%A4%C3%B4%C2%ABGLl%C3%80%C3%9A%22%C3%9CP%18%C2%83K%C3%9Car%14%03~%C2%96%3B%1Bp%C3%8C%C3%84%2Bz9a%3FP%1C%1A%C2%AB%C3%A5%C3%A0%01%C2%89%06Y%C2%BEvj%18%C2%BB%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 
-   var edit_group_layers_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%12%00%00%00%12%08%06%00%00%00V%C3%8E%C2%8EW%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01UIDATx%01%C2%BDS%C3%9Bm%C2%83%40%10%3C%C2%B0%0B%C3%A0%C2%87%C3%A7%C2%97%C3%93%01%25%C3%84%15D%C2%A9%C3%80%C2%A1%C2%82%C2%A4%03%C2%8B%0Ab*%40%C2%A9%20q%05P%02%1D%C3%A4%3E%C2%81%2F%0A%C3%A0%C2%91Y%0BN%C3%87%01%17E%C2%8A%3C%C3%92%C2%89%C2%85%C3%9D%C2%9B%C2%9D9%C3%B6%18%C3%BB'%18%C2%BAd%5D%C3%97%C2%A1a%18%16%C3%85m%C3%9Br%C3%9F%C3%B7%C3%B9V%C3%AD%5EG4%0CC%C2%8A%15Rl%C2%9A%26%C3%87%C3%A3a%C2%AB%C3%96dz%C2%84R%7C%C3%90%15%C3%8E%C2%AC%C3%81JJ%1B%60%C3%A7%0A%25OX%C2%8FJ%3D%C2%87%C2%B2%C2%84r%C3%B4%C3%A28%C3%8EqA%04%C2%92%17%C2%B2%C3%82%C3%BE%00%C2%90%1Em%C3%9B%C3%8Eo%C3%B1%C3%B4%11%24g%C2%B5%10%C3%8Ar%C2%AC%08%C3%A13V%C2%A1%C3%A6%C3%BB%C2%BE%17%C2%8D%C3%85aw%5D%C2%97%C3%ACv%C2%BBw%C2%A9%C2%AE%C2%90%C2%A5%03_P%C2%9DMv%C3%91%C2%A0%01Q%22%C3%94MA%10%04%C2%97%C2%B1%C3%BB%C2%84%C2%98-%C3%B1!%C2%A9%C2%89%3D%C3%8F%C2%BB%2C%C2%88%C3%86%C2%A4%25%C3%99%C2%B2T%16%C2%A8i%C3%84F%C3%93l%C3%A4%C2%9C%20%C2%82%C3%ACW%24%C3%A5s%3A%C2%B1%25%C3%8E%12iZ%C2%96%C3%A5%C2%9Bh%3C%05UU%7D3eV%C2%A0%C2%AA%C3%80%C2%86xTwZ%1B%07%C3%97uoC%C2%BA%C2%97lEP%C2%94%C2%B1%C2%B9%15%1A%C3%88O%3C%C3%99%1A%C3%A8%C2%9C%16%C2%8AF%7B%C3%99Xp%C2%85%0A%C2%B2%16*%0As%C3%8A%C2%A1!%0D%24%C3%87_%C2%8DV%C2%89T%C3%80%C3%AEL%0All%C3%96%C3%BFv%C3%97%C2%B8%C2%A4%C2%A6%C3%90%15jo%3Fl%C3%90%40%1E(%C3%86%C2%B06%C3%AC%1E%C3%B8%01%C2%9DB%C2%90%C2%81%C3%86%C3%9C%C2%A7%0D%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+   var edit_group_layers_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0F%00%00%00%0F%08%06%00%00%00%3B%C3%96%C2%95J%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%3AIDATx%01%C2%8DS1V%C2%83%40%10%C3%9D%5D-%2C%C3%B1%06%C3%A4%06x%027%C2%A5%C2%A5'%C3%90%C3%9C%20%C2%B9%00%C2%B0%3C%C3%BAhiii%C2%A57%10%3A%3B%C2%B9%C2%81%1C%C2%8126%C3%A0%C3%BF%C2%B8%24%C2%9B%C3%8D%26%2FS%C3%80%C2%BC%3F%7F%C3%BE%C3%8C%C3%BE%05)%02Q%14%C3%85z%18%C2%86%C2%A5%03%3DgY%C2%B6%C3%B4y*%C3%94%C2%8CF%C3%ADA%C2%B7!%C2%9E%C3%A4%C2%A3%2C%C3%8B%C2%87%C2%BE%C3%AF%1F%C2%91%C2%BEJ)%5B%C3%A4%C3%AF%C3%88%23%C2%87%C3%97%01_Y%C2%8CBu%C2%9A%C2%A6O2%C3%8F%C3%B3%18%C2%85O%00%C2%B18%3F%3Al7S%C2%88%C3%ACDc%7B%04%C2%8F%C3%90%C2%B7V%C2%81%C3%B31%1A%C3%A0%C3%970i%C3%86%09%C3%98%C3%AC%C3%83'%C2%B0%C2%8F%C3%8Ds%7F%02%C2%B0%7B%1C%C2%A7c%C2%8E7%3DXpUO%7C%C2%AEX%C3%84%0A%0BwUb%C2%AE%18%C2%850%C2%BDq%C3%84W%C3%A4L%C2%86%C3%91%C3%9D%C3%84%C3%96F3%C2%A6%C3%89%C2%B69%02%C3%A7G%C3%ACn%C2%A0%1D'%5B%C2%A7%13%C3%97%0Cb%14%C2%9D%1Ai%C2%8E%C3%98%C2%BF%C2%BA%C3%B1%C2%86.%C2%91%C3%94%C3%A2%C3%90%C3%AD%C2%84%C2%93%C2%8C1-k%C2%98%22%C3%BC%40%C2%BDR%C3%B63%C3%ACD8%C3%A2%238M4%17UUm%C2%B4%C3%96%C2%BFXm%03%C2%B5%17%C2%88%C2%BD%C3%A1%C2%ADA%C2%B8r%C3%88%C3%B4%C3%A1%C2%8E%5B%C2%82%17!78%C3%8E%C2%97%0C%C3%89b%C3%9Do%C2%B1%C3%AFC%C2%83%3B%C2%BF%C3%B1y%C3%81%1FC%C3%BC%C3%BB%C2%B0%0DL%C2%AAC%C2%A4%3F%C3%B5%26%C2%9C%C2%BE%C2%9FH%40%2B%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 
-   var delete_group_layers_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0B%00%00%00%0F%08%06%00%00%002%3D50%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%ADIDATx%01%C2%95R%C2%B1%0D%C2%830%10%C3%84%C3%A0%C2%8A%C3%8A%14%08!!%C2%85%11%C2%92%11%18!%13%C2%84%0D%C2%B2%02%C2%8C%C2%90%112%01%C3%99%20l%C2%90d%03w%08(%C2%A0%C2%A3%02r%C2%8F%20!%C3%88%12%C3%A4%24%C3%8B%C3%BF%C3%96%C3%B9%C3%AF%C3%BEm%C2%96e%C2%99%C2%AF%01%C2%86a%C2%88%C2%BE%C3%AF%13%C2%84C%3EB2%C3%86%C2%8Em%C3%9B%C3%96%C2%94%C2%B0%3C%C3%8F%7Bm%238V%C2%BC%C2%99%0C%C2%99%1B%C3%A4%C3%8Fk%C3%84%C2%AE%C3%ABb%0E%3FB%C3%97%C3%B5p%C2%B5*%C3%A7W%5D%C3%BB%03%3Fd%C3%98%C2%B9%60%C2%93c*%C3%87%5CI%C2%96M%C3%93D%C3%B0%16%C2%A0%C2%8F%C2%94v%C3%8A%11%C3%97%1F%2B3%C2%B2o%C2%9A%C3%A6%C3%9Dq%C2%9C%03%C3%A2%C2%80%0E0%C3%96%07%C2%AA%0B%C2%A5%0D%40L%C2%8FTU%15%C2%91%C2%84%C3%92%06%C3%89%C2%91%C2%B4%C3%AB%C2%BA%C2%B2(%C2%8A%C3%90%C2%B2%C2%AC%C2%9A%5EOi%C2%83%C3%A40%C3%82%3D%C2%A4O%C2%88%C2%A3%C2%B2%2Cw%C2%B8%C3%BC%C2%9AW%C3%A7%0B%1B%C3%89%14%C2%8084%C2%87%C2%8B_%1B%C3%93'Qa%C3%9E%C3%9C%40%C3%B6%3C%C3%AF%C2%B9%C2%9C%C3%A7%124J%C3%9B%C2%B6%C3%937%C3%B7%C3%9Cs%C2%B3g%5D%C3%BB_%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+   var delete_group_layers_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0C%00%00%00%10%08%06%00%00%00%22a%C2%9E%07%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%20IDATx%01%C2%AD%C2%92%3DK%C3%84%40%10%C2%863%C3%89%1AH%17%C3%ACEA%10%C3%8B%C3%BB%07%C2%9E%C2%A0X%C3%B9%1F%C3%8EF%2Cl%C2%AE%0E%C2%84%10Hm%25XXX%C3%B8%1F%049%C3%BC(%2Cl%C2%AE%15l%C3%8E%C3%86%C3%82%C3%8EN%C3%8C%C3%87%C3%86g%C3%81%C3%80%26%18%C3%AF%C2%8A%1B%C2%98%C3%8C%C3%87%C3%8E%3B%C3%B3Nv%C3%85%C3%A9H%C2%92%24%23%11%C3%990%3E%C3%B6-%C2%8E%C3%A3%2B%C3%BB%5C%C3%924%C2%BDo%C2%82%C2%BA%C2%AEC%C3%8C%C2%A0%C3%93%C3%A3%19%C3%A0W%13%C2%A8%16Z%C3%A4%13%C3%B3%C3%A0%2CS%24%C3%8B%C2%B2AUUg%C2%8B%14k%C2%AD%C3%87%C2%8AO%08%C3%B7%C2%A1%C2%B3%C2%98%C2%84nk%C2%9C%C3%88%0C%C3%B3j%C2%A5%5E%C3%88%C2%BD%C3%9B5n%C2%A7%C3%83%C2%91%C3%A7y%7B%C2%BF%C2%A0i%C2%9E%C3%A7%C3%BB%00FvA%C3%AB%2FA%C3%AD%C2%A2%2C%C3%8B%03%C3%9C%5D%13%07A%C2%B0%C3%82~%C2%97%C2%BD%00d%1B%3D%C3%A7%C3%B2%0EM%C3%80%1D%C3%9D%60%C3%96%C3%BF%03L%C2%8B%C2%A28%C2%89%C2%A2%C3%88%14i%C3%97u%C2%8F%C2%990%C3%81%C3%9F%C3%BAs%07(%C2%8D%C2%A1%C2%A1%7C%C3%9F%7FDo%C2%A1'%C2%A4O%7B'%C2%B0%C3%A05%1DuC%C2%83%C3%B8%0E%5D%C2%A5Q%2F%C2%A5%C2%B5N%C2%BCi%177%C2%94%3E%C3%90og%C2%8E0%C2%A9PJ%C3%8D%0CG%C3%B3%C2%A4%C2%87%24vL%C2%BE%C2%A7%C2%BE%C3%A6%7C%C3%82S%7F%C3%BA%01Li_V%C2%B1%C3%9E%C3%AB%08%00%00%00%00IEND%C2%AEB%60%C2%82"; 
    
    var guide_on_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0E%00%00%00%0E%08%06%00%00%00%1FH-%C3%91%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C2%ABIDATx%01%C2%BD%C2%92%C3%9B%0D%C3%820%0CE%C2%AF%2B%06%C3%A8%08%1D%C2%A1%1B%C3%80%26%C2%8C%C3%80%0A%C2%AC%C3%902%01%C2%83%10%C3%84%06l%C3%90%C2%8E%C2%90%7FJ%C2%8C%C2%9D%C3%84%C2%A2j%11H%7C%C3%84%C2%92%C2%AD%1C%3B%C3%B2C6%C2%90%C2%A5w%C3%8F%C2%A1%C2%BB%3C%C2%8E%C3%86'7%5DU%C2%8D5%C3%96%C2%BBi0%C2%AE%C3%B0%C2%A7%C2%90VJOn%C3%84xq%C3%B9%C3%8C%C2%B5%18Q%1A%3F%C3%B1%C2%869%C2%9Cc%06%C2%A2%03%01%C3%B7%C3%80%C3%A1%C2%96%C2%B8%C3%9Ak%22%C2%8BWD%5B%06Zc%C2%94%C2%9F%C3%91%C2%B2J%1B%3B%C3%AD%C2%9F%C3%80c%C3%A66~%C2%90%C3%B6%13S%C2%A3s%1A%C3%8F%2Bz%C3%BC%C2%96z%C3%A5)7%C2%A3Uy%C2%AF%C2%83%C3%A7%C3%AB%C3%80z%1D%C3%9C%C3%85%C3%B8%C2%97%03X%C3%B2%C3%A2%20J%C3%8F%C3%B8%02%C3%A1%7F%C2%8D%C3%9F%C2%A9%24R!%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 
@@ -77,15 +77,15 @@ var palette = (panelGlobal instanceof Panel) ? panelGlobal : new Window("palette
    var view_button_fx_on_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0D%00%00%00%0E%08%06%00%00%00%C3%B4%7F%C2%96%C3%92%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01AIDATx%01%C2%8D%C2%92%C3%8BM%C3%83%40%10%C2%86g6N%C3%8E.%01%3AH%3A%C2%88%C2%95%02%C2%80%0ErEB%04W%10%C2%A7%02%C2%88%C2%8C%C3%841PA*%40%C3%AB%12H%05%C2%A4%C2%84%1C8%20%C3%AC%C3%9D%C2%9F%C2%99%0Dv%16%C3%84k%24%C3%8B%C3%A3%C2%99%C3%BD%C3%A6%C3%B1%C2%AF%C2%99%22%2B%C2%AD%C2%9B%01(%C3%84M%C3%9B%C2%98%C3%A3%C3%9Eq%C2%9E%C3%B16%3E%C2%97%C2%B4%C3%8E%C2%B5E%0A8%05%C3%88%C2%80%C3%AE%0F%10%C3%AD%C3%A8%C2%8BuP%C3%A2%C3%9C%18F%3A%C3%80%C3%A7%17%C2%93%C3%81%0D%C3%BDb%C2%A6u%C2%B8G'%C2%A1%C2%B2%C2%A1%C2%8A%C3%BE0%5E%C3%89X%C2%AF%C2%B2C%0Do%C2%89%C2%90%C3%B6%C2%B97%C2%8A%0F%C2%9CG%C3%BB%C3%9CY%1C%C2%85N%2Fp%C3%AB%1A%C3%AEY%00%0D%C2%A4%C3%AA%C3%87%C3%8F%C3%B2%C2%B1.%C3%B4%C2%A0%C2%884%C3%97%C3%AF7%C3%9FL%13b%2C%C3%A0i%C3%83%C3%8C%C2%AA%C3%9C%C3%82%C3%84%C3%A3%C2%81%C3%A7%24q%01%C2%A0%C2%AAj~6%C3%A9%17%C2%AC%C2%B9%5B%C3%9B%C2%AC%3Ch%C3%AA%C3%98%C2%8F%C3%B2l%C3%B0%C3%942%C2%A5%C2%AD%C3%87%00%C3%9B%C3%80%7F%00%C2%9D%10%C2%92%18%C3%8Ak%17%03%C3%BB%24%3A%C2%B9%C2%BDI%3AEM%C2%B8%1F%C3%82PZ~%02ti%07c%C2%89%C3%B7%C3%A3%1A%C3%9F%5CuPB%C3%8D0T%0261%C2%A0j2%C3%B1%C3%B62K2)X%C3%A9%C3%8E%1D%04%C2%8F%00%19%C3%83U%1B%C2%AC%C2%BD%5C4%C3%BCC%C3%83%C3%A6%2C%C3%A4%C3%98%C3%A7%C2%B2%C3%93%C2%B2%C2%95%C2%9CK%C3%9B%C2%AC%01%3A%C3%BD%C3%AE%1F%C3%BB%C3%89%C3%8CA%C2%84%C3%BF%01j%C3%AF%C2%83%C2%BD%C2%BA%C2%93!%C3%A8%C2%BFM%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 
 //Setting Panel Icons
-   var create_group_layers_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%14%00%00%00%14%08%06%00%00%00%C2%8D%C2%89%1D%0D%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%91IDATx%01%C3%95TQ%11%C3%820%0CM9%C3%BE%C2%99%C2%84%C2%A2%C2%80Z%C3%80%01%12%C2%90%C2%80%C2%84I%C2%98%04%2C%C2%A0%00%09%C3%A0%C2%809X%1D%C2%94%17%C2%96%C3%9D%C2%B5%C3%90%1B%C3%8B%C3%A8%07%7Bwo%C3%99r%C2%B74yiB%C3%B4%C3%AF0%C3%BC%08!8%C2%98%03%C3%A9%C3%A0%C3%81%C2%B31%C3%86'%5E%04%C2%AB%C3%80G%C2%98%C2%87%C3%AB%C3%BB)%2B%C2%B0%02-%C3%8D%C2%83%C3%8D%05%2C%C2%8Au%C3%B4~%17NE%5Es%C3%A8%60E%C2%8F%C2%9A%14%10%C3%9Do4%C2%92%C2%A1%16%7B%C3%AA%C3%B5%2F%13%10%C3%97%C2%A5%C3%8D%C3%B9%7Fj%C2%8A%C2%94%7D*%16%C2%90%C3%BAk%C2%B3%C2%8B%1D%C3%AA%C2%92%C2%B9%C2%890%C3%87%C3%88%C3%A5%C2%A4%C2%A1%1E24%C3%AA.s%C2%89%23%C2%93S%C2%A9K~eA%C2%B4%152.%C3%837%C3%8Fu%5C%C3%B2F%C3%8A%C2%99%12%C2%B4%C2%95l%C3%99tI%C3%87e9tA%07'%C3%BF%C3%96%6021%C3%83%C3%BA%C2%B2%C2%94%0A%C3%BD%0D%C3%8D%C3%87%C3%9AZ%0C%C2%9E%C3%A4%0B%C3%A0%C3%9E0t%C3%AA%C2%B6%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+   var create_group_layers_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0F%00%00%00%0C%08%06%00%00%00%C2%BDB%C3%A7%C3%A4%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%91IDATx%01%C2%A5R%C3%8B%0D%C2%82%40%10e7%7B%C3%A3B%09%C3%98%C2%81V%60%0Br%C3%A6%20%5B%C2%81vB%C2%AC%60%C2%91%C3%8F%C3%9D%12%C2%A4%03%3B%C2%90%128p%22%C3%80%C3%BA%C3%86%C2%B0%07%12%C3%9D%C2%AC2%C3%89%243%C2%9Byyo%C3%A6-%C3%8B%C3%B3%3Ce%C2%8C%C2%9D%3D%C2%87%C3%80%5C%C3%A3%C3%BB%C3%BE.%C2%8A%C2%A2%C2%96z%C3%AE%0A%C2%A4%C3%90Z%C2%87%5D%C3%97mM%C3%8F%C2%BD%15!f9%19%C2%B2%C3%B6%C3%AC%C2%AC%012%C3%BD%04%C2%AE%C3%A38%C3%8El%60%C2%A5T%20%C2%84%08%C2%87ah%16%60%C2%97%C2%90R%C3%92%C2%91%16%C3%B7%C3%B9i%C3%A7%C2%A2(%0EeY%3E%C3%BF%02s%C3%8Ei%C3%AF%C3%90%C3%B4N%C2%B2%C3%B1%17%12%C3%9CEM%C3%93d%14h%C3%B2%C3%9C%C2%89y%1C%C3%87%3BX%25%C3%8A%C3%AB%C2%AC%40B%C2%81%7C3%C2%A3%C3%98WU%C3%B5%15%0C%C3%86%C2%96%C3%9C%C2%A0%19%C3%94G%C3%A3%0C%C2%81%2F%00%C2%9F%C2%90%C2%89%C2%8D%1DVm%C3%BA%C2%BE%C2%BF%C2%A1%7C%C2%98%C2%B7%17%C2%A5%0CY%C2%92c%18u%1D%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 
-   var save_my_presets_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%14%00%00%00%14%08%06%00%00%00%C2%8D%C2%89%1D%0D%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C2%B4IDATx%01%C3%AD%C2%92%C3%91%0D%C3%820%0CD%1D%C3%84%00%C2%8C%C2%90%11%60%C2%84n%02%1B0B7%C2%81%11%C3%98%C2%A0%2Bt%03%C3%98%C2%80n%10%7C%C3%82%16%11J%1DW%C3%AAO%C2%AB%3E%C3%89%C2%8A%C3%AD%C2%B8%C3%97k%13%C2%A2U%C2%90R%C2%BA%22h.X%C3%AC%C2%89%C3%B0%C3%8C%C3%AEhf6%C3%81%1F%7C%08%11%C3%A1%C3%AD%2B%C3%BB%11%C2%B1%03%2F%C2%9D%C3%A4M.%26%C3%BD%C2%81%C3%A3D%16%3C%C3%9C%C2%A6%2FQ%C3%AA%C2%B3%C3%94%C2%B82o%09%C3%8D%C2%8F%C2%99%5B%C3%90%C2%9A%0EA%08%C3%A1%C3%8E%C2%83Ho%7F%5B%0D%C3%AF%C3%B5c%C3%8F%C2%99%C2%87%02Q%5E.R%0E51%C3%93a%C3%81i_%13s%09%C2%AA(9)%09Fq%C3%A4!Z%C2%82%C3%BA9%1DM%C3%A7%C2%A5I%C3%88%C2%BB%C2%B8*%C2%A5%C2%B7V%C3%80%C2%BF%7D%C3%90b%C3%B8%00O%C3%8EsN%3F%C3%BA%C2%9D%C2%9F%00%00%00%00IEND%C2%AEB%60%C2%82";
+   var save_my_presets_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0E%00%00%00%0E%08%06%00%00%00%1FH-%C3%91%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C2%8AIDATx%01%C3%95%C2%90%C3%91%0D%C2%80%20%0CD%C2%8Bq%00G%60%0470l%C3%86%26%C2%BA%C2%89%C2%A3%C3%A8%06%C2%BA%01%C3%9E%C2%99%C2%9A%20%C2%8AA%C3%BF%C2%BC%C3%A4%C2%A0%C2%A1%7D%C2%A5%C2%A9HF!%C2%84%C2%91%C3%8E%C3%A5%2B%C3%B9%C2%A8%C2%BF%C2%82XF%03%C2%B7i%11%C3%9F%C2%98%C3%8B%C2%82P%0F%C2%8F1%C2%AC1%C2%B7%3B%C2%A4%C3%9D(%C2%AF%C2%B1%C2%85'x%C3%91%3B%C2%8E%C2%AD%C3%96x%02%C2%A7%1F%C2%8D13.%07%C2%AF%C2%B0U3v%C2%9A%C3%8B%C2%8E%1A%C3%83%C2%B3%C3%BA%02Q%C2%B5%C3%9C%C2%88%C2%85%C2%98%C3%86E%C2%8D%C2%A4%08%7C%02R%C2%B0%3B%16T%C2%A0n%3F%C2%8F-%C2%BD%C2%94%C3%9F%00C%C3%9A%C2%92%C2%B0%C3%A1%C3%90gS%00%00%00%00IEND%C2%AEB%60%C2%82";
 
-   var load_my_presets_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%14%00%00%00%14%08%06%00%00%00%C2%8D%C2%89%1D%0D%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%ABIDATx%01%C2%B5%C2%94%0D%11%C3%820%0C%C2%85%C2%B3%1D%02%C2%900%07X%18%12P%C3%80p%C2%80%03%C2%86%02%24%C3%909%C2%98%03%C2%90%C2%80%C2%84J%C2%98%C2%83%C3%B2r%04%C2%AE%C3%B4%C3%9A.%C3%A5%C3%A7%C3%9D%C3%A5%C3%9A%C2%A5%C3%A9%C2%B7%24%5BK%C3%B4cU%C2%A1%C3%839%C3%97bh%12%C3%B1SUU%23i%05X%C3%A7%C3%A6u%C3%881%16%C3%81s%2B%C3%A3.%12%C2%BB%C2%84%C2%9D%60%3D%C2%A0%C2%84L%C2%8F%C2%A4%C3%88%C3%90p%0A%C2%89%C2%B5F%C2%93iM%C2%9F%C2%AB%C2%8FA%C2%BF%01%3E%C2%A1%7B%C3%9F%C2%B1%20%C2%BD%26X%C3%987%C3%8Ep%C2%95%C3%9C%C2%91%C3%ABa%22%C2%9Eu%C3%B6%7D%C2%AA%C2%92%C2%B1i%C3%8B%C2%A6%C2%89%C2%9D-Y%40F%C3%A6%C3%BC%C2%BB%0C%C2%B9%C3%B8Z%0B%13%C2%99%C2%B9L%C3%AB%0C%C2%AC%11%C2%98%C2%A5%C3%87%07%C2%99dnd-%C2%AAd%C3%89(%C3%8Db%C3%A3%06%C3%93%1B%C3%AC%22%C3%AE5%C2%AC%C3%A5%C2%B5b%C2%A0%40G%C3%89%C3%B6%C3%B5%12zoA%19%C3%90%C2%93U%C3%86%C3%85%C2%81%7C%C3%AB%04%C2%AE!%C3%A1%C3%8F%C2%8B%C2%8F%C2%91%2BW%C3%A73J%2F%C3%98P%16%7D%C2%BD%C3%92%3Fu%077%02%C3%96%15%C2%8A%C2%8A%C2%86%7B%00%00%00%00IEND%C2%AEB%60%C2%82";
+   var load_my_presets_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0C%00%00%00%0F%08%06%00%00%00%C3%90%C3%A1.I%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C2%B0IDATx%01%C2%8D%C2%92%C2%81%11%C3%82%20%0CEC%C3%8F%01%C3%9C%40Gp%03%C3%9B%09%C3%AA%06%C2%B2%C2%89lR7%C2%B1n%C2%A0%13%C3%88%08n%10%C3%BFW%C3%ACQ%0E8%C3%BE%C3%9D%3BJ%C2%92OH%5BQ%C3%95%C2%8B%C2%96%C3%B5%02%7B%C2%89d%18%C3%85%3A%C2%83%C2%BB%C2%AC%C2%B5%03%16x0%18c%C3%BC7%1ANrI1%C3%A3%7D%C2%AES'mb%C3%B1%C2%8D%C2%A6V%C3%83b%C3%9AT%0A%1E%60%C2%88%C3%B6%16%C2%9Ck%06%C3%81%C2%A0%C3%B3%C3%BF%C2%993q%C3%8D%5E%09%C3%89I~w%C3%9E%C2%A6%C2%B9%C2%AEPl%C3%81%01LUCTL%C2%BD%C3%81)%C3%84%16%C2%A53%C3%B0%C3%A3%3D%C3%81%18%C3%AD%7D%C3%91%C2%80!%C2%AF%C2%A1%C3%93%18%C3%B6.9PJo%C2%89%5D4%C2%97%C2%A8%C3%BDK%C2%A9%C2%8E%C2%A0g%7B%C2%A7%C3%ADr%1F%C2%A7%C3%86%C2%A2m%0C%0F%C3%81%C2%AB%00%00%00%00IEND%C2%AEB%60%C2%82";
 
-   var clear_all_panels_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%14%00%00%00%12%08%06%00%00%00%5B%C3%90%C3%BE%10%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%0FIDATx%01%C2%9DT%0B%11%C2%830%0C-w%13%C2%80%C2%84J%40%02%12%C2%90%C2%80%C2%83%C3%A1%00%24%C3%A0%60H%C2%98%03%C3%A6%00%09%C3%85%018%C3%88%12H%C2%8F%C3%90%C3%8F(%7Bw%C2%B9%1D%C3%8B%7B%2FM%C2%9A%C2%ABR%3F%00%009F%C2%8B1b%2C%C2%B0c%C3%A1%C3%AF%1AC%C2%ABT%20%C3%B9)L%C2%AC%C2%91%C2%813%C3%A8%C2%BBN1k%C2%85%C2%A8%C3%87(%C2%9D%7C%C2%891%08N%C2%9BbF%C3%95%C2%8B%C2%8B%C3%82%C2%95%C3%A8%C2%A2%0A%11%C2%B4%C2%A8%C2%AAU%02%C3%98%C3%94%C2%8E%24w%C2%93%2FNv%C3%AA%06D%C3%BB%C2%8D%C2%9B0%C2%B1%C3%93%C3%B1%C2%8DW%C2%91%5C%C3%89%C2%BA%C3%91%15%10%C2%A6%C2%80%40%C2%8BY%19%C2%AF%C2%B5%C2%9D%C2%B3%C2%B5%C3%BD%C3%A0%1B%C3%94%18%C2%96%C2%94%C2%8BU%C3%B8dY6%C3%A3o-%C3%B2%C3%84%25%C3%8D%C3%9B%C3%B1%C2%9C%C2%B7%1CW7%C3%A0c%08%C2%B4d%C2%87%C2%AFc'%C2%94-%C2%99%C2%90%C2%99%10%144%C3%B4%C2%88Y%11%C2%9A%C2%A15%C3%B5%C3%8C%C2%AE%20%C2%B6%C3%83%C2%BBe%C2%ADn%02%C2%8E%C3%9D%5D%C3%BE%C3%91%C2%BBf%C2%85%18UwE%C2%A6%C3%8A%23%04%5E%158%5E%C2%A1%25%C3%89%C2%8CE%1D%C2%9C1q%01%C3%A3%C3%BC%C3%9F%C2%A8T%C3%B0)%07%08%3F%5B%7Dhf%C3%99%0DsZl%C2%8A%15%C2%97%7D%C2%8D%C3%B1%C2%BE%C2%A00%0E%C2%98%5C%C3%BF%05*%00%00%00%00IEND%C2%AEB%60%C2%82";
+   var clear_all_panels_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%10%00%00%00%0E%08%06%00%00%00%26%2F%C2%9C%C2%8A%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C2%BDIDATx%01%C2%9DRQ%11%C3%83%20%0C%C3%8DM%01%12%C2%90P%09H%C2%A8%04%24%C3%94%C3%81%C3%A6%608%C3%A8%C2%9CT%02%12%C2%90%C3%909%C3%88%C3%82%1A%C3%AE%C3%92%5CC%7B%7Dw%C3%AF%C3%A7%C3%B1%C3%B2%12%20%00%07%40DG%7C%12%17%C3%A2%C2%8A%1B2q%26z%C3%A8%C2%81%0C%03%C2%B1%C2%A8%C2%A2%C3%84a%0D%C2%93U%C3%AC%C2%B9c%0D%08%C3%86y6C%C2%B8%C2%B0%C2%9C%C2%8D)%C2%AE%C3%A6%C2%A4%1889%C3%82%09x%C2%92%C2%8A%C2%97%14%13%C2%8BN%C2%99c5%1E%C3%A8u%C2%8A%C2%A2%C2%85%C2%ACL%C2%A3x%C2%B8%C2%A4%C3%8E%C3%BE%0D%1F%C2%9C%C2%8E%C2%A4%05%C3%A2%C2%A0F%C3%BB%C3%82%15%C2%B4%10%C2%A3S%C2%BD%C3%82d%5C!%C3%AB%C2%90%C3%8F%C3%85%C2%86%C3%AD%11g%C2%B8%03%C2%B1%0B%C2%BE%C3%97a4%C3%B4%C3%85%5C%24al%C2%A6%C2%B6%C3%8Ao%C2%A1%C2%AD%C3%9Db%11%12q%C2%BF%C3%BF%C2%85%C2%BF%C3%8EK%C3%9F%0FIU%60h%C3%A6%0F~%17%00%00%00%00IEND%C2%AEB%60%C2%82";
 
-   var updates_check_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%14%00%00%00%14%08%06%00%00%00%C2%8D%C2%89%1D%0D%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%13IDATx%01%C3%95SQ%11%C3%820%0CM9%04%20!%12%26%01%09%C2%A0%C2%80%C3%A1%00%07%14%05%C3%A0%60s%00%0E%C2%90%00%0E%3A%14%C2%80%C2%83%C2%92%C2%B27.W%C2%BA%C2%96Oxw%C3%AF%C2%B2k_%C3%9E%C3%924%25%C3%BAu%C2%98%C2%92%C3%80%7B_I%60%C3%A1%23%C3%90%18sMhX%C3%96%C2%BB%C2%9C%C3%89L%C2%B8%15%C3%9E%C3%BD'%C2%9C%C2%B0V%C3%9A%C2%A0%C2%B393F%C2%92%C2%87%C3%A1!%18%C2%80%C2%AD%C3%9A%C2%BB%08%C3%B7%C3%B8%C2%B6%C2%B9%C3%8A%5CV%C3%94%C3%ABlT%C3%B5%5B%3B%C2%89%C2%B4%7B%C3%AA%C3%BB%C2%B5%C2%93%C2%9EXe%C2%B0%08%C2%95%2B%C2%9D%C2%A3%12P%C3%9D%C2%ABG%C2%89%C2%BDw%C3%9F%C3%82%25%C3%B9O%C3%98A%3BUys%C3%84%1D%C3%A5%C3%81%C3%82u%C2%B4vM%19V%C2%88%1De%20%C2%AD8%C3%A5%C3%B6'%C3%B4%1D%C3%82%0C%C2%AE%C2%A2%3E%0E%C3%87%0F%C3%AD%C3%98%C2%A4%0C%3BDN%18.%C2%857%C2%A1%C3%83%C2%A8%C2%B0%C3%922%C2%A5N%C2%A5.%C3%A5L%23%C3%80%C2%8C%C2%9E%07C%C2%89%0Drx%2C%C2%A1%C2%85%60E%05%60%C2%94%02%1A*T%C3%A0%C3%B0B%C3%AA%C2%82%C3%99%1DZ%C2%A6%C3%82%C2%9F%C3%B5%C3%93%3B%C3%A2%C3%89UX%C2%AFqd%C3%BF%C2%95Yd%C3%9A%C3%BAq4cf%C2%A6dL%C3%BD%7C%C3%AA%19%3D%C3%89%2C%3E%C3%A8o%C3%B1%04d%C3%8B~)%C3%9D%C3%BC%C3%843%00%00%00%00IEND%C2%AEB%60%C2%82";
+   var updates_check_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0D%00%00%00%0D%08%06%00%00%00r%C3%AB%C3%A4%7C%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%5BIDATx%01%7D%C2%92%C3%91Q%C3%82%40%10%C2%86%C3%BF%C2%BD%04%C2%9E)%01%2B0%25%24%C3%92%00V%00%C2%AF%3E%60%C2%A4%02%C2%A0%02%40t%7C%C3%95%0E%C3%92%00%13%C2%A9%C3%80X%C2%81%C2%B1%C2%83%3C%C2%9B%C3%9C%C2%AD%C2%BB%C3%889a%06%C3%98%C2%99%C3%8C%C3%A4%C3%AE%C3%BE%C3%AFn%C3%AF%C3%BF%C2%8F%C3%90%C2%AA%C2%97%C2%9C%C3%BB%16.eF%C3%8C%40%C2%8F%C3%80%25%11%15%01%C3%8C%C3%BA.%C2%A1R5%C2%9B%C3%9C%C3%8E%C3%88%03%3A%60%C3%A6%C2%B9%C3%BCV%C3%84x%C2%97%C2%85%C2%8A%09%7D%C2%81c%5D%17X%C3%97%C2%A0%1Aj%03%C3%B2%C2%AD%C2%9D%09%C3%A7%C3%93%C2%84*%C2%BF%C3%99RN7%5C%C2%8B%C3%90%C2%8C%C3%BC%1CiK5%C3%9B%2F%01%16%C3%A9%C2%A03%C3%B7m6%C2%B0%C3%91%24%093%1D%3F%C3%A5%3Crl_%3Dd%2C%C3%ACL%C3%98%C3%92%03Z%0D%C2%9A%C2%BE%C3%9Cky%0A%C3%90%0A%1Dc%08%C3%A2%0Cg*%00v%01%05WG%C2%90%7C%3Dv%C3%BC%7D%0A%C2%90%C3%BB%C3%B4%C2%BCkZ%C3%8F%C3%B9Oda%22%C2%A3n)%C3%98%167%08%0B%C2%86%C3%9B%05%C3%AC%3E%1E%C2%B7%C3%8D%C3%B8%7F%C3%9E%C3%91%10%C3%92%C2%B6%11%C3%BB%0A%C2%B1s%C3%94%C2%86%C3%94%C2%BD%C3%B4%C2%A6%3B%C2%B6do%C3%85%C3%AB%C2%99%C2%9E%C2%B8w%C2%8D%C3%84ABF%C2%9B%C2%BC%C2%8E%C2%99)%07%C2%BB%C3%A9%C3%BD%C2%A0%C2%BB%C3%82%C2%99%C2%92X%24t%5E%11qb%26IG%C2%82to%20%C2%B3%C3%94%C2%BC.%01%C2%9A%C3%A3%C2%9F%C3%BEP%C3%ABm-%C2%BBP%C2%AA%C3%B6K%C3%8F%C2%99%03%7F%1A%C3%90%C2%B5%08%23%7D%15%0AH%2C%0F%C3%BB6%C2%8Fw%C2%ACc8J%C3%A5%C3%B9%C3%84%07s*%C2%BD%C2%B3D%C2%B2%C3%90%13%C2%BC%C3%AE%17%C3%A5-%C3%80%0B%C2%A9%C3%A0Y%C2%B6%00%00%00%00IEND%C2%AEB%60%C2%82";
 
 // TPANEL1
 var tpanel1 = palette.add("tabbedpanel", undefined, undefined, {name: "tpanel1"}); 
@@ -101,7 +101,7 @@ var tab_layers = tpanel1.add("tab", undefined, undefined, {name: "tab_layers"});
     tab_layers.spacing = 10; 
     tab_layers.margins = 10; 
 
- var layer_group_default = tab_layers.add("panel", undefined, undefined, {name: "layer_group_default"});     
+    
 
 // TAB_LAYERS
 var create_group_layers_button = tab_layers.add("iconbutton", undefined, File.decode(create_group_layers_button_imgString), {name: "create_group_layers_button", style: "toolbutton"}); 
@@ -109,8 +109,9 @@ var create_group_layers_button = tab_layers.add("iconbutton", undefined, File.de
     create_group_layers_button.text = "Create a New Layer Group"; 
     create_group_layers_button.preferredSize.width = 40; 
     create_group_layers_button.preferredSize.height = 35; 
-    create_group_layers_button.alignment = ["fill","top"]; 
-
+    create_group_layers_button.alignment = ["fill","top"];
+     
+var layer_group_default = tab_layers.add("panel", undefined, undefined, {name: "layer_group_default"}); 
 
 // TAB_EFFECTS
 var tab_effects = tpanel1.add("tab", undefined, undefined, {name: "tab_effects"}); 
@@ -164,13 +165,13 @@ var panel_import_export = tab_settings.add("panel", undefined, undefined, {name:
 var save_my_presets_button = panel_import_export.add("iconbutton", undefined, File.decode(save_my_presets_button_imgString), {name: "save_my_presets_button", style: "toolbutton"}); 
     save_my_presets_button.helpTip = "Save current Layer and Effect Groups to a .pgm file"; 
     save_my_presets_button.text = "Save My Preset"; 
-    save_my_presets_button.preferredSize.width = 160; 
+    save_my_presets_button.preferredSize.width = 150; 
     save_my_presets_button.preferredSize.height = 35; 
 
 var load_my_presets_button = panel_import_export.add("iconbutton", undefined, File.decode(load_my_presets_button_imgString), {name: "load_my_presets_button", style: "toolbutton"}); 
     load_my_presets_button.helpTip = "Load Layer and Effect Groups from a .pgm file"; 
     load_my_presets_button.text = "Load My Preset"; 
-    load_my_presets_button.preferredSize.width = 168; 
+    load_my_presets_button.preferredSize.width = 150; 
     load_my_presets_button.preferredSize.height = 35; 
     
 // PANEL_SETTINGS
@@ -185,16 +186,16 @@ var panel_settings = tab_settings.add("panel", undefined, undefined, {name: "pan
 var clear_all_panels_button = panel_settings.add("iconbutton", undefined, File.decode(clear_all_panels_button_imgString), {name: "clear_all_panels_button", style: "toolbutton"}); 
     clear_all_panels_button.helpTip = "Clear All Panels"; 
     clear_all_panels_button.text = "Clear All Panels"; 
-    clear_all_panels_button.preferredSize.width = 157; 
+    clear_all_panels_button.preferredSize.width = 150; 
     clear_all_panels_button.preferredSize.height = 35; 
    
 // TAB_SETTINGS
-var about_text_group = tab_settings.add('edittext {size: [395,240], properties: {name: "about_text_group", readonly: true, multiline: true, scrollable: true}}'); 
+var about_text_group = tab_settings.add('edittext {size: [350,240], properties: {name: "about_text_group", readonly: true, multiline: true, scrollable: true}}'); 
     about_text_group.text = "\rYO Group Matcher\r\rDownload Updates:\rhttps://github.com/yo-romlogunov/YO-Group-Matcher/releases\r\rManual:\rhttps://goo.su/5jGwMYu\r\rThis script allows you to manage Layer Groups \rand Effect Groups within your compositions. \rYou can add, edit, and delete groups, toggle visibility, \rsolo groups, and hide layers using the Shy feature.\r\rFeatures:\r- Create and manage Layer Groups and Effect Groups\r- Toggle visibility of entire groups\r- Solo specific Layer Groups\r- Hide layers in the timeline without disabling them\r\rFor more information, visit @romlogunov - t.me/vtb_blog\r"; 
 
 var updates_check_button = tab_settings.add("iconbutton", undefined, File.decode(updates_check_button_imgString), {name: "updates_check_button", style: "toolbutton"}); 
     updates_check_button.helpTip = "Check for Updates"; 
-    updates_check_button.text = "Check For Updates - You Version 2.3.5"; 
+    updates_check_button.text = "Check For Updates - You Version 2.3.6"; 
     updates_check_button.preferredSize.width = 275; 
     updates_check_button.preferredSize.height = 35; 
 
@@ -202,7 +203,7 @@ var divider4 = tab_settings.add("panel", undefined, undefined, {name: "divider4"
     divider4.alignment = "fill"; 
 
 var status_updates_text = tab_settings.add("statictext", undefined, undefined, {name: "status_updates_text"}); 
-    status_updates_text.text = "Status Updates/Press Button"; 
+    status_updates_text.text = "Status Updates / Press Button"; 
     status_updates_text.preferredSize.height = 24; 
     status_updates_text.justify = "center"; 
     status_updates_text.alignment = ["fill","top"]; 
@@ -213,8 +214,8 @@ palette.onResizing = palette.onResize = function () { this.layout.resize(); }
 
 if ( palette instanceof Window ) palette.show();
 
-// FUNCTIONS
 
+// FUNCTIONS
 
 var labelColorIcons = {
     0: none_color_label_button_imgString,
@@ -319,7 +320,7 @@ var layerGroups = [];
 var effectGroups = [];
 
 // Define current version
-var currentVersion = "2.3.5"; // Adjust as needed
+var currentVersion = "2.3.6"; // Adjust as needed
 
 // Function to compare versions and check for updates
 function compareVersions(v1, v2) {
@@ -547,8 +548,8 @@ function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColo
     // Создаём кнопку для Solo
     var solo_button = groupPanel.add("iconbutton", undefined, undefined, {name: "solo_button_" + prefix, style: "toolbutton"});
     solo_button.helpTip = "Solo this group: show only layers in this group and hide all others";
-    solo_button.preferredSize.width = 30;
-    solo_button.preferredSize.height = 30;
+    solo_button.preferredSize.width = 28;
+    solo_button.preferredSize.height = 28;
 
     // Инициализируем состояние Solo
     var soloState = false;
@@ -602,8 +603,8 @@ function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColo
     // Создаём кнопку для Hide
     var hide_button = groupPanel.add("iconbutton", undefined, undefined, {name: "hide_button_" + prefix, style: "toolbutton"});
     hide_button.helpTip = "Toggle hide for layers in this group without disabling them";
-    hide_button.preferredSize.width = 30;
-    hide_button.preferredSize.height = 30;
+    hide_button.preferredSize.width = 28;
+    hide_button.preferredSize.height = 28;
 
     // Инициализируем состояние Hide
     var hideState = false;
@@ -650,19 +651,19 @@ function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColo
 
     var add_layer_button = groupPanel.add("iconbutton", undefined, File.decode(add_layer_button_imgString), {name: "add_layer_button_" + prefix, style: "toolbutton"});
     add_layer_button.helpTip = "Add selected layers to this group across all compositions";
-    add_layer_button.text = "Add Layer";
-    add_layer_button.preferredSize.width = 105;
-    add_layer_button.preferredSize.height = 35;
+    add_layer_button.text = "";
+    add_layer_button.preferredSize.width = 33;
+    add_layer_button.preferredSize.height = 33;
 
     var edit_group_layers_button = groupPanel.add("iconbutton", undefined, File.decode(edit_group_layers_button_imgString), {name: "edit_group_layers_button_" + prefix, style: "toolbutton"});
     edit_group_layers_button.helpTip = "Rename and settings this Group";
-    edit_group_layers_button.preferredSize.width = 35;
-    edit_group_layers_button.preferredSize.height = 35;
+    edit_group_layers_button.preferredSize.width = 33;
+    edit_group_layers_button.preferredSize.height = 33;
 
     var delete_group_layers_button = groupPanel.add("iconbutton", undefined, File.decode(delete_group_layers_button_imgString), {name: "delete_group_layers_button_" + prefix, style: "toolbutton"});
     delete_group_layers_button.helpTip = "Delete this Layer Group";
-    delete_group_layers_button.preferredSize.width = 35;
-    delete_group_layers_button.preferredSize.height = 35;
+    delete_group_layers_button.preferredSize.width = 33;
+    delete_group_layers_button.preferredSize.height = 33;
 
     // Сохраняем данные группы
     var groupData = {
@@ -1285,8 +1286,8 @@ function createEffectGroupUI(groupName, prefix) {
     // Создаём кнопку View вместо чекбокса
     var view_button = groupPanel.add("iconbutton", undefined, undefined, {name: "view_button_" + prefix, style: "toolbutton"});
     view_button.helpTip = "Toggle visibility of effects in this group across all compositions";
-    view_button.preferredSize.width = 30;
-    view_button.preferredSize.height = 30;
+    view_button.preferredSize.width = 28;
+    view_button.preferredSize.height = 28;
 
     // Инициализируем состояние View
     var viewState = true; // Начальное состояние
@@ -1295,30 +1296,35 @@ function createEffectGroupUI(groupName, prefix) {
     // Создаём кнопку Solo вместо чекбокса
     var solo_button = groupPanel.add("iconbutton", undefined, undefined, {name: "solo_button_" + prefix, style: "toolbutton"});
     solo_button.helpTip = "Toggle solo mode for this effects group";
-    solo_button.preferredSize.width = 30;
-    solo_button.preferredSize.height = 30;
+    solo_button.preferredSize.width = 28;
+    solo_button.preferredSize.height = 28;
 
     // Инициализируем состояние Solo
     var soloState = false; // Начальное состояние
     setSoloButtonIconEffects(solo_button, soloState ? solo_on_button_imgString : solo_off_button_imgString);
 
+    var divider1 = groupPanel.add("panel", undefined, undefined, {name: "divider1"});
+    divider1.alignment = "fill";
+    divider1.graphics.backgroundColor = divider1.graphics.newBrush(divider1.graphics.BrushType.SOLID_COLOR, [0.5, 0.5, 0.5, 1]); // Серый цвет
+    divider1.preferredSize.height = 1;
+    
     var add_effect_button = groupPanel.add("iconbutton", undefined, File.decode(add_layer_button_imgString), {name: "add_effect_button_" + prefix, style: "toolbutton"});
     add_effect_button.helpTip = "Add selected effects to this group across all compositions";
     add_effect_button.text = "Add Effect";
-    add_effect_button.preferredSize.width = 120;
-    add_effect_button.preferredSize.height = 35;
+    add_effect_button.preferredSize.width = 130;
+    add_effect_button.preferredSize.height = 33;
 
     var edit_group_effects_button = groupPanel.add("iconbutton", undefined, File.decode(edit_group_layers_button_imgString), {name: "edit_group_effects_button_" + prefix, style: "toolbutton"});
     edit_group_effects_button.helpTip = "Rename and settings this Group";
     edit_group_effects_button.text = "";
-    edit_group_effects_button.preferredSize.width = 35;
-    edit_group_effects_button.preferredSize.height = 35;
+    edit_group_effects_button.preferredSize.width = 33;
+    edit_group_effects_button.preferredSize.height = 33;
 
     var delete_group_effects_button = groupPanel.add("iconbutton", undefined, File.decode(delete_group_layers_button_imgString), {name: "delete_group_effects_button_" + prefix, style: "toolbutton"});
     delete_group_effects_button.helpTip = "Delete this Effects Group";
     delete_group_effects_button.text = "";
-    delete_group_effects_button.preferredSize.width = 35;
-    delete_group_effects_button.preferredSize.height = 35;
+    delete_group_effects_button.preferredSize.width = 33;
+    delete_group_effects_button.preferredSize.height = 33;
 
     // Сохраняем данные группы
     var groupData = {
@@ -1931,6 +1937,8 @@ for (var i = 0; i < layerGroups.length; i++) {
     saveWindow.center();
     saveWindow.show();
 }
+
+//EXPORT AND IMPORT - CLEAN ALL PANELS
 
 function loadData() {
     var importWindow = new Window("dialog", "Load Preset and Settings Project");
