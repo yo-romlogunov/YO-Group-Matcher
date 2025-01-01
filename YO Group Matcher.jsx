@@ -2,7 +2,7 @@ var panelGlobal = this;
 
 // PALETTE
 var palette = (panelGlobal instanceof Panel) ? panelGlobal : new Window("palette", undefined, undefined, {maximizeButton: true, resizeable: true}); 
-    if ( !(panelGlobal instanceof Panel) ) palette.text = "YO Group Matcher"; 
+    if ( !(panelGlobal instanceof Panel) ) palette.text = "YO Group Matcher 2.4"; 
     palette.preferredSize.width = 395; 
     palette.preferredSize.height = 490; 
     palette.orientation = "row"; 
@@ -191,11 +191,11 @@ var clear_all_panels_button = panel_settings.add("iconbutton", undefined, File.d
    
 // TAB_SETTINGS
 var about_text_group = tab_settings.add('edittext {size: [350,240], properties: {name: "about_text_group", readonly: true, multiline: true, scrollable: true}}'); 
-    about_text_group.text = "\rYO Group Matcher\r\rDownload Updates:\rhttps://github.com/yo-romlogunov/YO-Group-Matcher/releases\r\rManual:\rhttps://goo.su/5jGwMYu\r\rThis script allows you to manage Layer Groups \rand Effect Groups within your compositions. \rYou can add, edit, and delete groups, toggle visibility, \rsolo groups, and hide layers using the Shy feature.\r\rFeatures:\r- Create and manage Layer Groups and Effect Groups\r- Toggle visibility of entire groups\r- Solo specific Layer Groups\r- Hide layers in the timeline without disabling them\r\rFor more information, visit @romlogunov - t.me/vtb_blog\r"; 
+    about_text_group.text = "\rYO Group Matcher\r\rDownload Updates:\rhttps://github.com/yo-romlogunov/YO-Group-Matcher/releases\r\rManual:\rhttps://goo.su/5jGwMYu\r\rThis script allows you to manage Layer Groups \rand Effect Groups within your compositions. \rYou can add, edit, and delete groups, toggle visibility, \rsolo groups, and hide layers using the Shy feature.\r\rFeatures:\r- Create and manage Layer Groups and Effect Groups\r- Toggle visibility of entire groups\r- Solo specific Layer Groups\r- Hide layers in the timeline without disabling them\r\rFor more information, visit @romlogunov - t.me/romlogunov_hub\r"; 
 
 var updates_check_button = tab_settings.add("iconbutton", undefined, File.decode(updates_check_button_imgString), {name: "updates_check_button", style: "toolbutton"}); 
     updates_check_button.helpTip = "Check for Updates"; 
-    updates_check_button.text = "Check For Updates - You Version 2.3.6"; 
+    updates_check_button.text = "Check For Updates - You Version 2.4"; 
     updates_check_button.preferredSize.width = 275; 
     updates_check_button.preferredSize.height = 35; 
 
