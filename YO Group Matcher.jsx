@@ -1,5 +1,5 @@
 // [A] ОБЪЯВЛЯЕМ ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
-var scriptVersion = "3.0.1";
+var scriptVersion = "3.1.0";
 
  // LAYER_GROUP Color Label
 
@@ -620,6 +620,38 @@ function getDefaultLabelForLayer(layer) {
     // 9) Ничего не подошло → даём запасной цвет (Green=9, например)
     return 9;
 }
+// (4) unlinkSelectedEffectsFromGroup
+function unlinkSelectedEffectsFromGroup() {
+    var layers = getSelectedLayersInActiveComp();
+    if (!layers) return;
+
+    app.beginUndoGroup("Unlink Effects from Groups");
+
+    for (var i = 0; i < layers.length; i++) {
+        var layer = layers[i];
+        var selectedProps = layer.selectedProperties;
+        if (!selectedProps || selectedProps.length === 0) continue;
+
+        for (var j = 0; j < selectedProps.length; j++) {
+            var prop = selectedProps[j];
+            // Проверяем, действительно ли это эффект:
+            if (
+                prop.matchName !== "ADBE Effect Parade" &&
+                prop.parentProperty &&
+                prop.parentProperty.matchName === "ADBE Effect Parade"
+            ) {
+                var newName = prop.name.replace(/\[.*?\]\s*/g, "");
+                prop.name = newName;
+            }
+        }
+    }
+    app.endUndoGroup();
+}
+
+// (5) Обработчик кнопки Unlink
+unlink_effects_button.onClick = function() {
+    unlinkSelectedEffectsFromGroup();
+};
 
 // (6) Пример обработки "Create Effects Group"
 create_group_effects_button.onClick = function() {
@@ -2635,7 +2667,62 @@ export_ffx.enabled = false;
 // === КОНЕЦ ПОЛНОГО ПРИМЕРА ===
 //
 
-function createEffectGroupUI(groupName, prefix) {
+
+
+
+
+
+
+
+
+/***********************************************************************************
+ * (1) Доп. функция: сканируем проект и возвращаем массив всех найденных эффектов +
+ * пункт "None" в начале для "не выбирать эффект".
+ ***********************************************************************************/
+function getAllUniqueEffectsInProject_WithNone() {
+    // Ваш метод, который собирает эффекты:
+    // (Если у вас уже есть getAllUniqueEffectsInProject(), можно переименовать или изменить.)
+    var effectNamesSet = {};
+    var comps = getAllCompositions();
+    for (var c = 0; c < comps.length; c++) {
+        var comp = comps[c];
+        for (var l = 1; l <= comp.numLayers; l++) {
+            var layer = comp.layer(l);
+            var fx = layer.property("Effects");
+            if (!fx) continue;
+            for (var e = 1; e <= fx.numProperties; e++) {
+                var eff = fx.property(e);
+                // Убираем префикс [XXX], если он есть, чтобы получить "чистое" имя эффекта
+                var baseName = eff.name.replace(/^\[[^\]]+\]\s*/, "");
+                effectNamesSet[baseName] = true;
+            }
+        }
+    }
+
+    // Превращаем "множество" (объект) в массив и сортируем
+    var resultArray = [];
+    for (var nm in effectNamesSet) {
+        if (effectNamesSet.hasOwnProperty(nm)) {
+            resultArray.push(nm);
+        }
+    }
+    resultArray.sort();
+
+    // Добавляем пункт "None" в начало
+    resultArray.unshift("None");
+    return resultArray;
+}
+
+
+/***********************************************************************************
+ * (2) Главная функция создания панели группы эффектов (createEffectGroupUI).
+ *     Принимает:
+ *       groupName  (например, "Color Correction")
+ *       prefix     (например, "CLR1")
+ *       effectName (например, "Curves" или "" если None)
+ ***********************************************************************************/
+function createEffectGroupUI(groupName, prefix, effectName) {
+    // Создаём панель внутри tab_effects
     var groupPanel = tab_effects.add("panel", undefined, undefined, {name: "effect_group_" + prefix});
     groupPanel.text = groupName + " [" + prefix + "]";
     groupPanel.orientation = "row";
@@ -2644,160 +2731,164 @@ function createEffectGroupUI(groupName, prefix) {
     groupPanel.margins = [5, 15, 5, 10];
     groupPanel.alignment = ["fill", "top"];
 
-    // Создаём кнопку View вместо чекбокса
+    // Кнопка View
     var view_button = groupPanel.add("iconbutton", undefined, undefined, {name: "view_button_" + prefix, style: "toolbutton"});
     view_button.helpTip = "Toggle visibility of effects in this group across all compositions";
     view_button.preferredSize.width = 28;
     view_button.preferredSize.height = 28;
 
-    // Инициализируем состояние View
-    var viewState = true; // Начальное состояние
-    setViewButtonIconEffects(view_button, viewState ? view_button_fx_on_imgString : view_button_fx_off_imgString);
+    // Начальное состояние "view on"
+    var viewState = true;
+    setViewButtonIconEffects(view_button, view_button_fx_on_imgString);
 
-    // Создаём кнопку Solo вместо чекбокса
+    // Кнопка Solo
     var solo_button = groupPanel.add("iconbutton", undefined, undefined, {name: "solo_button_" + prefix, style: "toolbutton"});
     solo_button.helpTip = "Toggle solo mode for this effects group";
     solo_button.preferredSize.width = 28;
     solo_button.preferredSize.height = 28;
 
-    // Инициализируем состояние Solo
-    var soloState = false; // Начальное состояние
-    setSoloButtonIconEffects(solo_button, soloState ? solo_on_button_imgString : solo_off_button_imgString);
+    // Начальное состояние "solo off"
+    var soloState = false;
+    setSoloButtonIconEffects(solo_button, solo_off_button_imgString);
 
+    // Разделитель
     var divider1 = groupPanel.add("panel", undefined, undefined, {name: "divider1"});
     divider1.alignment = "fill";
-    divider1.graphics.backgroundColor = divider1.graphics.newBrush(divider1.graphics.BrushType.SOLID_COLOR, [0.5, 0.5, 0.5, 1]); // Серый цвет
+    divider1.graphics.backgroundColor = divider1.graphics.newBrush(
+        divider1.graphics.BrushType.SOLID_COLOR, [0.5, 0.5, 0.5, 1]
+    );
     divider1.preferredSize.height = 1;
-    
-    var add_effect_button = groupPanel.add("iconbutton", undefined, File.decode(add_layer_button_imgString), {name: "add_effect_button_" + prefix, style: "toolbutton"});
+
+    // Кнопка "Add Effect"
+    var add_effect_button = groupPanel.add(
+        "iconbutton",
+        undefined,
+        File.decode(add_layer_button_imgString),
+        {name: "add_effect_button_" + prefix, style: "toolbutton"}
+    );
     add_effect_button.helpTip = "Add selected effects to this group across all compositions";
     add_effect_button.text = "Add Effect";
     add_effect_button.preferredSize.width = 130;
     add_effect_button.preferredSize.height = 33;
 
-    var edit_group_effects_button = groupPanel.add("iconbutton", undefined, File.decode(edit_group_layers_button_imgString), {name: "edit_group_effects_button_" + prefix, style: "toolbutton"});
+    // Кнопка "Edit"
+    var edit_group_effects_button = groupPanel.add(
+        "iconbutton",
+        undefined,
+        File.decode(edit_group_layers_button_imgString),
+        {name: "edit_group_effects_button_" + prefix, style: "toolbutton"}
+    );
     edit_group_effects_button.helpTip = "Rename and settings this Group";
     edit_group_effects_button.text = "";
     edit_group_effects_button.preferredSize.width = 33;
     edit_group_effects_button.preferredSize.height = 33;
 
-    var delete_group_effects_button = groupPanel.add("iconbutton", undefined, File.decode(delete_group_layers_button_imgString), {name: "delete_group_effects_button_" + prefix, style: "toolbutton"});
+    // Кнопка "Delete"
+    var delete_group_effects_button = groupPanel.add(
+        "iconbutton",
+        undefined,
+        File.decode(delete_group_layers_button_imgString),
+        {name: "delete_group_effects_button_" + prefix, style: "toolbutton"}
+    );
     delete_group_effects_button.helpTip = "Delete this Effects Group";
     delete_group_effects_button.text = "";
     delete_group_effects_button.preferredSize.width = 33;
     delete_group_effects_button.preferredSize.height = 33;
 
-    // Сохраняем данные группы
+    // Сохраняем данные о группе
     var groupData = {
-        name: groupName,
-        prefix: prefix,
-        panel: groupPanel,
-        viewButton: view_button,
-        viewState: viewState,
-        soloButton: solo_button,
-        soloState: soloState,
-        addButton: add_effect_button,
-        deleteButton: delete_group_effects_button,
-        editButton: edit_group_effects_button
+        name:        groupName,
+        prefix:      prefix,
+        effectName:  effectName, // пустая строка, если "None"
+        panel:       groupPanel,
+        viewButton:  view_button,
+        viewState:   viewState,
+        soloButton:  solo_button,
+        soloState:   soloState,
+        addButton:   add_effect_button,
+        deleteButton:delete_group_effects_button,
+        editButton:  edit_group_effects_button
     };
+    effectGroups.push(groupData);
 
-    // Функции для установки иконок
-    function setViewButtonIcon(button, imageData) {
-        button.image = ScriptUI.newImage(File.decode(imageData));
-    }
+    // ==================== VIEW onClick ====================
+    view_button.onClick = function() {
+        groupData.viewState = !groupData.viewState;
+        if (groupData.viewState) {
+            setViewButtonIconEffects(view_button, view_button_fx_on_imgString);
+        } else {
+            setViewButtonIconEffects(view_button, view_button_fx_off_imgString);
+        }
+        app.beginUndoGroup("Toggle View for " + groupName);
 
-    function setSoloButtonIcon(button, imageData) {
-        button.image = ScriptUI.newImage(File.decode(imageData));
-    }
-
-// Обработчик нажатия на кнопку View
-view_button.onClick = function() {
-    groupData.viewState = !groupData.viewState; // Переключаем состояние
-
-    // Меняем иконку в зависимости от состояния
-    if (groupData.viewState) {
-        setViewButtonIconEffects(view_button, view_button_fx_on_imgString);
-    } else {
-        setViewButtonIconEffects(view_button, view_button_fx_off_imgString);
-    }
-
-    // Начинаем группу отмены действий
-    app.beginUndoGroup("Toggle View for " + groupName);
-    var effectsFound = false;
-
-    var comps = getAllCompositions();
-    for (var c = 0; c < comps.length; c++) {
-        var comp = comps[c];
-        for (var l = 1; l <= comp.numLayers; l++) {
-            var layer = comp.layer(l);
-            if (layer.property("Effects")) {
+        var comps = getAllCompositions();
+        var effectsFound = false;
+        for (var c = 0; c < comps.length; c++) {
+            var comp = comps[c];
+            for (var l = 1; l <= comp.numLayers; l++) {
+                var layer = comp.layer(l);
+                if (!layer.property("Effects")) continue;
                 for (var i = 1; i <= layer.property("Effects").numProperties; i++) {
                     var effect = layer.property("Effects").property(i);
                     if (effect.name.indexOf("[" + prefix + "]") === 0) {
-                        effect.enabled = groupData.viewState; // Устанавливаем видимость эффекта
+                        effect.enabled = groupData.viewState;
                         effectsFound = true;
                     }
                 }
             }
         }
-    }
+        if (!effectsFound) {
+            alert("Effects for group '" + groupName + "' not found in any composition.");
+        }
+        app.endUndoGroup();
+    };
 
-    if (!effectsFound) {
-        alert("Effects for group '" + groupName + "' not found in any composition.");
-    }
-    app.endUndoGroup();
-};
+    // ==================== SOLO onClick ====================
+    solo_button.onClick = function() {
+        groupData.soloState = !groupData.soloState;
+        if (groupData.soloState) {
+            setSoloButtonIconEffects(solo_button, solo_on_button_imgString);
+        } else {
+            setSoloButtonIconEffects(solo_button, solo_off_button_imgString);
+        }
+        app.beginUndoGroup("Toggle Solo for " + groupName);
 
-// Обработчик нажатия на кнопку Solo
-solo_button.onClick = function() {
-    groupData.soloState = !groupData.soloState; // Переключаем состояние
-
-    // Меняем иконку в зависимости от состояния
-    if (groupData.soloState) {
-        setSoloButtonIconEffects(solo_button, solo_on_button_imgString);
-    } else {
-        setSoloButtonIconEffects(solo_button, solo_off_button_imgString);
-    }
-
-    app.beginUndoGroup("Toggle Solo for " + groupName);
-
-    var comps = getAllCompositions();
-    for (var c = 0; c < comps.length; c++) {
-        var comp = comps[c];
-        for (var l = 1; l <= comp.numLayers; l++) {
-            var layer = comp.layer(l);
-            if (layer.property("Effects")) {
-                var hasGroupEffect = false;
+        var comps = getAllCompositions();
+        for (var c = 0; c < comps.length; c++) {
+            var comp = comps[c];
+            for (var l = 1; l <= comp.numLayers; l++) {
+                var layer = comp.layer(l);
                 var effects = layer.property("Effects");
-                // Проверяем, есть ли эффекты из этой группы
-                for (var i = 1; i <= effects.numProperties; i++) {
-                    var effect = effects.property(i);
-                    if (effect.name.indexOf("[" + prefix + "]") === 0) {
+                if (!effects) continue;
+
+                // Ищем, есть ли в слое эффект из этой группы
+                var hasGroupEffect = false;
+                for (var e = 1; e <= effects.numProperties; e++) {
+                    var eff = effects.property(e);
+                    if (eff.name.indexOf("[" + prefix + "]") === 0) {
                         hasGroupEffect = true;
                         break;
                     }
                 }
-
                 if (hasGroupEffect) {
-                    // Включаем или выключаем эффекты на основе состояния Solo
-                    for (var i = 1; i <= effects.numProperties; i++) {
-                        var effect = effects.property(i);
-                        if (effect.name.indexOf("[" + prefix + "]") === 0) {
-                            // Эффекты из этой группы
-                            effect.enabled = groupData.viewState; // Устанавливаем видимость эффекта
+                    // Переключаем enable в зависимости от Solo
+                    for (var e = 1; e <= effects.numProperties; e++) {
+                        var eff = effects.property(e);
+                        if (eff.name.indexOf("[" + prefix + "]") === 0) {
+                            // Эффекты в группе
+                            eff.enabled = groupData.viewState;
                         } else {
-                            // Другие эффекты
-                            effect.enabled = !groupData.soloState; // Устанавливаем видимость для остальных эффектов
+                            // Остальные
+                            eff.enabled = !groupData.soloState;
                         }
                     }
                 }
             }
         }
-    }
-    app.endUndoGroup();
-};
+        app.endUndoGroup();
+    };
 
-    // Обработчик для кнопки Add Effect
+    // ==================== ADD EFFECT onClick ====================
     add_effect_button.onClick = function() {
         var layers = getSelectedLayersInActiveComp();
         if (!layers) return;
@@ -2808,36 +2899,34 @@ solo_button.onClick = function() {
         for (var j = 0; j < layers.length; j++) {
             var layer = layers[j];
             var selectedProps = layer.selectedProperties;
-
-            if (selectedProps.length === 0) {
-                continue;
-            }
+            if (selectedProps.length === 0) continue;
 
             for (var i = 0; i < selectedProps.length; i++) {
                 var effect = selectedProps[i];
-                if (effect.matchName !== "ADBE Effect Parade" && effect.parentProperty.matchName === "ADBE Effect Parade") {
-                    var newName = "[" + prefix + "] " + effect.name.replace(/^\[.*?\]\s*/, "");
-                    effect.name = newName;
+                // Проверяем, что это настоящий эффект, а не папка Effects
+                if (
+                    effect.matchName !== "ADBE Effect Parade" &&
+                    effect.parentProperty.matchName === "ADBE Effect Parade"
+                ) {
+                    var baseName = effect.name.replace(/^\[[^\]]+\]\s*/, "");
+                    effect.name = "[" + prefix + "] " + baseName;
                     effectsFound = true;
                 }
             }
         }
-
         if (!effectsFound) {
             alert("Please select effects to add to " + groupName + ".");
         }
-
         app.endUndoGroup();
     };
 
-
-    // Event handler for the Edit button
+    // ==================== EDIT onClick ====================
     edit_group_effects_button.onClick = function() {
+        // Создаём диалог "Edit Effect Group"
         var dialog = new Window("dialog", "Edit Effect Group");
         dialog.orientation = "column";
         dialog.alignChildren = ["fill", "top"];
 
-        // Первая группа - Name and Prefix
         var namePrefixPanel = dialog.add("panel", undefined, "Name and Prefix");
         namePrefixPanel.orientation = "column";
         namePrefixPanel.alignChildren = ["fill", "top"];
@@ -2853,18 +2942,15 @@ solo_button.onClick = function() {
         var prefixInput = prefixGroup.add("edittext", undefined, groupData.prefix);
         prefixInput.characters = 5;
 
-        // Добавление чекбокса для автогенерации префикса
+        // Автогенерация (необязательное)
         var autoPrefixGroup = namePrefixPanel.add("group");
         autoPrefixGroup.orientation = "row";
         autoPrefixGroup.alignChildren = ["left", "center"];
         autoPrefixGroup.add("statictext", undefined, "Auto-generate Prefix:");
         var autoPrefixCheckbox = autoPrefixGroup.add("checkbox", undefined, "");
-        autoPrefixCheckbox.value = false; // При редактировании группы по умолчанию выключено
-
-        // Если автогенерация включена, отключаем ввод префикса
+        autoPrefixCheckbox.value = false;
         prefixInput.enabled = !autoPrefixCheckbox.value;
 
-        // Обработчик для изменения состояния чекбокса
         autoPrefixCheckbox.onClick = function() {
             prefixInput.enabled = !autoPrefixCheckbox.value;
             if (autoPrefixCheckbox.value) {
@@ -2873,12 +2959,10 @@ solo_button.onClick = function() {
                 } else {
                     autoPrefixCheckbox.value = false;
                     prefixInput.enabled = true;
-                    alert("Auto-prefix generation is disabled for group names containing non-English characters or special symbols.");
+                    alert("Auto-prefix generation is disabled for invalid characters.");
                 }
             }
         };
-
-        // Обработчик для изменения имени группы
         groupNameInput.onChanging = function() {
             if (autoPrefixCheckbox.value) {
                 if (containsOnlyEnglishLetters(groupNameInput.text)) {
@@ -2887,11 +2971,29 @@ solo_button.onClick = function() {
                     autoPrefixCheckbox.value = false;
                     prefixInput.enabled = true;
                     prefixInput.text = "";
-                    alert("Auto-prefix generation is disabled for group names containing non-English characters or special symbols.");
                 }
             }
         };
 
+        // --- Если у нас есть effectName (не пустой), добавим кнопку Update ---
+        if (groupData.effectName && groupData.effectName !== "") {
+            var updateButton = dialog.add("button", undefined, "Update Group Effects");
+            updateButton.helpTip = "Re-scan the project for '" + groupData.effectName + "' and prefix them.";
+
+            updateButton.onClick = function() {
+                // Префиксуем все эффекты такого имени
+                addAllEffectsOfThisTypeToGroup(groupData.prefix, groupData.effectName);
+                alert("All '" + groupData.effectName + "' have been updated with [" + groupData.prefix + "].");
+            };
+        } else {
+            // Если effectName пустое (значит выбрали "None"), то:
+            var infoText = dialog.add("statictext", undefined, "(No effect is tracked in this group.)");
+            infoText.graphics.foregroundColor = infoText.graphics.newPen(
+                infoText.graphics.PenType.SOLID_COLOR, [0.9,0.3,0.3], 1
+            );
+        }
+
+        // --- OK / Cancel ---
         var buttonsGroup = dialog.add("group");
         buttonsGroup.alignment = "center";
         var okButton = buttonsGroup.add("button", undefined, "OK");
@@ -2900,40 +3002,40 @@ solo_button.onClick = function() {
         okButton.onClick = function() {
             var newGroupName = groupNameInput.text;
             var newPrefix = prefixInput.text;
-
-            if (newGroupName === "" || newPrefix === "") {
+            if (!newGroupName || !newPrefix) {
                 alert("Please enter both a group name and prefix.");
-            } else {
-                app.beginUndoGroup("Edit Effect Group " + groupData.name);
+                return;
+            }
+            app.beginUndoGroup("Edit Effect Group " + groupData.name);
 
-                var comps = getAllCompositions();
-                for (var c = 0; c < comps.length; c++) {
-                    var comp = comps[c];
-                    for (var l = 1; l <= comp.numLayers; l++) {
-                        var layer = comp.layer(l);
-                        if (layer.property("Effects")) {
-                            for (var i = 1; i <= layer.property("Effects").numProperties; i++) {
-                                var effect = layer.property("Effects").property(i);
-                                if (effect.name.indexOf("[" + groupData.prefix + "]") === 0) {
-                                    var baseName = effect.name.replace("[" + groupData.prefix + "] ", "");
-                                    effect.name = "[" + newPrefix + "] " + baseName;
-                                }
-                            }
+            // Переименовать [oldPrefix] -> [newPrefix]
+            var comps = getAllCompositions();
+            for (var c = 0; c < comps.length; c++) {
+                var comp = comps[c];
+                for (var l = 1; l <= comp.numLayers; l++) {
+                    var layer = comp.layer(l);
+                    var fx = layer.property("Effects");
+                    if (!fx) continue;
+
+                    for (var e = 1; e <= fx.numProperties; e++) {
+                        var eff = fx.property(e);
+                        if (eff.name.indexOf("[" + groupData.prefix + "]") === 0) {
+                            var baseName = eff.name.replace("[" + groupData.prefix + "] ", "");
+                            eff.name = "[" + newPrefix + "] " + baseName;
                         }
                     }
                 }
-
-                // Обновление информации о группе
-                groupData.name = newGroupName;
-                groupData.prefix = newPrefix;
-                groupPanel.text = newGroupName + " [" + newPrefix + "]";
-
-                palette.layout.layout(true);
-                palette.layout.resize();
-
-                app.endUndoGroup();
-                dialog.close();
             }
+
+            // Обновляем данные UI
+            groupData.name = newGroupName;
+            groupData.prefix = newPrefix;
+            groupPanel.text = newGroupName + " [" + newPrefix + "]";
+
+            palette.layout.layout(true);
+            palette.layout.resize();
+            app.endUndoGroup();
+            dialog.close();
         };
 
         cancelButton.onClick = function() {
@@ -2944,7 +3046,7 @@ solo_button.onClick = function() {
         dialog.show();
     };
 
-    // Event handler for the Delete Group button
+    // ==================== DELETE onClick ====================
     delete_group_effects_button.onClick = function() {
         app.beginUndoGroup("Delete Effect Group " + groupName);
         var effectsFound = false;
@@ -2954,14 +3056,15 @@ solo_button.onClick = function() {
             var comp = comps[c];
             for (var l = 1; l <= comp.numLayers; l++) {
                 var layer = comp.layer(l);
-                if (layer.property("Effects")) {
-                    for (var i = layer.property("Effects").numProperties; i >= 1; i--) {
-                        var effect = layer.property("Effects").property(i);
-                        if (effect.name.indexOf("[" + prefix + "]") === 0) {
-                            var originalName = effect.name.replace("[" + prefix + "] ", "");
-                            effect.name = originalName;
-                            effectsFound = true;
-                        }
+                var fx = layer.property("Effects");
+                if (!fx) continue;
+
+                for (var i = fx.numProperties; i >= 1; i--) {
+                    var eff = fx.property(i);
+                    if (eff.name.indexOf("[" + prefix + "]") === 0) {
+                        var originalName = eff.name.replace("[" + prefix + "] ", "");
+                        eff.name = originalName;
+                        effectsFound = true;
                     }
                 }
             }
@@ -2971,11 +3074,13 @@ solo_button.onClick = function() {
             alert("Effects for group '" + groupName + "' not found in any composition.");
         }
 
+        // Удаляем панель
         tab_effects.remove(groupPanel);
 
         palette.layout.layout(true);
         palette.layout.resize();
 
+        // Удаляем из массива effectGroups
         for (var j = 0; j < effectGroups.length; j++) {
             if (effectGroups[j].panel === groupPanel) {
                 effectGroups.splice(j, 1);
@@ -2985,18 +3090,28 @@ solo_button.onClick = function() {
         app.endUndoGroup();
     };
 
-    effectGroups.push(groupData);
-
+    // Перерисовываем UI в конце
     palette.layout.layout(true);
+    palette.layout.resize();
 }
 
-// Event handler for the Create a New Effects Group button
+
+/***********************************************************************************
+ * (3) "Create a New Effects Group" — с выпадающим списком, где есть "None"
+ ***********************************************************************************/
 create_group_effects_button.onClick = function() {
     var dialog = new Window("dialog", "Add New Effects Group");
     dialog.orientation = "column";
     dialog.alignChildren = ["fill", "top"];
 
-    // Первая группа: Name and Prefix
+    // (A) Сканируем проект, получаем список с "None" в начале
+    var projectEffects = getAllUniqueEffectsInProject_WithNone();
+    if (projectEffects.length === 0) {
+        alert("No effects in the project! The list is empty.");
+        return;
+    }
+
+    // (B) Name + Prefix
     var nameAndPrefixPanel = dialog.add("panel", undefined, "Name and Prefix");
     nameAndPrefixPanel.orientation = "column";
     nameAndPrefixPanel.alignChildren = ["fill", "top"];
@@ -3011,18 +3126,14 @@ create_group_effects_button.onClick = function() {
     var prefixInput = prefixGroup.add("edittext", undefined, "");
     prefixInput.characters = 5;
 
-    // Добавление чекбокса для автогенерации префикса
     var autoPrefixGroup = nameAndPrefixPanel.add("group");
     autoPrefixGroup.orientation = "row";
     autoPrefixGroup.alignChildren = ["left", "center"];
     autoPrefixGroup.add("statictext", undefined, "Auto-generate Prefix:");
     var autoPrefixCheckbox = autoPrefixGroup.add("checkbox", undefined, "");
     autoPrefixCheckbox.value = true;
-
-    // Если автогенерация включена, отключаем ввод префикса
     prefixInput.enabled = !autoPrefixCheckbox.value;
 
-    // Обработчик для изменения состояния чекбокса
     autoPrefixCheckbox.onClick = function() {
         prefixInput.enabled = !autoPrefixCheckbox.value;
         if (autoPrefixCheckbox.value) {
@@ -3031,12 +3142,10 @@ create_group_effects_button.onClick = function() {
             } else {
                 autoPrefixCheckbox.value = false;
                 prefixInput.enabled = true;
-                alert("Auto-prefix generation is disabled for group names containing non-English characters or special symbols.");
+                alert("Auto-prefix disabled: non-English characters.");
             }
         }
     };
-
-    // Обработчик для изменения имени группы
     groupNameInput.onChanging = function() {
         if (autoPrefixCheckbox.value) {
             if (containsOnlyEnglishLetters(groupNameInput.text)) {
@@ -3045,11 +3154,21 @@ create_group_effects_button.onClick = function() {
                 autoPrefixCheckbox.value = false;
                 prefixInput.enabled = true;
                 prefixInput.text = "";
-                alert("Auto-prefix generation is disabled for group names containing non-English characters or special symbols.");
             }
         }
     };
 
+    // (C) Dropdown с эффектами (первый пункт — "None")
+    var effectSelectPanel = dialog.add("panel", undefined, "Select an Effect from Project (optional)");
+    effectSelectPanel.orientation = "column";
+    effectSelectPanel.alignChildren = ["fill", "top"];
+
+    var ddGroup = effectSelectPanel.add("group");
+    ddGroup.add("statictext", undefined, "Effect Name:");
+    var effectDropdown = ddGroup.add("dropdownlist", undefined, projectEffects);
+    effectDropdown.selection = 0; // "None" по умолчанию
+
+    // (D) Кнопки OK / Cancel
     var buttonsGroup = dialog.add("group");
     buttonsGroup.alignment = "center";
     var okButton = buttonsGroup.add("button", undefined, "OK");
@@ -3058,13 +3177,13 @@ create_group_effects_button.onClick = function() {
     okButton.onClick = function() {
         var groupName = groupNameInput.text;
         var prefix = prefixInput.text;
+        var chosenEffect = effectDropdown.selection ? effectDropdown.selection.text : "";
 
-        if (groupName === "") {
+        if (!groupName) {
             alert("Please enter a group name.");
             return;
         }
-
-        if (prefix === "") {
+        if (!prefix) {
             if (autoPrefixCheckbox.value) {
                 prefix = generateUniquePrefix(groupName);
                 prefixInput.text = prefix;
@@ -3074,7 +3193,15 @@ create_group_effects_button.onClick = function() {
             }
         }
 
-        createEffectGroupUI(groupName, prefix);
+        // Создаём группу
+        var finalEffectName = (chosenEffect === "None") ? "" : chosenEffect;
+        createEffectGroupUI(groupName, prefix, finalEffectName);
+
+        // Если пользователь не выбрал "None" — префиксуем все эффекты этого имени
+        if (finalEffectName !== "") {
+            addAllEffectsOfThisTypeToGroup(prefix, finalEffectName);
+        }
+
         dialog.close();
     };
 
@@ -3084,6 +3211,86 @@ create_group_effects_button.onClick = function() {
 
     dialog.center();
     dialog.show();
+};
+
+
+/***********************************************************************************
+ * (4) Функция, которая массово ищет effectName во всех компах и добавляет [prefix]
+ ***********************************************************************************/
+function addAllEffectsOfThisTypeToGroup(prefix, effectName) {
+    app.beginUndoGroup("Add All Effects of " + effectName + " -> " + prefix);
+    var comps = getAllCompositions();
+    var countAdded = 0;
+
+    for (var c = 0; c < comps.length; c++) {
+        var comp = comps[c];
+        for (var l = 1; l <= comp.numLayers; l++) {
+            var layer = comp.layer(l);
+            var fx = layer.property("Effects");
+            if (!fx) continue;
+
+            for (var e = 1; e <= fx.numProperties; e++) {
+                var eff = fx.property(e);
+                var baseName = eff.name.replace(/^\[[^\]]+\]\s*/, "");
+                if (baseName === effectName) {
+                    // Если нет префикса [prefix]
+                    if (eff.name.indexOf("[" + prefix + "]") !== 0) {
+                        eff.name = "[" + prefix + "] " + baseName;
+                        countAdded++;
+                    }
+                }
+            }
+        }
+    }
+
+    app.endUndoGroup();
+    $.writeln("Added prefix [" + prefix + "] to " + countAdded + " effects: " + effectName);
+}
+
+function addAllEffectsOfThisTypeToGroup(prefix, effectName) {
+    app.beginUndoGroup("Add All Effects of " + effectName + " -> " + prefix);
+    var comps = getAllCompositions();
+    var countAdded = 0;
+
+    // Регулярка, которая ищет префикс вида [ABC]
+    // ^\[[^\]]+\] - начало строки, '[', любые символы кроме ']', ']' 
+    // \s*        - возможные пробелы
+    var prefixRegex = /^\[[^\]]+\]\s*/;
+
+    for (var c = 0; c < comps.length; c++) {
+        var comp = comps[c];
+        for (var l = 1; l <= comp.numLayers; l++) {
+            var layer = comp.layer(l);
+            var fx = layer.property("Effects");
+            if (!fx) continue;
+
+            for (var e = 1; e <= fx.numProperties; e++) {
+                var eff = fx.property(e);
+
+                // (1) Получаем "чистое" имя, убирая уже существующий префикс в начале, если он есть
+                var baseName = eff.name.replace(prefixRegex, "");
+
+                // (2) Проверяем, совпадает ли baseName с нужным эффектом
+                if (baseName === effectName) {
+
+                    // (3) Если eff.name *уже* содержит *любой* префикс (prefixRegex.test),
+                    //     значит оно "[что-то] ИмяЭффекта" — игнорируем.
+                    //     То есть не будем "переприсваивать" его.
+                    if (prefixRegex.test(eff.name)) {
+                        // Уже есть префикс [XXX], пропускаем
+                        continue;
+                    }
+
+                    // (4) Если дошли сюда, у эффекта нет никакого префикса — ставим наш
+                    eff.name = "[" + prefix + "] " + baseName;
+                    countAdded++;
+                }
+            }
+        }
+    }
+
+    app.endUndoGroup();
+    $.writeln("Added prefix [" + prefix + "] to " + countAdded + " \"" + effectName + "\" effects.");
 }
 
 
