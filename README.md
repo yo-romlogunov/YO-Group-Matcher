@@ -20,7 +20,7 @@ Solo Groups: Highlight specific groups by hiding all others, allowing you to foc
 8.	Update Checking: Automatic Checking: Always stay up-to-date with the latest updates and improvements of the script directly from the control panel.Simple Update Link: Easily navigate to the download page for new versions with a direct link.
 
 
-Install
+### Install
 
 ### Windows
 
