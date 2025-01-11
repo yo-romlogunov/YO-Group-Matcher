@@ -19,6 +19,35 @@ Solo Groups: Highlight specific groups by hiding all others, allowing you to foc
 
 8.	Update Checking: Automatic Checking: Always stay up-to-date with the latest updates and improvements of the script directly from the control panel.Simple Update Link: Easily navigate to the download page for new versions with a direct link.
 
+
+Install
+
+### Windows
+
+Move YO Group Matcher.jsx to *C: Program Files Adobe After Effects <version> Support Files Scripts ScriptUI Panels *
+
+Restart After Effects (if it is open)
+
+*Window > YO Group Matcher*
+
+Place the panel in a space that is convenient for you in the After Effects interface
+
+### Mac
+
+Move YO Group Matcher.jsx file to */Applications/Adobe After Effects <version>/Scripts/ScriptUI Panels/*
+
+Restart After Effects (if it is open)
+
+*Window > YO Group Matcher*
+
+Place the panel in a space that is convenient for you in the After Effects interface
+
+### Update
+
+When a new version is released, simply replace the old script file with a new one and restart After Effects.
+
+
+
 _How It Works:_
 
 1.	Creating a Group: Click the “Create a New Layer Group” or “Create a New Effects Group” button. Enter the group name, prefix, and select a color label. Add the selected layers or effects to the created group for easy management.
