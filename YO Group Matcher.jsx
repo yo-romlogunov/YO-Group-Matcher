@@ -1,4 +1,4 @@
-var scriptVersion = "3.2.0";
+var scriptVersion = "3.2.4";
 
  // LAYER_GROUP Color Label
 
@@ -1718,6 +1718,852 @@ create_group_layers_button.onClick = function() {
     dialog.center();
     dialog.show();
 };
+
+
+/**
+ * Возвращает все композиции из текущего проекта.
+ * @returns {CompItem[]} Массив композиций.
+ */
+function getAllCompositions() {
+    // Заглушка: вернёт все композиции в текущем проекте.
+    // В реальном скрипте можете добавить фильтры, проверки и т.п.
+    var result = [];
+    for (var i = 1; i <= app.project.numItems; i++) {
+        var item = app.project.item(i);
+        if (item instanceof CompItem) {
+            result.push(item);
+        }
+    }
+    return result;
+}
+
+/**
+ * Возвращает список эффектов по проекту (уникальные).
+ * При этом в начало списка добавляется "None".
+ * @returns {String[]} Массив уникальных имён эффектов, включая "None".
+ */
+function getAllUniqueEffectsInProject_WithNone() {
+    var effectNamesSet = {};
+    var comps = getAllCompositions();
+    for (var c = 0; c < comps.length; c++) {
+        var comp = comps[c];
+        for (var l = 1; l <= comp.numLayers; l++) {
+            var layer = comp.layer(l);
+            var fx = layer.property("Effects");
+            if (!fx) continue;
+            for (var e = 1; e <= fx.numProperties; e++) {
+                var eff = fx.property(e);
+                // Убираем префикс [XXX], если он есть, чтобы получить "чистое" имя эффекта
+                var baseName = eff.name.replace(/^\[[^\]]+\]\s*/, "");
+                effectNamesSet[baseName] = true;
+            }
+        }
+    }
+
+    var resultArray = [];
+    for (var nm in effectNamesSet) {
+        if (effectNamesSet.hasOwnProperty(nm)) {
+            resultArray.push(nm);
+        }
+    }
+    resultArray.sort();
+
+    // Добавляем пункт "None" в начало
+    resultArray.unshift("None");
+    return resultArray;
+}
+
+
+/*******************************************************************************************************
+ * [2] ОСНОВНОЙ МОДУЛЬ (ПОЛУЧЕНИЕ ДАННЫХ, СОРТИРОВКА, СОЗДАНИЕ UI, ОБРАБОТКА СОБЫТИЙ)
+ ******************************************************************************************************/
+
+/**
+ * Основная функция, которую вы вызываете.
+ * @param {Object} groupData Параметры группы:
+ *                          {name: "...", prefix: "..."}
+ */
+function showGroupCompositions(groupData) {
+    var groupName   = groupData.name;    // напр. "MyGroup"
+    var groupPrefix = groupData.prefix;  // напр. "LR"
+
+    /****************************************
+     * (A) Сбор данных о композициях и эффектах
+     ****************************************/
+    var comps = getAllCompositions();
+    var compsWithGroup         = []; 
+    var allEffectsFromAllComps = []; 
+
+    // 1) Сканируем проект, собираем все comps, где есть слои с [groupPrefix]
+    for (var c = 0; c < comps.length; c++) {
+        var comp = comps[c];
+        var layerCount       = 0;
+        var layerNamesArray  = [];
+        var layerEffectsArray = [];
+
+        for (var l = 1; l <= comp.numLayers; l++) {
+            var layer = comp.layer(l);
+
+            // Проверяем, начинается ли имя слоя с "[<prefix>]"
+            if (layer.name.indexOf("[" + groupPrefix + "]") === 0) {
+                layerCount++;
+                layerNamesArray.push(layer.name);
+
+                // Эффекты этого слоя
+                var effectGroup = layer.property("ADBE Effect Parade");
+                var effectNames = [];
+                if (effectGroup && effectGroup.numProperties > 0) {
+                    for (var e = 1; e <= effectGroup.numProperties; e++) {
+                        var effectProp = effectGroup.property(e);
+                        if (effectProp) {
+                            effectNames.push(effectProp.name);
+
+                            // Сохраняем в общий массив (для списка All Effects)
+                            allEffectsFromAllComps.push({
+                                name:       effectProp.name,
+                                comp:       comp,
+                                layerIndex: l, // 1-based
+                                effectProp: effectProp,
+                                isEnabled:  effectProp.enabled
+                            });
+                        }
+                    }
+                }
+                layerEffectsArray.push(effectNames);
+            }
+        }
+
+        // Если в этой компе были слои с группой prefix
+        if (layerCount > 0) {
+            compsWithGroup.push({
+                comp:          comp,
+                layerCount:    layerCount,
+                layerNames:    layerNamesArray,
+                layerEffects:  layerEffectsArray
+            });
+        }
+    }
+
+    // Если ни одной композиции не найдено, завершаем
+    if (compsWithGroup.length === 0) {
+        alert("No compositions containing the group '" + groupName + "'");
+        return;
+    }
+
+    /****************************************
+     * (A2) Создаём основной диалог (UI)
+     ****************************************/
+    var dialog = new Window("dialog"); 
+    dialog.text = "Compositions with group"; 
+    dialog.orientation = "column"; 
+    dialog.alignChildren = ["left","top"]; 
+    dialog.spacing = 10; 
+    dialog.margins = 16; 
+
+    // ------------------------------------------------------------------------
+    //  ГОЛОВНОЙ БЛОК (head_group) + сортировка (sort_group) + кнопка (close_group)
+    // ------------------------------------------------------------------------
+    var head_group = dialog.add("group"); 
+    head_group.orientation = "row"; 
+    head_group.alignChildren = ["left","fill"]; 
+    head_group.spacing = 192; 
+
+    // (1) Группа сортировки
+    var sort_group = head_group.add("group"); 
+    sort_group.orientation = "row"; 
+    sort_group.alignChildren = ["center","center"]; 
+    sort_group.spacing = 18; 
+
+    sort_group.add("statictext", undefined, "Sort by layer count:");
+    var Sort_array = ["Ascending","Descending"]; 
+    var Sort = sort_group.add("dropdownlist", undefined, undefined, {items: Sort_array}); 
+    Sort.selection = 0; // Ascending
+
+    // (2) Группа закрытия окна
+    var close_group = head_group.add("group"); 
+    close_group.orientation = "row"; 
+    close_group.alignChildren = ["left","fill"]; 
+    close_group.spacing = 10; 
+    close_group.margins = [300,0,0,0]; 
+
+    var close_button = close_group.add(
+        "iconbutton",
+        undefined,
+        File.decode(close_button_imgString),
+        {style: "toolbutton"}
+    ); 
+    close_button.text = "Close"; 
+    close_button.preferredSize.width = 98; 
+
+    // ------------------------------------------------------------------------
+    //  ОСНОВНОЙ БЛОК (main_group) с тремя панелями:
+    //     1) ПАНЕЛЬ All Effects (слева)
+    //     2) ПАНЕЛЬ Compositions (по центру)
+    //     3) ПАНЕЛЬ Effects and Layers (справа)
+    // ------------------------------------------------------------------------
+    var main_group = dialog.add("group"); 
+    main_group.orientation = "row"; 
+    main_group.alignChildren = ["left","center"]; 
+    main_group.spacing = 13; 
+    main_group.margins = [0,0,0,8]; 
+
+    /****************************************
+     * ПАНЕЛЬ: ALL EFFECTS (слева)
+     ****************************************/
+    var All_Effects_panel = main_group.add("panel"); 
+    All_Effects_panel.text = "All Effects "; 
+    All_Effects_panel.orientation = "column"; 
+    All_Effects_panel.alignChildren = ["left","top"]; 
+    All_Effects_panel.spacing = 10; 
+    All_Effects_panel.margins = 10; 
+    All_Effects_panel.alignment = ["left","top"]; 
+
+    var All_effects = All_Effects_panel.add("group"); 
+    All_effects.orientation = "column"; 
+    All_effects.alignChildren = ["left","top"]; 
+    All_effects.spacing = 10; 
+    All_effects.margins = [0,0,0,0]; 
+
+    var All_Effects_list = All_effects.add("listbox", undefined, undefined); 
+    All_Effects_list.preferredSize.width  = 200; 
+    All_Effects_list.preferredSize.height = 329; 
+
+    var disable_effect_button = All_effects.add(
+        "iconbutton",
+        undefined,
+        File.decode(disable_effect_button_imgString),
+        {style: "toolbutton"}
+    ); 
+    disable_effect_button.text = "Disable Select Effect"; 
+    disable_effect_button.preferredSize.width  = 193; 
+    disable_effect_button.preferredSize.height = 39; 
+    disable_effect_button.alignment = ["fill","top"]; 
+
+    /****************************************
+     * ПАНЕЛЬ: COMPOSITIONS (по центру)
+     ****************************************/
+    var compositions_panel = main_group.add("panel"); 
+    compositions_panel.text = "Compositions"; 
+    compositions_panel.orientation = "column"; 
+    compositions_panel.alignChildren = ["left","top"]; 
+    compositions_panel.spacing = 10; 
+    compositions_panel.margins = 10; 
+    compositions_panel.alignment = ["left","top"]; 
+
+    var compositions_group = compositions_panel.add("group"); 
+    compositions_group.orientation = "column"; 
+    compositions_group.alignChildren = ["left","top"]; 
+    compositions_group.spacing = 10; 
+    compositions_group.margins = [0,0,0,0]; 
+
+    var compositions_list = compositions_group.add("listbox", undefined, undefined); 
+    compositions_list.preferredSize.width  = 246; 
+    compositions_list.preferredSize.height = 328; 
+
+    var open_selected_comp_button = compositions_group.add(
+        "iconbutton",
+        undefined,
+        File.decode(open_selected_comp_button_imgString),
+        {style: "toolbutton"}
+    ); 
+    open_selected_comp_button.text = "Open Selected Compositions"; 
+    open_selected_comp_button.preferredSize.width  = 240; 
+    open_selected_comp_button.preferredSize.height = 39; 
+    open_selected_comp_button.alignment = ["center","top"]; 
+
+    /****************************************
+     * ПАНЕЛЬ: EFFECTS AND LAYERS (справа)
+     ****************************************/
+    var Effects_and_Layers_Group = main_group.add("panel"); 
+    Effects_and_Layers_Group.text = "Effects and Layers"; 
+    Effects_and_Layers_Group.orientation = "column"; 
+    Effects_and_Layers_Group.alignChildren = ["left","top"]; 
+    Effects_and_Layers_Group.spacing = 10; 
+    Effects_and_Layers_Group.margins = 10; 
+    Effects_and_Layers_Group.alignment = ["left","top"]; 
+
+    var Effects_and_layers_group = Effects_and_Layers_Group.add("group"); 
+    Effects_and_layers_group.orientation = "column"; 
+    Effects_and_layers_group.alignChildren = ["left","top"]; 
+    Effects_and_layers_group.spacing = 10; 
+    Effects_and_layers_group.margins = [0,0,0,0]; 
+
+    var layers_text = Effects_and_layers_group.add("statictext", undefined, "Layers"); 
+    var layers_list = Effects_and_layers_group.add("listbox", undefined, undefined); 
+    layers_list.preferredSize.width  = 250; 
+    layers_list.preferredSize.height = 136; 
+
+    var Effects_text = Effects_and_layers_group.add("statictext", undefined, "Effects"); 
+    var effects_layer_list = Effects_and_layers_group.add("listbox", undefined, undefined); 
+    effects_layer_list.preferredSize.width  = 250; 
+    effects_layer_list.preferredSize.height = 130; 
+
+    // Кнопки FFX (import/export)
+    var ffx_button = Effects_and_layers_group.add("group"); 
+    ffx_button.orientation = "row"; 
+    ffx_button.alignChildren = ["center","center"]; 
+    ffx_button.spacing = 10; 
+
+    var import_ffx = ffx_button.add("iconbutton", undefined, File.decode(import_ffx_imgString), {style: "toolbutton"});
+    import_ffx.text = "Import FFX";
+    import_ffx.preferredSize.width  = 120;
+    import_ffx.preferredSize.height = 39;
+    import_ffx.enabled = false; // по умолчанию отключена
+
+    var export_ffx = ffx_button.add("iconbutton", undefined, File.decode(export_ffx_imgString), {style: "toolbutton"});
+    export_ffx.text = "Export FFX";
+    export_ffx.preferredSize.width  = 120;
+    export_ffx.preferredSize.height = 40;
+    export_ffx.enabled = false; // по умолчанию отключена
+
+    /****************************************
+     * (B1) Функции сортировки и заполнения
+     ****************************************/
+
+    /**
+     * Сортирует массив compsWithGroup по количеству слоёв (возр/убыв).
+     * @param {Array} compsArray массив объектов {comp, layerCount, ...}
+     * @param {String} order "Ascending" или "Descending".
+     */
+    function sortCompositions(compsArray, order) {
+        compsArray.sort(function(a, b) {
+            if (order === "Descending") {
+                return b.layerCount - a.layerCount;
+            } else {
+                return a.layerCount - b.layerCount;
+            }
+        });
+    }
+
+    /**
+     * Заполнение списка «Compositions» (с учётом текущего массива compsWithGroup).
+     */
+    function fillCompositionsList() {
+        compositions_list.removeAll();
+        for (var i = 0; i < compsWithGroup.length; i++) {
+            var compName   = compsWithGroup[i].comp.name;
+            var layerCount = compsWithGroup[i].layerCount;
+            var txt        = compName + " [" + layerCount + " layer" + (layerCount !== 1 ? "s" : "") + "]";
+            compositions_list.add("item", txt);
+        }
+    }
+
+    /**
+     * Группируем одинаковые эффекты, чтобы выводить в списке All_Effects_list одной строкой.
+     */
+    function fillAllEffectsList() {
+        All_Effects_list.removeAll();
+
+        var effectGroups = {}; // ключ = имя эффекта, значение = массив объектов effObj
+
+        for (var i = 0; i < allEffectsFromAllComps.length; i++) {
+            var effObj  = allEffectsFromAllComps[i];
+            var effName = effObj.name;
+
+            if (!effectGroups[effName]) {
+                effectGroups[effName] = [];
+            }
+            effectGroups[effName].push(effObj);
+        }
+
+        for (var groupName in effectGroups) {
+            if (effectGroups.hasOwnProperty(groupName)) {
+                var groupArray = effectGroups[groupName];
+
+                // Проверяем, выключены ли все эффекты (allDisabled)
+                var allDisabled = true;
+                for (var k = 0; k < groupArray.length; k++) {
+                    if (groupArray[k].isEnabled) {
+                        allDisabled = false;
+                        break;
+                    }
+                }
+
+                var count = groupArray.length;
+                var itemLabel = groupName + " (" + count + ")" + (allDisabled ? " | Off" : "");
+                var newItem   = All_Effects_list.add("item", itemLabel);
+
+                newItem.__effectDataGroup = groupArray;
+                newItem.__groupName       = groupName;
+            }
+        }
+    }
+
+    // Первоначальная инициализация (сортируем + выводим)
+    sortCompositions(compsWithGroup, Sort.selection.text);
+    fillCompositionsList();
+    fillAllEffectsList();
+
+    /****************************************
+     * (C) ОБРАБОТЧИКИ СОБЫТИЙ UI
+     ****************************************/
+
+    // (C1) Обработчик: сортировка композиций (DropDown "Ascending"/"Descending")
+    Sort.onChange = function() {
+        sortCompositions(compsWithGroup, Sort.selection.text);
+        fillCompositionsList();
+        layers_list.removeAll();
+        effects_layer_list.removeAll();
+    };
+
+    // (C2) Обработчик: кнопка «Disable Select Effect» (переключает On/Off у выбранной группы эффектов)
+    disable_effect_button.onClick = function() {
+        var selItem = All_Effects_list.selection;
+        if (!selItem) {
+            alert("Select an effect group from 'All Effects' first!");
+            return;
+        }
+
+        var effDataGroup = selItem.__effectDataGroup;
+        if (!effDataGroup || effDataGroup.length === 0) {
+            alert("No effect data group found!");
+            return;
+        }
+
+        // Проверяем, есть ли хотя бы один включённый эффект
+        var anyEnabled = false;
+        for (var i = 0; i < effDataGroup.length; i++) {
+            if (effDataGroup[i].effectProp.enabled) {
+                anyEnabled = true;
+                break;
+            }
+        }
+
+        var count = effDataGroup.length;
+        if (anyEnabled) {
+            // Выключаем все
+            for (var j = 0; j < effDataGroup.length; j++) {
+                effDataGroup[j].effectProp.enabled = false;
+                effDataGroup[j].isEnabled = false;
+            }
+            selItem.text = selItem.__groupName + " (" + count + ") | Off";
+            disable_effect_button.text = "Enable Select Effect";
+        } else {
+            // Включаем все
+            for (var j = 0; j < effDataGroup.length; j++) {
+                effDataGroup[j].effectProp.enabled = true;
+                effDataGroup[j].isEnabled = true;
+            }
+            selItem.text = selItem.__groupName + " (" + count + ")";
+            disable_effect_button.text = "Disable Select Effect";
+        }
+    };
+
+    // При смене выделения в списке «All Effects» — меняем надпись кнопки disable_effect_button
+    All_Effects_list.onChange = function() {
+        var selItem = All_Effects_list.selection;
+        if (!selItem) {
+            disable_effect_button.text = "Disable / Enable";
+            return;
+        }
+        var effDataGroup = selItem.__effectDataGroup;
+        if (!effDataGroup || effDataGroup.length === 0) {
+            disable_effect_button.text = "Disable / Enable";
+            return;
+        }
+
+        // Проверяем, есть ли включённый
+        var anyEnabled = false;
+        for (var i = 0; i < effDataGroup.length; i++) {
+            if (effDataGroup[i].effectProp.enabled) {
+                anyEnabled = true;
+                break;
+            }
+        }
+
+        disable_effect_button.text = anyEnabled ? "Disable Select Effect" : "Enable Select Effect";
+    };
+
+    // (C3) Обработка выбора композиции — заполнить список слоёв
+    compositions_list.onChange = function() {
+        layers_list.removeAll();
+        effects_layer_list.removeAll();
+
+        var selItem = compositions_list.selection;
+        if (!selItem) return;
+
+        // Из строки "CompName [5 layers]" берём CompName
+        var compName = selItem.text.split(" [")[0];
+
+        var foundItem = null;
+        for (var i = 0; i < compsWithGroup.length; i++) {
+            if (compsWithGroup[i].comp.name === compName) {
+                foundItem = compsWithGroup[i];
+                break;
+            }
+        }
+        if (!foundItem) return;
+
+        // Заполняем список слоёв
+        for (var l = 0; l < foundItem.layerNames.length; l++) {
+            layers_list.add("item", foundItem.layerNames[l]);
+        }
+    };
+
+    // (C4) Обработка выбора слоя — заполняем список «Effects»
+    layers_list.onChange = function() {
+        effects_layer_list.removeAll();
+
+        var compSel  = compositions_list.selection;
+        var layerSel = layers_list.selection;
+        if (!compSel || !layerSel) return;
+
+        var compName = compSel.text.split(" [")[0];
+        var foundItem = null;
+        for (var i = 0; i < compsWithGroup.length; i++) {
+            if (compsWithGroup[i].comp.name === compName) {
+                foundItem = compsWithGroup[i];
+                break;
+            }
+        }
+        if (!foundItem) return;
+
+        var layerIndexInArray = layerSel.index; 
+        var effectNamesForLayer = foundItem.layerEffects[layerIndexInArray];
+        if (!effectNamesForLayer) return;
+
+        for (var e = 0; e < effectNamesForLayer.length; e++) {
+            effects_layer_list.add("item", effectNamesForLayer[e]);
+        }
+    };
+
+    // Кнопка "Open Selected Composition"
+    open_selected_comp_button.onClick = function() {
+        var sel = compositions_list.selection;
+        if (!sel) {
+            alert("Select a composition first!");
+            return;
+        }
+        var compName = sel.text.split(" [")[0];
+        for (var i = 0; i < compsWithGroup.length; i++) {
+            var compObj = compsWithGroup[i].comp;
+            if (compObj && compObj.name === compName) {
+                compObj.openInViewer();
+                break;
+            }
+        }
+    };
+
+    /****************************************
+     * (D) Импорт/экспорт FFX + закрытие окна
+     ****************************************/
+
+    // (D1) Обработчик: "Import FFX"
+    import_ffx.onClick = function() {
+        showImportFfxDialog();
+    };
+
+    /**
+     * Показывает диалоговое окно импорта FFX. Можно применить к одному слою или ко всем слоям группы.
+     */
+    function showImportFfxDialog() {
+        var importDialog = new Window("dialog", "Import FFX");
+        importDialog.orientation = "column";
+        importDialog.alignChildren = ["fill","top"];
+        importDialog.spacing = 10;
+        importDialog.margins = 15;
+
+        importDialog.add("statictext", undefined, "Select an FFX file to import:");
+
+        // Поле для пути к файлу
+        var pathGroup = importDialog.add("group");
+        pathGroup.orientation = "row";
+        pathGroup.add("statictext", undefined, "File path:");
+        var pathEdit = pathGroup.add("edittext", undefined, "");
+        pathEdit.size = [300, 25];
+
+        var browseButton = pathGroup.add("button", undefined, "Browse");
+        browseButton.onClick = function() {
+            var ffxFile = File.openDialog("Select an FFX file", "*.ffx");
+            if (ffxFile) {
+                pathEdit.text = ffxFile.fsName;
+            }
+        };
+
+        // Чекбокс: применять ко всем слоям
+        var checkGroup = importDialog.add("group");
+        checkGroup.orientation = "row";
+        var applyAllCheck = checkGroup.add("checkbox", undefined, "Apply to all layers in the group (in all comps)?");
+        applyAllCheck.value = false;
+
+        // Кнопки диалога
+        var btns = importDialog.add("group");
+        btns.orientation = "row";
+        btns.alignChildren = ["fill","center"];
+
+        var okBtn = btns.add("button", undefined, "Import", {name:"ok"});
+        var cancelBtn = btns.add("button", undefined, "Cancel", {name:"cancel"});
+
+        okBtn.onClick = function() {
+            var filePath = pathEdit.text;
+            if (!filePath) {
+                alert("Please select an FFX file.");
+                return;
+            }
+
+            var f = new File(filePath);
+            if (!f.exists) {
+                alert("File not found:\n" + filePath);
+                return;
+            }
+
+            if (applyAllCheck.value) {
+                // Применить FFX ко всем слоям [groupPrefix] во всех композах
+                applyFfxToAllGroupLayers(f);
+                alert("FFX imported on all group layers in all comps.");
+                importDialog.close();
+            } else {
+                // Применить FFX на выбранный слой
+                var selComp  = compositions_list.selection;
+                var selLayer = layers_list.selection;
+                if (!selComp || !selLayer) {
+                    alert("Select a composition and a layer first!");
+                    return;
+                }
+
+                var compName = selComp.text.split(" [")[0];
+                var foundComp = null;
+                for (var i = 0; i < compsWithGroup.length; i++) {
+                    if (compsWithGroup[i].comp.name === compName) {
+                        foundComp = compsWithGroup[i].comp;
+                        break;
+                    }
+                }
+                if (!foundComp) {
+                    alert("Can't find the selected comp");
+                    return;
+                }
+
+                var theLayerIndex = selLayer.index + 1;
+                var theLayer = foundComp.layer(theLayerIndex);
+                if (!theLayer) {
+                    alert("Can't find the selected layer");
+                    return;
+                }
+
+                theLayer.applyPreset(f);
+                alert("FFX imported on layer: " + theLayer.name);
+                importDialog.close();
+            }
+        };
+
+        cancelBtn.onClick = function() {
+            importDialog.close();
+        };
+
+        importDialog.center();
+        importDialog.show();
+    }
+
+    /**
+     * Применяет FFX ко всем слоям [groupPrefix] во всех comps.
+     * @param {File} ffxFile FFX-файл для применения.
+     */
+    function applyFfxToAllGroupLayers(ffxFile) {
+        app.beginUndoGroup("Apply FFX to all group layers");
+        for (var i = 0; i < compsWithGroup.length; i++) {
+            var cwg = compsWithGroup[i];
+            var thisComp = cwg.comp;
+            for (var l = 1; l <= thisComp.numLayers; l++) {
+                var layer = thisComp.layer(l);
+                if (layer.name.indexOf("[" + groupPrefix + "]") === 0) {
+                    $.writeln("Applying FFX to layer: " + layer.name + " in comp: " + thisComp.name);
+                    layer.applyPreset(ffxFile);
+                }
+            }
+        }
+        app.endUndoGroup();
+    }
+
+    // (D2) Обработчик: "Export FFX"
+    export_ffx.onClick = function() {
+        showExportFfxDialog();
+    };
+
+    /**
+     * Показывает диалоговое окно экспорта FFX (один эффект или все эффекты слоя).
+     */
+    function showExportFfxDialog() {
+        var compSel   = compositions_list.selection;
+        var layerSel  = layers_list.selection;
+        var effectSel = effects_layer_list.selection;
+
+        if (!compSel || !layerSel) {
+            alert("Please select a composition and layer first!");
+            return;
+        }
+
+        var layerName = layerSel.text;
+
+        var exportWindow = new Window("dialog", "Export FFX Preset");
+        exportWindow.orientation = "column";
+        exportWindow.alignChildren = ["fill","top"];
+        exportWindow.spacing = 10;
+        exportWindow.margins = 15;
+
+        exportWindow.add("statictext", undefined, "Export from layer: " + layerName);
+
+        // Поле для пути сохранения
+        var pathGroup = exportWindow.add("group");
+        pathGroup.orientation = "row";
+        pathGroup.add("statictext", undefined, "Save path:");
+        var pathEdit = pathGroup.add("edittext", undefined, "");
+        pathEdit.size = [300, 25];
+
+        var browseBtn = pathGroup.add("button", undefined, "Browse");
+        browseBtn.onClick = function() {
+            var folder = Folder.selectDialog("Please select a folder");
+            if (folder) {
+                pathEdit.text = folder.fsName;
+            }
+        };
+
+        // Имя файла
+        var fileGroup = exportWindow.add("group");
+        fileGroup.orientation = "row";
+        fileGroup.add("statictext", undefined, "File Name:");
+
+        // Если выбран эффект в списке (effects_layer_list), подставим его имя как дефолтное
+        var defaultName = "My_FFX_Preset.ffx";
+        if (effectSel && effectSel.text) {
+            var cleaned = effectSel.text.replace(" | Off", ""); 
+            cleaned = cleaned.replace(/\s+/g, "_");
+            if (!/\.ffx$/i.test(cleaned)) {
+                cleaned += ".ffx";
+            }
+            defaultName = cleaned;
+        }
+        var fileEdit = fileGroup.add("edittext", undefined, defaultName);
+        fileEdit.size = [250, 25];
+
+        // Чекбокс: «Export ALL effects from this layer?»
+        var expAllGroup = exportWindow.add("group");
+        expAllGroup.orientation = "row";
+        var exportAllCheck = expAllGroup.add("checkbox", undefined, "Export ALL effects from this layer?");
+        exportAllCheck.value = false;
+
+        // Кнопки диалога
+        var btnGroup = exportWindow.add("group");
+        btnGroup.orientation = "row";
+        btnGroup.alignChildren = ["fill","center"];
+
+        var exportBtn = btnGroup.add("button", undefined, "Export", {name:"ok"});
+        var cancelBtn = btnGroup.add("button", undefined, "Cancel", {name:"cancel"});
+
+        exportBtn.onClick = function() {
+            var savePath = pathEdit.text;
+            var fileName = fileEdit.text;
+
+            if (!savePath || !fileName) {
+                alert("Please specify the path and file name.");
+                return;
+            }
+            if (!/\.ffx$/i.test(fileName)) {
+                fileName += ".ffx";
+            }
+
+            var fullPath = savePath + "/" + fileName;
+            var file = new File(fullPath);
+
+            // Ищем композицию, соответствующую compSel
+            var compName = compSel.text.split(" [")[0];
+            var foundComp = null;
+            for (var i = 0; i < compsWithGroup.length; i++) {
+                if (compsWithGroup[i].comp.name === compName) {
+                    foundComp = compsWithGroup[i].comp;
+                    break;
+                }
+            }
+            if (!foundComp) {
+                alert("Something went wrong: can't find the comp");
+                return;
+            }
+
+            var theLayerIndex = layerSel.index + 1;
+            var theLayer = foundComp.layer(theLayerIndex);
+            if (!theLayer) {
+                alert("Something went wrong: can't find the layer");
+                return;
+            }
+
+            $.writeln("\n--- Export FFX Debug ---");
+            $.writeln("Selected comp: " + compName);
+            $.writeln("Selected layer: " + layerName);
+            $.writeln("Export path: " + file.fsName);
+            $.writeln("Export ALL? " + exportAllCheck.value);
+
+            if (exportAllCheck.value) {
+                // Сохраняем все эффекты слоя
+                $.writeln("Trying: theLayer.savePreset(...)");
+                var successAll = theLayer.savePreset(file.fsName);
+                $.writeln("savePreset (all) returned: " + successAll);
+
+                if (successAll) {
+                    alert("All effects from layer have been exported:\n" + file.fsName);
+                    exportWindow.close();
+                } else {
+                    alert("Failed to export all effects.");
+                }
+            } else {
+                // Сохраняем один выбранный эффект
+                if (!effectSel) {
+                    alert("No effect selected in 'Effects' list.\n(Or check 'Export ALL effects').");
+                    return;
+                }
+                var effectName = effectSel.text.replace(" | Off", "");
+                $.writeln("Trying single effect: " + effectName);
+
+                var effectGroup = theLayer.property("ADBE Effect Parade");
+                if (!effectGroup) {
+                    alert("No effect group found on this layer!");
+                    return;
+                }
+
+                var effectToExport = null;
+                for (var e = 1; e <= effectGroup.numProperties; e++) {
+                    var prop = effectGroup.property(e);
+                    if (prop && prop.name === effectName) {
+                        effectToExport = prop;
+                        break;
+                    }
+                }
+
+                if (!effectToExport) {
+                    alert("Effect '" + effectName + "' not found on this layer!");
+                    return;
+                }
+
+                $.writeln("Trying: effectToExport.savePreset(...) for effect: " + effectName);
+                var successOne = effectToExport.savePreset(file.fsName);
+                $.writeln("savePreset (single effect) returned: " + successOne);
+
+                if (successOne) {
+                    alert("Effect exported successfully:\n" + file.fsName);
+                    exportWindow.close();
+                } else {
+                    alert("Failed to export the effect.");
+                }
+            }
+        };
+
+        cancelBtn.onClick = function() {
+            exportWindow.close();
+        };
+
+        exportWindow.center();
+        exportWindow.show();
+    }
+
+    // (D3) Кнопка закрытия основного окна
+    close_button.onClick = function() {
+        dialog.close();
+    };
+
+    // Показываем диалог
+    dialog.center();
+    dialog.show();
+}
+
 
 //
 // ===================== CREATE EFFECT GROUP UI =====================
