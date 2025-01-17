@@ -1,4 +1,4 @@
-var scriptVersion = "3.2.4";
+var scriptVersion = "3.2.6";
 
  // LAYER_GROUP Color Label
 
@@ -116,7 +116,7 @@ var scriptVersion = "3.2.4";
 
     var export_ffx_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0D%00%00%00%0E%08%06%00%00%00%C3%B4%7F%C2%96%C3%92%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%0DIDATx%01%C2%8DR%0B%C2%91%C3%820%10MR%04T%02%C3%A7%C3%A0%C3%8E%01%C2%A7%C3%A0%C2%AE%C2%AD%01%1C%14%14P%1C%C2%80%02%40%40%C2%A7S%05T%02(%00%09%18h%C3%8B%7B%C3%8C%26%C2%B3%C3%BCy3%C2%9D%C3%AC%C2%BE%C3%ACK%C3%9Enj%C2%8DB%5D%C3%97y%C3%9B%C2%B6%05%C3%82%C3%98s%C3%96%C3%9A%C2%AF%24I%C2%8E%C2%BAn%C3%A0%C2%83%C2%AA%C2%AAb%11%C2%B0p%C2%ADjN%C3%A6%06A%04%C3%81%C3%889%17%C3%B7%7D%3FM%C3%93ta%5E%C3%80%C3%B9%20%C2%8A%C2%A2%C2%BF%0B%C3%A1%5Cc%C3%9E%C3%80%C3%92%16%7B%C3%80%0D%5B%C2%AE%C2%B0%C3%B6%C2%A3%0Bt%3F%C2%A8%1D%5E%0EFq%C2%85%C3%AF%C2%80x(%C3%A2%C2%83%C3%BE%C3%8A%C2%B2%2CD0c%C3%9Eu%C3%9Dx%C2%80%C2%93%C3%A7H%C3%B6%C3%A0s%C2%ACsm%0F%C3%B9%0C%C3%BB9%04%08%C3%BB%C2%82%C3%BBY%C2%96%15VNY%C2%81%18%C3%93%1A%C3%AC%C3%AC%C2%94%C2%9D%C2%91%C3%986%5E%10%06%01%C3%A2%1B%C3%8BI%0B%04a%C3%9Cp%10%26%C3%AAd%10%14%5D%09%C3%98%C2%B4%C3%9C%C3%920G%2F%C2%93%20%12%01%C2%B1%7F%208%C3%A2%C3%8D~)dow%22%C2%90%C2%8D'q*%7B%C3%99%C2%80Kdo%C2%8A%7C%C3%A9G%C3%8Ew%C3%A2h%C3%BE%1F%C3%BDc%C3%8F%C3%A0%C3%94%10%3E%12%10gup%C2%AC%C2%BD%C3%A7%C3%BASp%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 
-    var panelGlobal = this;
+var panelGlobal = this;
 var palette = (panelGlobal instanceof Panel) 
     ? panelGlobal 
     : new Window("palette", undefined, undefined, {maximizeButton: true, resizeable: true}); 
@@ -1278,7 +1278,15 @@ function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColo
         precompose_window.margins = 16; 
 
         var About = precompose_window.add("statictext", undefined, undefined, {name: "About"}); 
-        About.text = "Pre-compose works only on active composition, not on all at the same time"; 
+        // Задаём сам текст
+        About.text = "Pre-compose works only on active composition, not on all at the same time";
+
+        // Устанавливаем цвет в формате RGB (0–1)
+        About.graphics.foregroundColor = About.graphics.newPen(
+            About.graphics.PenType.SOLID_COLOR,
+            [0.5569, 0.7333, 0.9412], // это #8EBBF0
+            1                         // полная непрозрачность
+        );
         About.justify = "center"; 
         About.alignment = ["center","top"]; 
 
@@ -2244,316 +2252,6 @@ function showGroupCompositions(groupData) {
         }
     };
 
-    /****************************************
-     * (D) Импорт/экспорт FFX + закрытие окна
-     ****************************************/
-
-    // (D1) Обработчик: "Import FFX"
-    import_ffx.onClick = function() {
-        showImportFfxDialog();
-    };
-
-    /**
-     * Показывает диалоговое окно импорта FFX. Можно применить к одному слою или ко всем слоям группы.
-     */
-    function showImportFfxDialog() {
-        var importDialog = new Window("dialog", "Import FFX");
-        importDialog.orientation = "column";
-        importDialog.alignChildren = ["fill","top"];
-        importDialog.spacing = 10;
-        importDialog.margins = 15;
-
-        importDialog.add("statictext", undefined, "Select an FFX file to import:");
-
-        // Поле для пути к файлу
-        var pathGroup = importDialog.add("group");
-        pathGroup.orientation = "row";
-        pathGroup.add("statictext", undefined, "File path:");
-        var pathEdit = pathGroup.add("edittext", undefined, "");
-        pathEdit.size = [300, 25];
-
-        var browseButton = pathGroup.add("button", undefined, "Browse");
-        browseButton.onClick = function() {
-            var ffxFile = File.openDialog("Select an FFX file", "*.ffx");
-            if (ffxFile) {
-                pathEdit.text = ffxFile.fsName;
-            }
-        };
-
-        // Чекбокс: применять ко всем слоям
-        var checkGroup = importDialog.add("group");
-        checkGroup.orientation = "row";
-        var applyAllCheck = checkGroup.add("checkbox", undefined, "Apply to all layers in the group (in all comps)?");
-        applyAllCheck.value = false;
-
-        // Кнопки диалога
-        var btns = importDialog.add("group");
-        btns.orientation = "row";
-        btns.alignChildren = ["fill","center"];
-
-        var okBtn = btns.add("button", undefined, "Import", {name:"ok"});
-        var cancelBtn = btns.add("button", undefined, "Cancel", {name:"cancel"});
-
-        okBtn.onClick = function() {
-            var filePath = pathEdit.text;
-            if (!filePath) {
-                alert("Please select an FFX file.");
-                return;
-            }
-
-            var f = new File(filePath);
-            if (!f.exists) {
-                alert("File not found:\n" + filePath);
-                return;
-            }
-
-            if (applyAllCheck.value) {
-                // Применить FFX ко всем слоям [groupPrefix] во всех композах
-                applyFfxToAllGroupLayers(f);
-                alert("FFX imported on all group layers in all comps.");
-                importDialog.close();
-            } else {
-                // Применить FFX на выбранный слой
-                var selComp  = compositions_list.selection;
-                var selLayer = layers_list.selection;
-                if (!selComp || !selLayer) {
-                    alert("Select a composition and a layer first!");
-                    return;
-                }
-
-                var compName = selComp.text.split(" [")[0];
-                var foundComp = null;
-                for (var i = 0; i < compsWithGroup.length; i++) {
-                    if (compsWithGroup[i].comp.name === compName) {
-                        foundComp = compsWithGroup[i].comp;
-                        break;
-                    }
-                }
-                if (!foundComp) {
-                    alert("Can't find the selected comp");
-                    return;
-                }
-
-                var theLayerIndex = selLayer.index + 1;
-                var theLayer = foundComp.layer(theLayerIndex);
-                if (!theLayer) {
-                    alert("Can't find the selected layer");
-                    return;
-                }
-
-                theLayer.applyPreset(f);
-                alert("FFX imported on layer: " + theLayer.name);
-                importDialog.close();
-            }
-        };
-
-        cancelBtn.onClick = function() {
-            importDialog.close();
-        };
-
-        importDialog.center();
-        importDialog.show();
-    }
-
-    /**
-     * Применяет FFX ко всем слоям [groupPrefix] во всех comps.
-     * @param {File} ffxFile FFX-файл для применения.
-     */
-    function applyFfxToAllGroupLayers(ffxFile) {
-        app.beginUndoGroup("Apply FFX to all group layers");
-        for (var i = 0; i < compsWithGroup.length; i++) {
-            var cwg = compsWithGroup[i];
-            var thisComp = cwg.comp;
-            for (var l = 1; l <= thisComp.numLayers; l++) {
-                var layer = thisComp.layer(l);
-                if (layer.name.indexOf("[" + groupPrefix + "]") === 0) {
-                    $.writeln("Applying FFX to layer: " + layer.name + " in comp: " + thisComp.name);
-                    layer.applyPreset(ffxFile);
-                }
-            }
-        }
-        app.endUndoGroup();
-    }
-
-    // (D2) Обработчик: "Export FFX"
-    export_ffx.onClick = function() {
-        showExportFfxDialog();
-    };
-
-    /**
-     * Показывает диалоговое окно экспорта FFX (один эффект или все эффекты слоя).
-     */
-    function showExportFfxDialog() {
-        var compSel   = compositions_list.selection;
-        var layerSel  = layers_list.selection;
-        var effectSel = effects_layer_list.selection;
-
-        if (!compSel || !layerSel) {
-            alert("Please select a composition and layer first!");
-            return;
-        }
-
-        var layerName = layerSel.text;
-
-        var exportWindow = new Window("dialog", "Export FFX Preset");
-        exportWindow.orientation = "column";
-        exportWindow.alignChildren = ["fill","top"];
-        exportWindow.spacing = 10;
-        exportWindow.margins = 15;
-
-        exportWindow.add("statictext", undefined, "Export from layer: " + layerName);
-
-        // Поле для пути сохранения
-        var pathGroup = exportWindow.add("group");
-        pathGroup.orientation = "row";
-        pathGroup.add("statictext", undefined, "Save path:");
-        var pathEdit = pathGroup.add("edittext", undefined, "");
-        pathEdit.size = [300, 25];
-
-        var browseBtn = pathGroup.add("button", undefined, "Browse");
-        browseBtn.onClick = function() {
-            var folder = Folder.selectDialog("Please select a folder");
-            if (folder) {
-                pathEdit.text = folder.fsName;
-            }
-        };
-
-        // Имя файла
-        var fileGroup = exportWindow.add("group");
-        fileGroup.orientation = "row";
-        fileGroup.add("statictext", undefined, "File Name:");
-
-        // Если выбран эффект в списке (effects_layer_list), подставим его имя как дефолтное
-        var defaultName = "My_FFX_Preset.ffx";
-        if (effectSel && effectSel.text) {
-            var cleaned = effectSel.text.replace(" | Off", ""); 
-            cleaned = cleaned.replace(/\s+/g, "_");
-            if (!/\.ffx$/i.test(cleaned)) {
-                cleaned += ".ffx";
-            }
-            defaultName = cleaned;
-        }
-        var fileEdit = fileGroup.add("edittext", undefined, defaultName);
-        fileEdit.size = [250, 25];
-
-        // Чекбокс: «Export ALL effects from this layer?»
-        var expAllGroup = exportWindow.add("group");
-        expAllGroup.orientation = "row";
-        var exportAllCheck = expAllGroup.add("checkbox", undefined, "Export ALL effects from this layer?");
-        exportAllCheck.value = false;
-
-        // Кнопки диалога
-        var btnGroup = exportWindow.add("group");
-        btnGroup.orientation = "row";
-        btnGroup.alignChildren = ["fill","center"];
-
-        var exportBtn = btnGroup.add("button", undefined, "Export", {name:"ok"});
-        var cancelBtn = btnGroup.add("button", undefined, "Cancel", {name:"cancel"});
-
-        exportBtn.onClick = function() {
-            var savePath = pathEdit.text;
-            var fileName = fileEdit.text;
-
-            if (!savePath || !fileName) {
-                alert("Please specify the path and file name.");
-                return;
-            }
-            if (!/\.ffx$/i.test(fileName)) {
-                fileName += ".ffx";
-            }
-
-            var fullPath = savePath + "/" + fileName;
-            var file = new File(fullPath);
-
-            // Ищем композицию, соответствующую compSel
-            var compName = compSel.text.split(" [")[0];
-            var foundComp = null;
-            for (var i = 0; i < compsWithGroup.length; i++) {
-                if (compsWithGroup[i].comp.name === compName) {
-                    foundComp = compsWithGroup[i].comp;
-                    break;
-                }
-            }
-            if (!foundComp) {
-                alert("Something went wrong: can't find the comp");
-                return;
-            }
-
-            var theLayerIndex = layerSel.index + 1;
-            var theLayer = foundComp.layer(theLayerIndex);
-            if (!theLayer) {
-                alert("Something went wrong: can't find the layer");
-                return;
-            }
-
-            $.writeln("\n--- Export FFX Debug ---");
-            $.writeln("Selected comp: " + compName);
-            $.writeln("Selected layer: " + layerName);
-            $.writeln("Export path: " + file.fsName);
-            $.writeln("Export ALL? " + exportAllCheck.value);
-
-            if (exportAllCheck.value) {
-                // Сохраняем все эффекты слоя
-                $.writeln("Trying: theLayer.savePreset(...)");
-                var successAll = theLayer.savePreset(file.fsName);
-                $.writeln("savePreset (all) returned: " + successAll);
-
-                if (successAll) {
-                    alert("All effects from layer have been exported:\n" + file.fsName);
-                    exportWindow.close();
-                } else {
-                    alert("Failed to export all effects.");
-                }
-            } else {
-                // Сохраняем один выбранный эффект
-                if (!effectSel) {
-                    alert("No effect selected in 'Effects' list.\n(Or check 'Export ALL effects').");
-                    return;
-                }
-                var effectName = effectSel.text.replace(" | Off", "");
-                $.writeln("Trying single effect: " + effectName);
-
-                var effectGroup = theLayer.property("ADBE Effect Parade");
-                if (!effectGroup) {
-                    alert("No effect group found on this layer!");
-                    return;
-                }
-
-                var effectToExport = null;
-                for (var e = 1; e <= effectGroup.numProperties; e++) {
-                    var prop = effectGroup.property(e);
-                    if (prop && prop.name === effectName) {
-                        effectToExport = prop;
-                        break;
-                    }
-                }
-
-                if (!effectToExport) {
-                    alert("Effect '" + effectName + "' not found on this layer!");
-                    return;
-                }
-
-                $.writeln("Trying: effectToExport.savePreset(...) for effect: " + effectName);
-                var successOne = effectToExport.savePreset(file.fsName);
-                $.writeln("savePreset (single effect) returned: " + successOne);
-
-                if (successOne) {
-                    alert("Effect exported successfully:\n" + file.fsName);
-                    exportWindow.close();
-                } else {
-                    alert("Failed to export the effect.");
-                }
-            }
-        };
-
-        cancelBtn.onClick = function() {
-            exportWindow.close();
-        };
-
-        exportWindow.center();
-        exportWindow.show();
-    }
-
     // (D3) Кнопка закрытия основного окна
     close_button.onClick = function() {
         dialog.close();
@@ -2569,9 +2267,99 @@ function showGroupCompositions(groupData) {
 // ===================== CREATE EFFECT GROUP UI =====================
 //
 
+//
+// ВАЖНО: Добавлены две новые вспомогательные функции:
+//   1) getEffectCountsByBaseName(prefix) – возвращает объект вида { "Curves": кол-во_эффектов, ... }
+//   2) updateEffectGroupPanelTitle(groupData) – формирует строку для groupPanel.text
+//
+
+// !!! NEW !!!
+// Убираем в конце эффекта любые пробел + число (например "Curves 2" -> "Curves")
+function unifyEffectBaseName(baseName) {
+    // Удаляем конечные пробел + цифра (например, "Curves 2" => "Curves")
+    // Если вам нужно более гибкое правило, корректируйте эту регулярку.
+    return baseName.replace(/\s+\d+$/, "");
+}
+
+// !!! NEW !!!
+// Собираем статистику эффектов по префиксу группы
+function getEffectCountsByBaseName(prefix) {
+    var comps = getAllCompositions();
+    var prefixString = "[" + prefix + "]";
+    var prefixLength = prefixString.length;
+    var result = {}; // формат: { baseName: count }
+
+    for (var c = 0; c < comps.length; c++) {
+        var comp = comps[c];
+        for (var l = 1; l <= comp.numLayers; l++) {
+            var layer = comp.layer(l);
+            var fx = layer.property("Effects");
+            if (!fx) continue;
+            for (var e = 1; e <= fx.numProperties; e++) {
+                var eff = fx.property(e);
+                // Проверяем, начинается ли имя эффекта с [prefix]
+                if (eff.name.indexOf(prefixString) === 0) {
+                    // baseName без префикса [CRVS] и пробела
+                    var baseName = eff.name.substring(prefixLength + 1); 
+                    baseName = unifyEffectBaseName(baseName);
+                    
+                    if (!result[baseName]) {
+                        result[baseName] = 0;
+                    }
+                    result[baseName]++;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+// !!! NEW !!!
+// Обновляем заголовок панели группы с учётом до 3 уникальных имён эффектов и общего количества
+function updateEffectGroupPanelTitle(groupData) {
+    var groupName = groupData.name;
+    var prefix    = groupData.prefix;
+    var countsMap = getEffectCountsByBaseName(prefix);
+    var baseNames = [];
+
+    for (var nm in countsMap) {
+        if (countsMap.hasOwnProperty(nm)) {
+            baseNames.push(nm);
+        }
+    }
+    baseNames.sort();
+
+    // Если вообще нет эффектов с таким префиксом, просто показываем "GroupName [PRFX]"
+    if (baseNames.length === 0) {
+        groupData.panel.text = groupName + " [" + prefix + "]";
+        return;
+    }
+
+    // Берём первые 3 эффекта
+    var top3 = baseNames.slice(0, 3);
+    var top3String = top3.join(", ");
+
+    // Считаем общее количество эффектов (сумма значений в countsMap)
+    var totalCount = 0;
+    for (var k in countsMap) {
+        if (countsMap.hasOwnProperty(k)) {
+            totalCount += countsMap[k];
+        }
+    }
+
+    // Формируем итоговую надпись
+    // Пример: "Curves [CRVS] | Curves, Levels, Hue (7)"
+    groupData.panel.text = groupName + " [" + prefix + "] | " + top3String + " (" + totalCount + ")";
+}
+
+// ----------------------------------------------------------------------------
+// Ниже идёт ваша функция createEffectGroupUI(...) c добавленными вызовами
+// updateEffectGroupPanelTitle(...) в нужных местах
+// ----------------------------------------------------------------------------
+
 function createEffectGroupUI(groupName, prefix, effectName) {
     var groupPanel = tab_effects.add("panel", undefined, undefined, {name: "effect_group_" + prefix});
-    groupPanel.text = groupName + " [" + prefix + "]";
+    groupPanel.text = groupName + " [" + prefix + "]"; // Изначально
     groupPanel.orientation = "row";
     groupPanel.alignChildren = ["center", "center"];
     groupPanel.spacing = 12;
@@ -2584,7 +2372,6 @@ function createEffectGroupUI(groupName, prefix, effectName) {
     view_button.helpTip = "Toggle visibility of effects in this group across all compositions";
     view_button.preferredSize.width  = 28;
     view_button.preferredSize.height = 28;
-
     var viewState = true;
     setViewButtonIconEffects(view_button, view_button_fx_on_imgString);
 
@@ -2593,7 +2380,6 @@ function createEffectGroupUI(groupName, prefix, effectName) {
     solo_button.helpTip = "Toggle solo mode for this effects group";
     solo_button.preferredSize.width  = 28;
     solo_button.preferredSize.height = 28;
-
     var soloState = false;
     setSoloButtonIconEffects(solo_button, solo_off_button_imgString);
 
@@ -2642,6 +2428,7 @@ function createEffectGroupUI(groupName, prefix, effectName) {
     delete_group_effects_button.preferredSize.width  = 33;
     delete_group_effects_button.preferredSize.height = 33;
 
+    // Собираем все данные
     var groupData = {
         name:        groupName,
         prefix:      prefix,
@@ -2687,7 +2474,11 @@ function createEffectGroupUI(groupName, prefix, effectName) {
         if (!effectsFound) {
             alert("Effects for group '" + groupName + "' not found in any composition.");
         }
+
         app.endUndoGroup();
+        // Здесь просмотр включён/выключен, но названия эффектов не менялись,
+        // так что можно НЕ обновлять заголовок. Если нужно, можно раскомментировать:
+        // updateEffectGroupPanelTitle(groupData);
     };
 
     // SOLO onClick
@@ -2731,6 +2522,8 @@ function createEffectGroupUI(groupName, prefix, effectName) {
             }
         }
         app.endUndoGroup();
+        // Названия эффектов не менялись, если нужно — можно обновить:
+        // updateEffectGroupPanelTitle(groupData);
     };
 
     // ADD EFFECT onClick
@@ -2762,11 +2555,15 @@ function createEffectGroupUI(groupName, prefix, effectName) {
             alert("Please select effects to add to " + groupName + ".");
         }
         app.endUndoGroup();
+
+        // !!! NEW !!!
+        // После добавления эффектов обновим заголовок
+        updateEffectGroupPanelTitle(groupData);
     };
 
     // EDIT onClick
     edit_group_effects_button.onClick = function() {
-        var dialog = new Window("dialog", "Edit Effect Group");
+        var dialog = new Window("dialog", "Settings Effect Group: " + groupData.name);
         dialog.orientation = "column";
         dialog.alignChildren = ["fill", "top"];
 
@@ -2828,8 +2625,10 @@ function createEffectGroupUI(groupName, prefix, effectName) {
             };
         } else {
             var infoText = dialog.add("statictext", undefined, "(No effect is tracked in this group.)");
-            infoText.graphics.foregroundColor = infoText.graphics.newPen(
-                infoText.graphics.PenType.SOLID_COLOR, [0.9,0.3,0.3], 1
+            infoText.graphics.foregroundColor = infoText.graphics.foregroundColor = infoText.graphics.newPen(
+                infoText.graphics.PenType.SOLID_COLOR,
+                [0.5569, 0.7333, 0.9412], // RGB для #8EBBF0
+                1                         // непрозрачность 100%
             );
         }
 
@@ -2845,7 +2644,7 @@ function createEffectGroupUI(groupName, prefix, effectName) {
                 alert("Please enter both a group name and prefix.");
                 return;
             }
-            app.beginUndoGroup("Edit Effect Group " + groupData.name);
+            app.beginUndoGroup("Settings Effect Group " + groupData.name);
 
             var comps = getAllCompositions();
             for (var c = 0; c < comps.length; c++) {
@@ -2866,7 +2665,10 @@ function createEffectGroupUI(groupName, prefix, effectName) {
 
             groupData.name   = newGroupName;
             groupData.prefix = newPrefix;
-            groupPanel.text  = newGroupName + " [" + newPrefix + "]";
+
+            // !!! NEW !!!
+            // Обновляем заголовок с учётом новых имени и префикса
+            updateEffectGroupPanelTitle(groupData);
 
             palette.layout.layout(true);
             palette.layout.resize();
@@ -2922,10 +2724,13 @@ function createEffectGroupUI(groupName, prefix, effectName) {
         app.endUndoGroup();
     };
 
+    // !!! NEW !!!
+    // В самом конце — первый раз обновляем заголовок, чтобы сразу увидеть эффекты группы
+    updateEffectGroupPanelTitle(groupData);
+
     palette.layout.layout(true);
     palette.layout.resize();
 }
-
 //
 // "Create a New Effects Group" кнопка
 //
