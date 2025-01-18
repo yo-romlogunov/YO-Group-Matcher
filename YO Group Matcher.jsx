@@ -1,4 +1,4 @@
-var scriptVersion = "3.2.6";
+var scriptVersion = "3.3.0";
 
  // LAYER_GROUP Color Label
 
@@ -1261,7 +1261,106 @@ function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColo
         precomposeButton.text = "Pre-compose Tool (Beta)";
         precomposeButton.preferredSize.width  = 150; 
         precomposeButton.preferredSize.height = 30;
-        precomposeButton.helpTip = "Pre-compose selected layers for this group (Beta)";       
+        precomposeButton.helpTip = "Pre-compose selected layers for this group (Beta)";   
+        
+                // Пример кнопки "Rename Layers" 
+        var renamelayersButton = toolsgroupPanel.add("iconbutton", undefined, undefined, {
+            name: "renamelayersButton", 
+            style: "toolbutton"}); 
+        renamelayersButton.text = "Rename Layers (Beta)";
+        renamelayersButton.preferredSize.width  = 150; 
+        renamelayersButton.preferredSize.height = 30;
+        renamelayersButton.helpTip = "Rename layers with this group";
+
+        renamelayersButton.onClick = function() {
+        var currentPrefix    = groupData.prefix;
+        var currentGroupName = groupData.name;
+        
+            // === Создаём диалоговое окно ===
+            var dialog = new Window("dialog", "Rename Layers In Group");
+            dialog.orientation = "column";
+            dialog.alignChildren = ["fill", "top"];
+            dialog.margins = 16;
+        
+            // === Группа (одна строка) с Prefix (read-only) и полем "New Name" ===
+            var fieldsGroup = dialog.add("group");
+            fieldsGroup.orientation = "row";
+            fieldsGroup.alignChildren = ["center", "center"];
+            fieldsGroup.spacing = 10;
+        
+            // Текст Prefix
+            fieldsGroup.add("statictext", undefined, "Prefix:");
+            // Поле Prefix (read-only)
+            var prefixField = fieldsGroup.add("edittext", undefined, "[" + currentPrefix + "]");
+            prefixField.preferredSize.width  = 50; 
+            prefixField.enabled = false; 
+        
+            // Текст "New Name"
+            fieldsGroup.add("statictext", undefined, "New Name:");
+            var newNameField = fieldsGroup.add("edittext", undefined, "");
+            newNameField.characters = 20;
+        
+            // === Чекбокс (использовать имя группы) ===
+            var useGroupNameCheckbox = dialog.add("checkbox", undefined, "Use Group Name for Rename");
+            useGroupNameCheckbox.value = false; 
+            useGroupNameCheckbox.helpTip = "If enabled, the second field (New Name) will be replaced with group name.";
+        
+            // Когда пользователь кликает по чекбоксу
+            useGroupNameCheckbox.onClick = function() {
+                if (useGroupNameCheckbox.value) {
+                    // Подставляем имя группы
+                    newNameField.text = currentGroupName;
+                } else {
+                    // По желанию: очищаем или восстанавливаем старое значение
+                    newNameField.text = "";
+                }
+            };
+        
+            // === Кнопки OK / Cancel ===
+            var buttonsGroup = dialog.add("group");
+            buttonsGroup.alignment = "right";
+        
+            var okBtn = buttonsGroup.add("button", undefined, "OK");
+            var cancelBtn = buttonsGroup.add("button", undefined, "Cancel");
+        
+            // --- Обработка OK ---
+            okBtn.onClick = function() {
+                var newName = newNameField.text;
+                if (!newName || newName.length === 0) {
+                    alert("Please enter a new name.");
+                    return;
+                }
+        
+                app.beginUndoGroup("Rename Layers In Group");
+        
+                var comps = getAllCompositions(); // Ваша функция получения всех композиций
+                for (var c = 0; c < comps.length; c++) {
+                    var comp = comps[c];
+                    for (var l = 1; l <= comp.numLayers; l++) {
+                        var layer = comp.layer(l);
+        
+                        // Проверяем, начинается ли имя слоя с "[prefix]"
+                        var prefixSearch = "[" + currentPrefix + "]";
+                        if (layer.name.indexOf(prefixSearch) === 0) {
+                            // Полностью заменяем имя слоя (кроме префикса)
+                            layer.name = "[" + currentPrefix + "] " + newName;
+                        }
+                    }
+                }
+        
+                app.endUndoGroup();
+                dialog.close();
+            };
+        
+            // --- Обработка Cancel ---
+            cancelBtn.onClick = function() {
+                dialog.close();
+            };
+        
+            // Показываем диалог
+            dialog.center();
+            dialog.show();
+        };
 
         // Parameters
         var parametersPanel = dialog.add("panel", undefined, "Parameters");
@@ -1609,6 +1708,7 @@ collapse_transformationButton.onClick = function() {
     layerGroups.push(groupData);
     palette.layout.layout(true);
 }
+
 
 //
 // "Create a New Layer Group" кнопка
@@ -2267,13 +2367,6 @@ function showGroupCompositions(groupData) {
 // ===================== CREATE EFFECT GROUP UI =====================
 //
 
-//
-// ВАЖНО: Добавлены две новые вспомогательные функции:
-//   1) getEffectCountsByBaseName(prefix) – возвращает объект вида { "Curves": кол-во_эффектов, ... }
-//   2) updateEffectGroupPanelTitle(groupData) – формирует строку для groupPanel.text
-//
-
-// !!! NEW !!!
 // Убираем в конце эффекта любые пробел + число (например "Curves 2" -> "Curves")
 function unifyEffectBaseName(baseName) {
     // Удаляем конечные пробел + цифра (например, "Curves 2" => "Curves")
@@ -2281,7 +2374,6 @@ function unifyEffectBaseName(baseName) {
     return baseName.replace(/\s+\d+$/, "");
 }
 
-// !!! NEW !!!
 // Собираем статистику эффектов по префиксу группы
 function getEffectCountsByBaseName(prefix) {
     var comps = getAllCompositions();
@@ -2314,7 +2406,6 @@ function getEffectCountsByBaseName(prefix) {
     return result;
 }
 
-// !!! NEW !!!
 // Обновляем заголовок панели группы с учётом до 3 уникальных имён эффектов и общего количества
 function updateEffectGroupPanelTitle(groupData) {
     var groupName = groupData.name;
@@ -2351,11 +2442,6 @@ function updateEffectGroupPanelTitle(groupData) {
     // Пример: "Curves [CRVS] | Curves, Levels, Hue (7)"
     groupData.panel.text = groupName + " [" + prefix + "] | " + top3String + " (" + totalCount + ")";
 }
-
-// ----------------------------------------------------------------------------
-// Ниже идёт ваша функция createEffectGroupUI(...) c добавленными вызовами
-// updateEffectGroupPanelTitle(...) в нужных местах
-// ----------------------------------------------------------------------------
 
 function createEffectGroupUI(groupName, prefix, effectName) {
     var groupPanel = tab_effects.add("panel", undefined, undefined, {name: "effect_group_" + prefix});
@@ -2476,9 +2562,6 @@ function createEffectGroupUI(groupName, prefix, effectName) {
         }
 
         app.endUndoGroup();
-        // Здесь просмотр включён/выключен, но названия эффектов не менялись,
-        // так что можно НЕ обновлять заголовок. Если нужно, можно раскомментировать:
-        // updateEffectGroupPanelTitle(groupData);
     };
 
     // SOLO onClick
@@ -2555,9 +2638,6 @@ function createEffectGroupUI(groupName, prefix, effectName) {
             alert("Please select effects to add to " + groupName + ".");
         }
         app.endUndoGroup();
-
-        // !!! NEW !!!
-        // После добавления эффектов обновим заголовок
         updateEffectGroupPanelTitle(groupData);
     };
 
@@ -2665,11 +2745,7 @@ function createEffectGroupUI(groupName, prefix, effectName) {
 
             groupData.name   = newGroupName;
             groupData.prefix = newPrefix;
-
-            // !!! NEW !!!
-            // Обновляем заголовок с учётом новых имени и префикса
             updateEffectGroupPanelTitle(groupData);
-
             palette.layout.layout(true);
             palette.layout.resize();
             app.endUndoGroup();
@@ -2723,14 +2799,11 @@ function createEffectGroupUI(groupName, prefix, effectName) {
         }
         app.endUndoGroup();
     };
-
-    // !!! NEW !!!
-    // В самом конце — первый раз обновляем заголовок, чтобы сразу увидеть эффекты группы
     updateEffectGroupPanelTitle(groupData);
-
     palette.layout.layout(true);
     palette.layout.resize();
 }
+
 //
 // "Create a New Effects Group" кнопка
 //
@@ -2795,11 +2868,13 @@ create_group_effects_button.onClick = function() {
     var effectSelectPanel = dialog.add("panel", undefined, "Select an Effect from Project (optional)");
     effectSelectPanel.orientation = "column";
     effectSelectPanel.alignChildren = ["fill", "top"];
+    effectSelectPanel.margins = [10, 15, 10, 10];
 
     var ddGroup = effectSelectPanel.add("group");
     ddGroup.add("statictext", undefined, "Effect Name:");
     var effectDropdown = ddGroup.add("dropdownlist", undefined, projectEffects);
     effectDropdown.selection = 0; 
+    effectDropdown.preferredSize.width  = 120;
 
     effectDropdown.onChange = function() {
         var chosenEffect = effectDropdown.selection ? effectDropdown.selection.text : "";
