@@ -1,4 +1,4 @@
-var scriptVersion = "3.3.0";
+var scriptVersion = "3.3.1";
 
  // LAYER_GROUP Color Label
 
@@ -1053,35 +1053,53 @@ function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColo
     hide_button.preferredSize.width = 28;
     hide_button.preferredSize.height = 28;
 
-    var hideState = false;
-    setHideButtonIcon(hide_button, hide_off_button_imgString);
+    // Инициализируем состояние Hide
+var hideState = false;
+setHideButtonIcon(hide_button, hideState ? hide_on_button_imgString : hide_off_button_imgString);
 
-    hide_button.onClick = function() {
-        hideState = !hideState;
-        if (hideState) {
-            setHideButtonIcon(hide_button, hide_on_imgString);
-        } else {
-            setHideButtonIcon(hide_button, hide_off_imgString);
-        }
+// Обработчик нажатия на кнопку Hide
+hide_button.onClick = function() {
+    hideState = !hideState; // Переключаем состояние
 
-        app.beginUndoGroup("Toggle Hide for " + groupName);
-        var layersFound = false;
-        var comps = getAllCompositions();
-        for (var c = 0; c < comps.length; c++) {
-            var comp = comps[c];
-            for (var l = 1; l <= comp.numLayers; l++) {
-                var layer = comp.layer(l);
-                if (layer.name.indexOf("[" + groupData.prefix + "]") === 0) {
-                    layer.shy = hideState;
-                    layersFound = true;
-                }
+    // Меняем иконку в зависимости от состояния
+    setHideButtonIcon(hide_button, hideState ? hide_on_button_imgString : hide_off_button_imgString);
+
+    // Начинаем группу отмены действий
+    app.beginUndoGroup("Toggle Hide for " + groupName);
+
+    var layersFound = false;
+    var comps = getAllCompositions();
+
+    for (var c = 0; c < comps.length; c++) {
+        var comp = comps[c];
+        var foundInThisComp = false;
+
+        // Перебираем слои композиции
+        for (var l = 1; l <= comp.numLayers; l++) {
+            var layer = comp.layer(l);
+
+            // Проверяем, начинается ли имя слоя с нужного префикса
+            if (layer.name.indexOf("[" + prefix + "]") === 0) {
+                layer.shy = hideState;     // Устанавливаем состояние shy для слоя
+                layersFound = true;
+                foundInThisComp = true;
             }
         }
-        if (!layersFound) {
-            alert("Layers for group '" + groupName + "' not found in any composition.");
+
+        // Если в композиции нашлись слои с нужным префиксом,
+        // то включаем/выключаем глобальный флаг Hide Shy Layers
+        if (foundInThisComp) {
+            comp.hideShyLayers = hideState;
         }
-        app.endUndoGroup();
-    };
+    }
+
+    // Если слоёв, подходящих под условие, не найдено ни в одной композиции
+    if (!layersFound) {
+        alert("Layers for group '" + groupName + "' not found in any composition.");
+    }
+
+    app.endUndoGroup();
+};
 
     // Разделитель
     var divider1 = groupPanel.add("panel", undefined, undefined, {name: "divider1"});
