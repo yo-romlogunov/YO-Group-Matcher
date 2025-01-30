@@ -1,4 +1,4 @@
-var scriptVersion = "3.4.0";
+var scriptVersion = "3.4.2";
 
  // LAYER_GROUP Color Label
 
@@ -634,14 +634,14 @@ check_update_button.onClick = function() {
     group1.spacing = 10; 
     group1.margins = 0; 
 
-    var telegram_button = group1.add("button", undefined, undefined, {name: "telegram_button"}); 
+    var telegram_button = group1.add("iconbutton", undefined, undefined, {name: "telegram_button"}); 
     telegram_button.text = "Telegram"; 
     telegram_button.helpTip = "Open Telegram channel.";
     telegram_button.onClick = function() {
         openURL("https://t.me/romlogunov_hub");
     };
 
-    var manual_button = group1.add("button", undefined, undefined, {name: "manual_button"}); 
+    var manual_button = group1.add("iconbutton", undefined, undefined, {name: "manual_button"}); 
     manual_button.text = "Manual"; 
     manual_button.helpTip = "Open user manual.";
     manual_button.onClick = function() {
@@ -1374,7 +1374,7 @@ volumeAudioButton.onClick = function() {
         precomposeButton.preferredSize.height = 30;
         precomposeButton.helpTip = "Pre-compose selected layers for this group (Beta)";   
         
-                // Пример кнопки "Rename Layers" 
+        // Rename Layers 
         var renamelayersButton = toolsgroupPanel.add("iconbutton", undefined, undefined, {
             name: "renamelayersButton", 
             style: "toolbutton"}); 
@@ -1551,7 +1551,7 @@ volumeAudioButton.onClick = function() {
             app.beginUndoGroup("Custom Pre-Compose (by Group Prefix)");
             var activeComp = app.project.activeItem;
             if (!(activeComp && activeComp instanceof CompItem)) {
-                alert("Откройте композицию перед выполнением этого скрипта!");
+                alert("Open the composition before executing this script!");
                 return;
             }
 
@@ -1573,7 +1573,7 @@ volumeAudioButton.onClick = function() {
                 }
             }
             if (foundLayers.length === 0) {
-                alert("Слоёв с префиксом " + groupPrefix + " не найдено.");
+                alert("Prefixed layers " + groupPrefix + " not found.");
                 app.endUndoGroup();
                 return;
             }
@@ -1596,7 +1596,7 @@ volumeAudioButton.onClick = function() {
                     activeComp.layers.precompose([idx], precompName, moveAllAttributes);
                 }
             } catch (err) {
-                alert("Ошибка при создании прекомпов: " + err.toString());
+                alert("Error in precompilation: " + err.toString());
             }
 
             app.endUndoGroup();
@@ -1934,6 +1934,7 @@ create_group_layers_button.onClick = function() {
     disableLabelColorCheckbox.onClick = function() {
         labelColorDropdown.enabled = !disableLabelColorCheckbox.value;
     };
+
     // Volume Presets Checkbox
     var volumePresetsPanel = dialog.add("panel", undefined, "Audio Control");
     volumePresetsPanel.orientation = "column";
@@ -2141,7 +2142,7 @@ function showGroupCompositions(groupData) {
      * (A2) Создаём основной диалог (UI)
      ****************************************/
     var dialog = new Window("dialog"); 
-    dialog.text = "Compositions with group"; 
+    dialog.text = ("Group Viewer: " + groupData.name);
     dialog.orientation = "column"; 
     dialog.alignChildren = ["left","top"]; 
     dialog.spacing = 10; 
@@ -3201,7 +3202,7 @@ function saveData() {
     fileGroup.orientation = "row";
     fileGroup.add("statictext", undefined, "Preset Name:");
     var fileEdit = fileGroup.add("edittext", undefined, "My_Preset_Project.pgm");
-    fileEdit.size = [200, 25];
+    fileEdit.size = [285, 25];
 
     var buttonsGroup = saveWindow.add("group");
     buttonsGroup.orientation = "row";
@@ -3278,10 +3279,10 @@ function loadData() {
     fileGroup.add("statictext", undefined, "Preset to import:");
     var fileEdit = fileGroup.add("edittext", undefined, "");
     fileEdit.size = [300, 25];
-    fileEdit.helpTip = "Выберите .pgm файл с ранее сохранёнными настройками";
+    fileEdit.helpTip = "Select the .pgm file with previously saved settings";
     
     var browseButton = fileGroup.add("button", undefined, "Browse");
-    browseButton.helpTip = "Нажмите, чтобы найти .pgm файл";
+    browseButton.helpTip = "Click to find .pgm file";
 
     browseButton.onClick = function() {
         var file = File.openDialog("Please select a file to import", "*.pgm");
@@ -3297,7 +3298,7 @@ function loadData() {
 
     // Кнопка Import
     var importButton = buttonsGroup.add("button", undefined, "Import", {name: "ok"});
-    importButton.helpTip = "Загрузить выбранный .pgm пресет";
+    importButton.helpTip = "Load the selected .pgm preset";
 
     importButton.onClick = function() {
         var filePath = fileEdit.text;
@@ -3513,7 +3514,7 @@ function loadData() {
 
     // Кнопка Cancel
     var cancelButton = buttonsGroup.add("button", undefined, "Cancel", {name: "cancel"});
-    cancelButton.helpTip = "Отменить загрузку пресета и закрыть окно";
+    cancelButton.helpTip = "Cancel the upload and close the window";
     cancelButton.onClick = function() {
         importWindow.close();
     };
