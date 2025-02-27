@@ -3,13 +3,11 @@ var scriptVersion = "3.5.0";
 var soloShapesStates = {};
 var soloTextStates = {};
 var soloNullStates = {};
-
-
-
+var soloTrackMatteStates = {};
+var soloAdjustStates = {};
 
 var autoSaveEnabled = false;
 var presetFilePath = "";
-
 
 
  // LAYER_GROUP Color Label
@@ -154,6 +152,15 @@ var null_objects_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%11%
 
 var null_object_select_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%11%00%00%00%11%08%06%00%00%00%3BmG%C3%BA%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%1AIDATx%01%C3%9DS1%C2%B2%C2%820%10%C3%9D(%C2%85%C2%A5G%C2%A0t%06%0A%C2%8E%C3%B09%C3%81%C3%B7%06r%13%C3%B0%26x%12s%04%0A%C3%AC9%C2%82%C2%85%C2%85%053%C3%AB%C3%9B52%C3%84%C3%84%C2%B1%C2%A1rg%12vv%1F%2F%2F%C3%89%0B%C3%91%02a%5E%09%C3%A7%C3%B9%C3%9FTM%C2%92%C3%81t%C3%9D%C3%B0%0E%C3%A6%C2%A2Hi%1C%C3%93%19%C2%AE%03%C3%AE%C2%BA%C3%92%C3%A6n%C2%97%12%C3%B3y%1A%C3%A3X%C3%85V%C3%94%C2%BA%C2%8F%2B%C2%94%C3%8B%C2%93u%C2%B9%18(%12%40%C3%8DYV%07%24%C3%8C2%5B%C3%A0J%C3%B4y%12%C3%A4a%C2%B2%C3%AC%C2%8C%C2%8F%C2%B0%C2%9F%C3%88%C2%986BRa%C3%BEw8%C3%B2I6%C2%9B%2B%C2%A4%1DE%01F%0B%C2%82%C2%93%C3%A9%7B%1Bp%C3%A4%C2%B9%10%C2%89%C2%82%0A%C2%98%23%C3%BE%19%C3%82%C2%85%20%C3%91%3B%C3%A0HH%7F%C2%BE%15%C2%89%15-%10%C2%BFH%02'nq%60%C2%8DV%C2%98%0F%C2%9F%0EW%C3%AB%C3%A8%C2%BB%C2%BCQ%C2%93%C3%92%C3%AB%C2%8A%C3%AF%C3%B7-%C2%AD%C3%975%C2%AE%C3%8D%02%C2%B4%17S%C3%A9u%06%2C%200f%C2%8F%C3%8C%C2%AA%1D%C2%92%C3%84%22%1F%7C%C3%87%C3%B6%7D%C3%A9%1C%5B9c%C3%85%C2%88%C2%BE%3A%C2%96%C3%95%C3%9A0%12%08%1B%0A%C2%B7%C3%93%C2%B8'%C3%A1%C3%B9d%C3%AE%C3%98r%C2%AA%C3%86%C2%9C%C3%B8%C2%AC%C2%B7n%0B%C3%8F%C2%B8%C3%9D%3AZ*%1E%C3%8A%C2%93%C2%A08%C2%B1%C3%A4%C2%8E'%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 
+var trackmatte_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%11%00%00%00%11%08%06%00%00%00%3BmG%C3%BA%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%09IDATx%01%C3%8D%C2%92%C3%9F%0D%C2%820%10%C3%86%C2%AF%C3%84%C3%B0%C3%8C%088%C2%81%C2%BA%01N%C2%A0N%20n%C2%80%0BP%C3%9E%18C6%10'%C3%90%0D%C3%84%0D%18%C2%81WB%02~%C2%A75%C2%A9%14%C2%A5%C2%8F%5Cr%C3%A9%C2%BF%C2%AF%C2%BF%C2%BB%5E%C2%8Fh*%26%C2%866%C2%93%24%C3%B1%1C%C3%87%091%5D%C3%80%7Dx%05%C2%BF%C3%84q%C2%9CYA%00X%0A!%C3%8E%C3%AA%C3%B2%5B%24%C3%84%C2%AD%C3%AB%C2%BA%C3%97%1A%C3%A3%1A%C2%9A%C3%B2'%04%C2%87%3E.%C3%9C1%C3%B5%C3%B4%7D%C3%97u%C3%A7u%5D3%2C%C3%82r%0F%C3%90J%079%C2%BA%18O8%C3%B5%01Z%C2%80RJ%19qVJG%06%C2%84%C2%B3%40%C2%84%C2%80F%C2%ACm%C3%9B%23%C3%AB%C3%924%C3%B5%0D%08%C3%A8%5B%C2%B20%C3%B5%C2%8C%C2%A2i%C2%9A%C3%80%C2%80%C2%80%C3%AE%C2%91%C2%A5%C3%A1I%C3%95%C2%A7%C3%90%7DHI%C2%96%C3%86%01%19d%408E%1B%00%C3%97%0E%C3%83%12%C2%B5%C3%89%0D%08%0E%0B%C2%AE%C3%BC%18%04%C2%B5%C2%93%C2%AC%C3%93%C2%BFx%C2%A6%0B%40%3F%0C%C3%B5%C2%89%0A%C3%82%5D%2C%C3%B9g%C2%B8%C3%A1%C3%B4%C2%B3%C2%A1%C2%8E%C3%A5%C2%86%C2%BB%C3%92w%C3%87%C3%A6%C3%AA%C3%BB%C2%B9%C2%A0%3B%C3%8E%C3%BA%2FD%C2%83%C2%85%C2%88%C2%BCQY%C2%95%C3%B0%072%C3%8D%C2%B0_%C3%91d%C3%AD%09%C3%A5nx%3F%C2%8C%C2%B3%C3%85T%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+
+var trackmatte_select_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%11%00%00%00%11%08%06%00%00%00%3BmG%C3%BA%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C2%B6IDATx%01%C3%8D%C2%92%C3%81%0D%C3%820%0CE%1D%26%C3%88%08%C3%9E%C2%80%C2%8E%C3%80%060B7%C2%82%0D%C3%A8%06%15%13d%05%C2%98%C2%A0%C3%99%C2%80n%60~%C2%84%0FiH%C2%83%C3%A1%C3%94%2F%3DYr%C3%93%C3%97%C3%8A%0E%C3%91V%C3%A2jM%11%C3%B1(%3D%C3%98%03%063%C2%B89%C3%A7%06%C2%B2%04%C2%82%0EL%C2%B2L%C3%90%5E%C2%82%C2%BF%09%18%3C%C3%A53%C2%AC%5C%C3%B49%C2%B7%24A%C3%AA%C3%A1%C3%AC%C3%8C%C2%98%C3%8E%C2%B5%C3%BEB%0C%12.%7B%C2%BB%C3%8Cs%22C0%C3%9C%C2%88r%07%C2%87%C2%9A%C3%84%C2%93%3Di%5B%5C%C2%93D%C2%B2%C3%87%C2%ABh%19%5D%C3%AD_3)E%C3%81%20%C2%B9%C2%AEn'%C3%BB%C3%8A%C3%9A%3D%C3%B1%C3%A0%2C%3F%5C%C2%B8%C2%A9%C2%90%C2%8C*O%C3%BD%C2%AE%7C%C3%875d%3D%C3%8A%C2%91%C3%9EC%C2%8C%C3%A0%01%06%C2%ACx%C2%A6%C3%8D%C3%A6%05%7C%C2%959%C3%B2%C2%BA%C2%AB'%1C%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+
+var Adjust_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%11%00%00%00%11%08%06%00%00%00%3BmG%C3%BA%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%015IDATx%01%C3%8D%C2%93%C3%A1q%C3%820%0C%C2%85%C3%AD%5C%07%60%C2%83%C2%A6%13%C2%B4%23x%03%C3%98%C2%80f%C2%830A%C3%9C%C3%8B%00%C2%B0A%C3%9B%09J'%20%23%C2%94%09H7%C2%80%01%C2%92%C3%B4Sc8%C3%85%09%C3%BC%C3%86w%C3%AF%C3%ACHO%C3%8F%C2%92%C2%AC%18s%2F%C3%8BN%19%C2%BD%C3%B7%C2%B3%24I%5E9%3E%C2%83%14%1C%C3%81w%C3%9B%C2%B6%15%C2%BE%3A%C3%A6'%13%02%0Bk%C3%AD%C2%A1%C3%AB%C2%BA%C2%82%C3%8F%19%C2%BB%13%C2%BB%7Cc%C3%9F%C2%89%C3%BF%C2%A6H%10%C3%B8%22%C3%A0%13%3Cq%C3%B3*%08%C2%BC%04J*%C3%BEX%C3%88*%01!%C3%ACD%C2%80%C2%B3W%C2%B6%03%C2%A5%C3%A5M%C3%93%C2%9C%C3%BE%03%C2%ACuls%C2%B9%04%C2%BF%C2%94i%1E%C2%94%C2%A0%0B%C2%81%3EN%C2%97%C2%8C6%04%0FK%C3%A8%7B%C2%B6%19%C2%88%60%C2%9C%C2%B3Ufz%C2%BDqs%C2%AD%C2%B8K%C3%937%C3%9D%C3%84%C2%99H%13%C3%B7WD%0A%C2%9D%09%3C)%C2%AB%1A%C2%89%C3%A0%C3%B8%C3%85%C3%B18%C2%A5%C2%80%5D%1A%7CT%C2%A6%25%C3%BC%C3%93%253E%C3%BC%C3%81%C2%B1%C2%90%19%C2%89E%C2%B0%C2%AF%C3%81%C2%BB%C2%82%C2%83%C2%BF%1D%C2%89%C3%90%C2%BC%0F%C3%93%C3%97%5B%C3%84%22%C3%B2%3A%04e%01%C3%92%C3%8CZ%06o%24%22%C3%8F%C3%85%0D%19%C3%88%C3%8B%C2%B2%1C%08%11%C2%90%C2%ABl%C3%A4%C2%BC%C3%92%C2%93%3B%1A%C3%BB0pk%5D%C2%A2%C2%A4%C2%AE%267%C2%83%C2%B3%C3%951%C3%97%C3%BE%C2%9D%C2%94%C3%8D%C2%85g%C2%97%1E%C3%95%60%2F%25%C2%9F%07%C3%AC%3E%C3%97%1F~%C3%9F%C2%BBU%C3%80%C3%99y%C2%AE%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+
+var Adjust_select_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%11%00%00%00%11%08%06%00%00%00%3BmG%C3%BA%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%C2%84IDATx%01%C3%8D%C2%92%C3%81m%C3%82%40%10E%C3%A7%C2%AF%03%C2%96%C2%95%0B%1D%04N%C2%88%13)%01%0E%11G%C2%A0%C2%82%C2%84%0EB%05%40%05P%02T%009E%C2%91%22A%09%C3%A1%14q%C2%82t%00%12%C2%91%C3%A5%60v2kb%C3%A3%C3%98%16gF%C3%B2a%C2%BFw%C3%9F%C3%BC%C3%BD%3BD%C3%97R%C3%88%12%C3%A7k.%C3%B8%C2%9E%C3%BB%C3%84%40%C2%95%C2%98%C2%8A%20l%C2%99%C3%B9%25G%C2%B4%C2%A8W%C2%9CMr%C2%BFJ%0Ao%2B%C2%AF%C3%A5%C3%BF%C2%B8k%C3%81%C3%B7%40%5C%10%C2%A9%16%C2%B4%C2%92%C3%B5%0147%C3%BF%2FB%C3%8C%06%C2%B0%C2%9E2%C3%93d%C2%9FwJ%C2%BEF%C3%97%C3%A8%C3%A2%C3%A2%C3%BEoK%C3%91%C3%BCO%C2%82%C2%A2%C3%AB%C3%8C%3F%C3%9D%C2%A2%C3%A9%C3%84%C2%AC'%C2%8D%C3%8Am%C3%9Fh%C2%AF%C2%A2Y%C2%A0%C2%B5Rx%C3%96G%C3%9E%05%40%C3%925(%C2%AB%C2%99%C3%8B%C3%9B%C2%A5z%09%5B%C2%A3%C3%9D%C2%84%C2%90%C2%83%C2%B1-%15%02%C3%A2%C2%A55%C2%8F%C3%82v0%C3%A6%C3%85%C2%AA'%C2%99%C3%89r%C3%B4%0F%02%C2%A0)A.(%C2%A3%C3%A4%C3%8C%40%18%C2%9B%C2%98%C3%BFG%05%C2%AB%1A.%23%08K%C2%88%C2%ACy%C2%99%05%C2%81%C2%84%C2%9A%26%C3%ABE%1A%C3%82%C3%B4%05%C2%A5%C3%AE2!%C3%84%5D%C3%A6%C3%93%C3%BDC'%C3%92p%C2%97%C2%82(%C3%B0%C2%87%C2%B8%C3%A9%C3%89%C2%8Ct%C3%83%C3%80%C3%8E.1LN%C2%94%5C%C2%BF%13%C2%9D%C2%8Dh%C2%B67%C2%96%08%C3%89%3F%C2%B8)%C3%AB%C3%A6u%C2%84%C3%941%1F%14L%C2%98%C2%9B%C2%A3%0C%C3%9E%C3%99X%C2%AC%C3%9EW%C3%9F-%C3%8Dj*%19%C3%B4%1F%C3%8A%C3%8E%20%7Cbs%08%C2%90%C3%8C%18%C2%85%C3%80%19T%C2%BBQ%C2%B6g%C2%99%C2%90%18hx%C2%B2%2CWd%C2%B4d%C3%ACg%04%5D3%C2%9A%26%C2%AB%13%07dBL%05%0Edn%C2%A0%C2%B8%19t%C2%878a%5E%C3%AEmg%C3%9CN%C3%A4u%5D%C3%B5%0B%C3%BE%04%C2%AF%C3%80%7D%C3%A6%C2%90%C3%BB%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+
+
 
 
 ////////////////////
@@ -179,7 +186,7 @@ var head_panel = palette.add("group", undefined, {name: "head_panel"});
 head_panel.orientation   = "row"; 
 head_panel.alignChildren = ["left", "fill"]; 
 head_panel.spacing       = 10; 
-head_panel.margins       = 10;
+head_panel.margins = [10, 10, 10, 0];
 
 // --- LOGO ---
 
@@ -451,7 +458,7 @@ tpanel1.helpTip             = "Switch between Layers Group and Effects Group tab
 var tab_layers = tpanel1.add("tab", undefined, undefined, {name: "tab_layers"}); 
 tab_layers.text          = "Layers Group"; 
 tab_layers.orientation   = "column"; 
-tab_layers.alignChildren = ["center", "top"]; 
+tab_layers.alignChildren = ["left", "top"]; 
 tab_layers.spacing       = 10; 
 tab_layers.margins       = 10; 
 tab_layers.helpTip       = "Here you can manage your Layer Groups";
@@ -471,8 +478,8 @@ var create_group_layers_button = create_unlink_group.add(
     { name: "create_group_layers_button", style: "toolbutton" }
 );
 create_group_layers_button.helpTip  = "Create a new Layer Group";
-create_group_layers_button.text     = "Create a Layer Group"; 
-create_group_layers_button.preferredSize.width  = 172; 
+create_group_layers_button.text     = "CRT"; 
+create_group_layers_button.preferredSize.width  = 80; 
 create_group_layers_button.preferredSize.height = 35; 
 create_group_layers_button.alignment = ["left", "center"];
 
@@ -511,6 +518,14 @@ unlink_layer_button.onClick = function() {
 };
 
 // ----- Новые кнопки для режима Solo -----
+
+// Новая кнопка для режима Solo Track Matte
+var solo_trackmatte_button = create_unlink_group.add("iconbutton", undefined, File.decode(trackmatte_imgString), { name: "solo_trackmatte_button", style: "toolbutton" });
+solo_trackmatte_button.helpTip = "Solo Track Matte: show only layers involved in track matte (main layer and matte)";
+solo_trackmatte_button.text = "";
+solo_trackmatte_button.preferredSize.width = 35;
+solo_trackmatte_button.preferredSize.height = 35;
+
 // Кнопка Solo Shapes
 var solo_shapes_button = create_unlink_group.add("iconbutton", undefined, File.decode(shapes_imgString), { name: "solo_shapes_button", style: "toolbutton" });
 solo_shapes_button.helpTip = "Solo Shapes: show only shape layers";
@@ -531,6 +546,13 @@ solo_null_button.helpTip = "Solo Null Objects: show only null layers";
 solo_null_button.text = "";
 solo_null_button.preferredSize.width = 35;
 solo_null_button.preferredSize.height = 35;
+
+// Новая кнопка для режима Solo Adjustment Layers
+var solo_adjust_button = create_unlink_group.add("iconbutton", undefined, File.decode(Adjust_imgString), { name: "solo_adjust_button", style: "toolbutton" });
+solo_adjust_button.helpTip = "Solo Adjustment Layers: show only adjustment layers";
+solo_adjust_button.text = "";
+solo_adjust_button.preferredSize.width = 35;
+solo_adjust_button.preferredSize.height = 35;
 
 function updateSoloForComp(comp) {
     var compId = comp.id;
@@ -564,6 +586,22 @@ function updateSoloForComp(comp) {
     // Включаем Hide в композиции, если он ещё не активен
     comp.hideShyLayers = true;
 }
+
+solo_trackmatte_button.onClick = function() {
+    var comp = app.project.activeItem;
+    if (!(comp instanceof CompItem)) {
+        alert("Active item is not a composition.");
+        return;
+    }
+    var compId = comp.id;
+    soloTrackMatteStates[compId] = !soloTrackMatteStates[compId];
+    if (soloTrackMatteStates[compId]) {
+        setButtonIcon(solo_trackmatte_button, trackmatte_select_imgString, "solo_trackmatte_select");
+    } else {
+        setButtonIcon(solo_trackmatte_button, trackmatte_imgString, "solo_trackmatte");
+    }
+    updateSoloTrackMatte(comp);
+};
 
 solo_shapes_button.onClick = function() {
     var comp = app.project.activeItem;
@@ -613,6 +651,83 @@ solo_null_button.onClick = function() {
     updateSoloForComp(comp);
 };
 
+solo_adjust_button.onClick = function() {
+    var comp = app.project.activeItem;
+    if (!(comp instanceof CompItem)) {
+        alert("Active item is not a composition.");
+        return;
+    }
+    var compId = comp.id;
+    soloAdjustStates[compId] = !soloAdjustStates[compId];
+    if (soloAdjustStates[compId]) {
+        setButtonIcon(solo_adjust_button, Adjust_select_imgString, "solo_adjust_select");
+    } else {
+        setButtonIcon(solo_adjust_button, Adjust_imgString, "solo_adjust");
+    }
+    updateSoloAdjust(comp);
+};
+
+
+function updateSoloAdjust(comp) {
+    var compId = comp.id;
+    var soloAdjust = soloAdjustStates[compId] || false;
+    if (!soloAdjust) {
+        // Если режим не активен – снимаем shy со всех слоёв
+        for (var i = 1; i <= comp.numLayers; i++) {
+            comp.layer(i).shy = false;
+        }
+    } else {
+        for (var i = 1; i <= comp.numLayers; i++) {
+            var layer = comp.layer(i);
+            // Если слой является Adjustment Layer (adjustmentLayer == true), показываем его, иначе скрываем
+            layer.shy = !layer.adjustmentLayer;
+        }
+    }
+    // Включаем режим Hide, чтобы скрытые слои не отображались в панели
+    comp.hideShyLayers = true;
+}
+
+
+function updateSoloTrackMatte(comp) {
+    var compId = comp.id;
+    var soloTM = soloTrackMatteStates[compId] || false;
+    if (!soloTM) {
+        // Если режим не активен – снимаем shy со всех слоёв
+        for (var i = 1; i <= comp.numLayers; i++) {
+            comp.layer(i).shy = false;
+        }
+        return;
+    }
+    // Если активен режим solo для track matte, для каждого слоя проверяем:
+    // 1. Является ли слой основным, т.е. его trackMatteType != NO_TRACK_MATTE
+    // 2. Либо является ли слой matte-слоем: если для слоя с индексом i+1 задан trackMatteType (то есть, слой i используется как маска)
+    for (var i = 1; i <= comp.numLayers; i++) {
+        var layer = comp.layer(i);
+        var isMain = false;
+        var isMatte = false;
+        try {
+            if (layer.trackMatteType && layer.trackMatteType !== TrackMatteType.NO_TRACK_MATTE) {
+                isMain = true;
+            }
+        } catch (e) {
+            // Если слой не поддерживает trackMatteType – пропускаем
+        }
+        if (i < comp.numLayers) {
+            var nextLayer = comp.layer(i + 1);
+            try {
+                if (nextLayer.trackMatteType && nextLayer.trackMatteType !== TrackMatteType.NO_TRACK_MATTE) {
+                    isMatte = true;
+                }
+            } catch(e) {}
+        }
+        // Если слой участвует в track matte, делаем его видимым (shy = false), иначе скрываем (shy = true)
+        layer.shy = !(isMain || isMatte);
+    }
+    // Включаем Hide режим в композиции, чтобы скрытые (shy) слои не отображались в панели
+    comp.hideShyLayers = true;
+}
+
+
 function refreshSoloButtons() {
     var comp = app.project.activeItem;
     if (!(comp instanceof CompItem)) return;
@@ -632,7 +747,21 @@ function refreshSoloButtons() {
     } else {
         setButtonIcon(solo_null_button, null_objects_imgString, "solo_null");
     }
+     // Добавляем обновление для solo_trackmatte_button:
+     if (soloTrackMatteStates[compId]) {
+        setButtonIcon(solo_trackmatte_button, trackmatte_select_imgString, "solo_trackmatte_select");
+    } else {
+        setButtonIcon(solo_trackmatte_button, trackmatte_imgString, "solo_trackmatte");
+    }
+    // Обновляем solo для Adjustment Layers
+    if (soloAdjustStates[compId]) {
+        setButtonIcon(solo_adjust_button, Adjust_select_imgString, "solo_adjust_select");
+    } else {
+        setButtonIcon(solo_adjust_button, Adjust_imgString, "solo_adjust");
+    }
 }
+
+
 
 // Привязываем обновление при активации панели
 palette.onActivate = function() {
@@ -1599,6 +1728,7 @@ volumeAudioButton.onClick = function() {
     
     var disableLabelColorCheckbox = colorLabelPanel.add("checkbox", undefined, "Disable label color assignment");
     disableLabelColorCheckbox.value = groupData.disableLabelColor;
+    labelColorDropdown.preferredSize.width = 130; // расширяем выпадающий список
     disableLabelColorCheckbox.helpTip = "Disable automatic label color assignment to layers in this group";
     labelColorDropdown.enabled = !disableLabelColorCheckbox.value;
     disableLabelColorCheckbox.onClick = function() {
