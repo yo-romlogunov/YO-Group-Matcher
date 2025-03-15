@@ -1,4 +1,4 @@
-var scriptVersion = "3.5.3";
+var scriptVersion = "3.5.4";
 
 var soloShapesStates = {};
 var soloTextStates = {};
@@ -364,7 +364,6 @@ tab_effects.alignChildren = ["fill", "top"];
 tab_effects.spacing       = 10; 
 tab_effects.margins       = 10; 
 tab_effects.helpTip       = "Manage your Effects Groups";
-
 // Если вкладка Tools уже не создана, создаём её:
 var tab_tools = tpanel1.add("tab", undefined, undefined, {name: "tab_tools"}); 
 tab_tools.text = "Tools";
@@ -386,7 +385,7 @@ var clear_all_panels_button = panel_parameters.add("iconbutton", undefined, File
     style: "toolbutton"
 });
 clear_all_panels_button.helpTip = "Clear All Panels";
-clear_all_panels_button.text    = "Clear All Panels";
+clear_all_panels_button.text    = "CLR ALL PANELS";
 clear_all_panels_button.preferredSize.width  = 150; 
 clear_all_panels_button.preferredSize.height = 35;    
 
@@ -471,7 +470,7 @@ clear_all_panels_button.onClick = function() {
 };
 
 // ========= Панель Layers and Effects =========
-var panel_layers_effects = tab_tools.add("panel", undefined, "Layers and Effects");
+var panel_layers_effects = tab_tools.add("panel", undefined, "Layers");
 panel_layers_effects.orientation = "row";
 panel_layers_effects.alignChildren = ["left", "center"];
 panel_layers_effects.spacing = 15;
@@ -482,10 +481,9 @@ panel_layers_effects.margins = [15, 15, 15, 15];
 // равную средней позиции выбранных слоёв, и назначает его родителем для этих слоёв.
 var add_null_objects_button = panel_layers_effects.add("iconbutton", undefined, undefined, {name: "add_null_objects_button", style: "toolbutton"});
 add_null_objects_button.helpTip = "Add Null Object for selected layers";
-add_null_objects_button.text = "Add Null Object"; // Можно заменить на иконку, если есть ресурс
+add_null_objects_button.text = "ADD NULL OBJ"; // Можно заменить на иконку, если есть ресурс
 add_null_objects_button.preferredSize.width = 120;
 add_null_objects_button.preferredSize.height = 35;
-
 add_null_objects_button.onClick = function() {
     var comp = app.project.activeItem;
     if (!(comp instanceof CompItem)) {
@@ -501,18 +499,44 @@ add_null_objects_button.onClick = function() {
         alert("Please select layers in the active composition.");
         return;
     }
-    // Вычисляем среднюю позицию выбранных слоёв
-    var sumX = 0, sumY = 0;
+    
+    // Вычисляем среднюю позицию выбранных слоёв (учитывая X, Y и Z)
+    var sumX = 0, sumY = 0, sumZ = 0;
     for (var i = 0; i < selectedLayers.length; i++){
         var pos = selectedLayers[i].property("Position").value;
         sumX += pos[0];
         sumY += pos[1];
+        // Если слой 2D, Z считается равной 0
+        var zVal = (pos.length > 2) ? pos[2] : 0;
+        sumZ += zVal;
     }
-    var avgPos = [sumX / selectedLayers.length, sumY / selectedLayers.length];
+    var avgPos = [
+        sumX / selectedLayers.length,
+        sumY / selectedLayers.length,
+        sumZ / selectedLayers.length
+    ];
+    
+    // Проверяем, есть ли среди выбранных слоёв 3D
+    var is3D = false;
+    for (var i = 0; i < selectedLayers.length; i++){
+        if (selectedLayers[i].threeDLayer) {
+            is3D = true;
+            break;
+        }
+    }
+    
     app.beginUndoGroup("Add Null Object for Selected Layers");
     var nullLayer = comp.layers.addNull();
     nullLayer.name = "Controller Null";
-    nullLayer.property("Position").setValue(avgPos);
+    
+    if (is3D) {
+        nullLayer.threeDLayer = true;
+        nullLayer.property("Position").setValue(avgPos);
+    } else {
+        // Если слои 2D, устанавливаем только X и Y
+        nullLayer.property("Position").setValue([avgPos[0], avgPos[1]]);
+    }
+    
     // Назначаем нулевой объект родителем для всех выбранных слоёв
     for (var i = 0; i < selectedLayers.length; i++){
         selectedLayers[i].parent = nullLayer;
@@ -520,16 +544,86 @@ add_null_objects_button.onClick = function() {
     app.endUndoGroup();
 };
 
+// --- Кнопка Add Track Matte Layer ---
+// Добавляет новый solid-слой, который становится трек-маттом для активного слоя.
+// Новый слой перемещается непосредственно над активным слоем, а для активного слоя
+// устанавливается тип трек-матта (ALPHA MATTE).
+var add_track_matte_button = panel_layers_effects.add("iconbutton", undefined, undefined, {name: "add_track_matte_button", style: "toolbutton"});
+add_track_matte_button.helpTip = "Add Track Matte Layer to the active layer";
+add_track_matte_button.text = "ADD TRCK MTT";
+add_track_matte_button.preferredSize.width = 135;
+add_track_matte_button.preferredSize.height = 35;
+
+// Вспомогательная функция для получения массива индексов слоёв
+function getLayerIndices(layersArray) {
+    var indices = [];
+    for (var i = 0; i < layersArray.length; i++){
+        indices.push(layersArray[i].index);
+    }
+    return indices;
+}
+
+add_track_matte_button.onClick = function() {
+    var comp = app.project.activeItem;
+    if (!(comp instanceof CompItem)) {
+        alert("Active item is not a composition.");
+        return;
+    }
+    
+    if (comp.selectedLayers.length === 0) {
+        alert("Please select one or more layers.");
+        return;
+    }
+    
+    app.beginUndoGroup("Add Track Matte Layer");
+    var solidColor = [1, 1, 1]; // белый цвет
+    
+    // Если выбрано несколько слоёв – объединяем их в пре-композицию
+    if (comp.selectedLayers.length > 1) {
+        // Используем имя первого выбранного слоя для именования
+        var baseName = comp.selectedLayers[0].name;
+        // Получаем индексы выбранных слоёв
+        var indices = getLayerIndices(comp.selectedLayers);
+        // Предварительное объединение выбранных слоёв в одну пре-композицию
+        var precomp = comp.layers.precompose(indices, "Precomp (" + baseName + ")", true);
+        
+        // Создаём новый solid-слой для трек-матта с нужным именем
+        var matteLayerName = "TRMT (" + baseName + ")";
+        var matteLayer = comp.layers.addSolid(solidColor, matteLayerName, comp.width, comp.height, comp.pixelAspect, comp.duration);
+        // Перемещаем matte-слой непосредственно над пре-композицией
+        matteLayer.moveBefore(precomp);
+        // Устанавливаем для пре-композиции тип трек-матта (ALPHA)
+        precomp.trackMatteType = TrackMatteType.ALPHA;
+    } else {
+        // Если выбран только один слой
+        var activeLayer = comp.selectedLayers[0];
+        var matteLayerName = "TRMT (" + activeLayer.name + ")";
+        var matteLayer = comp.layers.addSolid(solidColor, matteLayerName, comp.width, comp.height, comp.pixelAspect, comp.duration);
+        // Перемещаем matte-слой непосредственно над выбранным слоем
+        matteLayer.moveBefore(activeLayer);
+        activeLayer.trackMatteType = TrackMatteType.ALPHA;
+    }
+    
+    app.endUndoGroup();
+};
+
+// ========= Панель Library =========
+var panel_library = tab_tools.add("panel", undefined, "Library and Effects");
+panel_library.orientation = "row";
+panel_library.alignChildren = ["left", "center"];
+panel_library.spacing = 15;
+panel_library.margins = [15, 15, 15, 15];
+
 // --- Кнопка Remove Disabled Effects ---
-// Проходит по всем композициям и удаляет эффекты, у которых свойство enabled === false.
-var remove_disabled_effects_button = panel_layers_effects.add("iconbutton", undefined, undefined, {name: "remove_disabled_effects_button", style: "toolbutton"});
+// Перенесена в панель Library.
+var remove_disabled_effects_button = panel_library.add("iconbutton", undefined, undefined, {name: "remove_disabled_effects_button", style: "toolbutton"});
 remove_disabled_effects_button.helpTip = "Remove effects that are disabled on all layers in all compositions";
-remove_disabled_effects_button.text = "Remove Disabled Effects";
-remove_disabled_effects_button.preferredSize.width = 175;
+remove_disabled_effects_button.text = "RMV UNSD EFFECTS";
+remove_disabled_effects_button.preferredSize.width = 145;
 remove_disabled_effects_button.preferredSize.height = 35;
 
 remove_disabled_effects_button.onClick = function(){
-    app.beginUndoGroup("Remove Disabled Effects");
+    app.beginUndoGroup("RMV UNSD EFFECTS");
     var comps = getAllCompositions();
     for (var i = 0; i < comps.length; i++){
         var comp = comps[i];
@@ -550,17 +644,10 @@ remove_disabled_effects_button.onClick = function(){
     alert("Disabled effects removed.");
 };
 
-// ========= Панель Library =========
-var panel_library = tab_tools.add("panel", undefined, "Library");
-panel_library.orientation = "row";
-panel_library.alignChildren = ["left", "center"];
-panel_library.spacing = 15;
-panel_library.margins = [15, 15, 15, 15];
-
 var remove_unused_button = panel_library.add("iconbutton", undefined, undefined, {name: "remove_unused_button", style: "toolbutton"});
 remove_unused_button.helpTip = "Remove Unused Footage and Compositions";
-remove_unused_button.text = "Remove Unused Footage and Compositions";
-remove_unused_button.preferredSize.width = 260;
+remove_unused_button.text = "RMV FTG & CMPS";
+remove_unused_button.preferredSize.width = 130;
 remove_unused_button.preferredSize.height = 35;
 
 remove_unused_button.onClick = function(){
@@ -600,7 +687,7 @@ var create_group_layers_button = create_unlink_group.add(
 );
 create_group_layers_button.helpTip  = "Create a new Layer Group";
 create_group_layers_button.text     = "CRT"; 
-create_group_layers_button.preferredSize.width  = 80; 
+create_group_layers_button.preferredSize.width  = 75; 
 create_group_layers_button.preferredSize.height = 35; 
 create_group_layers_button.alignment = ["left", "center"];
 
@@ -910,8 +997,8 @@ var create_group_effects_button = create_unlink_effects_group.add(
     }
 );
 create_group_effects_button.helpTip = "Create a new Effects Group";
-create_group_effects_button.text    = "Create a New Effects Group";
-create_group_effects_button.preferredSize.width  = 210;
+create_group_effects_button.text    = "CRT";
+create_group_effects_button.preferredSize.width  = 75;
 create_group_effects_button.preferredSize.height = 35;
 create_group_effects_button.alignment = ["left", "center"];
 
@@ -926,8 +1013,8 @@ var unlink_effects_button = create_unlink_effects_group.add(
     }
 );
 unlink_effects_button.helpTip              = "Remove [GroupPrefix] from selected effects";
-unlink_effects_button.text                 = "Unlink Effects";
-unlink_effects_button.preferredSize.width  = 140;
+unlink_effects_button.text                 = "UNLINK";
+unlink_effects_button.preferredSize.width  = 110;
 unlink_effects_button.preferredSize.height = 35;
 unlink_effects_button.alignment            = ["left", "center"];
 
@@ -982,6 +1069,176 @@ function unlinkSelectedEffectsFromGroup() {
 unlink_effects_button.onClick = function() {
     unlinkSelectedEffectsFromGroup();
 };
+
+// ===== Новый блок: кнопка Effects Manager =====
+var effects_manager_button = create_unlink_effects_group.add(
+    "iconbutton",
+    undefined,
+    undefined, // можно добавить File.decode(...) с иконкой, если есть ресурс
+    {
+        name: "effects_manager_button",
+        style: "toolbutton"
+    }
+);
+effects_manager_button.helpTip = "Open Effects Manager";
+effects_manager_button.text = "Effects Manager";
+effects_manager_button.preferredSize.width = 150;
+effects_manager_button.preferredSize.height = 35;
+effects_manager_button.alignment = ["left", "center"];
+
+effects_manager_button.onClick = function() {
+    openEffectsManager();
+};
+
+
+
+// ===== Функция для открытия диалога Effects Manager =====
+function openEffectsManager() {
+    // Создаем новое окно-диалог
+    var win = new Window("dialog", "Effects Manager");
+    win.orientation = "column";
+    win.alignChildren = ["fill", "top"];
+    win.spacing = 10;
+    win.margins = 15;
+    
+    // Панель для списка всех эффектов
+    var effectsPanel = win.add("panel", undefined, "All Effects");
+    effectsPanel.orientation = "column";
+    effectsPanel.alignChildren = ["left", "top"];
+    effectsPanel.spacing = 10;
+    effectsPanel.margins = 10;
+    
+    var effectsList = effectsPanel.add("listbox", undefined, undefined);
+    effectsList.preferredSize.width = 200;
+    effectsList.preferredSize.height = 329;
+    
+    // Кнопка для включения/выключения выбранной группы эффектов
+    var disableEffectBtn = win.add("button", undefined, "Disable Select Effect");
+    
+    // Функция заполнения списка эффектов (группируя по имени)
+    function fillEffectsList() {
+        effectsList.removeAll();
+        var allEffects = getAllEffectsInProject();
+        var groups = {};
+        for (var i = 0; i < allEffects.length; i++) {
+            var eff = allEffects[i];
+            var ename = eff.name;
+            if (!groups[ename]) groups[ename] = [];
+            groups[ename].push(eff);
+        }
+        for (var gName in groups) {
+            if (groups.hasOwnProperty(gName)) {
+                var groupArray = groups[gName];
+                var allDisabled = true;
+                for (var j = 0; j < groupArray.length; j++) {
+                    if (groupArray[j].effectProp.enabled) {
+                        allDisabled = false;
+                        break;
+                    }
+                }
+                var count = groupArray.length;
+                var itemLabel = gName + " (" + count + ")" + (allDisabled ? " | Off" : "");
+                var item = effectsList.add("item", itemLabel);
+                item.__effectDataGroup = groupArray;
+                item.__groupName = gName;
+            }
+        }
+    }
+    
+    fillEffectsList();
+    
+    // Обработчик кнопки "Disable Select Effect"
+    disableEffectBtn.onClick = function() {
+        var selItem = effectsList.selection;
+        if (!selItem) {
+            alert("Select an effect group from the list first!");
+            return;
+        }
+        var effGroup = selItem.__effectDataGroup;
+        if (!effGroup || effGroup.length === 0) {
+            alert("No effect data found!");
+            return;
+        }
+        var anyEnabled = false;
+        for (var i = 0; i < effGroup.length; i++) {
+            if (effGroup[i].effectProp.enabled) {
+                anyEnabled = true;
+                break;
+            }
+        }
+        var count = effGroup.length;
+        if (anyEnabled) {
+            // Выключаем все эффекты в группе
+            for (var j = 0; j < effGroup.length; j++) {
+                effGroup[j].effectProp.enabled = false;
+                effGroup[j].isEnabled = false;
+            }
+            selItem.text = selItem.__groupName + " (" + count + ") | Off";
+            disableEffectBtn.text = "Enable Select Effect";
+        } else {
+            // Включаем все эффекты в группе
+            for (var j = 0; j < effGroup.length; j++) {
+                effGroup[j].effectProp.enabled = true;
+                effGroup[j].isEnabled = true;
+            }
+            selItem.text = selItem.__groupName + " (" + count + ")";
+            disableEffectBtn.text = "Disable Select Effect";
+        }
+    };
+    
+    // Обновляем текст кнопки при выборе элемента списка
+    effectsList.onChange = function() {
+        var selItem = effectsList.selection;
+        if (!selItem) {
+            disableEffectBtn.text = "Disable / Enable";
+            return;
+        }
+        var effGroup = selItem.__effectDataGroup;
+        if (!effGroup || effGroup.length === 0) {
+            disableEffectBtn.text = "Disable / Enable";
+            return;
+        }
+        var anyEnabled = false;
+        for (var i = 0; i < effGroup.length; i++) {
+            if (effGroup[i].effectProp.enabled) {
+                anyEnabled = true;
+                break;
+            }
+        }
+        disableEffectBtn.text = anyEnabled ? "Disable Select Effect" : "Enable Select Effect";
+    };
+    
+    win.center();
+    win.show();
+}
+
+
+// ===== Вспомогательная функция: получить все эффекты в проекте =====
+function getAllEffectsInProject() {
+    var allEffects = [];
+    var comps = getAllCompositions();
+    for (var c = 0; c < comps.length; c++) {
+        var comp = comps[c];
+        for (var l = 1; l <= comp.numLayers; l++) {
+            var layer = comp.layer(l);
+            var fx = layer.property("Effects");
+            if (!fx) continue;
+            for (var e = 1; e <= fx.numProperties; e++) {
+                var effectProp = fx.property(e);
+                // Убираем возможный префикс в квадратных скобках
+                var baseName = effectProp.name.replace(/^\[[^\]]+\]\s*/, "");
+                allEffects.push({
+                    name: baseName,
+                    effectProp: effectProp,
+                    comp: comp,
+                    layerIndex: l,
+                    isEnabled: effectProp.enabled
+                });
+            }
+        }
+    }
+    return allEffects;
+}
 
 // "Панель" внутри Effects (удаляем потом)
 var effect_group_default = tab_effects.add("panel", undefined, undefined, {name: "effect_group_default"}); 
