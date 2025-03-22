@@ -1,4 +1,4 @@
-var scriptVersion = "3.5.6";
+var scriptVersion = "3.6.1";
 
 var soloShapesStates = {};
 var soloTextStates = {};
@@ -167,6 +167,12 @@ var clear_all_panels_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%0
 var track_matte__imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%11%00%00%00%10%08%06%00%00%00%C3%B01%C2%94_%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01.IDATx%01%C3%8D%C2%91%C2%B1J%03A%10%C2%86%C3%BF%C3%99%C3%9D%2B%C2%B4%12%2B%C2%B1Q%2CB%5E%40%C3%85*%C3%86%7B%C2%82%C2%94i%C3%A4l%04%C2%91%C2%9C%C3%B8%00%22%C2%A4%C2%B3%12%7C%07AP%C3%90%C3%86%C3%86%C3%82%C3%93V%C2%B0P%5B%5B-%C2%83%C2%95%18r%C2%BB%C3%A3DX%0C%C3%87%C3%A6re%C2%A6%C3%9A%7F%C2%98%C3%B9v%C3%BE%19%60Z%C2%82%C3%BC%C3%A3%C3%A4%C2%8E%17g%C2%8C%C3%8B%00%C2%AEM%C3%ACb8%C2%AD%C3%B4%C3%B6~%C2%93%C3%8E%C2%87R%C3%B9%C3%BCl%C2%94%C3%97*%01%C2%80%2FV%C3%B4j%C3%99%C3%AE%C3%B8%C2%84%C2%9A%C3%90%C3%B0I%C2%8C%0B%C3%B9%C3%B9%C3%89%03%C2%88%C2%B8%05%C2%B6%2FbAW%C2%80p%17%3Fz%C2%A5%13%C2%9Bv%1A%C2%9Bu%C3%92%3A%16%C3%A0n%C2%A7%19%3D%14%2BM%C2%B8%1F%C3%B7i%1C%1D%7By%C2%9A%C3%B1%1C%C2%AC%3DbBO%C3%A4e5%08%C3%A8j%14%60%C3%98%5E3%C2%B0)%C3%B2%3BT%5D%C2%BA%C2%93%02%60l%04!%C2%A4%C2%B8%15%02%C3%882oC%C3%B5A%3B%C3%8CX%C3%95p%C2%A9%00%1A%C3%BFdz6N%1DV%C2%9D%C3%A4%C3%AF%C2%8C%C3%A9%C2%96%C3%AEF%03%C2%BD%C2%A0%08m%C2%90%C3%9B%C3%A8%3D%C2%AA%C2%B5%C2%BD%C2%98%3EP6%C2%89%26cs%C2%B6%C3%83%C2%99o%18%C2%B4%7C%C2%96%C3%A5%C3%89%00%C3%96%C3%BFU%C2%9Fo%C3%98%C2%BA%C3%A4%C2%BC%C2%AD%25vr%C3%83%22%C2%A4%C3%8Fx%13%C3%B1.V%12%C2%91%09JB%C2%BA%C3%BB%60%3A%C3%80%C3%94%C3%85%2F%C2%95%C3%83o%C2%B5%C2%AF%C3%8B%C3%98%C3%9A%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 
 var effect_manager_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0D%00%00%00%0E%08%06%00%00%00%C3%B4%7F%C2%96%C3%92%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%86IDATx%01%C2%8DR%0B%0D%021%0C%C3%9D.%08%40%C3%82%24%20a%0E%18%0A%C2%98%04P%40P%C3%80%24%20%01%07%03%05%04%05w%0E%C3%80Ai%C2%93w%C2%97f%C2%8C%C2%BB%C2%BD%C3%A4e%C3%9D%C3%BAogM%01%22%C2%8A%7C8%C3%B5%C2%94%C2%AC%C2%B5%1F%C3%B3%0F%C3%ACp%C2%A1_83%076x3%7B%C3%A6%C3%9A%C2%B4%C2%80%0D%3D%22%C3%87%25%C3%9BN%C3%89%01%C3%A7%7D%C3%89I2%04fFi%04Y%C3%93%C3%83n%C2%8F%7BX%C3%81w%60zdy%C2%A8%C2%98%5B%C3%A6%C2%89%0DE%C2%BE2%C3%8F%3C%C3%89%C2%9B%C3%8E%268%C2%98z%C2%9FRE*KLPn%C2%8Aw7%C3%8E%C2%BD%C3%96W.%15p%C3%A8A%1A%7B%C3%93%06%C2%92%3EW%1C%C2%9E%C2%B23%C3%88%C2%93%C2%BECI%C2%B2%C3%8C%C2%97%C2%8A%131%C2%94%1D%C2%BE%C3%90Q%C2%865%C3%BD%0EY%26%C3%92%07%C3%93%08Y%C2%AEx%0F%60%13%C2%BE%C2%B2%C3%96%C3%A3T%C2%BD%01_%C2%8E%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+
+
+//Comps
+var sort_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%11%00%00%00%11%08%06%00%00%00%3BmG%C3%BA%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C2%A6IDATx%01%C3%9D%C2%93%C2%B1%09%02A%10E%C3%BFz%17%18%09%22%C2%87%C2%89%C2%99%0DX%C2%84%3D%C3%98%C2%82M%08%C3%B6%20FV%60%C2%A0%16cj%03%06%26f%222%3E%C2%90%C2%83u%C3%99%C3%93%5B%13%C2%8F%7B%C3%B0%C2%99e%C2%98%7Dl%C2%B0%235%05%176%C3%8ClL%C3%99%C2%93%5Ed%C3%BEF%C3%96%C3%8E%C2%B9%C2%95%C3%9F%C3%8C%23%C2%83%059%C2%A8%C2%9A%7B%C3%98%C3%88%C2%83W%C3%8C(K%C3%92U5%C2%8C%C3%99%C2%84%C3%97%C3%8C%C2%A3%12%C3%A8%C2%93%C2%ADj%C2%80h%C2%88%C3%A8%C3%BC%26%C2%A19%C2%A2L%C3%89%C2%A0%C2%8E%C2%83%1C%C3%89.4%2F%2C%C2%8DSy%C2%B7%C3%A3y2%C2%A5%C2%91%C3%85%24%3F%C3%93b%C3%89Ui%5C%C3%8A%C2%83%C3%BF%C3%996z%C3%ADF%C2%A1%C3%AF%3C%C3%B4y5%C3%BE%C3%84%13%C3%8E%19S%5E%C2%82x%C2%B0~%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+
+var duplicate_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%13%00%00%00%13%08%06%00%00%00rP6%C3%8C%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%02TIDATx%01%C3%8DSMh%13Q%10%C2%9Eyo7-%C3%B4bR%C3%A9%C3%85%C2%8A%1E%05%11%3D%08%C3%A2%0F%0D%C2%9BV%C2%A5G%3D%C3%B9%C2%83D%C3%B1%07%C2%A44%C2%8DV%C2%BC%C2%A9%C3%91%C2%BB%14%13R%15Q%C2%A4%14%C2%A19(%C2%82%07AHR%C3%81%3F%C2%A8%C3%90%C2%80'A%C2%BDx%C2%90%C3%86%C2%98*%C2%A8%C3%B9%C3%99%C3%B7%C3%86%C3%99M%23%C2%BB%C3%95%10-%3Dt%0E%C3%BBf%C3%9E%C3%8C%7C%C3%BB%7D%C3%B3%C3%9E%03X%C2%A9%C2%86M'%C2%93!%C3%B9)d%C3%AF%40%09%C3%B2_%C2%9B%C2%89%C2%8Cr%2C%C2%82%05%1F%C2%98%0B%C2%B4Z%C3%B3%26m%C2%84%C3%BF4%C2%8D%C3%BAD%C3%9C%0A%C3%9Cv%7C%C3%A1%7C%C3%A6%C2%BA%C2%A1%C3%97%01%22%C2%A2k%C2%88%C2%B0%C2%AF%1D%00%02%C3%8E%22%C2%92%C3%A5%C2%AC%02%C3%84%C2%AE%C3%A6%C2%BE%0BV%17%0D%C2%86%1C%C3%8C%13%C3%80*X%C2%A2%19%C3%9E%C2%80%10%2F%01%C2%B5o%22%C2%A0-%5C%C2%9C%C2%83F%C3%B1%C2%AC%C2%8F%C3%99%C3%AF%C2%A2%C2%BF%C3%8A%C3%84%02%C3%8B%19%12%C2%82%C3%B6H%C2%A4A%C3%90p%07%C2%81%5E5ez%2B%C3%85%C2%A2%C3%80'%C2%93%C3%BD%C3%B1%2FO%C3%85%C3%96%C3%A1%C2%88%1CG2%5E%0CY%C3%A6%C3%A3%C3%98%C2%80q%C3%9C%40%C3%A3%40%C2%ADJeXd%C3%AE%C2%AC%C3%86r%C2%B4%5E%C2%92%C3%BA%C3%A0g%09%C3%AF%03%C2%9Dr%C2%BB%C2%AE%C3%83%3A%C2%A5%C3%AC%20%22F%09%C3%A4%3D%C2%AD%C3%AA%C3%9D%C3%B1%C3%9D%C2%81%C2%89t%C2%8E%0E%2BR%C2%93%C2%8Cp7f%19%C3%87%C3%BE%60%06%C2%A4%C3%8F8%C3%B4%C3%9D%C2%84%C2%A4%C2%A9%C3%93%3Bq%C2%AEFP%04%C3%84%C2%87%C3%8C%C3%B2%10%C2%80z%C2%84R%0C8%C3%B9%22%C3%80%14%C3%8F%C3%AD%5Bk%C2%99Blv%C2%87%C3%8B%C2%A6lz%C2%97%C3%88%C2%91!%C2%B5%C2%BA%C3%82a%C2%A7G%C2%8A%C2%95%C3%8A%C3%9B%C2%83%09%0Bm%40z%C3%93%12L%13%1C%05%12cn%02!%C3%A04H!%1D%C2%B0%1F%C2%9E%C2%B2%C2%B7%C2%A5%C2%BC%7C%C3%92%00%C2%A6ZK0%C2%AFLD%C2%B1%C2%ADA%C2%A5%1E%C3%A4%C3%84%0D%C3%B7%C2%A2%12%3D%C3%A0%C2%9DH%C2%B0O%C2%A5%13%092%C2%B4%C2%82%0B%7CJ%3F%7D%60%C2%A6f%C3%B5%C2%AC%C3%8C%2B%C2%93g%14%C2%BE9Cf1l%C2%BE%C2%8EE%C3%8CQ%C2%8D%C3%B6%C2%91%C3%A1~s%3F%C3%BF%C3%A5%1C%C3%97%C2%9E%0C%C2%85%C3%B5%C2%AD%C3%B23%C3%A3%C2%A5Dy%C3%9E%07%C3%96S%C2%82%C2%8F%C2%BC%C3%9Cg%C2%99%C3%91%05%C2%99%C3%B3%C2%80%C3%BA%60%C2%ADT%C3%A9%C3%AD%C3%89%C3%83)%C2%A7f%C3%84%C3%AAp%C3%A7%13%C2%B3%C3%A4Uf9%C3%8A%C3%87%1D%0D%C3%B5%C2%A9%C3%89%C3%A24T%3C%C3%B3%5CPH%24%C3%92YX%2B%C3%B9ii%C3%B8%5E%C2%A9vt%7D5%C2%ABv%C2%86%087%C3%98%0C%7C%C3%96%0A%C3%8Cx'%C2%92%C3%8C%C2%AA%C2%8B%C3%9Cu%C3%99%C2%B9%C3%A8%23%C3%BDf%1C%C3%9A%C3%99D%C2%81%C2%BAR%C3%99%C3%BA%C3%9EV%C3%B9d%C2%AE%16Of%C3%AD%C3%8F%C2%A9%C3%A9%C3%AA%26X%0E%C2%BB%C3%BE%C2%9C%C3%964%C3%BD_%3D%C2%8B%C3%B9xs%1F%01%C3%A3%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 
 ////////////////////
 
@@ -367,6 +373,253 @@ tab_effects.alignChildren = ["fill", "top"];
 tab_effects.spacing       = 10; 
 tab_effects.margins       = 10; 
 tab_effects.helpTip       = "Manage your Effects Groups";
+
+// ===== Добавляем новую вкладку "Compositions Groups" =====
+var tab_compositions = tpanel1.add("tab", undefined, undefined, {name: "tab_compositions"});
+tab_compositions.text = "Comps Groups";
+tab_compositions.orientation = "column";
+tab_compositions.alignChildren = ["fill", "top"];
+tab_compositions.spacing = 10;
+tab_compositions.margins = 10;
+tab_compositions.helpTip = "Sort project items into folders";
+
+// Создаем группу для кнопок с горизонтальной ориентацией
+var buttonGroup = tab_compositions.add("group");
+buttonGroup.orientation = "row";
+buttonGroup.alignChildren = ["fill", "top"];
+buttonGroup.spacing = 10;
+
+// Добавляем кнопку "Auto Sort Comps" в группу
+var autoSortCompsButton = buttonGroup.add("iconbutton", undefined, File.decode(sort_imgString), {
+    name: "sort_comps", 
+    style: "toolbutton"
+});
+autoSortCompsButton.text = "Sort Comps (Beta)";
+autoSortCompsButton.preferredSize = [130, 35];
+autoSortCompsButton.helpTip = "Automatically sort project items into folders: Compositions, Footages, Audio, Nulls & Solids, Images";
+
+// Добавляем кнопку "Duplicate Comp" в группу
+var duplicateCompButton = buttonGroup.add("iconbutton", undefined, File.decode(duplicate_imgString), {
+    name: "duplicate_button", 
+    style: "toolbutton"
+});
+duplicateCompButton.text = "Duplicate Comps Pro"
+duplicateCompButton.preferredSize = [165, 35];
+duplicateCompButton.helpTip = "Duplicate the active composition. All duplicate comps (including nested ones) will be moved to a folder 'Duplicate (CompName)', a new color label is assigned to each, and the duplicated comp is opened.";
+
+autoSortCompsButton.onClick = function() {
+    var dlg = new Window("dialog", "Sort Presets");
+    dlg.orientation = "column";
+    dlg.alignChildren = "fill";
+    dlg.spacing = 10;
+    dlg.margins = 15;
+
+    var sortOptions = ["All Sort", "Compositions", "Footages", "Audio", "Nulls & Solids", "Images & SQ", "GLB Models", "Other"];
+    dlg.add("statictext", undefined, "Select category to sort:");
+    var sortDropdown = dlg.add("dropdownlist", undefined, sortOptions);
+    sortDropdown.selection = 0;
+
+    dlg.add("statictext", undefined, "Rename folders:");
+    var renameFields = {};
+    var presets = ["Compositions", "Footages", "Audio", "Nulls & Solids", "Images & SQ", "GLB Models", "Other"];
+
+    for (var i = 0; i < presets.length; i++) {
+        var group = dlg.add("group");
+        group.orientation = "row";
+        group.add("statictext", undefined, presets[i] + ":");
+        renameFields[presets[i]] = group.add("edittext", undefined, presets[i]);
+        renameFields[presets[i]].characters = 20;
+    }
+
+    var btnGroup = dlg.add("group");
+    btnGroup.alignment = "center";
+    var okBtn = btnGroup.add("button", undefined, "OK");
+    var cancelBtn = btnGroup.add("button", undefined, "Cancel");
+
+    dlg.center();
+    if (dlg.show() !== 1) {
+        return;
+    }
+    var chosenOption = sortDropdown.selection.text;
+
+    var folderNames = {};
+    for (var i = 0; i < presets.length; i++) {
+        folderNames[presets[i]] = renameFields[presets[i]].text;
+    }
+
+    var presetData = {
+        "Compositions": { color: 8 },
+        "Footages": { color: 9 },
+        "Audio": { color: 2 },
+        "Nulls & Solids": { color: 1 },
+        "Images & SQ": { color: 14 },
+        "GLB Models": { color: 10 },
+        "Other": { color: 0 }
+    };
+
+    app.beginUndoGroup("Auto Sort Comps");
+
+    function getOrCreateFolder(folderName) {
+        for (var i = 1; i <= app.project.numItems; i++) {
+            var item = app.project.item(i);
+            if (item instanceof FolderItem && item.name === folderName) {
+                return item;
+            }
+        }
+        return app.project.items.addFolder(folderName);
+    }
+
+    var folderMap = {};
+    for (var key in folderNames) {
+        var folder = getOrCreateFolder(folderNames[key]);
+        folder.label = presetData[key].color;
+        folderMap[key] = folder;
+    }
+
+    var audioExtensions = ["mp3", "wav", "aif", "aiff", "ogg", "aac"];
+    var imageExtensions = ["jpg", "jpeg", "png", "tif", "tiff", "gif", "bmp", "psd"];
+    var videoExtensions = ["mov", "mp4", "m4v", "avi", "mxf", "vob", "flv", "mkv", "mpg", "mpeg"];
+    var glbExtensions = ["glb"];
+
+    function getCategory(item) {
+        if (item instanceof CompItem) return "Compositions";
+        if (item instanceof FootageItem) {
+            if (item.mainSource instanceof SolidSource || (item.name && item.name.match(/^solid/i))) {
+                return "Nulls & Solids";
+            }
+            if (item.mainSource && item.mainSource.file) {
+                var fileName = item.mainSource.file.name;
+                var ext = fileName.split('.').pop().toLowerCase();
+                if (audioExtensions.indexOf(ext) !== -1) return "Audio";
+                if (imageExtensions.indexOf(ext) !== -1) return "Images & SQ";
+                if (glbExtensions.indexOf(ext) !== -1) return "GLB Models";
+                if (videoExtensions.indexOf(ext) !== -1) return "Footages";
+            }
+            return "Other";
+        }
+        return null;
+    }
+
+    var sorted = false;
+    while (!sorted) {
+        sorted = true;
+        for (var i = app.project.numItems; i >= 1; i--) {
+            var item = app.project.item(i);
+            if (item instanceof FolderItem) continue;
+
+            var category = getCategory(item);
+            if (!category) continue;
+
+            if (chosenOption === "All Sort" || chosenOption === category) {
+                var targetFolder = folderMap[category];
+                if (targetFolder && item.parentFolder !== targetFolder) {
+                    item.parentFolder = targetFolder;
+                    sorted = false;
+                }
+            }
+        }
+    }
+
+    var removedCount = removeEmptyFolders();
+
+    app.endUndoGroup();
+    app.project.refresh();
+    alert("Sorted items into folders.\nRemoved " + removedCount + " empty folder(s).");
+};
+
+function removeEmptyFolders() {
+    var removedCount = 0;
+    var keepSearching = true;
+    while (keepSearching) {
+        keepSearching = false;
+        for (var i = app.project.numItems; i >= 1; i--) {
+            var item = app.project.item(i);
+            if (item instanceof FolderItem && item.numItems === 0) {
+                item.remove();
+                removedCount++;
+                keepSearching = true;
+                break;
+            }
+        }
+    }
+    return removedCount;
+}
+
+///////// DUPLICATE PRO/////////
+
+duplicateCompButton.onClick = function() {
+    app.beginUndoGroup("Duplicate Comp");
+    var activeComp = app.project.activeItem;
+    if (!(activeComp instanceof CompItem)) {
+        alert("Please select a composition.");
+        app.endUndoGroup();
+        return;
+    }
+    
+    // Функция для поиска или создания папки
+    function getOrCreateFolder(folderName) {
+        for (var i = 1; i <= app.project.numItems; i++) {
+            var item = app.project.item(i);
+            if (item instanceof FolderItem && item.name === folderName) {
+                return item;
+            }
+        }
+        return app.project.items.addFolder(folderName);
+    }
+    
+    // Создаем папку для всех дубликатов: "Duplicate (Имя Композиции)"
+    var dupFolder = getOrCreateFolder("Duplicate (" + activeComp.name + ")");
+    // Задаем новый цвет для всех дубликатов (например, 10)
+    var newColor = 10;
+    
+    // Рекурсивное дублирование композиции с передачей целевой папки и нового цвета
+    var dupComp = duplicateCompRecursively(activeComp, dupFolder, newColor);
+    
+    // Открываем дублированную композицию в окне Project
+    dupComp.openInViewer();
+    
+    app.endUndoGroup();
+    alert("Composition duplicated successfully.");
+};
+
+/**
+ * Рекурсивно дублирует композицию.
+ * Для каждого слоя создается его дубликат. Если источник слоя является композицией,
+ * вызывается рекурсивное дублирование с передачей targetFolder и newColor, а затем источник слоя заменяется на полученный дубликат.
+ * После чего исходный слой удаляется.
+ *
+ * @param {CompItem} compItem - композиция для дублирования.
+ * @param {FolderItem} targetFolder - папка, в которую перемещаются все дубликаты.
+ * @param {Number} newColor - новый цвет метки для дубликатов.
+ * @returns {CompItem} - дубликат композиции.
+ */
+function duplicateCompRecursively(compItem, targetFolder, newColor) {
+    // Дублируем композицию
+    var dupComp = compItem.duplicate();
+    // Назначаем новый цвет метки
+    dupComp.label = newColor;
+    // Перемещаем дубликат в целевую папку
+    if (targetFolder) {
+        dupComp.parentFolder = targetFolder;
+    }
+    
+    // Для каждого слоя дублируем его
+    for (var i = dupComp.numLayers; i >= 1; i--) {
+        var origLayer = dupComp.layer(i);
+        var dupLayer = origLayer.duplicate();
+        
+        // Если источник слоя является композицией – дублируем её рекурсивно
+        if (origLayer.source instanceof CompItem) {
+            var dupNestedComp = duplicateCompRecursively(origLayer.source, targetFolder, newColor);
+            dupLayer.replaceSource(dupNestedComp, false);
+        }
+        // Удаляем исходный слой
+        origLayer.remove();
+    }
+    return dupComp;
+}
+
+
 // Если вкладка Tools уже не создана, создаём её:
 var tab_tools = tpanel1.add("tab", undefined, undefined, {name: "tab_tools"}); 
 tab_tools.text = "Tools";
