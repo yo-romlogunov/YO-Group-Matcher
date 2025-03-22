@@ -394,7 +394,7 @@ var autoSortCompsButton = buttonGroup.add("iconbutton", undefined, File.decode(s
     name: "sort_comps", 
     style: "toolbutton"
 });
-autoSortCompsButton.text = "Sort Comps (Beta)";
+autoSortCompsButton.text = "Sort Project Files";
 autoSortCompsButton.preferredSize = [130, 35];
 autoSortCompsButton.helpTip = "Automatically sort project items into folders: Compositions, Footages, Audio, Nulls & Solids, Images";
 
