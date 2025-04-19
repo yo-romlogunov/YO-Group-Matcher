@@ -1,4 +1,4 @@
-var scriptVersion = "3.7.3";
+var scriptVersion = "3.7.4";
 
 var soloAnimStates = soloAnimStates || {};
 var soloShapesStates = {};
