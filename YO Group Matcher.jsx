@@ -1,4 +1,4 @@
-var scriptVersion = "3.7.4";
+var scriptVersion = "3.7.5";
 
 var soloAnimStates = soloAnimStates || {};
 var soloShapesStates = {};
@@ -79,8 +79,15 @@ var collapse_transformation_off_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIH
 
 var collapse_transformation_on_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%10%00%00%00%0F%08%06%00%00%00%C3%ADsO%2F%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%017IDATx%01%C2%8DR%C3%8BQ%C3%830%10%C3%9D%C2%95%C2%93%19%C2%8E%C2%94%10%3Ap%3A%C2%B0%C2%A1%00%C3%92%C2%81%C3%93%00%13%C2%A7%02%C2%86%0A%3Cv%26%C3%831%C3%90%01%0D%04%C2%B9%03%C3%9C%01.%C3%81%07N%C2%B6%C2%A4E%C2%8B1%C3%84N%C3%BCy%17i%C2%A5%C3%9D%C3%B7%C2%B4%C3%BB%040%C2%80%C2%83%C2%A4k%18%C2%81%18%C2%BA%C3%BC%C3%92%C3%9A%C2%8BFHZ%04%C3%8F%C2%92%16%C2%A71%3Ap%3F%03%C3%ADM%26(%C2%8DZ'G%C2%B5nb%22t%C2%8D!%C2%AF%C2%89wR%3F%C3%AE%C2%A4Z%C2%B5DN%03~%C2%AEC%C3%BAS%20%C2%BC!%C2%98X%C2%93%C3%B8%C2%B0%09)%20%3D%11%C2%89%03%02%C3%A5%0F%C2%B73%C2%BF%C2%97%C2%80%C2%91%C3%882%04%12%11%5C%C2%80F%C3%A7f%C3%ABc%C3%9E%C3%9B%02%C3%83aEh'%C3%BD*%C2%A5Wp%0E%C3%BCy6%C3%A8%15%12%04%04%C3%A0%C3%9A%C2%B3%11%C3%AB0G%C2%A2L%09%C2%8A%C2%B7%C3%BE%3C%C3%BDk%C2%81%C2%89x%C3%A2%3C4D%0C%C2%BAD%08%C2%98%11%C3%AAW%5E%15%C3%8C2%C3%9BJQ%C2%9Fw%C3%80VVv%C2%90%C2%97%C2%945%C2%8AeS%C3%98%C3%A0l%06%15%19i%C2%97%C2%82%C2%88%C3%A2%C2%A6%C2%B0%C3%9E%C3%93B%18%15v%C3%B3%5B%04%C3%96%C3%A7%C2%8D%C2%B5%2C%C2%B3%C3%93%5En%C3%AE%C3%A6%C2%9C%5C%C3%988%C3%A5%3D%3B%C2%80(%C2%82%C2%BD%2C%5D%C3%A8C%C3%94%C3%B9%C2%89%C3%B1%7B%C3%B9%C2%92%C3%88%C3%BF%C2%8FU%C2%8BT%1ELEr%2C%C3%83hHq%0C%C3%BB%09%C3%85%C3%9F%C2%9D%C2%AF%C2%90%C2%84%C2%A7%C2%88%C2%9A%1E%00%00%00%00IEND%C2%AEB%60%C2%82";
 
-///
+var layer_3d_on_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0D%00%00%00%0D%08%06%00%00%00r%C3%AB%C3%A4%7C%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01gIDATx%01u%C2%92%C3%81m%C3%82%40%10Eg%C3%96%C3%AB(G%C2%97%60%3A%20%1D%C3%84%C3%90%40R%01%C3%A1%C2%98%03%20*%C2%80%0E%10%10)GH%23%18*%08%1D%40%09%3EFaw'%C3%B37%40%2C%C2%8B%C3%B8bi%C3%B6%C3%8F%C3%8C%C3%BB%7F%C2%97%17%C2%A5%C2%9F%C2%91%C3%90%13%C3%A9%C3%A7%C3%99%14%C3%A3%C2%82%C2%8F%C3%94%C3%B8%C2%96%1BW%0Aq%C3%8E%2C%C3%BBAa%C2%9F-%1AD%C3%82%07%C2%9B(%C2%AE%C2%A2%C2%A8%3C%3DJ%C3%A0%7C%C3%98%C2%B5%C3%AB%C3%98%C3%854%C3%97%C2%91%C2%B9%C2%88%C2%99%C3%8DJ%C3%89y%C2%B1%C3%B1%07%C3%A6%C3%90%1F%14%C3%A9%C3%B6%5D%0BN%C3%BCJ%C2%88%C3%9A%C2%AA%C2%8C%03R%C3%9D%C3%BE%C2%AA%C3%9B!N%C3%84%1F%3C'-%C2%83%C2%A2%23%C2%BB_%C2%96~r%C3%92%C3%A2%2Ff%C3%B2%00T!%C2%BFC%C3%AD%C2%ADt%2BP%C2%A4%C3%9A%00%7C%C2%86%C3%A82%25%C3%A2%09%C2%8D%2FX%11S%C2%8C6%08%C3%BC%14%C2%A0A%C3%9D%C3%96%0D%0B%C3%8B%C2%9C%C3%89L%14y%C3%82%24G%11j%C2%AB%C3%9F9%C2%B3%C3%A9%C3%A9%C3%A9Ug%C3%AAM%C2%81%C3%AC%1AX%C2%B1A%C3%93%02%C3%A6%C2%A8%C2%9BN%C2%9Bi%C2%9Af%01%C3%8CAdG%2C%C3%9B%5B%C3%B1%C3%97%C3%B14)%3E%26%12JM%C2%B0%C3%B8%0E.%16%C3%BF%C3%92%C2%94L%C3%83%C2%BA%0E%60%5C%C2%9C%C3%A30%C3%96p%2B%23%C2%A7%C2%A9z%C3%AAa%C2%80z%C3%88%C3%B4%3C%C3%93%C2%A4%C2%B6%C2%8E%C2%93%3E%C3%84%18%0A%7C%03vK%C2%9C%01e%C3%94%C2%B9%7B%C3%81%3D%C3%80%C2%93%C2%8A%C3%B71%C2%B1%C2%8E%C2%AD%C2%BD%12%C3%89%C3%8F%C2%9B%C3%BC%C2%A7%C2%AEo%C2%9F%C3%AF%C2%A7u%C3%8B%07%1E%C3%80%C2%B9%C2%A1%C2%82%C3%86%3A%5Dw%C2%AF%188%1C%C3%BEc%1C%0F%00%C3%BF%2Fm%C3%92%C2%A1%C3%95%0F%03%C3%98%C3%88R%C2%93%3C%C2%97q%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 
+var layer_3d_off_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0D%00%00%00%0D%08%06%00%00%00r%C3%AB%C3%A4%7C%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%019IDATx%01m%C2%92%C2%8DQ%C2%83%40%10%C2%85%C3%83%C2%91%02%C2%B0%03%C3%92A%C3%92%01%C2%A9%20%C3%9A%01%C2%A9%40-%C2%80%C2%9F%40%03%C2%A4%C2%82h%05%C3%86%0A%C3%84%0A%C2%8C%15H%094%00%C3%B8%C2%BD%C3%8C%C2%9Ds%C2%83%C2%B9%C2%99%C2%9B%5Dv%C3%9F%C3%AE%C2%BD%7DKP%C2%96el%C2%8C9M%C3%93%14%07A%C3%90%C3%A6y%C2%BE_%C3%8CN%5D%C3%97%C3%898%C2%8E'%C3%9C%1E%C3%8C%C3%AB2%0C%C3%83%C2%98%40B%C3%91%C2%9E%C3%9B%0BD%C2%A3%C2%88F)%C3%B13~7%0C%C3%83%C2%85%C3%B0%C2%81%C2%82%04%C2%BB3%C2%AE%1B%C3%89%17%C3%AEY%5DI~%C3%91%C2%A0%C3%80%C3%BETU%C2%A5%17%22%C3%A5%C2%89%C2%B5%C3%82%06%C2%B6%20%C2%96%C2%B54%C3%97%C3%9C%23%C2%9F%C2%8D%C3%80%14%C2%BEa5B%C3%83%C2%8B%C3%87k%C3%8C%7B)%05%C2%A0%C2%AE%1DE%5B%C3%91%C2%B2%C3%B3%14%C3%90%2C%C3%A5%17Eq%C3%85%2Fg3%C2%8B%C3%BB%C2%B7%C2%A5%25%3A%12%60%C3%81w%C2%83%C3%BF%C3%A4%40%C3%86%C2%AF%20%C3%99%C3%93-%05%C2%B0%C3%A2%C3%9EKM%C3%AC%06%C3%BB%C3%AE%C3%A3%C3%8C%C3%A2%C3%86%C2%B1%C3%94%C2%A4%C3%A4'~%3F%C3%8F%C3%BB%C3%B44K%22%C2%B5%C2%A0tpAoG%C3%9D%1F%23%17%C2%84%C3%96J*%3A%C2%B5%C2%A4%C2%92%05FNMv%C2%AA%7D%C3%AE%C3%9CK%C2%B1Gkc%C2%95%7C%C3%A4v4%7CvJ%C3%9A%C2%A5%C3%87%01%C3%8EZ%C3%8B%C2%B4B%C3%A87%C3%9A%C3%8Eg%C2%B0l%3E%1C%C3%86Pt%C3%A1%C3%89%3B)F%C3%A2%C3%9F%7F%C2%A7%C2%93eYk%15%15%C3%A6%C3%A1%17%C2%82%3A%C3%8E%3D%C3%99%C2%A3%C2%BB%0A%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+
+var motion_off_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0C%00%00%00%0D%08%06%00%00%00%C2%9D)%C2%8FB%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C2%ADIDATx%01%C2%95R%C3%9B%0D%02!%10%C3%A4%C2%B6%01)%C2%81%12(%C3%A1J%C2%B8%12%C2%B4%02%C2%B4%03%1E%C3%A1%C2%9F%16%C2%AC%C3%80%12%C3%8E%0E%C3%94%0E%2C%C3%A1%1A%00%1C%C2%92%C3%A3C%25%C2%97c%C2%92%0D%1Bvf%C2%99%2C%C3%8BX%03%C3%8E%C2%B9%091%C2%B6jT%13%C2%AD57%C3%86%3CJ%C2%9EsV)%C2%A5y%15%2B%C3%94%C3%84%C2%97%00%17%12%07G%C3%88%C3%9F%C2%8E%10O%C3%830%C3%8C%2B%C2%87%C2%91%C3%B7%5E%12%C2%91b%C3%9B%10%10%C3%9D%C2%8A%0B%C3%82%C3%93%C2%9C%C3%AD%C2%83%40%C3%A3%23%C2%B1%0E%C3%80%C3%9E%C3%98%25%C2%80%C2%ADC%C2%97%C2%A0%C2%A0%C3%97%C3%92%C2%8Bb%C2%8CK%C2%87%20%10F%C3%B5%C3%84%C2%A4%C2%AE%3B%C3%88%17p%C3%9F%C3%B5%C3%A3%C3%AE%1B%C3%9C%05%C3%A4%138%C3%A1%C2%AFRW%C3%80Z%7B%C3%86%C2%9A%C2%84%C2%96%C3%BA%03%C2%97%15J%C2%BEJ%17%3B%2F%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+
+var motion_on_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0C%00%00%00%0D%08%06%00%00%00%C2%9D)%C2%8FB%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%8EIDATx%01%C2%95%C2%91%C3%81%0D%C2%82%40%10E%C3%BF_%09gK%C2%A0%04K%60%C2%B5%02%3B%C3%90%C2%A31%C3%81X%C2%81v%C2%A0%C2%84%18%C2%8Fb%05%C3%86%02%0C-P%C2%82%25pV%C3%98q%C2%91%C2%AC%07b%02%C3%BC%C3%8B%C3%BE%C3%8D%C3%8C%C3%BB%C2%B3%C2%9B!Z%3Ae%C2%AF%C2%89%C2%81%0A%3C%C2%8C%C3%B2%C2%95%C3%A6%C2%B3%5D%C2%A73%C3%89%C2%A3%C2%BC%09p%17H%40r%07%C3%81%C3%92%C3%95%C2%A2%C2%99%C2%97%3A%C2%AF%C3%8E%C2%99%04%C2%B5%11r%C3%92N%C2%ABa%1ByI%C2%B2j%C3%B7%03J17tHD%C3%B6I%C3%B6%0E%C2%BF%C2%80%7D%C3%86%18%7D%24%C3%BCNQ%C3%A8)%1B%1C%0E%02j%1D%C3%AC%7F%07%01VEo%C2%80%60%C2%BE%C3%95%C3%AC%0F%08%25%C2%AEO%05Vqg3%C3%8C5%C3%92%C3%8D%C3%B2T%C2%A4%C3%BDc3%12%C3%85%C3%9Ff%C2%91x3%C3%B5%17%C3%AE%C3%AE9SR%C3%8D-Ux%C2%A8B%1A%C2%A4T%26_k%3Fm%07%7C%003%C3%92C%C3%8Dd%C3%A1%C3%82K%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+
+///
 
 var edit_group_layers_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0E%00%00%00%0C%08%06%00%00%00R%C2%80%C2%8C%C3%9A%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%01IDATx%01%C2%95%C2%92%C2%BB%C2%8D%C3%82%40%10%C2%86w%C3%97W%C2%80%C3%93%C2%8B%C3%8E%25p%15%C3%9C%C3%9A%0D%C3%9C%5DF%C3%A8%C2%94%08%11%11Y%C2%AC%C2%9D8DT%00t%40%07%C2%86%0E%5C%02%25%10%3B%C2%B0%C3%B9%C3%86%C3%82%02Y%C3%A65%C3%92%C2%AF%C3%99%C3%99%C2%9D%7F%C2%9E%C2%AB%C2%9Ds%C2%BE1%26n%C2%9A%C3%86W%17%C3%A1%5Cr%C2%BFS%0F%C3%A4%03%C3%BC%C3%A1%C2%B8%C2%BC%C2%BD%C3%94Z%C2%AB%2C%C3%8Bf%C3%A8%C2%B2OH%C2%92d%2F%C3%9A%C3%B0%18%0CE%C2%94%60u%5D%17%7D%C2%A4i%C3%AAZ%C2%A2zSH%C3%B4%C3%95%C2%95%C3%BAHNd%5E%C2%A1%C2%BB~G%C3%98%C3%813%C2%A2%C2%90%C2%BE%19%C3%92%11X%C3%8F%C3%B3~%C3%A8%2F%C3%AD%1E%C2%BD0%0C-%C3%9A%0E%C2%944%C2%81x%C2%8C%C2%A2(%C3%86%C2%9Cs%1Es%C3%B6%C3%B1%C3%BF%2C%C2%8A%C2%A2%C2%BC%C3%9B%23%C2%83%C2%90%C3%B2%C2%AC%0C%09%1C%40%08d%03%0By%C2%BFK%C2%A4%C2%BC%13%C3%98%5CM%C2%B7G%1F%C3%80%C2%B6%C3%ADQ%C3%8A%C2%91%C2%BD%C3%B5%25%C3%8F%C3%B3%C2%A0%C2%AA%C2%AA%C2%B8%C2%8Dn%C3%8C%C2%9A%C2%BDJ%C3%96%C3%9F.%C2%90%C2%BE%C2%84%C2%B3%03Ie%C3%B9%C3%B2%C2%9BF%10%C2%A7%C2%90%C2%A4%C3%AC%7Fl%19V%C2%A9%5E%11%1C%032%C3%86%C2%B7wg%C3%9D%10%C2%8C%C2%B3%C2%86%C2%A2%C2%86%16%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 
@@ -102,7 +109,6 @@ var load_my_presets_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00
 var unlink_layer_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%11%00%00%00%10%08%06%00%00%00%C3%B01%C2%94_%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%C3%B2IDATx%01%C3%8DQ1h%14A%14%C3%BD%7Fv6wI%40%12H%23%C2%A2D%14-%02%C2%A2%C2%85%C2%95%C2%88%C2%B9S!%60%C2%95%C3%8AJ%0B%11%C3%84%C3%88%C2%8A%C2%B9N%1B%C2%B7%C3%91J%C2%B9%C3%8B%C3%A5%1Am%C2%84%C3%98%06%0CV%11%C3%8Dm%10%C3%81BAc%C2%91%C3%86%C3%82%C2%A0%C2%82%C3%98%24WhLvw%C3%BEs%C3%A6%C2%8E%C2%8D9E%C3%82%C2%A5%C3%8A%C2%83%C3%99%C3%BD%C3%B3g%C3%A6%C3%8D%C2%9B%C3%B7%C2%88v%0Ax%C3%B3%24%C2%8C%C2%A0%07%C2%84%C3%B6x%C2%AA%C3%95%C2%BFZ%C3%A0%25%C3%B7%7F%14%C2%A1o%C2%8D%C2%A8%C3%8F%C3%95%C2%A2%C3%88%5C%3BE_%C3%ADQd%C3%A7TVLF%C3%A9%C3%B9~%C2%98o%C3%82f)%C2%81%C3%B9%C3%A4%C3%86d%C2%94%0C%C2%BB%C2%B5%1F%C2%94%1E%C3%8Dz%C3%86%C2%98%C3%8F%C3%95%C3%88%7C%C2%9Fx%C2%91%C2%8C%C2%B4%C2%91T%C3%AA8%2CBSDxLH%0F%C3%BA%C3%AC%C3%ADw%23%25%C3%BD%C3%9E%C2%AD%07%05%7F%3E%C3%AB%C2%91%C2%98!%C2%80%C2%9E%C2%B0R%C3%93%C3%95%C3%A7%C3%B11%C2%B7%C2%AE%5B%1F%C2%B9%08%C3%A6%C3%85%C2%A0%C2%A8K-U%C3%A66%0B%06%7D%5B%C3%97%C3%A6%C3%92%C3%A6mF%0C%09%C3%89%C3%82%C3%B53%C2%B9%C2%8A%C2%9D%5E%C2%A9%C3%8E%C2%99a%C3%B1%C3%88)%7D%C3%97%24%01S%2F%20~%26OD%C3%BA%15%C3%B3%20%C3%BD%05%C3%85%5E%C3%A3%C2%8F%C2%9BhX%C3%AB%C2%BA7%C2%94(R%C3%93%C2%86%10%C3%94%C3%A6Q%C2%B2%C2%A6U%C2%98%C3%B9%06%C3%BD%07%0F%C3%9E%C3%82%C2%8F%1B2%06%C3%82q%C3%BB%C2%AC%C3%B1%C2%B6tjuS%12%C2%A6%3B%04%C3%A47.c%14%C2%9C%1F%C3%8E%60%C2%80%C2%A3M%5C%C3%ABLr3(v%C2%95%C3%9BH%1C%C3%8A%C2%B3%C3%98%C3%ADu%C2%A5%C2%87%C2%98%5B%7Dg%C3%ACx%C2%81%1Be%1B%C2%B1%C2%B6%0957!I%3C%C2%BF%7Bq%C3%AC%24%C2%AF%C3%90vp%C3%BF%19%C3%B6N%C2%BC%C3%82%3EW%C2%87!%C3%B4%C2%BD%C2%A7%18%C3%B8G%C3%89V%C2%A8%C3%96%C3%93%19%2BrH%C3%A7VO%C3%84q%C3%BE%C2%96Mdt%C3%A5%C2%A5w%40wB%C3%92%13%7B%C2%97~%C3%B9%C3%A6M%C2%B2%C3%96%C3%B3%C3%91%C2%A6%C3%B3%C2%93%C2%8D%C2%9C%0BC%C2%9D%C2%AANH.%C2%8F%C3%B0%C2%B2%C2%8D%C3%B2%C2%83%25%C3%98e%C3%A3%5D%C2%8E%C2%B5%C3%BF%C3%85%C3%B5%3B%22%C2%B1%C3%8Fyhc-Z%C3%A3G%C2%AD%C3%83%C3%B9%1C%C3%A4%C3%B5%C3%94%02z%3B%22!%C2%8Ff%09r6(%C3%A8%C2%99u%24%C2%A7E%C3%A1%C3%AE%C2%85%23%C2%B4%C3%BA%1B%C3%A0%C3%82%C3%9B%C3%96%C2%A4%03%C2%AB%C2%B4%00%00%00%00IEND%C2%AEB%60%C2%82";
 
 var unlink_effects_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%11%00%00%00%10%08%06%00%00%00%C3%B01%C2%94_%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%C3%B2IDATx%01%C3%8DQ1h%14A%14%C3%BD%7Fv6wI%40%12H%23%C2%A2D%14-%02%C2%A2%C2%85%C2%95%C2%88%C2%B9S!%60%C2%95%C3%8AJ%0B%11%C3%84%C3%88%C2%8A%C2%B9N%1B%C2%B7%C3%91J%C2%B9%C3%8B%C3%A5%1Am%C2%84%C3%98%06%0CV%11%C3%8Dm%10%C3%81BAc%C2%91%C3%86%C3%82%C2%A0%C2%82%C3%98%24WhLvw%C3%BEs%C3%A6%C2%8E%C2%8D9E%C3%82%C2%A5%C3%8A%C2%83%C3%99%C3%BD%C3%B3g%C3%A6%C3%8D%C2%9B%C3%B7%C2%88v%0Ax%C3%B3%24%C2%8C%C2%A0%07%C2%84%C3%B6x%C2%AA%C3%95%C2%BFZ%C3%A0%25%C3%B7%7F%14%C2%A1o%C2%8D%C2%A8%C3%8F%C3%95%C2%A2%C3%88%5C%3BE_%C3%ADQd%C3%A7TVLF%C3%A9%C3%B9~%C2%98o%C3%82f)%C2%81%C3%B9%C3%A4%C3%86d%C2%94%0C%C2%BB%C2%B5%1F%C2%94%1E%C3%8Dz%C3%86%C2%98%C3%8F%C3%95%C3%88%7C%C2%9Fx%C2%91%C2%8C%C2%B4%C2%91T%C3%AA8%2CBSDxLH%0F%C3%BA%C3%AC%C3%ADw%23%25%C3%BD%C3%9E%C2%AD%07%05%7F%3E%C3%AB%C2%91%C2%98!%C2%80%C2%9E%C2%B0R%C3%93%C3%95%C3%A7%C3%B11%C2%B7%C2%AE%5B%1F%C2%B9%08%C3%A6%C3%85%C2%A0%C2%A8K-U%C3%A66%0B%06%7D%5B%C3%97%C3%A6%C3%92%C3%A6mF%0C%09%C3%89%C3%82%C3%B53%C2%B9%C2%8A%C2%9D%5E%C2%A9%C3%8E%C2%99a%C3%B1%C3%88)%7D%C3%97%24%01S%2F%20~%26OD%C3%BA%15%C3%B3%20%C3%BD%05%C3%85%5E%C3%A3%C2%8F%C2%9BhX%C3%AB%C2%BA7%C2%94(R%C3%93%C2%86%10%C3%94%C3%A6Q%C2%B2%C2%A6U%C2%98%C3%B9%06%C3%BD%07%0F%C3%9E%C3%82%C2%8F%1B2%06%C3%82q%C3%BB%C2%AC%C3%B1%C2%B6tjuS%12%C2%A6%3B%04%C3%A47.c%14%C2%9C%1F%C3%8E%60%C2%80%C2%A3M%5C%C3%ABLr3(v%C2%95%C3%9BH%1C%C3%8A%C2%B3%C3%98%C3%ADu%C2%A5%C2%87%C2%98%5B%7Dg%C3%ACx%C2%81%1Be%1B%C2%B1%C2%B6%0957!I%3C%C2%BF%7Bq%C3%AC%24%C2%AF%C3%90vp%C3%BF%19%C3%B6N%C2%BC%C3%82%3EW%C2%87!%C3%B4%C2%BD%C2%A7%18%C3%B8G%C3%89V%C2%A8%C3%96%C3%93%19%2BrH%C3%A7VO%C3%84q%C3%BE%C2%96Mdt%C3%A5%C2%A5w%40wB%C3%92%13%7B%C2%97~%C3%B9%C3%A6M%C2%B2%C3%96%C3%B3%C3%91%C2%A6%C3%B3%C2%93%C2%8D%C2%9C%0BC%C2%9D%C2%AANH.%C2%8F%C3%B0%C2%B2%C2%8D%C3%B2%C2%83%25%C3%98e%C3%A3%5D%C2%8E%C2%B5%C3%BF%C3%85%C3%B5%3B%22%C2%B1%C3%8Fyhc-Z%C3%A3G%C2%AD%C3%83%C3%B9%1C%C3%A4%C3%B5%C3%94%02z%3B%22!%C2%8Ff%09r6(%C3%A8%C2%99u%24%C2%A7E%C3%A1%C3%AE%C2%85%23%C2%B4%C3%BA%1B%C3%A0%C3%82%C3%9B%C3%96%C2%A4%03%C2%AB%C2%B4%00%00%00%00IEND%C2%AEB%60%C2%82";
-
 
 //Head Panel
 
@@ -146,7 +152,6 @@ var volume_high_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%11%0
 
 var volume_on_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%11%00%00%00%11%08%06%00%00%00%3BmG%C3%BA%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%AAIDATx%01%C2%BD%C2%93%C3%9F%11%C2%820%0C%C3%86S%C3%BE%C2%BC3%02%1B%C3%A8%08%C2%B8%C2%81n%C3%A0%26%C3%82%04%C2%BA%C2%81n%C3%A0%082%C2%82%1B%C3%88%06%C2%BEC%C2%B9%C2%98%C2%94%C2%90%2B'%C2%9E%C3%80%03%C3%9F%5D%C2%AF%C2%A5%C3%A9%C3%B7k%C3%92%16%C2%805%C2%85%C2%88)Z%C3%BB%C3%80%C2%A6%C3%89%C3%A6%C3%B8%C3%98%C2%98%C2%B0%C3%99%C2%8D%C3%89%C2%8Cm%C3%BB%22%10R%7F%C2%9E%0AH%C3%85%C3%B4%1E%C3%8C%C3%95%C3%B5m%12%C3%88%03%20%C2%B7~N%C3%A3%3DHJ3%1A%C2%B0%C3%B6%C2%A8%14cN%C3%A0%C2%99L%14%192%C3%A4%10%04h%C3%82%C2%B0%C3%A02%C2%816%C2%A1%C3%90%C2%93b%3B%C3%90ze%C3%97%C2%B1%26kr%7Fw%C3%8D%C2%86%C2%80%01%C3%8CW%26%C3%99V%C3%B2%C2%BD%08%C3%B2%C2%A5%25%C2%90%12%C2%BAL6%5Dg%C2%AA%C3%88%0D%C3%A2%C2%B8%C2%A4%C3%BA%0E%C2%9C%C2%9A%2C%18%1C%C2%AC%0A%C2%B1pk9%C3%96%C2%B6%C2%99%02%C3%87%C3%B4%C3%A3%C2%8A%13%C2%8D%5B%7B%C3%B7%0F%C3%B9%3F%C2%A8%C2%BB%C3%8A~.!%C3%B3U%009L%C2%91%C2%BC%C3%90%C2%AD%C3%AC%C2%BE%C3%A7%C3%97%2B%C2%80%0B%2C%11%C3%83%5C%19s%7F%C3%80U%C3%B5%01%1DW%02k%3D%C2%BA%C2%9Ao%00%00%00%00IEND%C2%AEB%60%C2%82";
 
-
 //Solo icons
 
 var shapes_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%12%00%00%00%11%08%06%00%00%00%C3%90Z%C3%BC%C3%B9%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%012IDATx%01%C2%AD%C2%93%C3%8BM%C3%840%10%C2%86m'%C3%8A9t%C3%A0t%10*%00*%60%C2%A9%00%3A%609%C3%A6%C2%90%C2%87%14E9%02%1D%C2%B0%15%40%07%C3%90%01%C2%A1%03%C2%97%C2%B0%C3%97%1C%C2%92%C3%B0O%C3%A4%C2%ACV%2B%3FvW%3B%C2%923~%C3%BC%C3%BEf%C3%ACq%18%C2%BB%C2%90%C3%B1%C3%BDAUU%C2%B1%10b5M%C2%93%C2%A41%C3%BA%5D%C2%9E%C3%A7_'%C2%81%00I9%C3%A7%C2%9F%C3%A8%C3%8A%03%C2%8D%02%C3%B8%0E%C3%AB%C3%8A%0B%C2%82H%02%C3%B2%C2%8Bnl%C3%91%11%C3%AC%1A%C2%BA%C2%AD%0D%24%C3%A6%C2%8F%10%C2%A5%03BF%C2%81%C3%96%C2%8Eu%16%C3%92%07%C3%91V%C3%8Cc%00%C3%9D%C2%90%C2%AF%C3%ABz%C3%96%0E%C3%83%C3%90%C3%AD%1F7%C3%94%3E%C3%B6%C2%81%C2%96%02%C3%80%3F%C2%A3%C3%9D%02%C2%AC0L%C2%96u%C2%A1%C2%BD%C3%B2%C2%81%C3%B4F%02-Ae%C3%9B%C2%B6%C3%B2%10%C2%B4a~%C3%9BPQ%C3%A0S%C3%93%C2%A2%C3%90Q%C3%9E%3CYuEQ%7C%04A%C3%B0h%13%C3%8C%20*%2B%C2%BD%15Sf%C2%98%7F%C3%97%C3%AF(%1D%C3%87%C2%B1r%C2%824L%C2%95e%C3%B9%C2%84M%09mD%7B%40%C2%BB%C3%82%C3%BC%C2%9A2%C3%81%1D%7D3%C2%87q%C3%93d%C3%934%14%5D%C3%AAJ%C3%9DS%C2%95L%C2%BA(%C2%8A%C2%92%2C%C3%8B%14%C3%B5C%C2%93%00o%C3%A4%C3%95%C2%B6%C3%99f%C3%822%C2%BFeGX%C3%9F%C3%B7%3B%C2%9D1%23%1C%C3%AB%05w%C3%B2%C3%A7%60P%11~%5C%C3%BF%C3%9E%C3%99%C3%B6%0F%23%16%C2%8Dx%01%2B%C2%8E%C3%A8%00%00%00%00IEND%C2%AEB%60%C2%82";
@@ -177,7 +182,6 @@ var solo_mask_select_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00
 
 var solo_mask_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0F%00%00%00%10%08%06%00%00%00%C3%89V%25%04%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%60IDATx%01%C2%95R%C2%BBR%C2%83%40%14e%C2%A1%C2%B1Lk%C2%97%C3%92R%3B%C2%BB%40h%C2%B4%0B_%60%C3%BC%02%C3%87%C3%92%02X%1E%3D%C3%A6%0B%C3%A2'%24%C2%9D%1Dkg%17%3E!%C2%A5%25%C2%96%16%C2%80%C3%A7%C3%84e%06%054%C3%9E%C2%99%C2%9D%C3%9D%C2%B9%C3%B7%C2%9C%C2%BD%C3%A7%3E%C2%841bR%C3%8A%C2%A9i%C2%9AY%5D%C3%97%2B%C2%BC%C3%95%10%C3%86%1Ar%26Ib%C3%A3%C3%8Aq%C3%8E%C2%85%10K%C3%97u%C2%8D%3C%C3%8F_~%C3%A2%C3%84%001D6%C3%99%03%0A%C2%B1%C2%81%C3%BF%1E*%C3%B6%3D2%C2%9C%13%C3%88%5C7M%C2%B30%C3%86m%C2%8F%C2%B8%C3%93~%60i%22%C3%A5Q%C3%A6%C2%A5%C3%B1%C2%BBMX%C3%86%7C%3E%C3%BF%40%19%C2%AF%02%C3%84%25%1C%19%03%C3%86%C3%BF%2C%C2%B2%C2%94R%C2%85%C3%A38%C2%A7Gd%C3%ADZ%01%C3%B9%0F%07%C3%99%C3%B8%C3%A0%C3%99%C2%B6%C3%ADw(%C2%B8%C3%BA%C2%8B%05%C3%92%0A%C3%97-%14%C2%BF%1D%1A%C3%86f%C3%A1%C2%94%C2%9C%C2%AD%C2%AE%7D%3A%C3%80%2BA%C2%8C%C2%80yl%1D%C2%96n%C3%96%0E%C2%B3%3C%09%C3%83p%0B%05%5Bt%C2%9D%C3%A4%C2%B3%0E%C2%91%5D%C2%BE%06v%C2%93%C2%A6%C3%A9%C3%8Dl6Sl%C2%9A%C3%89%1FAV%C2%9Cm%14E%3B%22%C2%83%20%C3%B0%C2%98%C2%85o%C3%86%C3%B0%C2%BE%00%C2%B1%C2%88%C3%A38%C2%AB%C2%AA%C3%AA%C2%89%1C%C3%A0Uw%C3%8E%12%C3%80Pg%C3%B1%08%C2%A6*%7DO%C3%B5%0E%C3%98%3A%11%C3%A3%C3%A5%C2%B7%0D%C2%83c%C2%A1%C3%87F%C2%B0%C3%B4%7D%3F%C3%A2%C2%AA%02%C2%BC%C2%A6O%C3%97%2C%5B%7Co%3D%C2%BBM%C3%A3J%C3%AA%C2%8D%2B%C2%B5%1A%C3%95%C3%85%C3%B6%C3%88%C2%AD%C2%A1~v%C3%B5%C3%8E%C3%B8%C2%9A%C2%A9%C3%97%C3%9D%C3%A9%C2%A3%C2%8Cep%C2%8Cc%C3%B1O%3Db%C3%85%12%5B%C2%84%C3%B4%C2%9F%00%00%00%00IEND%C2%AEB%60%C2%82";
 
-
 //TOOLS
 
 var add_null_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0F%00%00%00%0F%08%06%00%00%00%3B%C3%96%C2%95J%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%18IDATx%01%C3%95%C2%92AR%C2%83%40%10E%7F%0F%C2%B8%C3%A7%06r%04n%10%C3%B0%02%C3%A6%06%C2%BAu%C2%91%C3%B2%08)O%40%25%2C%C3%9C%C2%86%13%18%C3%B7%1A%C3%B0%06z%03%C2%8E%C3%80Zf%C2%A6%C3%AD%26%C2%91*C%C3%8C%C2%86Uz%01L%C3%B7%7F3%C3%94%C3%BC%0FL(%C3%92%C3%87s%C3%85q%07%C2%97%1E%1A%C3%AD%22%0B%C2%B7%C3%87%C3%82%C2%A2%C2%B2s%06%22%C3%BD%C2%BEBP%3Fd%C3%94%C2%84%C2%BA%C3%A8%C2%BC%C2%80DK%027%22H%C3%96%C2%95%C2%8DF%C3%870%3D%12%C3%8B%C2%9C(%C3%A9%C3%98ig%13%0E%C2%BF%40%C3%BC%C3%89%C3%9E%7F%C2%80LJ%C2%8C%C2%BB%11%0B%C2%8E%01_%12%C2%99%C2%88y%C3%9F%C3%ABa2h%C2%A5%C2%91%C3%B6%20P%2Fn%C3%82%C3%AC%18%5E%C3%AD%C2%BE7%02%C3%A6%C2%A2kE%C2%BF%C3%BA3%5C%C2%BF%C3%9B%C3%BBbg%2B%C2%9C)%C2%9D%C2%AB%C3%AEwm0%C2%A1.%19.%C3%9E%C3%AC%5C%C3%92%C2%91%C2%8B%03%C3%A9%7F%C2%97%26%C3%9E%C2%BFh%06T%C3%97%C3%ABq%C2%B0%C2%8A%09%C2%91%C3%B8%C3%B8%25!%C3%982%C2%99%C3%A5%C2%A9%0D%C3%84%C2%A2%04%C3%AC%C2%9F%60%C3%8CL%C3%B5%03%C2%ACE0%C3%97%C2%92%C2%B0%19%C3%AF7%2BGG3%C3%85%C3%A2%C3%B3-%C3%8B%5B%16%C2%AF%03%C3%ACLP%07p%0Ai%C2%B6%C3%8BS%C3%99%C3%8E%C2%AB%C2%AE%09%C3%90%C2%83p%14%C3%94%C2%98Z%3F%19%03x%C3%AC%1ED%C2%94X%00%00%00%00IEND%C2%AEB%60%C2%82";
@@ -198,12 +202,10 @@ var sort_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%11%00%00%00
 
 var duplicate_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%13%00%00%00%13%08%06%00%00%00rP6%C3%8C%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%02TIDATx%01%C3%8DSMh%13Q%10%C2%9Eyo7-%C3%B4bR%C3%A9%C3%85%C2%8A%1E%05%11%3D%08%C3%A2%0F%0D%C2%9BV%C2%A5G%3D%C3%B9%C2%83D%C3%B1%07%C2%A44%C2%8DV%C2%BC%C2%A9%C3%91%C2%BB%14%13R%15Q%C2%A4%14%C2%A19(%C2%82%07AHR%C3%81%3F%C2%A8%C3%90%C2%80'A%C2%BDx%C2%90%C3%86%C2%98*%C2%A8%C3%B9%C3%99%C3%B7%C3%86%C3%99M%23%C2%BB%C3%95%10-%3Dt%0E%C3%BBf%C3%9E%C3%8C%7C%C3%BB%7D%C3%B3%C3%9E%03X%C2%A9%C2%86M'%C2%93!%C3%B9)d%C3%AF%40%09%C3%B2_%C2%9B%C2%89%C2%8Cr%2C%C2%82%05%1F%C2%98%0B%C2%B4Z%C3%B3%26m%C2%84%C3%BF4%C2%8D%C3%BAD%C3%9C%0A%C3%9Cv%7C%C3%A1%7C%C3%A6%C2%BA%C2%A1%C3%97%01%22%C2%A2k%C2%88%C2%B0%C2%AF%1D%00%02%C3%8E%22%C2%92%C3%A5%C2%AC%02%C3%84%C2%AE%C3%A6%C2%BE%0BV%17%0D%C2%86%1C%C3%8C%13%C3%80*X%C2%A2%19%C3%9E%C2%80%10%2F%01%C2%B5o%22%C2%A0-%5C%C2%9C%C2%83F%C3%B1%C2%AC%C2%8F%C3%99%C3%AF%C2%A2%C2%BF%C3%8A%C3%84%02%C3%8B%19%12%C2%82%C3%B6H%C2%A4A%C3%90p%07%C2%81%5E5ez%2B%C3%85%C2%A2%C3%80'%C2%93%C3%BD%C3%B1%2FO%C3%85%C3%96%C3%A1%C2%88%1CG2%5E%0CY%C3%A6%C3%A3%C3%98%C2%80q%C3%9C%40%C3%A3%40%C2%ADJeXd%C3%AE%C2%AC%C3%86r%C2%B4%5E%C2%92%C3%BA%C3%A0g%09%C3%AF%03%C2%9Dr%C2%BB%C2%AE%C3%83%3A%C2%A5%C3%AC%20%22F%09%C3%A4%3D%C2%AD%C3%AA%C3%9D%C3%B1%C3%9D%C2%81%C2%89t%C2%8E%0E%2BR%C2%93%C2%8Cp7f%19%C3%87%C3%BE%60%06%C2%A4%C3%8F8%C3%B4%C3%9D%C2%84%C2%A4%C2%A9%C3%93%3Bq%C2%AEFP%04%C3%84%C2%87%C3%8C%C3%B2%10%C2%80z%C2%84R%0C8%C3%B9%22%C3%80%14%C3%8F%C3%AD%5Bk%C2%99Blv%C2%87%C3%8B%C2%A6lz%C2%97%C3%88%C2%91!%C2%B5%C2%BA%C3%82a%C2%A7G%C2%8A%C2%95%C3%8A%C3%9B%C2%83%09%0Bm%40z%C3%93%12L%13%1C%05%12cn%02!%C3%A04H!%1D%C2%B0%1F%C2%9E%C2%B2%C2%B7%C2%A5%C2%BC%7C%C3%92%00%C2%A6ZK0%C2%AFLD%C2%B1%C2%ADA%C2%A5%1E%C3%A4%C3%84%0D%C3%B7%C2%A2%12%3D%C3%A0%C2%9DH%C2%B0O%C2%A5%13%092%C2%B4%C2%82%0B%7CJ%3F%7D%60%C2%A6f%C3%B5%C2%AC%C3%8C%2B%C2%93g%14%C2%BE9Cf1l%C2%BE%C2%8EE%C3%8CQ%C2%8D%C3%B6%C2%91%C3%A1~s%3F%C3%BF%C3%A5%1C%C3%97%C2%9E%0C%C2%85%C3%B5%C2%AD%C3%B23%C3%A3%C2%A5Dy%C3%9E%07%C3%96S%C2%82%C2%8F%C2%BC%C3%9Cg%C2%99%C3%91%05%C2%99%C3%B3%C2%80%C3%BA%60%C2%ADT%C3%A9%C3%AD%C3%89%C3%83)%C2%A7f%C3%84%C3%AAp%C3%A7%13%C2%B3%C3%A4Uf9%C3%8A%C3%87%1D%0D%C3%B5%C2%A9%C3%89%C3%A24T%3C%C3%B3%5CPH%24%C3%92YX%2B%C3%B9ii%C3%B8%5E%C2%A9vt%7D5%C2%ABv%C2%86%087%C3%98%0C%7C%C3%96%0A%C3%8Cx'%C2%92%C3%8C%C2%AA%C2%8B%C3%9Cu%C3%99%C2%B9%C3%A8%23%C3%BDf%1C%C3%9A%C3%99D%C2%81%C2%BAR%C3%99%C3%BA%C3%9EV%C3%B9d%C2%AE%16Of%C3%AD%C3%8F%C2%A9%C3%A9%C3%AA%26X%0E%C2%BB%C3%BE%C2%9C%C3%964%C3%BD_%3D%C2%8B%C3%B9xs%1F%01%C3%A3%00%00%00%00IEND%C2%AEB%60%C2%82";
 
-//about//
+//About//
 var telegram_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0D%00%00%00%0B%08%06%00%00%00%C2%A4%C2%B2%07a%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%9BIDATx%01%C2%8DQ%C3%91%0D%C2%82%40%0C%7D%C2%BD%C3%B8%2Fn%C2%A2%13%088%C2%88h%C3%BC%07'%00'0%C3%BEc%C3%A2%0AN%00%23%C3%A0%06%C2%B8%01%C3%8A%2FR%0B'DH%20%C2%BC%C3%A4%C3%92%C2%BB%C2%B6%C2%AF%7D%C3%AD%11%26%C3%A2%10%C2%B1Y%02k%C2%94x%C3%92X%C2%A2%17%C2%B1%C2%91%03%26%18.*%C2%ABq%C2%9F%0D%25%C2%BF%017gx%C3%B24%C3%A4%C2%A4m%C2%90%C2%91%C3%8E%C3%BA%12%18%C3%98J%C2%B2%C3%B3%C2%93%C2%90%11%C3%A3X*%C3%8C%C3%85%06%C2%95C%C3%BC%C2%9AT'3%7C9fS%40%C2%82qA%C3%98)%C2%82K%C2%BA%C2%A3%C2%86B%C2%A2%C3%AA%C2%8ERY%C3%8C%C2%B2%250N%C2%A1M%C2%96%04%C3%BD%0EAP%00%09%C3%B5%C3%A5U%C3%8E%C2%9BE%C3%99%3E%C3%A2s%C2%9FP%C3%89%C2%BD%C3%9A%C2%B4%C3%A8%C3%8C%14Z%14%C2%B7*J%C2%BC%C2%B8%C2%B7%5By%26Z%C3%A1%00%C3%82%0D%05D%C2%B0%C3%B0%C2%B79%19%C3%A31Jj%3A%7F%08%2BY%C3%B3%C2%A5%26)%C3%9Di2%1C%C3%B9%C2%BB%C3%A6%C3%BE%05%5C%C2%88T%06E%C3%8F4%C3%92%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 
 var manual_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0E%00%00%00%0E%08%06%00%00%00%1FH-%C3%91%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C2%A4IDATx%01%C3%95%C2%921%0E%02!%10E%07%C3%98%C3%A05%C2%A4!%C2%A1%C3%9B%0B%19%3BK%7Bo%C2%B1%C2%89%17%C3%90%13%C2%A87%C3%91%0A%3A%3C%C2%81%C3%99%C2%92%0A%C3%BC%16%24%C2%A8%C3%8B%C2%9Alb%C2%B1%3F!3L%C3%A6%C3%BDb%C3%B2%C2%89%26%C2%8A%C3%A5%C3%86Z%C2%BB%14B%C2%ACRJ%C2%A2%C2%B6%2C%C2%A5%C3%AC%C2%94R%C3%BD%C2%ABo%C3%B2%C2%90s%C2%BE%03%C2%B4%C2%A1%11%C2%85%10%0E(%C3%AF%20%C2%B4(%C3%BA3c%C2%AC%C3%8F%1F%18%C2%B6(mi%C3%92%0C%7B%C3%93%C2%B1%04%0B%C3%B8'x%C2%8A1%C3%92%C2%988M%C3%94%C2%8C%C3%80%C3%8F%C3%A3%5Cp%C2%94%C2%AE%C2%B6l%C2%8C%C2%B9%0F%C2%817%C2%BC-%C3%92%C2%B3%C2%AE%C2%81%C3%9E%C3%BB%C3%ABWr%C2%B4%C3%96%7B%C3%A7%C3%9C%03%09R%C3%B4O%3D%01%01%C3%A4.%C2%90%C3%9D%C3%A0%C2%B1%C3%BA%00%00%00%00IEND%C2%AEB%60%C2%82"; 
-
-
 
 
 
@@ -1069,8 +1071,8 @@ function refreshSoloButtons() {
     } else {
         setButtonIcon(solo_anim_button, solo_anim_imgString, "solo_anim");
     }
+    
 }
-
 
 // Привязываем обновление при активации панели
 palette.onActivate = function () {
@@ -1079,6 +1081,47 @@ palette.onActivate = function () {
 
 
 ///UNLINKS///
+
+unlink_layer_button.onClick = function () {
+    unlinkSelectedLayersFromGroup();
+};
+
+//
+// ============= getDefaultLabelForLayer =============
+//
+function getDefaultLabelForLayer(layer) {
+    if (layer.matchName === "ADBE Vector Layer") {
+        return 11; // Teal
+    }
+    var isTextLayer = layer.property && layer.property("Source Text") !== null;
+    if (isTextLayer) {
+        return 1; // Text -> Red
+    }
+    if (
+        layer instanceof AVLayer &&
+        layer.source && layer.source.mainSource &&
+        layer.source.mainSource.isSolid
+    ) {
+        return 1; // Solid -> Red
+    }
+    if (layer.nullLayer === true) {
+        return 1; // Null -> Red
+    }
+    if (layer instanceof LightLayer) {
+        return 6; // Light -> Peach
+    }
+    if (layer instanceof CameraLayer) {
+        return 4; // Camera -> Pink
+    }
+    if (layer.adjustmentLayer === true) {
+        return 5; // Adjustment -> Lavender
+    }
+    if (layer instanceof AVLayer && layer.source instanceof CompItem) {
+        return 15; // Precomp -> Sandstone
+    }
+    return 1; // Default -> Green
+}
+
 
 // Функция "unlinkSelectedLayersFromGroup" (дублируется — для удобства)
 function unlinkSelectedLayersFromGroup() {
@@ -1100,6 +1143,11 @@ function unlinkSelectedLayersFromGroup() {
 
     app.endUndoGroup();
 }
+
+
+unlink_effects_button.onClick = function () {
+    unlinkSelectedEffectsFromGroup();
+};
 
 // (5) Обработчик кнопки Unlink (Effects)
 function unlinkSelectedEffectsFromGroup() {
@@ -1128,26 +1176,6 @@ function unlinkSelectedEffectsFromGroup() {
     app.endUndoGroup();
 }
 
-unlink_effects_button.onClick = function () {
-    unlinkSelectedEffectsFromGroup();
-};
-
-function unlinkSelectedLayersFromGroup() {
-    var layers = getSelectedLayersInActiveComp();
-    if (!layers) return;
-    app.beginUndoGroup("Unlink Layers from Groups");
-    for (var i = 0; i < layers.length; i++) {
-        var layer = layers[i];
-        var newName = layer.name.replace(/\[.*?\]\s*/g, "");
-        layer.name = newName;
-    }
-    app.endUndoGroup();
-}
-
-unlink_layer_button.onClick = function () {
-    unlinkSelectedLayersFromGroup();
-};
-
 
 
 //
@@ -1174,25 +1202,29 @@ var labelColorIcons = {
     16: dark_green_color_label_button_imgString
 };
 
-function setButtonIcon(button, imgString, prefix) {
+function setButtonIcon(button, source, prefix) {
+
+    // ── Если уже File ──────────────────────────────────────────────
+    if (source instanceof File) {          // << ключевая проверка
+        button.image = source;
+        if (typeof button.notify === "function") button.notify("onDraw");
+        return;
+    }
+
+    // ── Если пришла строка (как раньше) ───────────────────────────
     try {
-        var decodedImgString = decodeURIComponent(imgString);
-        var timestamp = new Date().getTime();
-        var tempFile = new File(Folder.temp.fsName + "/temp_" + prefix + "_" + timestamp + ".png");
+        var decoded = decodeURIComponent(source);
+        var tmp = new File(Folder.temp.fsName +
+                           "/tmp_" + prefix + "_" + Date.now() + ".png");
+        if (!tmp.open("w+b")) throw Error("Не открыть файл " + tmp.fsName);
+        tmp.encoding = "BINARY";
+        tmp.write(decoded);
+        tmp.close();
 
-        if (!tempFile.open("w+b")) {
-            throw new Error("Не удалось открыть файл для записи: " + tempFile.fsName);
-        }
-        tempFile.encoding = "BINARY";
-        tempFile.write(decodedImgString);
-        tempFile.close();
-
-        button.image = tempFile;
-        if (typeof button.notify === "function") {
-            button.notify("onDraw");
-        }
+        button.image = tmp;
+        if (typeof button.notify === "function") button.notify("onDraw");
     } catch (e) {
-        alert("Ошибка при установке иконки: " + e.message);
+        alert("Ошибка иконки: " + e.message);
     }
 }
 
@@ -1229,7 +1261,12 @@ function setSoloButtonIconEffects(button, imgString) {
 function setCollapseTransformationsButtonIcon(button, imgString) {
     setButtonIcon(button, imgString, "collapse_transformations_icon");
 }
-
+function setMotionBlurButtonIcon(button, imgString) {
+    setButtonIcon(button, imgString, "motion_blur");
+}
+function set3DLayerButtonIcon(button, imgString) {
+    setButtonIcon(button, imgString, "3d_layer");
+}
 
 function trim(str) {
     return str.replace(/^\s+|\s+$/g, '');
@@ -1340,42 +1377,6 @@ function isPrefixUsed(prefix) {
         }
     }
     return false;
-}
-
-//
-// ============= getDefaultLabelForLayer =============
-//
-function getDefaultLabelForLayer(layer) {
-    if (layer.matchName === "ADBE Vector Layer") {
-        return 11; // Teal
-    }
-    var isTextLayer = layer.property && layer.property("Source Text") !== null;
-    if (isTextLayer) {
-        return 1; // Text -> Red
-    }
-    if (
-        layer instanceof AVLayer &&
-        layer.source && layer.source.mainSource &&
-        layer.source.mainSource.isSolid
-    ) {
-        return 1; // Solid -> Red
-    }
-    if (layer.nullLayer === true) {
-        return 1; // Null -> Red
-    }
-    if (layer instanceof LightLayer) {
-        return 6; // Light -> Peach
-    }
-    if (layer instanceof CameraLayer) {
-        return 4; // Camera -> Pink
-    }
-    if (layer.adjustmentLayer === true) {
-        return 5; // Adjustment -> Lavender
-    }
-    if (layer instanceof AVLayer && layer.source instanceof CompItem) {
-        return 15; // Precomp -> Sandstone
-    }
-    return 1; // Default -> Green
 }
 
 
@@ -1883,6 +1884,24 @@ hide_button.onClick = function () {
         audioControlPanel.alignChildren = ["fill", "top"];
         audioControlPanel.margins = [10, 15, 10, 10];
 
+        //Options
+        var OptionslayerPanel = leftColumn.add("panel", undefined, "Options");
+        OptionslayerPanel.orientation = "column";
+        OptionslayerPanel.alignChildren = ["fill", "top"];
+        OptionslayerPanel.margins = [10, 15, 10, 10];
+
+        // --- Кнопка Guide Layers (в Parameters) ---
+        var guideLayerButton = OptionslayerPanel.add("iconbutton", undefined, undefined, { name: "guide_layer_button", style: "toolbutton" });
+        guideLayerButton.text = "Guide Layer Mode";
+        guideLayerButton.preferredSize.width = 150;
+        guideLayerButton.preferredSize.height = 35;
+        guideLayerButton.helpTip = "Toggle Guide Layer for this group";
+        setGuideButtonIcon(guideLayerButton, groupData.guideCheckbox.value ? guide_on_imgString : guide_off_imgString);
+        guideLayerButton.onClick = function () {
+            groupData.guideCheckbox.value = !groupData.guideCheckbox.value;
+            setGuideButtonIcon(guideLayerButton, groupData.guideCheckbox.value ? guide_on_imgString : guide_off_imgString);
+        };
+
         var audioControlGroup = audioControlPanel.add("group");
         audioControlGroup.orientation = "row";
         audioControlGroup.alignChildren = ["left", "center"];
@@ -2139,18 +2158,6 @@ renamelayersButton.onClick = function () {
             }
         };
 
-        // --- Кнопка Guide Layers (в Parameters) ---
-        var guideLayerButton = parametersPanel.add("iconbutton", undefined, undefined, { name: "guide_layer_button", style: "toolbutton" });
-        guideLayerButton.text = "Guide Layers";
-        guideLayerButton.preferredSize.width = 150;
-        guideLayerButton.preferredSize.height = 35;
-        guideLayerButton.helpTip = "Toggle Guide Layer for this group";
-        setGuideButtonIcon(guideLayerButton, groupData.guideCheckbox.value ? guide_on_imgString : guide_off_imgString);
-        guideLayerButton.onClick = function () {
-            groupData.guideCheckbox.value = !groupData.guideCheckbox.value;
-            setGuideButtonIcon(guideLayerButton, groupData.guideCheckbox.value ? guide_on_imgString : guide_off_imgString);
-        };
-
         // --- Кнопка Lock Layers (в Parameters) ---
         var lockLayerButton = parametersPanel.add("iconbutton", undefined, undefined, { name: "lock_layer_button", style: "toolbutton" });
         lockLayerButton.text = "Lock Layers";
@@ -2190,7 +2197,7 @@ renamelayersButton.onClick = function () {
         }
 
         // --- Collapse Transformations Button ---
-collapse_transformationButton.onClick = function () {
+    collapse_transformationButton.onClick = function () {
     var p = groupData.prefix;
     var n = groupData.name;
 
@@ -2226,6 +2233,79 @@ collapse_transformationButton.onClick = function () {
 
     app.endUndoGroup();
 };
+
+// --- Motion Blur ---
+var motionBlurButton = parametersPanel.add("iconbutton", undefined, undefined, { name: "motionBlurButton", style: "toolbutton" });
+motionBlurButton.text = "Motion Blur";
+motionBlurButton.preferredSize.width  = 150;
+motionBlurButton.preferredSize.height = 35;
+motionBlurButton.helpTip = "Toggle Motion Blur for all layers in this group";
+
+// иконка по состоянию
+if (groupData.motionBlurState) {
+    setMotionBlurButtonIcon(motionBlurButton, motion_on_imgString);
+} else {
+    setMotionBlurButtonIcon(motionBlurButton, motion_off_imgString);
+}
+
+motionBlurButton.onClick = function () {
+    var prefix = groupData.prefix, name = groupData.name;
+    groupData.motionBlurState = !groupData.motionBlurState;
+    setMotionBlurButtonIcon(
+        motionBlurButton,
+        groupData.motionBlurState ? motion_on_imgString : motion_off_imgString
+    );
+
+    app.beginUndoGroup("Toggle Motion Blur for " + name);
+    var comps = getAllCompositions();
+    for (var i = 0; i < comps.length; i++) {
+        var comp = comps[i];
+        for (var j = 1; j <= comp.numLayers; j++) {
+            var layer = comp.layer(j);
+            if (layer instanceof AVLayer && layer.name.indexOf("[" + prefix + "]") === 0) {
+                layer.motionBlur = groupData.motionBlurState;
+            }
+        }
+    }
+    app.endUndoGroup();
+};
+
+// --- 3D Layer ---
+var layer3DButton = parametersPanel.add("iconbutton", undefined, undefined, { name: "layer3DButton", style: "toolbutton" });
+layer3DButton.text = "3D Layer";
+layer3DButton.preferredSize.width  = 150;
+layer3DButton.preferredSize.height = 35;
+layer3DButton.helpTip = "Toggle 3D Layer for all layers in this group";
+
+// иконка по состоянию
+if (groupData.threeDState) {
+    set3DLayerButtonIcon(layer3DButton, layer_3d_on_imgString);
+} else {
+    set3DLayerButtonIcon(layer3DButton, layer_3d_off_imgString);
+}
+
+layer3DButton.onClick = function () {
+    var prefix = groupData.prefix, name = groupData.name;
+    groupData.threeDState = !groupData.threeDState;
+    set3DLayerButtonIcon(
+        layer3DButton,
+        groupData.threeDState ? layer_3d_on_imgString : layer_3d_off_imgString
+    );
+
+    app.beginUndoGroup("Toggle 3D Layer for " + name);
+    var comps = getAllCompositions();
+    for (var i = 0; i < comps.length; i++) {
+        var comp = comps[i];
+        for (var j = 1; j <= comp.numLayers; j++) {
+            var layer = comp.layer(j);
+            if (layer instanceof AVLayer && layer.name.indexOf("[" + prefix + "]") === 0) {
+                layer.threeDLayer = groupData.threeDState;
+            }
+        }
+    }
+    app.endUndoGroup();
+};
+
 
         //
         // ——— Функция удаления группы ———
@@ -2399,6 +2479,8 @@ collapse_transformationButton.onClick = function () {
         guideCheckbox: { value: guideCheckboxValue },
         lockCheckbox: { value: lockCheckboxValue },
         collapseTransformationsState: false,
+        motionBlurState:            false,  // ← новое
+        threeDState:                false,  // ← новое
         disableVolumePresets: disableVolumePresets
     };
 
@@ -2560,8 +2642,6 @@ function groupHasAudio(prefix) {
     return false;
 }
 
-
-
 /**
  * Возвращает все композиции из текущего проекта.
  * @returns {CompItem[]} Массив композиций.
@@ -2615,6 +2695,8 @@ function getAllUniqueEffectsInProject_WithNone() {
     return resultArray;
 }
 
+
+//GROUP VIEWER///
 
 /**
  * Основная функция, которую вы вызываете.
@@ -2932,10 +3014,6 @@ function showGroupCompositions(groupData) {
     fillCompositionsList();
     fillAllEffectsList();
 
-    /****************************************
-     * (C) ОБРАБОТЧИКИ СОБЫТИЙ UI
-     ****************************************/
-
     // (C1) Обработчик: сортировка композиций (DropDown "Ascending"/"Descending")
     Sort.onChange = function () {
         sortCompositions(compsWithGroup, Sort.selection.text);
@@ -3093,9 +3171,15 @@ function showGroupCompositions(groupData) {
 }
 
 
+
+
+
+
+
 //
-// ===================== CREATE EFFECT GROUP UI =====================
+// ===================== EFFECT GROUP =====================
 //
+
 
 // Убираем в конце эффекта любые пробел + число (например "Curves 2" -> "Curves")
 function unifyEffectBaseName(baseName) {
@@ -3174,10 +3258,8 @@ function updateEffectGroupPanelTitle(groupData) {
 }
 
 function createEffectGroupUI(groupName, prefix, effectName) {
-    var groupPanel = tab_layers.add("panel", undefined, undefined, {
-        name: "layer_group_" + groupData.prefix
-    });
-    groupPanel.text = groupData.name + " [" + groupData.prefix + "]";
+    var groupPanel = tab_effects.add("panel", undefined, undefined, { name: "effect_group_" + prefix });
+    groupPanel.text = groupName + " [" + prefix + "]"; // Изначально
     groupPanel.orientation = "row";
     groupPanel.alignChildren = ["center", "center"];
     groupPanel.spacing = 6;
@@ -3264,23 +3346,35 @@ function createEffectGroupUI(groupName, prefix, effectName) {
 
     // VIEW onClick
     view_button.onClick = function () {
-        var p = groupData.prefix;               // всегда берём из groupData
-        var n = groupData.name;                 // если нужно сообщение
-        var v = groupData.viewState = !groupData.viewState;
-        setViewButtonIcon(view_button, v ? view_button_on_imgString : view_button_off_imgString);
-    
-        app.beginUndoGroup("Toggle View for " + n);
-        var comps = getAllCompositions(), found = false;
+        groupData.viewState = !groupData.viewState;
+        if (groupData.viewState) {
+            setViewButtonIconEffects(view_button, view_button_fx_on_imgString);
+        } else {
+            setViewButtonIconEffects(view_button, view_button_fx_off_imgString);
+        }
+        app.beginUndoGroup("Toggle View for " + groupName);
+
+        var comps = getAllCompositions();
+        var effectsFound = false;
         for (var c = 0; c < comps.length; c++) {
-            for (var l = 1; l <= comps[c].numLayers; l++) {
-                var layer = comps[c].layer(l);
-                if (layer.name.indexOf("[" + p + "]") === 0) {
-                    layer.enabled = v;
-                    found = true;
+            var comp = comps[c];
+            for (var l = 1; l <= comp.numLayers; l++) {
+                var layer = comp.layer(l);
+                var fx = layer.property("Effects");
+                if (!fx) continue;
+                for (var i = 1; i <= fx.numProperties; i++) {
+                    var effect = fx.property(i);
+                    if (effect.name.indexOf("[" + groupData.prefix + "]") === 0) {
+                        effect.enabled = groupData.viewState;
+                        effectsFound = true;
+                    }
                 }
             }
         }
-        if (!found) alert("Layers for group '" + n + "' not found.");
+        if (!effectsFound) {
+            alert("Effects for group '" + groupName + "' not found in any composition.");
+        }
+
         app.endUndoGroup();
     };
 
@@ -3712,7 +3806,7 @@ function addAllEffectsOfThisTypeToGroup(prefix, effectName) {
 
 
 
-// Функция для открытия окна Effects Manager
+// EFFECTS MANAGER///
 
 effects_manager_button.onClick = function () {
     openEffectsManager();
@@ -4124,7 +4218,7 @@ autoSortCompsButton.onClick = function () {
     removeUnusedCheckbox.helpTip = "Remove unused Footages and Compositions from the project";
     removeUnusedCheckbox.value = false;
 
-    var  remove_disabled_effects_checkbox = optionsPanel.add("checkbox", undefined, "Remove disabled Effects");
+    var remove_disabled_effects_checkbox = optionsPanel.add("checkbox", undefined, "Remove disabled Effects");
     remove_disabled_effects_checkbox.helpTip = "Remove disabled Effects from all compositions";
     remove_disabled_effects_checkbox.value = false;
 
