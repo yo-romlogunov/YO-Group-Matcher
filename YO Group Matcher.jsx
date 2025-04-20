@@ -80,7 +80,9 @@ var collapse_transformation_off_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIH
 var collapse_transformation_on_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%10%00%00%00%0F%08%06%00%00%00%C3%ADsO%2F%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%017IDATx%01%C2%8DR%C3%8BQ%C3%830%10%C3%9D%C2%95%C2%93%19%C2%8E%C2%94%10%3Ap%3A%C2%B0%C2%A1%00%C3%92%C2%81%C3%93%00%13%C2%A7%02%C2%86%0A%3Cv%26%C3%831%C3%90%01%0D%04%C2%B9%03%C3%9C%01.%C3%81%07N%C2%B6%C2%A4E%C2%8B1%C3%84N%C3%BCy%17i%C2%A5%C3%9D%C3%B7%C2%B4%C3%BB%040%C2%80%C2%83%C2%A4k%18%C2%81%18%C2%BA%C3%BC%C3%92%C3%9A%C2%8BFHZ%04%C3%8F%C2%92%16%C2%A71%3Ap%3F%03%C3%ADM%26(%C2%8DZ'G%C2%B5nb%22t%C2%8D!%C2%AF%C2%89wR%3F%C3%AE%C2%A4Z%C2%B5DN%03~%C2%AEC%C3%BAS%20%C2%BC!%C2%98X%C2%93%C3%B8%C2%B0%09)%20%3D%11%C2%89%03%02%C3%A5%0F%C2%B73%C2%BF%C2%97%C2%80%C2%91%C3%882%04%12%11%5C%C2%80F%C3%A7f%C3%ABc%C3%9E%C3%9B%02%C3%83aEh'%C3%BD*%C2%A5Wp%0E%C3%BCy6%C3%A8%15%12%04%04%C3%A0%C3%9A%C2%B3%11%C3%AB0G%C2%A2L%09%C2%8A%C2%B7%C3%BE%3C%C3%BDk%C2%81%C2%89x%C3%A2%3C4D%0C%C2%BAD%08%C2%98%11%C3%AAW%5E%15%C3%8C2%C3%9BJQ%C2%9Fw%C3%80VVv%C2%90%C2%97%C2%945%C2%8AeS%C3%98%C3%A0l%06%15%19i%C2%97%C2%82%C2%88%C3%A2%C2%A6%C2%B0%C3%9E%C3%93B%18%15v%C3%B3%5B%04%C3%96%C3%A7%C2%8D%C2%B5%2C%C2%B3%C3%93%5En%C3%AE%C3%A6%C2%9C%5C%C3%988%C3%A5%3D%3B%C2%80(%C2%82%C2%BD%2C%5D%C3%A8C%C3%94%C3%B9%C2%89%C3%B1%7B%C3%B9%C2%92%C3%88%C3%BF%C2%8FU%C2%8BT%1ELEr%2C%C3%83hHq%0C%C3%BB%09%C3%85%C3%9F%C2%9D%C2%AF%C2%90%C2%84%C2%A7%C2%88%C2%9A%1E%00%00%00%00IEND%C2%AEB%60%C2%82";
 
 ///
-var edit_group_layers_button = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0F%00%00%00%0D%08%06%00%00%00v%1E4A%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%05IDATx%01%C2%9DRm%11%C3%820%0Cm%C2%BA%0A%00%07%C2%93%00%0A%00%07%C2%93P%14%00%02%C2%B6v7%03%C2%A0%00p0%1C%C2%80%C2%83I%00%05%20%60%1F%C2%BC%C3%AC%C3%82%1F%C3%98%C2%8DA%C3%AEvI%C3%93%C3%A6%C2%BD%C3%97%C2%B7%C2%92BdY6o%C2%9A%26T%12Dt%C2%8D%C3%A3%C3%B8%C2%AC%C2%BE%04y%C3%AF-%0E%C3%AF%3F6%C2%88%0EI%C2%92%2C%C3%BB%C2%86%0D%0E%C2%85%5D%1BPb%C3%934%C2%B5%C2%9D%C2%8CD%5B%00o%C2%B4%C3%BA%23%00%C2%BCn%C2%99%7F%C2%98)%C3%80%C3%B8%10o%C3%82A%C3%83%18%C3%88%C3%AB%C2%BA%5E%C3%82%C2%9B%C3%87%C2%AB%C2%87%3A%C3%BA%3A%0C%C2%96%C2%9Dsn-%03l%C3%AC%0A%C2%BD%05%C3%AA%C2%BC%05%C2%86)%1E%C3%99u%C3%8C%C2%B2%C3%84%C2%A91f%06%C3%A6%09%1B%C2%88%C3%9EH%C3%A4%17%C3%A8%C2%A5%7D%C2%86%5D%C3%80p%C3%85%C2%A1%C2%88%0Db%15%0C%26%C2%8Al%10%04%13%C3%9Ds%C3%97%C2%BB%C3%A4%C2%9D%C3%88%C3%A6(%18%04K~D%C2%B9%11%07%C2%BB%C3%AE%3B%C2%96%C2%BC%C3%A2%C2%8CW%C3%A8%C2%B4%C3%96%C2%A7%C2%B2%2Cy%1Db%1D%19%C3%BC%C3%AC-%3B%C3%B9%C3%BEX%18%C2%943d%1FQ%C3%9F%C2%90-%3E%C2%8F%C3%BA%C3%8C%C3%ACUU%15%C2%A4%06%C3%86%C2%9B%C3%9B-%C3%B0%13%14'%C2%99%C2%AFNRcR%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+
+
+var edit_group_layers_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0E%00%00%00%0C%08%06%00%00%00R%C2%80%C2%8C%C3%9A%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%01IDATx%01%C2%95%C2%92%C2%BB%C2%8D%C3%82%40%10%C2%86w%C3%97W%C2%80%C3%93%C2%8B%C3%8E%25p%15%C3%9C%C3%9A%0D%C3%9C%5DF%C3%A8%C2%94%08%11%11Y%C2%AC%C2%9D8DT%00t%40%07%C2%86%0E%5C%02%25%10%3B%C2%B0%C3%B9%C3%86%C3%82%02Y%C3%A65%C3%92%C2%AF%C3%99%C3%99%C2%9D%7F%C2%9E%C2%AB%C2%9Ds%C2%BE1%26n%C2%9A%C3%86W%17%C3%A1%5Cr%C2%BFS%0F%C3%A4%03%C3%BC%C3%A1%C2%B8%C2%BC%C2%BD%C3%94Z%C2%AB%2C%C3%8Bf%C3%A8%C2%B2OH%C2%92d%2F%C3%9A%C3%B0%18%0CE%C2%94%60u%5D%17%7D%C2%A4i%C3%AAZ%C2%A2zSH%C3%B4%C3%95%C2%95%C3%BAHNd%5E%C2%A1%C2%BB~G%C3%98%C3%813%C2%A2%C2%90%C2%BE%19%C3%92%11X%C3%8F%C3%B3~%C3%A8%2F%C3%AD%1E%C2%BD0%0C-%C3%9A%0E%C2%944%C2%81x%C2%8C%C2%A2(%C3%86%C2%9Cs%1Es%C3%B6%C3%B1%C3%BF%2C%C2%8A%C2%A2%C2%BC%C3%9B%23%C2%83%C2%90%C3%B2%C2%AC%0C%09%1C%40%08d%03%0By%C2%BFK%C2%A4%C2%BC%13%C3%98%5CM%C2%B7G%1F%C3%80%C2%B6%C3%ADQ%C3%8A%C2%91%C2%BD%C3%B5%25%C3%8F%C3%B3%C2%A0%C2%AA%C2%AA%C2%B8%C2%8Dn%C3%8C%C2%9A%C2%BDJ%C3%96%C3%9F.%C2%90%C2%BE%C2%84%C2%B3%03Ie%C3%B9%C3%B2%C2%9BF%10%C2%A7%C2%90%C2%A4%C3%AC%7Fl%19V%C2%A9%5E%11%1C%032%C3%86%C2%B7wg%C3%9D%10%C2%8C%C2%B3%C2%86%C2%A2%C2%86%16%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 
 var settings_effects_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0D%00%00%00%0E%08%06%00%00%00%C3%B4%7F%C2%96%C3%92%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%13IDATx%01%C2%A5R%C3%8D%C2%AD%C2%82%40%10%C3%9E%5D%5E%01%C2%96%C2%80%1Dh%07%C3%8B%C3%AD%1D%C3%9F%C3%AB%40K%C2%B0%01X%20%C2%84%C2%ABV%C3%A0%C3%95%12%C2%BC%C2%B9%25%C3%98%01%C3%9B%C2%81x%C2%84%03%C3%B8%C2%8D%0E%09%C2%AE%C2%98%C2%988%C3%892%7F%C3%9F%C3%8C%7C3A%C2%8A%09)%C3%8B2%24%C3%9D4Mm%C2%8C%C2%A9%C3%BD%C2%BC%C3%B2%03y%C2%9E%C3%AB%C2%B6m%2BzR%C3%8A%0B%C2%8A%C3%B4d%11%123%02%C2%93%C3%9D%C3%B7%C3%BD%C3%A2%09%C2%A0TH%C2%BA(%C2%8A%05%C3%A1%C3%88%C2%96%C3%B4%C3%89%C2%B2l%0F%C3%B0%0A%26Q%C2%99%C2%89Wqx!%26o%C3%A38%C3%9EHT%C2%93S%C2%BD%03%C3%BAA4%C2%8F%C2%88%C2%9E%C3%B6%C3%81H%C3%8C%C2%93%24%C2%99%C2%93%C3%A6%C3%A2'%C2%BA%C2%81%C2%B5%C3%B6%C2%AC%C2%B5%C2%BEb%C3%9A%C3%AF%C2%9D%C2%AF%C2%94)%0A%C2%8Ed%23Ws%C3%AE%C2%8F%C2%A7%C3%BC%23w%C2%B8%1F%22%08%C2%82%5E%7C%20%C3%83Qh%C2%A7%15%3A%C3%AD%3Dz%11%C3%A2%C2%8E%C3%B7%3D%C2%8Dw%C2%83%C2%BF%C3%BE%C3%B19%C2%8B%C3%87%C2%95%C2%AA4M%C2%9D%C2%988D%C3%97uV%C2%A1%C2%9B%C2%85%C2%BD%C3%A3%C3%98y%5C%C3%8C%C2%BA%1E%1A%C2%83%C3%81%C2%8E%18(v%0C%C3%9E%12K.%C2%A1%C3%97%C3%A3%C3%8E%C2%98%C2%BA%C3%A1KFp%0D%C3%85%C2%88%C2%9E%C3%A0%C3%BFk%C2%98%C3%A2%3C%3A%C2%8E1V%7C%237%20%C3%82%C2%87%C3%8B%C3%9E%C3%93%C2%902%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 
@@ -1240,6 +1242,9 @@ var effectGroups = [];
 tab_layers.remove(layer_group_default);
 tab_effects.remove(effect_group_default);
 
+
+/////////////
+
 //
 // ФУНКЦИЯ: получить все композиции проекта
 //
@@ -1471,91 +1476,91 @@ function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColo
     var volumeStates = disableVolumePresets ? ["off", "on"] : ["off", "min", "normal", "high"];
     var currentVolumeIndex = disableVolumePresets ? 0 : 2; // По умолчанию "off" или "normal"
 
-    volumeAudioButton.onClick = function () {
-        if (!volumeAudioButton.enabled) return;
+    // --- Volume Audio Button ---
+volumeAudioButton.onClick = function () {
+    var p = groupData.prefix;
+    var states = groupData.volumeStates;
+    // переключаем индекс
+    groupData.currentVolumeIndex = (groupData.currentVolumeIndex + 1) % states.length;
+    var nextState = states[groupData.currentVolumeIndex];
 
-        // Используем значения из groupData
-        groupData.currentVolumeIndex = (groupData.currentVolumeIndex + 1) % groupData.volumeStates.length;
-        var nextState = groupData.volumeStates[groupData.currentVolumeIndex];
+    // обновляем иконку
+    switch (nextState) {
+        case "off":
+            setButtonIcon(volumeAudioButton, volume_off_imgString, "volume_off");
+            break;
+        case "on":
+            setButtonIcon(volumeAudioButton, volume_on_imgString, "volume_on");
+            break;
+        case "min":
+            setButtonIcon(volumeAudioButton, volume_min_imgString, "volume_min");
+            break;
+        case "normal":
+            setButtonIcon(volumeAudioButton, volume_normal_imgString, "volume_normal");
+            break;
+        case "high":
+            setButtonIcon(volumeAudioButton, volume_high_imgString, "volume_high");
+            break;
+    }
 
-        // Меняем иконку
-        switch (nextState) {
-            case "off":
-                setButtonIcon(volumeAudioButton, volume_off_imgString, "volume_off");
-                break;
-            case "on":
-                setButtonIcon(volumeAudioButton, volume_on_imgString, "volume_on");
-                break;
-            case "min":
-                setButtonIcon(volumeAudioButton, volume_min_imgString, "volume_min");
-                break;
-            case "normal":
-                setButtonIcon(volumeAudioButton, volume_normal_imgString, "volume_normal");
-                break;
-            case "high":
-                setButtonIcon(volumeAudioButton, volume_high_imgString, "volume_high");
-                break;
-        }
+    app.beginUndoGroup("Volume " + nextState + " for group " + p);
+    var comps = getAllCompositions();
+    var foundAny = false;
 
-        // Применяем громкость
-        app.beginUndoGroup("Volume " + nextState + " for group " + prefix);
-        var comps = getAllCompositions();
-        var foundAny = false;
-        for (var c = 0; c < comps.length; c++) {
-            var comp = comps[c];
-            for (var l = 1; l <= comp.numLayers; l++) {
-                var layer = comp.layer(l);
-                if (layer.name.indexOf("[" + prefix + "]") === 0) {
-                    if (layer instanceof AVLayer && layer.hasAudio) {
-                        foundAny = true;
-                        switch (nextState) {
-                            case "off":
-                                layer.audioEnabled = false;
-                                break;
-                            case "on":
-                                layer.audioEnabled = true;
-                                break;
-                            case "min":
-                                layer.audioEnabled = true;
-                                var audioGroupMin = layer.property("ADBE Audio Group");
-                                if (audioGroupMin) {
-                                    var audioLevelsMin = audioGroupMin.property("ADBE Audio Levels");
-                                    if (audioLevelsMin) {
-                                        var curVal = audioLevelsMin.value;
-                                        audioLevelsMin.setValue([curVal[0] - 11, curVal[1] - 11]);
-                                    }
-                                }
-                                break;
-                            case "normal":
-                                layer.audioEnabled = true;
-                                var audioGroupNorm = layer.property("ADBE Audio Group");
-                                if (audioGroupNorm) {
-                                    var audioLevelsNorm = audioGroupNorm.property("ADBE Audio Levels");
-                                    if (audioLevelsNorm) {
-                                        audioLevelsNorm.setValue([0, 0]);
-                                    }
-                                }
-                                break;
-                            case "high":
-                                layer.audioEnabled = true;
-                                var audioGroupHigh = layer.property("ADBE Audio Group");
-                                if (audioGroupHigh) {
-                                    var audioLevelsHigh = audioGroupHigh.property("ADBE Audio Levels");
-                                    if (audioLevelsHigh) {
-                                        audioLevelsHigh.setValue([3, 3]);
-                                    }
-                                }
-                                break;
+    for (var c = 0; c < comps.length; c++) {
+        var comp = comps[c];
+        for (var l = 1; l <= comp.numLayers; l++) {
+            var layer = comp.layer(l);
+            if (layer.name.indexOf("[" + p + "]") === 0 && layer instanceof AVLayer && layer.hasAudio) {
+                foundAny = true;
+                switch (nextState) {
+                    case "off":
+                        layer.audioEnabled = false;
+                        break;
+                    case "on":
+                        layer.audioEnabled = true;
+                        break;
+                    case "min":
+                        layer.audioEnabled = true;
+                        var grpMin = layer.property("ADBE Audio Group");
+                        if (grpMin) {
+                            var lvlMin = grpMin.property("ADBE Audio Levels");
+                            if (lvlMin) {
+                                var cur = lvlMin.value;
+                                lvlMin.setValue([cur[0] - 11, cur[1] - 11]);
+                            }
                         }
-                    }
+                        break;
+                    case "normal":
+                        layer.audioEnabled = true;
+                        var grpNorm = layer.property("ADBE Audio Group");
+                        if (grpNorm) {
+                            var lvlNorm = grpNorm.property("ADBE Audio Levels");
+                            if (lvlNorm) {
+                                lvlNorm.setValue([0, 0]);
+                            }
+                        }
+                        break;
+                    case "high":
+                        layer.audioEnabled = true;
+                        var grpHigh = layer.property("ADBE Audio Group");
+                        if (grpHigh) {
+                            var lvlHigh = grpHigh.property("ADBE Audio Levels");
+                            if (lvlHigh) {
+                                lvlHigh.setValue([3, 3]);
+                            }
+                        }
+                        break;
                 }
             }
         }
-        if (!foundAny) {
-            alert("No audio layers found for group [" + prefix + "]");
-        }
-        app.endUndoGroup();
-    };
+    }
+
+    if (!foundAny) {
+        alert("No audio layers found for group [" + p + "]");
+    }
+    app.endUndoGroup();
+};
 
     // --- (C) Кнопка View
     var view_button = groupPanel.add("iconbutton", undefined, undefined, { name: "view_button_" + prefix, style: "toolbutton" });
@@ -1567,30 +1572,23 @@ function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColo
     setViewButtonIcon(view_button, view_button_on_imgString);
 
     view_button.onClick = function () {
-        viewState = !viewState;
-        if (viewState) {
-            setViewButtonIcon(view_button, view_button_on_imgString);
-        } else {
-            setViewButtonIcon(view_button, view_button_off_imgString);
-        }
-
-        app.beginUndoGroup("Toggle View for " + groupName);
-        var layersFound = false;
-        var comps = getAllCompositions();
-
+        var p = groupData.prefix;               // всегда берём из groupData
+        var n = groupData.name;                 // если нужно сообщение
+        var v = groupData.viewState = !groupData.viewState;
+        setViewButtonIcon(view_button, v ? view_button_on_imgString : view_button_off_imgString);
+    
+        app.beginUndoGroup("Toggle View for " + n);
+        var comps = getAllCompositions(), found = false;
         for (var c = 0; c < comps.length; c++) {
-            var comp = comps[c];
-            for (var l = 1; l <= comp.numLayers; l++) {
-                var layer = comp.layer(l);
-                if (layer.name.indexOf("[" + prefix + "]") === 0) {
-                    layer.enabled = viewState;
-                    layersFound = true;
+            for (var l = 1; l <= comps[c].numLayers; l++) {
+                var layer = comps[c].layer(l);
+                if (layer.name.indexOf("[" + p + "]") === 0) {
+                    layer.enabled = v;
+                    found = true;
                 }
             }
         }
-        if (!layersFound) {
-            alert("Layers for group '" + groupName + "' not found in any composition.");
-        }
+        if (!found) alert("Layers for group '" + n + "' not found.");
         app.endUndoGroup();
     };
 
@@ -1604,81 +1602,87 @@ function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColo
     setSoloButtonIcon(solo_button, solo_off_button_imgString);
     var preSoloLayerStates = [];
 
-    solo_button.onClick = function () {
-        soloState = !soloState;
-        if (soloState) {
-            setSoloButtonIcon(solo_button, solo_on_button_imgString);
-        } else {
-            setSoloButtonIcon(solo_button, solo_off_button_imgString);
-        }
+    // --- Solo Button ---
+solo_button.onClick = function () {
+    var p = groupData.prefix;
+    var n = groupData.name;
 
-        app.beginUndoGroup("Solo Group " + groupName);
-        var layersFound = false;
-        var comps = getAllCompositions();
+    // переключаем состояние
+    groupData.soloState = !groupData.soloState;
+    if (groupData.soloState) {
+        setSoloButtonIcon(solo_button, solo_on_button_imgString);
+    } else {
+        setSoloButtonIcon(solo_button, solo_off_button_imgString);
+    }
 
-        if (soloState) {
-            // Отключаем Solo у других групп
-            for (var i = 0; i < layerGroups.length; i++) {
-                if (layerGroups[i].soloButton !== solo_button && layerGroups[i].soloState) {
-                    layerGroups[i].soloState = false;
-                    setSoloButtonIcon(layerGroups[i].soloButton, solo_off_button_imgString);
-                }
-            }
-            preSoloLayerStates = [];
+    app.beginUndoGroup("Solo Group " + n);
 
-            for (var c = 0; c < comps.length; c++) {
-                var comp = comps[c];
-                for (var l = 1; l <= comp.numLayers; l++) {
-                    var layer = comp.layer(l);
-                    if (layer.name.indexOf("[" + prefix + "]") === 0) {
-                        layer.enabled = true;
-                        layer.shy = false;
-                        layersFound = true;
-                    } else {
-                        preSoloLayerStates.push({
-                            layer: layer,
-                            enabled: layer.enabled,
-                            shy: layer.shy
-                        });
-                        if (layer.enabled) {
-                            layer.enabled = false;
-                            layer.shy = true;
-                        } else {
-                            layer.shy = true;
-                        }
-                    }
-                }
-            }
-        } else {
-            // Восстанавливаем
-            for (var k = 0; k < preSoloLayerStates.length; k++) {
-                var storedState = preSoloLayerStates[k];
-                var layer = storedState.layer;
-                if (layer) {
-                    layer.enabled = storedState.enabled;
-                    layer.shy = storedState.shy;
-                }
-            }
-            preSoloLayerStates = [];
-
-            // Включаем слои текущей группы
-            for (var c = 0; c < comps.length; c++) {
-                var comp = comps[c];
-                for (var l = 1; l <= comp.numLayers; l++) {
-                    var layer = comp.layer(l);
-                    if (layer.name.indexOf("[" + prefix + "]") === 0) {
-                        layer.enabled = true;
-                        layer.shy = false;
-                    }
-                }
+    // если включаем Solo, сначала отключаем у других групп
+    if (groupData.soloState) {
+        for (var i = 0; i < layerGroups.length; i++) {
+            var gd = layerGroups[i];
+            if (gd !== groupData && gd.soloState) {
+                gd.soloState = false;
+                setSoloButtonIcon(gd.soloButton, solo_off_button_imgString);
             }
         }
+    }
 
-        if (soloState && !layersFound) {
-            alert("Layers for group '" + groupName + "' not found in any composition.");
+    var comps = getAllCompositions();
+    var preSoloStates = [];
+
+    for (var c = 0; c < comps.length; c++) {
+        var comp = comps[c];
+        for (var l = 1; l <= comp.numLayers; l++) {
+            var layer = comp.layer(l);
+            var isThis = layer.name.indexOf("[" + p + "]") === 0;
+            if (groupData.soloState) {
+                // сохраняем и выключаем всё кроме нашей группы
+                if (isThis) {
+                    layer.enabled = true;
+                    layer.shy     = false;
+                } else {
+                    preSoloStates.push({
+                        layer: layer,
+                        enabled: layer.enabled,
+                        shy:     layer.shy
+                    });
+                    layer.enabled = false;
+                    layer.shy     = true;
+                }
+            } else {
+                // восстанавливаем сохранённые состояния
+                // (если нет — просто включаем слои нашей группы)
+                layer.enabled = false; // default off, потом включим свою
+                layer.shy     = true;
+            }
         }
-        app.endUndoGroup();
-    };
+    }
+
+    // если отключаем Solo, вернём сохранённое
+    if (!groupData.soloState) {
+        for (var j = 0; j < preSoloStates.length; j++) {
+            var st = preSoloStates[j];
+            if (st.layer) {
+                st.layer.enabled = st.enabled;
+                st.layer.shy     = st.shy;
+            }
+        }
+    }
+
+    // всегда включаем слои текущей группы
+    for (var c2 = 0; c2 < comps.length; c2++) {
+        for (var l2 = 1; l2 <= comps[c2].numLayers; l2++) {
+            var layer2 = comps[c2].layer(l2);
+            if (layer2.name.indexOf("[" + p + "]") === 0) {
+                layer2.enabled = true;
+                layer2.shy     = false;
+            }
+        }
+    }
+
+    app.endUndoGroup();
+};
 
     // --- (E) Кнопка Hide
     var hide_button = groupPanel.add("iconbutton", undefined, undefined, { name: "hide_button_" + prefix, style: "toolbutton" });
@@ -1689,38 +1693,46 @@ function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColo
     var hideState = false;
     setHideButtonIcon(hide_button, hide_off_button_imgString);
 
-    hide_button.onClick = function () {
-        hideState = !hideState;
-        setHideButtonIcon(hide_button, hideState ? hide_on_button_imgString : hide_off_button_imgString);
+    // --- Hide Button ---
+hide_button.onClick = function () {
+    var p = groupData.prefix;
+    var n = groupData.name;
 
-        app.beginUndoGroup("Toggle Hide for " + groupName);
+    // переключаем состояние
+    groupData.hideState = !groupData.hideState;
+    setHideButtonIcon(hide_button,
+        groupData.hideState ? hide_on_button_imgString : hide_off_button_imgString
+    );
 
-        var layersFound = false;
-        var comps = getAllCompositions();
+    app.beginUndoGroup("Toggle Hide for " + n);
 
-        for (var c = 0; c < comps.length; c++) {
-            var comp = comps[c];
-            var foundInThisComp = false;
+    var comps = getAllCompositions();
+    var found = false;
 
-            for (var l = 1; l <= comp.numLayers; l++) {
-                var layer = comp.layer(l);
-                if (layer.name.indexOf("[" + prefix + "]") === 0) {
-                    layer.shy = hideState;
-                    layersFound = true;
-                    foundInThisComp = true;
-                }
-            }
-            if (foundInThisComp) {
-                comp.hideShyLayers = hideState;
+    for (var c = 0; c < comps.length; c++) {
+        var comp = comps[c];
+        var inThisComp = false;
+
+        for (var l = 1; l <= comp.numLayers; l++) {
+            var layer = comp.layer(l);
+            if (layer.name.indexOf("[" + p + "]") === 0) {
+                layer.shy = groupData.hideState;
+                found = true;
+                inThisComp = true;
             }
         }
-
-        if (!layersFound) {
-            alert("Layers for group '" + groupName + "' not found in any composition.");
+        // если хоть один слой есть — применяем флаг shy ко всей композиции
+        if (inThisComp) {
+            comp.hideShyLayers = groupData.hideState;
         }
+    }
 
-        app.endUndoGroup();
-    };
+    if (!found) {
+        alert("Layers for group '" + n + "' not found in any composition.");
+    }
+
+    app.endUndoGroup();
+};
 
     // --- Разделитель
     var divider1 = groupPanel.add("panel", undefined, undefined, { name: "divider1" });
@@ -1739,53 +1751,28 @@ function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColo
     add_layer_button.preferredSize.width = 30;
     add_layer_button.preferredSize.height = 30;
 
-    add_layer_button.onClick = function () {
+    add_layer_button.onClick = function() {
+        var p = groupData.prefix;
+        app.beginUndoGroup("Add Layers to " + groupData.name);
         var layers = getSelectedLayersInActiveComp();
-        if (!layers) return;
-
-        app.beginUndoGroup("Add Layers to " + groupName);
-        var layersFound = false;
-
+        // …
         for (var i = 0; i < layers.length; i++) {
             var layer = layers[i];
-            var newName = "[" + prefix + "] " + layer.name.replace(/^\[.*?\]\s*/, "");
-            layer.name = newName;
-            layersFound = true;
-
-            // Цвет метки, если не отключен
-            if (!disableLabelColor) {
-                layer.label = groupData.labelColorIndex;
-            }
-
-            // Guide Layer
-            if (guideCheckboxValue) {
-                layer.guideLayer = true;
-            }
-
-            // Lock
-            if (lockCheckboxValue) {
-                layer.locked = true;
-            }
-
-            // Видимость
-            layer.enabled = viewState;
+            var base = layer.name.replace(/^\[.*?\]\s*/, "");
+            layer.name = "[" + p + "] " + base;
+            if (!groupData.disableLabelColor) layer.label = groupData.labelColorIndex;
+            if (groupData.guideCheckbox.value) layer.guideLayer = true;
+            if (groupData.lockCheckbox.value) layer.locked = true;
+            layer.enabled = groupData.viewState;
         }
-
-        if (!layersFound) {
-            alert("Please select layers to add to " + groupName + ".");
-        }
-
         app.endUndoGroup();
-
-        // Повторно проверяем аудио
-        var nowHasAudio = groupHasAudio(prefix);
-        if (nowHasAudio) {
-            volumeAudioButton.enabled = true;
-            volumeAudioButton.helpTip = "Volume Audio (Off / Min / Normal / High)";
-        } else {
-            volumeAudioButton.enabled = false;
-            volumeAudioButton.helpTip = "No audio layers found in this group.";
-        }
+    
+        // обновляем доступность аудио-кнопки по новому префиксу
+        var hasAudio = groupHasAudio(p);
+        volumeAudioButton.enabled = hasAudio;
+        volumeAudioButton.helpTip = hasAudio
+            ? "Volume Audio (Off / Min / Normal / High)"
+            : "No audio layers found in this group.";
     };
 
     // --- (G) Кнопка Edit
@@ -1954,71 +1941,66 @@ function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColo
         renamelayersButton.preferredSize = [150, 30];
 
 
-        renamelayersButton.onClick = function () {
-            var currentPrefix = groupData.prefix;
-            var currentGroupName = groupData.name;
+        // --- Rename Layers Tool ---
+renamelayersButton.onClick = function () {
+    var cp = groupData.prefix;
+    var cn = groupData.name;
 
-            var renameDialog = new Window("dialog", "Rename Layers In Group");
-            renameDialog.orientation = "column";
-            renameDialog.alignChildren = ["fill", "top"];
-            renameDialog.margins = 16;
+    // Открываем диалог переименования
+    var renameDialog = new Window("dialog", "Rename Layers In Group: " + cn);
+    renameDialog.orientation = "column";
+    renameDialog.alignChildren = ["fill","top"];
+    renameDialog.margins = 16;
 
-            var fieldsGroup = renameDialog.add("group");
-            fieldsGroup.orientation = "row";
-            fieldsGroup.alignChildren = ["center", "center"];
-            fieldsGroup.spacing = 10;
+    // Поля ввода
+    var fields = renameDialog.add("group");
+    fields.orientation = "row";
+    fields.add("statictext", undefined, "Prefix:");
+    var prefixField = fields.add("edittext", undefined, "[" + cp + "]");
+    prefixField.enabled = false;
+    fields.add("statictext", undefined, "New Name:");
+    var newNameField = fields.add("edittext", undefined, "");
+    newNameField.characters = 20;
 
-            fieldsGroup.add("statictext", undefined, "Prefix:");
-            var prefixField = fieldsGroup.add("edittext", undefined, "[" + currentPrefix + "]");
-            prefixField.preferredSize.width = 50;
-            prefixField.enabled = false;
+    var useGroupName = renameDialog.add("checkbox", undefined, "Use Group Name for Rename");
+    useGroupName.onClick = function() {
+        newNameField.text = useGroupName.value ? cn : "";
+    };
 
-            fieldsGroup.add("statictext", undefined, "New Name:");
-            var newNameField = fieldsGroup.add("edittext", undefined, "");
-            newNameField.characters = 20;
+    // Кнопки
+    var btns = renameDialog.add("group");
+    btns.alignment = "right";
+    var okBtn     = btns.add("button", undefined, "OK");
+    var cancelBtn = btns.add("button", undefined, "Cancel");
 
-            var useGroupNameCheckbox = renameDialog.add("checkbox", undefined, "Use Group Name for Rename");
-            useGroupNameCheckbox.value = false;
-            useGroupNameCheckbox.helpTip = "If enabled, the second field (New Name) will be replaced with group name.";
-            useGroupNameCheckbox.onClick = function () {
-                newNameField.text = useGroupNameCheckbox.value ? currentGroupName : "";
-            };
-
-            var renameButtonsGroup = renameDialog.add("group");
-            renameButtonsGroup.alignment = "right";
-
-            var okBtn = renameButtonsGroup.add("button", undefined, "OK");
-            var cancelBtn = renameButtonsGroup.add("button", undefined, "Cancel");
-
-            okBtn.onClick = function () {
-                var newName = newNameField.text;
-                if (!newName || newName.length === 0) {
-                    alert("Please enter a new name.");
-                    return;
+    okBtn.onClick = function () {
+        var newName = newNameField.text;
+        if (!newName) {
+            alert("Please enter a new name.");
+            return;
+        }
+        app.beginUndoGroup("Rename Layers In Group " + cn);
+        var comps = getAllCompositions();
+        for (var i = 0; i < comps.length; i++) {
+            var comp = comps[i];
+            for (var j = 1; j <= comp.numLayers; j++) {
+                var layer = comp.layer(j);
+                if (layer.name.indexOf("[" + cp + "]") === 0) {
+                    layer.name = "[" + cp + "] " + newName;
                 }
-                app.beginUndoGroup("Rename Layers In Group");
-                var comps = getAllCompositions();
-                for (var c = 0; c < comps.length; c++) {
-                    var comp = comps[c];
-                    for (var l = 1; l <= comp.numLayers; l++) {
-                        var layer = comp.layer(l);
-                        var prefixSearch = "[" + currentPrefix + "]";
-                        if (layer.name.indexOf(prefixSearch) === 0) {
-                            layer.name = "[" + currentPrefix + "] " + newName;
-                        }
-                    }
-                }
-                app.endUndoGroup();
-                renameDialog.close();
-            };
+            }
+        }
+        app.endUndoGroup();
+        renameDialog.close();
+    };
 
-            cancelBtn.onClick = function () {
-                renameDialog.close();
-            };
+    cancelBtn.onClick = function () {
+        renameDialog.close();
+    };
 
-            renameDialog.center();
-            renameDialog.show();
-        };
+    renameDialog.center();
+    renameDialog.show();
+};
 
         // --- Панель: Parameters ---
         var parametersPanel = rightColumn.add("panel", undefined, "Parameters");
@@ -2096,85 +2078,59 @@ function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColo
         };
 
         apply_button.onClick = function () {
-            app.beginUndoGroup("Custom Pre-Compose (by Group Prefix)");
-            var activeComp = app.project.activeItem;
-            if (!(activeComp && activeComp instanceof CompItem)) {
-                alert("Open the composition before executing this script!");
+            var cp        = groupData.prefix;
+            var userName  = name_pre_comps.text;
+            var useNums   = Add_Prefix.selection.text === "Numbers";
+            var collapse  = collapseCheckbox.value;
+            var moveAll   = radiobutton1.value; // если true — Move all attributes
+            var activeComp= app.project.activeItem;
+        
+            if (!(activeComp instanceof CompItem)) {
+                alert("Open a composition first!");
                 return;
             }
-
-            var moveAllAttributes = (radiobutton1.value === true);
-            var userPrecompName = name_pre_comps.text;
-            var groupPrefix = "[" + groupData.prefix + "]";
-
-            var foundLayers = [];
+        
+            // Собираем индексы всех слоёв с нашим префиксом
+            var indices = [];
             for (var i = 1; i <= activeComp.numLayers; i++) {
                 var ly = activeComp.layer(i);
-                if (ly.name.indexOf(groupPrefix) === 0) {
-                    foundLayers.push(ly);
+                if (ly.name.indexOf("[" + cp + "]") === 0) {
+                    indices.push(ly.index);
                 }
             }
-            if (foundLayers.length === 0) {
-                alert("Prefixed layers " + groupPrefix + " not found.");
-                app.endUndoGroup();
+            if (indices.length === 0) {
+                alert("No prefixed layers [" + cp + "] found.");
                 return;
             }
-
-            var layerIndices = [];
-            for (var n = 0; n < foundLayers.length; n++) {
-                layerIndices.push(foundLayers[n].index);
-            }
-            // Сортировка по убыванию индекса, чтобы при пре-композиции индексы не сбивались
-            layerIndices.sort(function (a, b) { return b - a; });
-
-            // Счетчик для нумерации при выборе "Numbers"
+        
+            // Сортируем по убыванию, чтобы индексы не сбивались
+            indices.sort(function(a,b){return b - a;});
+        
+            app.beginUndoGroup("Pre-compose Group " + groupData.name);
             var counter = 1;
-
-            try {
-                for (var k = 0; k < layerIndices.length; k++) {
-                    var idx = layerIndices[k];
-                    var layer = activeComp.layer(idx);
-                    if (!layer || !layer.name) continue;
-                    var forbiddenChars = new RegExp("[\\\\/:*?\"<>|]", "g");
-                    var safeLayerName = layer.name.replace(forbiddenChars, "_");
-
-                    // Формируем нумерацию для данного слоя, если выбрано "Numbers"
-                    var numberPrefix = "";
-                    if (Add_Prefix.selection.text === "Numbers") {
-                        numberPrefix = (counter < 10 ? "0" + counter : counter) + "_";
-                        counter++;
-                    }
-
-                    var precompName = "[" + groupData.prefix + "] " + userPrecompName + numberPrefix;
-
-                    // Сохраняем ссылку на исходный null‑объект, если он есть и является null‑объектом
-                    var origParent = null;
-                    if (layer.parent != null && layer.parent.nullLayer === true) {
-                        origParent = layer.parent;
-                    }
-
-                    // Прекомпозиция текущего слоя (передаём массив с единственным индексом)
-                    activeComp.layers.precompose([idx], precompName, moveAllAttributes);
-
-                    // После прекомпозиции получаем новый слой прекомпозиции
-                    var newPrecompLayer = activeComp.layer(idx);
-                    if (collapseCheckbox.value === true) {
-                        newPrecompLayer.collapseTransformation = true;
-                    }
-
-                    // Если был исходный null‑объект, привязываем новый слой обратно к нему
-                    if (origParent) {
-                        newPrecompLayer.parent = origParent;
-                    }
-                }
-            } catch (err) {
-                alert("Error in precompilation: " + err.toString());
+            for (var k = 0; k < indices.length; k++) {
+                var idx   = indices[k];
+                var layer = activeComp.layer(idx);
+                // Формируем имя прекомпозиции
+                var numPrefix = useNums ? ((counter<10?"0"+counter:counter) + "_") : "";
+                var preName   = "[" + cp + "] " + userName + numPrefix;
+        
+                // Сохраняем оригинальный parent-null, если есть
+                var origParent = (layer.parent && layer.parent.nullLayer) ? layer.parent : null;
+        
+                // Прекомпозиция
+                activeComp.layers.precompose([idx], preName, moveAll);
+                var newLayer = activeComp.layer(idx);
+                if (collapse) newLayer.collapseTransformation = true;
+                if (origParent) newLayer.parent = origParent;
+        
+                if (useNums) counter++;
             }
-
             app.endUndoGroup();
             precompose_window.close();
         };
 
+            // --- Pre-compose Tool ---
         precomposeButton.onClick = function () {
             if (precompose_window.visible) {
                 precompose_window.bringToFront();
@@ -2233,35 +2189,43 @@ function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColo
             setCollapseTransformationsButtonIcon(collapse_transformationButton, collapse_transformation_off_imgString);
         }
 
-        collapse_transformationButton.onClick = function () {
-            groupData.collapseTransformationsState = !groupData.collapseTransformationsState;
-            if (groupData.collapseTransformationsState) {
-                setCollapseTransformationsButtonIcon(collapse_transformationButton, collapse_transformation_on_imgString);
-            } else {
-                setCollapseTransformationsButtonIcon(collapse_transformationButton, collapse_transformation_off_imgString);
-            }
+        // --- Collapse Transformations Button ---
+collapse_transformationButton.onClick = function () {
+    var p = groupData.prefix;
+    var n = groupData.name;
 
-            app.beginUndoGroup("Toggle Collapse Transformations for " + groupData.name);
-            var comps = getAllCompositions();
-            var layersFound = false;
-            for (var c = 0; c < comps.length; c++) {
-                var comp = comps[c];
-                for (var l = 1; l <= comp.numLayers; l++) {
-                    var layer = comp.layer(l);
-                    if (layer.name.indexOf("[" + groupData.prefix + "]") === 0) {
-                        if (layer instanceof AVLayer) {
-                            layer.collapseTransformation = groupData.collapseTransformationsState;
-                        }
-                        layersFound = true;
-                    }
+    // переключаем состояние в данных группы
+    groupData.collapseTransformationsState = !groupData.collapseTransformationsState;
+    // обновляем иконку
+    if (groupData.collapseTransformationsState) {
+        setCollapseTransformationsButtonIcon(collapse_transformationButton, collapse_transformation_on_imgString);
+    } else {
+        setCollapseTransformationsButtonIcon(collapse_transformationButton, collapse_transformation_off_imgString);
+    }
+
+    app.beginUndoGroup("Toggle Collapse Transformations for " + n);
+
+    var comps = getAllCompositions();
+    var foundAny = false;
+    for (var c = 0; c < comps.length; c++) {
+        var comp = comps[c];
+        for (var l = 1; l <= comp.numLayers; l++) {
+            var layer = comp.layer(l);
+            if (layer.name.indexOf("[" + p + "]") === 0) {
+                if (layer instanceof AVLayer) {
+                    layer.collapseTransformation = groupData.collapseTransformationsState;
+                    foundAny = true;
                 }
             }
-            if (!layersFound) {
-                alert("Layers for group '" + groupData.name + "' not found in any composition.");
-            }
-            app.endUndoGroup();
-        };
+        }
+    }
 
+    if (!foundAny) {
+        alert("Layers for group '" + n + "' not found in any composition.");
+    }
+
+    app.endUndoGroup();
+};
 
         //
         // ——— Функция удаления группы ———
@@ -2389,6 +2353,7 @@ function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColo
             groupData.currentVolumeIndex = groupData.disableVolumePresets ? 0 : 2;
 
             groupPanel.text = newGroupName + " [" + newPrefix + "]";
+            groupPanel.name = "layer_group_" + newPrefix;
             setColorLabelButtonIcon(groupData.colorLabelButton, newLabelColorIndex);
             setGuideButtonIcon(guideLayerButton, newGuideLayer ? guide_on_imgString : guide_off_imgString);
             setLockButtonIcon(lockLayerButton, newLockLayers ? lock_on_imgString : lock_off_imgString);
@@ -3209,8 +3174,10 @@ function updateEffectGroupPanelTitle(groupData) {
 }
 
 function createEffectGroupUI(groupName, prefix, effectName) {
-    var groupPanel = tab_effects.add("panel", undefined, undefined, { name: "effect_group_" + prefix });
-    groupPanel.text = groupName + " [" + prefix + "]"; // Изначально
+    var groupPanel = tab_layers.add("panel", undefined, undefined, {
+        name: "layer_group_" + groupData.prefix
+    });
+    groupPanel.text = groupData.name + " [" + groupData.prefix + "]";
     groupPanel.orientation = "row";
     groupPanel.alignChildren = ["center", "center"];
     groupPanel.spacing = 6;
@@ -3297,35 +3264,23 @@ function createEffectGroupUI(groupName, prefix, effectName) {
 
     // VIEW onClick
     view_button.onClick = function () {
-        groupData.viewState = !groupData.viewState;
-        if (groupData.viewState) {
-            setViewButtonIconEffects(view_button, view_button_fx_on_imgString);
-        } else {
-            setViewButtonIconEffects(view_button, view_button_fx_off_imgString);
-        }
-        app.beginUndoGroup("Toggle View for " + groupName);
-
-        var comps = getAllCompositions();
-        var effectsFound = false;
+        var p = groupData.prefix;               // всегда берём из groupData
+        var n = groupData.name;                 // если нужно сообщение
+        var v = groupData.viewState = !groupData.viewState;
+        setViewButtonIcon(view_button, v ? view_button_on_imgString : view_button_off_imgString);
+    
+        app.beginUndoGroup("Toggle View for " + n);
+        var comps = getAllCompositions(), found = false;
         for (var c = 0; c < comps.length; c++) {
-            var comp = comps[c];
-            for (var l = 1; l <= comp.numLayers; l++) {
-                var layer = comp.layer(l);
-                var fx = layer.property("Effects");
-                if (!fx) continue;
-                for (var i = 1; i <= fx.numProperties; i++) {
-                    var effect = fx.property(i);
-                    if (effect.name.indexOf("[" + groupData.prefix + "]") === 0) {
-                        effect.enabled = groupData.viewState;
-                        effectsFound = true;
-                    }
+            for (var l = 1; l <= comps[c].numLayers; l++) {
+                var layer = comps[c].layer(l);
+                if (layer.name.indexOf("[" + p + "]") === 0) {
+                    layer.enabled = v;
+                    found = true;
                 }
             }
         }
-        if (!effectsFound) {
-            alert("Effects for group '" + groupName + "' not found in any composition.");
-        }
-
+        if (!found) alert("Layers for group '" + n + "' not found.");
         app.endUndoGroup();
     };
 
@@ -3764,7 +3719,7 @@ effects_manager_button.onClick = function () {
 };
 
 function openEffectsManager() {
-    var win = new Window("dialog", "Effects Manager Tool");
+    var win = new Window("dialog", "Effects Manager Tool V1.5");
     win.orientation = "column";
     win.alignChildren = ["fill", "top"];
     win.spacing = 10;
@@ -4142,7 +4097,7 @@ autoSortCompsButton.onClick = function () {
     var useCustomSort = false;
 
     // Главное окно "Sort Project Files Tool"
-    var dlg = new Window("dialog", "Sort Project Files Tool");
+    var dlg = new Window("dialog", "Sort Project Files Tool V1.3");
     dlg.orientation = "column";
     dlg.alignChildren = "fill";
     dlg.spacing = 10;
@@ -4153,18 +4108,25 @@ autoSortCompsButton.onClick = function () {
     var sortDropdown = dlg.add("dropdownlist", undefined, sortOptions);
     sortDropdown.selection = 0;
 
-    // Чекбокс для удаления неиспользуемых материалов
-    var removeUnusedCheckbox = dlg.add("checkbox", undefined, "Remove unused footages and compositions");
+    // Применить цвет папки к файлам
+    var applyColorCheckbox = dlg.add("checkbox", undefined, "Apply Folder color to files");
+    applyColorCheckbox.value = false;
+    applyColorCheckbox.helpTip = "Apply color label to all files in the selected category";
+    applyColorCheckbox.margins = [20, 10, 0, 0];
+
+    // Панель дополнительных опций
+    var optionsPanel = dlg.add("panel", undefined, "Additional Options");
+    optionsPanel.orientation = "column";
+    optionsPanel.alignChildren = ["left", "top"];
+    optionsPanel.margins = [15, 15, 10, 10];
+
+    var removeUnusedCheckbox = optionsPanel.add("checkbox", undefined, "Remove unused Footages and Compositions");
+    removeUnusedCheckbox.helpTip = "Remove unused Footages and Compositions from the project";
     removeUnusedCheckbox.value = false;
 
-    // Чекбокс для удаления отключённых эффектов (Effects Tab)
-    var remove_disabled_effects_checkbox = dlg.add("checkbox", undefined, "Remove disabled effects");
-    remove_disabled_effects_checkbox.helpTip = "Click to remove disabled effects from all compositions";
+    var  remove_disabled_effects_checkbox = optionsPanel.add("checkbox", undefined, "Remove disabled Effects");
+    remove_disabled_effects_checkbox.helpTip = "Remove disabled Effects from all compositions";
     remove_disabled_effects_checkbox.value = false;
-
-    // Новый чекбокс для применения цвета папки к файлам
-    var applyColorCheckbox = dlg.add("checkbox", undefined, "Apply folder color to files");
-    applyColorCheckbox.value = false;
 
     // Кнопки Apply/Cancel
     var btnGroup = dlg.add("group");
@@ -4176,7 +4138,6 @@ autoSortCompsButton.onClick = function () {
     if (dlg.show() !== 1) {
         return;
     }
-
     // Для отладки можно вывести значения чекбоксов:
     $.writeln("Remove Unused: " + removeUnusedCheckbox.value +
         ", Remove Disabled Effects: " + remove_disabled_effects_checkbox.value +
@@ -4285,7 +4246,7 @@ autoSortCompsButton.onClick = function () {
         var rasterCheckboxes = [];
         for (var i = 0; i < rasterFormats.length; i++) {
             var count = countFilesWithExtension(rasterFormats[i]);
-            var labelText = rasterFormats[i] + " (" + count + " Files)";
+            var labelText = rasterFormats[i] + " : " + count + " Files";
             var cb = rasterPanel.add("checkbox", undefined, labelText);
             rasterCheckboxes.push(cb);
         }
@@ -4294,7 +4255,7 @@ autoSortCompsButton.onClick = function () {
         var vectorCheckboxes = [];
         for (var i = 0; i < vectorFormats.length; i++) {
             var count = countFilesWithExtension(vectorFormats[i]);
-            var labelText = vectorFormats[i] + " (" + count + " Files)";
+            var labelText = vectorFormats[i] + " : " + count + " Files";
             var cb = vectorPanel.add("checkbox", undefined, labelText);
             vectorCheckboxes.push(cb);
         }
@@ -4303,7 +4264,7 @@ autoSortCompsButton.onClick = function () {
         var videoCheckboxes = [];
         for (var i = 0; i < videoFormats.length; i++) {
             var count = countFilesWithExtension(videoFormats[i]);
-            var labelText = videoFormats[i] + " (" + count + " Files)";
+            var labelText = videoFormats[i] + " : " + count + " Files";
             var cb = videoPanel.add("checkbox", undefined, labelText);
             videoCheckboxes.push(cb);
         }
@@ -4312,7 +4273,7 @@ autoSortCompsButton.onClick = function () {
         var audioCheckboxes = [];
         for (var i = 0; i < audioFormats.length; i++) {
             var count = countFilesWithExtension(audioFormats[i]);
-            var labelText = audioFormats[i] + " (" + count + " Files)";
+            var labelText = audioFormats[i] + " : " + count + " Files";
             var cb = audioPanel.add("checkbox", undefined, labelText);
             audioCheckboxes.push(cb);
         }
