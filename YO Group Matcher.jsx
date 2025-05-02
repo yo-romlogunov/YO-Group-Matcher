@@ -1,4 +1,4 @@
-var scriptVersion = "3.8.7";
+var scriptVersion = "3.9.1";
 
 var soloAnimStates = soloAnimStates || {};
 var soloShapesStates = {};
@@ -15,6 +15,7 @@ var currentIcon  = 0;  // 0=view, 1=tools, 2=mode
 var layerGroups  = [];
 var EffectGroups = [];
 var currentMode = modes[0]
+var _defaultCreateGroupEffectName = "";
 
 
 var switch_tools_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%5B%00%00%00%20%08%06%00%00%00%7D%C3%93%04%C2%9B%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%055IDATx%01%C3%AD%C2%99%3Bl%1CU%14%C2%86%C3%8F%C2%9Du%C3%BC%C2%B6%C2%B0%0B%C3%AC%C3%98%C3%95F%20%14%C3%89%0F%C3%AC%08%01%5Dv%0B%04%14(%0E%C2%A2%C2%A1s%1AD*%12%C3%B1%C2%90%C3%92%60%C2%BB%C3%A3e%25(U*%C2%9C%12%1AoDc%C2%A0%C3%88%C3%92%C2%A5%40%C3%8A%C3%A2%C2%87%C3%A4.%1B!%C2%A1%C3%85%C2%95%0D~%C3%9B%C2%BB%C3%83%C3%BF%C2%AFgV%C3%AB%C3%B5%C3%8C%C2%BDwf%1D!%C2%A1%C3%B9%C2%A4%C3%91x%C3%AF%C3%9C%C2%B9%C3%A7%C2%9C%C3%BF%C2%9E9s%C3%A7Z%24!!!!!!!%C3%A1%C2%BFDE%C3%A9%3C%0E*%C2%95%C3%8A%15%C3%97u%C3%87%C2%95R%C3%A3%5E%C3%B3%06~%17q~%C2%90J%C2%A5%C3%B2%C2%85B%C2%A1(g%C3%88%C3%A4%C3%B8%C3%AD%5E%C3%87%C2%A9L%C2%89%C2%B8%C2%97%5D%C2%B7f%13%C2%B8E%C3%B8%C3%B0%C2%A0Rqr%C2%B9%C3%82%C3%8D%C2%A2%C2%9C!%08%C2%B3%17qN!%C2%AE%C3%8Buq%0A%C3%A3%C3%84%C3%AF_%1D%C3%87%C2%99%C2%8F%13%C2%A7%C2%95%C3%980%C2%9E.%C2%97%C3%8B%C2%B7%C3%B1%C3%A7%C2%A4q%40%C2%A5f%C2%96%C2%96%C2%96f%C2%A5I%3C%C2%91%C2%A7%11%C3%A0%0DS_%C3%98%C2%9C%C2%87%C3%A8%C2%B3%C3%8D%C2%8A%C3%AE%C2%89%C3%BC%C2%91g%C2%B3%C3%97%C3%90%7D%1E%C3%895%1BEt%C2%A3%C3%98%C3%8Cf%08%C3%BD%C3%90%C3%82x%3DE8%C2%92%C2%8D%C2%9B%C3%A5%10%3A%C2%ADT%056%C3%9D%C2%B4%C3%BD%5D%C2%AA%C3%A8%C2%BAN6%C2%AE%C3%A0L%C2%A8%C2%A3%C2%A3%C2%A3%C2%85%C3%BAL%C2%B6%006%C3%9Dk%2B%2B%2By%C2%9B%C3%8E%C3%8A%C3%A0%40%1C%C2%A1k%C2%8E%C3%84%11%3C%C2%9E%C3%905P%C3%92R%13Q%05%C3%B7%C2%9E%5C%C3%86%C2%99%C2%96%18%40%C3%B0%C2%AC%C2%8D%C3%A0%C2%8E%C3%A8%1DX%C2%90xB%13%C3%9E%C3%BF%C2%9DD%C2%A4%09%C2%A1I%2F%C3%AFg%09%C2%8Ar%13%C3%BC%C2%9C%C2%96%C2%98B%13%3C%0D%0B%2CA%C2%A6~%C3%8E%C2%B3r%C3%80%233%3A%3A%3Ae%C3%9By%C3%B2%C3%92%C3%9C%C2%8D%26%C2%84%C3%B6p%C3%93%C2%8Esd%C2%AC%C3%B3%3E%C2%9E%7FS%C3%92%1C%C2%BD%C3%9E%3BMK%60%19%C3%B1%C2%B2%C3%BAIc%7BKK%C2%8B%C2%B4%C2%B7%C2%B7%C3%8B%C3%A1%C3%A1%C2%A1%C3%AC%C3%AF%C3%AF%C3%97%C3%9A%C2%BB%C2%BB%C2%BB%C2%AB%C3%A7%C2%AD%C2%AD%C2%AD%C2%A0%C3%A1%C3%B2%C3%8B%C3%8B%C3%8BY%C2%B1%C3%A0%C3%AA%C3%84%C3%9C%C2%93%20%C2%B1_%C3%8B%C2%BE(%C3%A9%C2%97%C2%9E%3F%C3%95%7F%C3%BD%C3%8F%C2%BF%C3%A5%C3%A1%C2%8F%C2%ABAC%C2%B1%C2%9C%5C%409%C3%99%10%03ccc%C2%8F%C2%B9%C2%BA%C2%AAokkk%C2%93s%C3%A7%C3%8E%09%5E%C2%96%C2%B2%C2%B3%C2%B3Skomm%C2%AD%1E%C2%8D%C3%AD%3E(%C2%9B%7D(%C2%9B%C2%A16%5B%C2%82%1A!t%26%C2%A4%5D%C2%BA%C2%BA%C2%BAX%C2%A3d%7D%7D%C3%BDx%00L%00%C3%9B%C3%B0r%09%13%3B%C3%83%C3%893%C3%95%C3%AE%C3%B7%5E%C3%B9%3AS.%07g%C3%B5%C2%AB%C2%99%17%24%C3%BB%C3%8E%C3%88%C2%A9%C3%B6%C2%95%C3%9F%C3%BE%08%13%1B%C2%8F%C3%B4%11%05%C3%8C%C2%8B%06%2F%C2%A9N%C2%BD%10%C2%99P%3C%C3%88%C3%9E%C3%9E%5EU%5C%C3%92%C3%93%C3%93S%C2%8D%C2%97%3A%04%C2%89%C3%8D%C3%A5%22Nw%C3%82%C3%AC%C2%85%C2%95%C2%91%2BA%C2%8D%14%C3%B9%C3%A0%C3%A0%C2%805%C2%AA%3A%C3%83%C2%BEcdwwW%C3%82%08%C2%9B%C2%BC%C2%93%C2%8EJh%C2%9F%C2%BB%C3%93%3F%C3%89%C2%BB%C2%97%C3%A6%C3%A4%C3%AE%C3%8C%C2%A2%C3%B7%7B%C2%B1%C3%BA%C3%BB%C3%B3%0F~%08%1DO9%C3%8A%C2%B8L%0D%12%C2%BA%C2%91%C3%8E%C3%8E%C3%8E%C3%AA%C2%99%22%C3%B3%C3%90%01%7D%5E%C3%96%5D%0F%13%3B%C2%B4%C3%98%C3%BB%C3%A5%C2%83%C2%8FZ%C3%BD%C2%B9%C2%BE%C2%AC4%C2%82%C3%89I%C2%8B%01%7C%C2%B0%18%C3%BBD%01%C3%B5%C3%B19c%1F%C3%832%C2%8F%C3%89%C3%A5%C2%8B%C3%8D3%7F%C3%B3%C3%90%C2%90%C3%96%5Dt%24%22%C3%8C%60%1A%C3%AC%C3%A8%C3%A8%60%C2%8D%C2%AA%C3%8E6K%08%1F%C2%AD%C3%BF%1B%2C%15%7C%C2%8A%19%2B%0F%26%C2%94_R%C3%A2%10%26vh%C2%91%C2%A7%C3%90%7CA%C3%92%09%C3%96j%C2%A2%2B!%C2%A6%C3%B1j(%C2%8B%3E%11%40%C3%BEmZt%C3%93%C3%9Ad%C3%89d%C2%BC%C2%AC%C3%95%C3%84%22N-%C2%81bC%C3%88%C2%A7%C2%BA%C2%9B%C3%B8%C3%92%20%C2%9Cm%C2%A2%2B!%04%C3%99P%10%03%C2%AE(c%C2%9F(%C2%A8%C2%8Ay%3C%1B%C2%BF%C3%BC%C3%AC%C3%A6%C2%93K%C3%B1%C2%B56%C2%95%C3%BA%5Dw%C3%9D%09q%22%C2%A7%C2%BB%C2%89b%C3%BB%C2%B5%C3%8B%C2%A2%C2%84lX%7D%C3%8EbCI%C3%8E%C2%90%C2%8A8yS%1F%C2%94%40%C2%8A%C2%AD%C3%8D%C3%AE%C3%AD%C3%AD%C3%AD%13g%C2%ADM%C2%83n%C2%A1%C2%9F%C3%ABX%C3%AC%C3%B3%C3%B35%13v%C2%9D%C3%B5%C2%9APtC%1D%C2%9B%C3%87%3A%C3%BB%C2%9AXpu%C3%A2%1B%C2%AD%C3%8D%C2%AE%C2%9E%C2%B6%C3%AA%C2%B1%C3%BD%C3%8F~%C3%B5%C3%90%C2%90_x%C3%BC%C2%89%C3%95%C3%9A%1E%C3%AB%C3%AC%19%C3%840%5D%C3%9F%C2%86%5D%C2%BDj6%07%C3%85%C3%A6%C3%87%C3%9D%C2%98%60%C3%A8_%C3%84%06%C3%9C%05%C2%9D%C2%AD%C3%90%17%24%0Ciw%C3%AEh%C2%8C%C2%87Nh8%C2%B0%C3%81%C2%9D1%C2%B1%C3%84u%2B7u%C3%97)0%3Fd%0CBc%C2%9C%C2%94%C3%95%C3%A4%12%08%C3%8Bu%C3%B1%C2%89%C3%ACfLa%C2%B1%C3%B9q%C2%9F%C2%B6%C3%A9%1A%C3%A3L%C2%85%5D%C3%80GK%C2%B1%C2%BF%C2%BF%C2%BF%0F%C2%82%C2%BD.1%C2%81%C2%B3%C2%B7%C2%90%C3%95%C2%8B%C2%B6%C3%BD%C3%97J%C2%BF%C2%94.%C2%9E%7Fs%13I%C3%B5%C2%96%C3%84%C2%84A%C3%A7%0A%1F%5B%C2%97%C2%A4R%C2%A9%C2%B4700%C3%B0%C2%97Xl%1Fkl~%C2%8BR%C3%B9%C2%85%C2%A9_Jw%11%C2%82%2F%C3%82%11%3E%1AQ%C2%B6%1D%7D%07fWWW%C2%8D%0E4%C2%B2V%C3%BA%C3%B9%C3%91%C3%85%C3%B3o%60%C2%8EUF%22r%2C%C3%B4%C2%A73%12%11%C3%84Y%40b%C3%85%C2%B2%09%C3%AEC%C3%A8%0Fm%3A%C2%A6L%1D%C3%A0H.%C2%8A%23%2C%1D%C3%88%C3%A8%C3%AB%10%C3%BA%C2%8E%C3%84%04%19%C2%9E%C3%B72%C2%9COU%C2%BB%C3%B9%0E%C3%85%C3%BF%16%C3%9D%C2%82%C3%90%C2%91'%C3%97%07q%C3%A6%C2%91XO%C2%BD%0F%1D%C2%AB%5DC%2F%C2%A3%C2%AD%C2%84%26F%C2%B1%7DG%C2%86%C2%86%C2%86%C3%AEc%C3%B0%3E%C3%AFk%C3%B0%C2%94%00%14%19%C3%97%C2%BFD%C2%8D~%1F%C2%A5%C3%A3%C2%914%C3%89q%C2%86%C2%BF%C3%BD%C2%BDRn%1FFg%C3%B0%01%02%C2%A8%0D%C2%BC%C3%A2%C3%AF%C2%B1F%C2%A3tX%C2%97%C2%AB0%C2%98%C3%A1%C2%83%C2%83%C2%83%C3%B8W%5Be%13%C2%B5%3C%1Dd%C3%93%C2%8B%C3%B3%1EV2%C3%97%C3%B1B%C2%9C%C2%97%08D%C3%BA%1F%C2%A4%C3%8F%C3%88%C3%88H%06Fk%02%C3%A0%23'%C2%BF%C2%B6%C2%B6V%C2%94g%C3%88%C3%A4%C3%B8W%C3%888%0A%C2%A0%3C%01%C3%8A%C2%85%5C%C3%A1%C2%B33%5D%C2%9B72%3C%3C%3C%5E%2F%3A%C3%97%C3%A5%C3%98%0D%2C%C3%AAv%C3%B6%12%12%12%12%12%12%12%22%C3%B2%2FCG%C2%AF%04%C3%B7j%2F%C2%AD%00%00%00%00IEND%C2%AEB%60%C2%82"; 
@@ -50,8 +51,6 @@ var solo_off_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%
 var edit_group_effects_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0C%00%00%00%0C%08%06%00%00%00Vu%5C%C3%A7%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%A9IDATx%01%C2%9DQ%C3%9D%0D%C2%83%20%10%16%C3%92%C3%84W%C2%BB%C2%81%C3%9D%C2%A0%1B%147%C2%B0%1B%C3%88%08%5D%40P%07%C2%B1%23%C2%B8%C2%81%C2%8E%607%60%04%C3%9FM%C2%B4%C3%9F%11%20%C3%844%7D%C2%90%C3%A4%C3%A0%C3%AE%C2%BE%C3%BB%C3%BB%0E%C2%96%1CN%C3%934%1A%C2%8F%22%C2%9D1%C3%B6%C2%AE%C3%ABZ%C3%868%C2%A7Kk%C2%9Dw%5DW%C2%BA%C2%A0%C2%87%07%C3%B7%7D%C2%BF%C3%93%0BLP%C2%8C%C3%85%C3%A9j%C3%9B%C2%B6%07XA%5D%20%C3%99%C2%A1%C2%A9%C3%B5%C2%A1%C3%90%C2%84n%05Cf%05%C2%A3%C2%8F%23%60%0F%C2%AECy%C3%B0K%1Ai%C2%82%C2%98h%C2%8C%17*%3DI%C2%A0%17Q%C2%BC%C3%99%C2%B6m%C3%A6%C3%A8%608%C3%A7%C2%81X%C2%9A%C2%A6%C2%83%C3%97%C2%81MQ!%09%C3%9B%26%C3%A4%C3%88%0C%23%C2%AD%C3%AB%1A%C3%86%C3%B0%C2%8Bp%C3%A3%C3%B4%14K%1C%04%C2%8C%C3%B1%07%C2%87%C3%85q%C3%88b%0E~K%23%40%C2%91%C3%BC%3FF)u%C2%B3%C3%BF%C2%80%C2%91%24%11%C2%84%C2%83%C3%91%C3%BA%C2%A2%C2%A0%19%C3%BE%2B%24%2C%C3%A0%C3%A2%C3%88%19%C2%BF)%00%1F%3C%C3%82%C2%8D0%C2%A3%08%C3%BD%C3%83%C2%90%C2%9C%3D_T(wN%C3%93%C2%8C%C2%B7%00%00%00%00%00IEND%C2%AEB%60%C2%82";
 var guide_on_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0E%00%00%00%0E%08%06%00%00%00%1FH-%C3%91%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C2%ABIDATx%01%C2%BD%C2%92%C3%9B%0D%C3%820%0CE%C2%AF%2B%06%C3%A8%08%1D%C2%A1%1B%C3%80%26%C2%8C%C3%80%0A%C2%AC%C3%902%01%C2%83%10%C3%84%06l%C3%90%C2%8E%C2%90%7FJ%C2%8C%C2%9D%C3%84%C2%A2j%11H%7C%C3%84%C2%92%C2%AD%1C%3B%C3%B2C6%C2%90%C2%A5w%C3%8F%C2%A1%C2%BB%3C%C2%8E%C3%86'7%5DU%C2%8D5%C3%96%C2%BBi0%C2%AE%C3%B0%C2%A7%C2%90VJOn%C3%84xq%C3%B9%C3%8C%C2%B5%18Q%1A%3F%C3%B1%C2%869%C2%9Cc%06%C2%A2%03%01%C3%B7%C3%80%C3%A1%C2%96%C2%B8%C3%9Ak%22%C2%8BWD%5B%06Zc%C2%94%C2%9F%C3%91%C2%B2J%1B%3B%C3%AD%C2%9F%C3%80c%C3%A66~%C2%90%C3%B6%13S%C2%A3s%1A%C3%8F%2Bz%C3%BC%C2%96z%C3%A5)7%C2%A3Uy%C2%AF%C2%83%C3%A7%C3%AB%C3%80z%1D%C3%9C%C3%85%C3%B8%C2%97%03X%C3%B2%C3%A2%20J%C3%8F%C3%B8%02%C3%A1%7F%C2%8D%C3%9F%C2%A9%24R!%00%00%00%00IEND%C2%AEB%60%C2%82";
 var guide_off_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0E%00%00%00%0E%08%06%00%00%00%1FH-%C3%91%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C2%92IDATx%01%C3%85%C2%92%5D%0D%C2%800%0C%C2%84%3B%C2%82%00%24%20%01%07%C3%A0%04%09X%C3%80%02%12%10%C2%B0Y%208%C2%98%03%C2%90%C2%80%C2%83%C2%B1%C2%92k%C2%B2%C2%8C%C2%BF%C2%84%C2%87%C3%91%C2%A4i%C2%BEm%C2%B9%C3%AE%C3%92%12!%C2%8C1%C2%8B%C3%96%C2%BA%0Fx%C3%A2%14%C3%A6%3B~%23%C2%9C%C3%91%C3%87P%C2%81J%C3%A9sCr%14%C3%88%C3%B5%C2%8As%C3%A7%C3%9Cx((%C3%95%C3%B9b%3D%C3%8F%C3%A0%C2%96E%C2%82%C3%BB%C3%9A%C2%97J%C2%98%C3%A8%0F%C2%8F%C2%A2%C3%9A%C3%A0%C3%BF%2B%C2%B8B%C2%B5%C2%A8%25%3C%C3%9A%C2%B8%C3%A3F%C3%AFQ%C2%9CN%C3%92y%C2%94.7%C3%A3%C2%A0%C2%8Bq%0C%07%3F%2C%40%C3%8C%C3%B1B%24%C3%B6%C2%B8%03%3A%C3%BDy%C2%9BY.~%C2%94%00%00%00%00IEND%C2%AEB%60%C2%82";
-var lock_on_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0C%00%00%00%10%08%06%00%00%00%22a%C2%9E%07%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%ACIDATx%01%C2%95R%C3%91M%C3%830%14%C2%BC%C2%B3%C3%83%7FF%08%13%00%13Ta%11%C3%A0%C2%93%2F%C3%88%060%01%02!%C3%B1%09Y%C2%840B7hF%C3%887%C3%849%C3%BC%C3%94%C2%A6r%C2%95%C2%AAMO%C2%B2t%C3%8F%C3%AF%C3%AE9g%C2%87H%C3%B0%C3%91%C2%A8%C3%A8%15%3E%05%5C%C3%862w%C3%84%C2%97%C2%87%7F%C2%BE%2F%C3%99%C2%8E%1A%C2%A6%C3%A2%3F%0D%0D%C2%A0%5CR%0D*'%C3%BC%C3%82z%C2%81%C3%AE%C2%AA*%C3%99%19%C3%8FF%C3%83%C3%AF%C3%90%3F%C2%92%2C%02%C3%BDyu%C2%BD%C2%9E%C3%B8%12%C2%87x%C2%85%C2%95%C2%8B%C2%BDX%3E%C3%99%C2%9E%1B%0D%C2%8E%C2%BC%C2%88%C3%87%C3%BDT%C3%89%C3%B1%C3%86%09.co%C2%B1%C3%95%C3%A1(%C3%94%C2%A5%15%C3%9F%1B%C3%9DH%C3%A1v%13%C3%94B-w%C3%A4%C3%A9%3E%C3%B1%C3%8A%C2%B7%C3%AF%5E%C2%98%C2%8Fn%C3%86'%C3%AD%20%3F%C3%95%C2%B0%2F4%5B%C2%BBZ%5B%C3%86%C2%8F%1A%C2%A4%C2%A1%C2%B6%C3%AB%C2%B4e%7C2n%1A%C2%9A%C3%AD%19%5Dil%C3%B3%C3%B2E%C3%9A%C3%8D0%C2%81%C3%BD%22a%C2%85%C3%B9%19%0E%C3%83%0C%C3%9D)%C2%86%C2%8C%C3%84%5D%7C%C3%8E%C2%879b%09%C3%B5%3FiJ_%C2%A3%C3%B5j%0F%16%00%00%00%00IEND%C2%AEB%60%C2%82";
-var lock_off_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0C%00%00%00%10%08%06%00%00%00%22a%C2%9E%07%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%B9IDATx%01%C2%95Q%C3%AD%11%C2%820%0Cm%7B%0C%C3%80%06%C3%A2%06%3A%C2%82%1B%08%0C%C2%80n%C2%80%13%C2%88%1B%C3%88%04%C3%A0%00%C2%80L%C2%A0%1B%C3%88%08l%C2%A0%C3%BE%C3%A7%C3%83%C2%97%C2%B3%C3%A5z%08%C2%9C%C2%BC%C2%BB%5C%C3%924y%7DI9%C3%93%C2%90e%C2%99%C3%95%C2%B6m%C2%84pEg%C3%8E%C3%B9%15%C3%AEd%C3%9Bv%C2%A9jx%C2%AF%C3%B8F1%C3%BCE6x%C3%92%C2%AF%C3%91%C3%B4%C2%A2%C3%98P%0D(%C3%B2%C3%A1L%C2%BAt%1C%C2%A7%C2%94%241%C3%B2%C2%8F%C2%A6i%C3%A8.%C2%A0%C2%9C%C3%90%25%C3%A12%C3%94%C2%9F%C2%A7%18%04w%C3%98J%C3%A5%C2%BA%17%C3%80%C3%AA%C2%B3%01%C2%80%C3%A4%0D%C2%B7%C3%A8f%C3%88%C3%B3%C3%9C%C2%AB%C2%AAj%0B%16%C2%93%0DC%C2%B1%17%C2%90%16%1Au%5D%C2%9FQL%03%C2%95%23%0D%C2%85%C3%B4%C2%96%10%22%22I%26iw%5D7%60%13H%C2%92%24%00%C3%B1Q%C2%B0%C2%990%C3%BA%09%C3%BD%3F%C3%80%C2%B8%C3%91%C2%B7F%C3%B8y%01%C2%83%C3%ADH%2F%C2%99%C2%8C%C3%99d%03%06%C2%8B%C3%99w%01%C2%A5%C2%8C%C2%A7%25I%09K6%C2%82%C3%99C%C3%B34M%C2%9F%C3%B0S%C3%BF%C2%A0%60%C3%81L%C2%81M%C3%AC%C3%BF(%C2%A6%C2%8D%15%C2%B0%C3%83%07%3A%C3%B2g%C2%8BJEv8%00%00%00%00IEND%C2%AEB%60%C2%82";
 var view_button_fx_off_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0D%00%00%00%0E%08%06%00%00%00%C3%B4%7F%C2%96%C3%92%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%0DIDATx%01%C2%8DR%0B%C2%91%C3%820%10MR%04T%02%C3%A7%C3%A0%C3%8E%01%C2%A7%C3%A0%C2%AE%C2%AD%01%1C%14%14P%1C%C2%80%02%40%40%C2%A7S%05T%02(%00%09%18h%C3%8B%7B%C3%8C%26%C2%B3%C3%BCy3%C2%9D%C3%AC%C2%BE%C3%ACK%C3%9Enj%C2%8DB%5D%C3%97y%C3%9B%C2%B6%05%C3%82%C3%98s%C3%96%C3%9A%C2%AF%24I%C2%8E%C2%BAn%C3%A0%C2%83%C2%AA%C2%AAb%11%C2%B0p%C2%ADjN%C3%A6%06A%04%C3%81%C3%889%17%C3%B7%7D%3FM%C3%93ta%5E%C3%80%C3%B9%20%C2%8A%C2%A2%C2%BF%0B%C3%A1%5Cc%C3%9E%C3%80%C3%92%16%7B%C3%80%0D%5B%C2%AE%C2%B0%C3%B6%C2%A3%0Bt%3F%C2%A8%1D%5E%0EFq%C2%85%C3%AF%C2%80x(%C3%A2%C2%83%C3%BE%C3%8A%C2%B2%2CD0c%C3%9Eu%C3%9Dx%C2%80%C2%93%C3%A7H%C3%B6%C3%A0s%C2%ACsm%0F%C3%B9%0C%C3%BB9%04%08%C3%BB%C2%82%C3%BBY%C2%96%15VNY%C2%81%18%C3%93%1A%C3%AC%C3%AC%C2%94%C2%9D%C2%91%C3%986%5E%10%06%01%C3%A2%1B%C3%8BI%0B%04a%C3%9Cp%10%26%C3%AAd%10%14%5D%09%C3%98%C2%B4%C3%9C%C3%920G%2F%C2%93%20%12%01%C2%B1%7F%208%C3%A2%C3%8D~)dow%22%C2%90%C2%8D'q*%7B%C3%99%C2%80Kdo%C2%8A%7C%C3%A9G%C3%8Ew%C3%A2h%C3%BE%1F%C3%BDc%C3%8F%C3%A0%C3%94%10%3E%12%10gup%C2%AC%C2%BD%C3%A7%C3%BASp%00%00%00%00IEND%C2%AEB%60%C2%82";
 var view_button_fx_on_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0D%00%00%00%0E%08%06%00%00%00%C3%B4%7F%C2%96%C3%92%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01AIDATx%01%C2%8D%C2%92%C3%8BM%C3%83%40%10%C2%86g6N%C3%8E.%01%3AH%3A%C2%88%C2%95%02%C2%80%0ErEB%04W%10%C2%A7%02%C2%88%C2%8C%C3%841PA*%40%C3%AB%12H%05%C2%A4%C2%84%1C8%20%C3%AC%C3%9D%C2%9F%C2%99%0Dv%16%C3%84k%24%C3%8B%C3%A3%C2%99%C3%BD%C3%A6%C3%B1%C2%AF%C2%99%22%2B%C2%AD%C2%9B%01(%C3%84M%C3%9B%C2%98%C3%A3%C3%9Eq%C2%9E%C3%B16%3E%C2%97%C2%B4%C3%8E%C2%B5E%0A8%05%C3%88%C2%80%C3%AE%0F%10%C3%AD%C3%A8%C2%8BuP%C3%A2%C3%9C%18F%3A%C3%80%C3%A7%17%C2%93%C3%81%0D%C3%BDb%C2%A6u%C2%B8G'%C2%A1%C2%B2%C2%A1%C2%8A%C3%BE0%5E%C3%89X%C2%AF%C2%B2C%0Do%C2%89%C2%90%C3%B6%C2%B97%C2%8A%0F%C2%9CG%C3%BB%C3%9CY%1C%C2%85N%2Fp%C3%AB%1A%C3%AEY%00%0D%C2%A4%C3%AA%C3%87%C3%8F%C3%B2%C2%B1.%C3%B4%C2%A0%C2%884%C3%97%C3%AF7%C3%9FL%13b%2C%C3%A0i%C3%83%C3%8C%C2%AA%C3%9C%C3%82%C3%84%C3%A3%C2%81%C3%A7%24q%01%C2%A0%C2%AAj~6%C3%A9%17%C2%AC%C2%B9%5B%C3%9B%C2%AC%3Ch%C3%AA%C3%98%C2%8F%C3%B2l%C3%B0%C3%942%C2%A5%C2%AD%C3%87%00%C3%9B%C3%80%7F%00%C2%9D%10%C2%92%18%C3%8Ak%17%03%C3%BB%24%3A%C2%B9%C2%BDI%3AEM%C2%B8%1F%C3%82PZ~%02ti%07c%C2%89%C3%B7%C3%A3%1A%C3%9F%5CuPB%C3%8D0T%0261%C2%A0j2%C3%B1%C3%B62K2)X%C3%A9%C3%8E%1D%04%C2%8F%00%19%C3%83U%1B%C2%AC%C2%BD%5C4%C3%BCC%C3%83%C3%A6%2C%C3%A4%C3%98%C3%A7%C2%B2%C3%93%C2%B2%C2%95%C2%9CK%C3%9B%C2%AC%01%3A%C3%BD%C3%AE%1F%C3%BB%C3%89%C3%8CA%C2%84%C3%BF%01j%C3%AF%C2%83%C2%BD%C2%BA%C2%93!%C3%A8%C2%BFM%00%00%00%00IEND%C2%AEB%60%C2%82";
 var collapse_transformation_off_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%10%00%00%00%10%08%06%00%00%00%1F%C3%B3%C3%BFa%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%40IDATx%01%C2%B5S%C3%8Bm%C2%83%40%10%5D%3E%C3%A2L%09%C2%B8%03%C2%A7%C2%82%40%05%C3%8E%1D%C2%81%C2%A0%C2%82l%07V*H%5C%01%09%1Fq%C2%A4%04%C2%93%0AB%3Ap%09D%C3%A2%C2%84%C3%B8%C3%A4-Z%C2%AC%C2%B5Ya_%3C%C3%92hwgv%C3%9E%C2%BCy%0B%C2%84%C3%9C%C2%B0(%C2%8A%C2%AC%C2%B5%C2%BC%C2%BA%C2%96L%C2%92%C3%846%0C%C3%83%C2%BE%1B%C2%A0(%0AS%3C%C2%8F%C3%A3%C2%B8%C2%85%3F%C2%8B%C2%B1%3C%C3%8F%C2%AD%2C%C3%8B%C2%B6R%C2%80%C2%A6i(%C2%BA%C3%AE%C3%A7%C2%B3%C2%A2(%C2%AC%C3%98%16%18%C2%BDv%5DG%5D%C3%97%C2%AD%C3%8EwD%00%C3%8Ckj%C2%9A%C3%B6%C2%A3%C2%AA*%19%C2%86%C3%A1%0D%C3%AB%1E%0C%2C%C2%A4%1C%C3%B8%C2%B4%C3%AF%C3%BB%C3%9E%09%C3%83%C3%B0%24%05%C2%98%C3%A7%C3%86r%24%12%03%40%C3%A8%C3%BB%C3%BE%C2%A7%18%5B%C2%88%C2%88%C2%AE5%C2%96J%06%C2%80%C2%91N%C2%8B%18%C2%A7%1D%20%C2%B9%C3%83%C2%99%C2%89c%C2%92%C3%9BV%C3%82%C2%BF%C2%A1%C3%87%C3%87y%04%C3%B6%C3%9E%C2%BA%C2%AE3%00%1BTw%00%C2%B4%24%C2%85%070%C2%AC%C3%9A%C2%B6-g%1D%16%1A%C2%B0g%C2%82PG.%C3%9E%C2%B59%C2%9E%C3%A7%C2%95b%60%C2%A1%01%C2%8Ag%C3%A5%0F%C3%B0%C2%9A%C2%87%C2%BF%C2%A6n%C2%8A%C3%B2~%7D%C3%BF%02%20%C2%8E%C3%A3%00%C3%8Fg%C3%B3N%14%05L%C3%8C%1A%C3%BB%00%C3%B3n%C2%903q%C2%87%C2%8A5%C2%BA%C2%84%C3%81%13%C3%A6%C2%9B%3A%C2%83%C3%89%2F%C3%BC%C2%8F%C3%AD%C3%B9%C3%8C%1B%C3%96%C2%84%C3%9Ck%C3%B8%26%5E%C3%924%C2%A5kwV%7F%26%C3%90.%C3%81%C2%A0%22%C2%8F%C2%B4%7F%C3%9A%C2%A4%C2%96h-9%C2%8E%C2%B6%00%00%00%00IEND%C2%AEB%60%C2%82";
@@ -60,6 +59,8 @@ var layer_3d_on_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0D%0
 var layer_3d_off_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0D%00%00%00%0D%08%06%00%00%00r%C3%AB%C3%A4%7C%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%019IDATx%01m%C2%92%C2%8DQ%C2%83%40%10%C2%85%C3%83%C2%91%02%C2%B0%03%C3%92A%C3%92%01%C2%A9%20%C3%9A%01%C2%A9%40-%C2%80%C2%9F%40%03%C2%A4%C2%82h%05%C3%86%0A%C3%84%0A%C2%8C%15H%094%00%C3%B8%C2%BD%C3%8C%C2%9Ds%C2%83%C2%B9%C2%99%C2%9B%5Dv%C3%9F%C3%AE%C2%BD%7DKP%C2%96el%C2%8C9M%C3%93%14%07A%C3%90%C3%A6y%C2%BE_%C3%8CN%5D%C3%97%C3%898%C2%8E'%C3%9C%1E%C3%8C%C3%AB2%0C%C3%83%C2%98%40B%C3%91%C2%9E%C3%9B%0BD%C2%A3%C2%88F)%C3%B13~7%0C%C3%83%C2%85%C3%B0%C2%81%C2%82%04%C2%BB3%C2%AE%1B%C3%89%17%C3%AEY%5DI~%C3%91%C2%A0%C3%80%C3%BETU%C2%A5%17%22%C3%A5%C2%89%C2%B5%C3%82%06%C2%B6%20%C2%96%C2%B54%C3%97%C3%9C%23%C2%9F%C2%8D%C3%80%14%C2%BEa5B%C3%83%C2%8B%C3%87k%C3%8C%7B)%05%C2%A0%C2%AE%1DE%5B%C3%91%C2%B2%C3%B3%14%C3%90%2C%C3%A5%17Eq%C3%85%2Fg3%C2%8B%C3%BB%C2%B7%C2%A5%25%3A%12%60%C3%81w%C2%83%C3%BF%C3%A4%40%C3%86%C2%AF%20%C3%99%C3%93-%05%C2%B0%C3%A2%C3%9EKM%C3%AC%06%C3%BB%C3%AE%C3%A3%C3%8C%C3%A2%C3%86%C2%B1%C3%94%C2%A4%C3%A4'~%3F%C3%8F%C3%BB%C3%B44K%22%C2%B5%C2%A0tpAoG%C3%9D%1F%23%17%C2%84%C3%96J*%3A%C2%B5%C2%A4%C2%92%05FNMv%C2%AA%7D%C3%AE%C3%9CK%C2%B1Gkc%C2%95%7C%C3%A4v4%7CvJ%C3%9A%C2%A5%C3%87%01%C3%8EZ%C3%8B%C2%B4B%C3%A87%C3%9A%C3%8Eg%C2%B0l%3E%1C%C3%86Pt%C3%A1%C3%89%3B)F%C3%A2%C3%9F%7F%C2%A7%C2%93eYk%15%15%C3%A6%C3%A1%17%C2%82%3A%C3%8E%3D%C3%99%C2%A3%C2%BB%0A%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 var motion_off_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0C%00%00%00%0D%08%06%00%00%00%C2%9D)%C2%8FB%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C2%ADIDATx%01%C2%95R%C3%9B%0D%02!%10%C3%A4%C2%B6%01)%C2%81%12(%C3%A1J%C2%B8%12%C2%B4%02%C2%B4%03%1E%C3%A1%C2%9F%16%C2%AC%C3%80%12%C3%8E%0E%C3%94%0E%2C%C3%A1%1A%00%1C%C2%92%C3%A3C%25%C2%97c%C2%92%0D%1Bvf%C2%99%2C%C3%8BX%03%C3%8E%C2%B9%091%C2%B6jT%13%C2%AD57%C3%86%3CJ%C2%9EsV)%C2%A5y%15%2B%C3%94%C3%84%C2%97%00%17%12%07G%C3%88%C3%9F%C2%8E%10O%C3%830%C3%8C%2B%C2%87%C2%91%C3%B7%5E%12%C2%91b%C3%9B%10%10%C3%9D%C2%8A%0B%C3%82%C3%93%C2%9C%C3%AD%C2%83%40%C3%A3%23%C2%B1%0E%C3%80%C3%9E%C3%98%25%C2%80%C2%ADC%C2%97%C2%A0%C2%A0%C3%97%C3%92%C2%8Bb%C2%8CK%C2%87%20%10F%C3%B5%C3%84%C2%A4%C2%AE%3B%C3%88%17p%C3%9F%C3%B5%C3%A3%C3%AE%1B%C3%9C%05%C3%A4%138%C3%A1%C2%AFRW%C3%80Z%7B%C3%86%C2%9A%C2%84%C2%96%C3%BA%03%C2%97%15J%C2%BEJ%17%3B%2F%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 var motion_on_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0C%00%00%00%0D%08%06%00%00%00%C2%9D)%C2%8FB%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%8EIDATx%01%C2%95%C2%91%C3%81%0D%C2%82%40%10E%C3%BF_%09gK%C2%A0%04K%60%C2%B5%02%3B%C3%90%C2%A31%C3%81X%C2%81v%C2%A0%C2%84%18%C2%8Fb%05%C3%86%02%0C-P%C2%82%25pV%C3%98q%C2%91%C2%AC%07b%02%C3%BC%C3%8B%C3%BE%C3%8D%C3%8C%C3%BB%C2%B3%C2%9B!Z%3Ae%C2%AF%C2%89%C2%81%0A%3C%C2%8C%C3%B2%C2%95%C3%A6%C2%B3%5D%C2%A73%C3%89%C2%A3%C2%BC%09p%17H%40r%07%C3%81%C3%92%C3%95%C2%A2%C2%99%C2%97%3A%C2%AF%C3%8E%C2%99%04%C2%B5%11r%C3%92N%C2%ABa%1ByI%C2%B2j%C3%B7%03J17tHD%C3%B6I%C3%B6%0E%C2%BF%C2%80%7D%C3%86%18%7D%24%C3%BCNQ%C3%A8)%1B%1C%0E%02j%1D%C3%AC%7F%07%01VEo%C2%80%60%C2%BE%C3%95%C3%AC%0F%08%25%C2%AEO%05Vqg3%C3%8C5%C3%92%C3%8D%C3%B2T%C2%A4%C3%BDc3%12%C3%85%C3%9Ff%C2%91x3%C3%B5%17%C3%AE%C3%AE9SR%C3%8D-Ux%C2%A8B%1A%C2%A4T%26_k%3Fm%07%7C%003%C3%92C%C3%8Dd%C3%A1%C3%82K%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+var lock_off_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0B%00%00%00%0E%08%06%00%00%00%C3%B9a%C3%A6%C2%95%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%9DIDATx%01%7DQ%C2%81%0D%C2%83%20%10%04%C3%82%00%C2%8E%C2%80%1B%C2%B8%C2%81v%C2%82%16%C3%A3%00%C3%AD%04%1D%C2%A1%C3%9D%C3%80t%03%170%C3%98%09%C3%9A%0D%C2%BA%C2%82%23%C2%B0%C2%80%C3%9A%C3%BB%04%0CA%C3%B4%13%C3%82%C3%B3%7F%7F%7F%C3%BFp%16%C2%991%C2%A6%C2%9A%C3%A7%C2%B9%C2%82k%C2%85%10%C2%83%C3%96z%C3%B49%11%01%1F%C3%8B%C2%B2%7C8%C3%A7%25%C3%8E%C2%99%7C%C3%84%C2%8A%0D%18A%C2%85%C3%A4%13%C2%AC%C2%BA%C2%AE%C3%AB%13%1D%C2%84%C3%9F%C2%88%C2%B5If%C2%B0uM%C3%93%0C%C3%81%C2%9B%C3%BCj%7D%3B%C3%96%0CW%C3%86%22%C2%9B%C2%A6%C2%A9%C2%80n%C2%83%C2%A2%C2%9C%C2%B4s%02%C2%A2%C3%95%0F9%C3%85%C2%8E%C3%AD%2B%1D%C2%A3B5i%1Cw%C2%80%17%10%C3%9Ee%10%18%C3%835%C2%85%C3%96%C3%B7%C2%BD%05%19%C2%93q%C3%82m%C2%85dYl%24%0Fs%22ATxin%C3%B0%7D0%C2%A4%0Chy%C2%A3%19%C3%A0%C3%9B0'%13%C3%8CT%C3%90%C2%A5%C3%A2%2B%18%3F%C3%97%C2%A2%C2%ADM%C2%810%C2%83%C3%82e%C3%BD%C2%A7%5Cq%C2%95%C3%AC%C3%98%5E%7F%C3%86%C3%AD%60n%C3%A5%0E7%C3%9D%00%00%00%00IEND%C2%AEB%60%C2%82"; 
+var lock_on_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0A%00%00%00%0E%08%06%00%00%00%16%C2%A3%C2%8D%C2%AB%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%00%C3%A8IDATx%01%C2%8D%C2%90%C3%8DQ%02A%10%C2%85%C3%9F%C3%AB%C2%9D%C3%B2%C2%BC!%C2%AC%19%60%04%0A%09H%06%C3%A8%C3%91%03%07C0%02%14%C2%B5%3CJ%08z%C2%A7%C3%98%22%02%C3%88%C2%80%0D%C2%81%03'%C2%98%C2%99f%06X%C2%8A%C3%A5%C3%BFUuUw%C2%BFo%C2%BA%5E%0D%C2%B1%C2%A3%C3%AF%7C%5Es%1E%0F%0A%C2%A67bz%2Fu%16%C2%A5'e%C3%B3%C3%99%C2%B7M%C2%A72%22%C2%93%C2%96%C2%90%C3%B7%0Bu%C2%93%C2%AF%C2%A1%C2%B6%0E%40%15vT%C3%B5%C2%AD%C3%9DH%C3%AE%C3%9A%0DS%0F%C3%BD%C2%87w%C3%AE%C2%BD%02vr%C3%8D%02%C2%9Ay%C3%91%C2%BF%C3%92%C3%B0b%22%C2%94%C2%AE%3D%C3%80%C3%BC%C3%A6%C2%9A%C3%8E%60%C2%B3%C2%90%0B%26d%C3%BB%C3%99%18v%C2%BB%C2%B3q.%C3%98%1D%C2%B8I%C2%BC%C2%863%228%C2%96K%C3%90*%3F%C2%B4%26%C2%B8R%7B%20%0B%C3%87%C3%A46V%18%C2%A6'A%06%C3%B35%7Cr%C2%AC%C3%90%C2%8F%2B%5Ew%60%C2%B5%C3%B2%C2%92%C3%A8%C2%A9G%C2%AADswo%C2%B0'%C2%AFx%C2%8A%C2%A7%C2%8Fe%C2%9C%C3%A2%0A%19%12%C3%8F%C3%B4x%3C%07%C2%A9%C3%A0%7F%09%C3%91%C2%A8Y%C2%82%C2%B6%7D%C2%B7z%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 
 ///
 var edit_group_layers_button_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0E%00%00%00%0C%08%06%00%00%00R%C2%80%C2%8C%C3%9A%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%01%01IDATx%01%C2%95%C2%92%C2%BB%C2%8D%C3%82%40%10%C2%86w%C3%97W%C2%80%C3%93%C2%8B%C3%8E%25p%15%C3%9C%C3%9A%0D%C3%9C%5DF%C3%A8%C2%94%08%11%11Y%C2%AC%C2%9D8DT%00t%40%07%C2%86%0E%5C%02%25%10%3B%C2%B0%C3%B9%C3%86%C3%82%02Y%C3%A65%C3%92%C2%AF%C3%99%C3%99%C2%9D%7F%C2%9E%C2%AB%C2%9Ds%C2%BE1%26n%C2%9A%C3%86W%17%C3%A1%5Cr%C2%BFS%0F%C3%A4%03%C3%BC%C3%A1%C2%B8%C2%BC%C2%BD%C3%94Z%C2%AB%2C%C3%8Bf%C3%A8%C2%B2OH%C2%92d%2F%C3%9A%C3%B0%18%0CE%C2%94%60u%5D%17%7D%C2%A4i%C3%AAZ%C2%A2zSH%C3%B4%C3%95%C2%95%C3%BAHNd%5E%C2%A1%C2%BB~G%C3%98%C3%813%C2%A2%C2%90%C2%BE%19%C3%92%11X%C3%8F%C3%B3~%C3%A8%2F%C3%AD%1E%C2%BD0%0C-%C3%9A%0E%C2%944%C2%81x%C2%8C%C2%A2(%C3%86%C2%9Cs%1Es%C3%B6%C3%B1%C3%BF%2C%C2%8A%C2%A2%C2%BC%C3%9B%23%C2%83%C2%90%C3%B2%C2%AC%0C%09%1C%40%08d%03%0By%C2%BFK%C2%A4%C2%BC%13%C3%98%5CM%C2%B7G%1F%C3%80%C2%B6%C3%ADQ%C3%8A%C2%91%C2%BD%C3%B5%25%C3%8F%C3%B3%C2%A0%C2%AA%C2%AA%C2%B8%C2%8Dn%C3%8C%C2%9A%C2%BDJ%C3%96%C3%9F.%C2%90%C2%BE%C2%84%C2%B3%03Ie%C3%B9%C3%B2%C2%9BF%10%C2%A7%C2%90%C2%A4%C3%AC%7Fl%19V%C2%A9%5E%11%1C%032%C3%86%C2%B7wg%C3%9D%10%C2%8C%C2%B3%C2%86%C2%A2%C2%86%16%00%00%00%00IEND%C2%AEB%60%C2%82"; 
@@ -286,50 +287,79 @@ tab_tools.alignChildren = ["fill", "top"];
 tab_tools.spacing = 7;
 tab_tools.margins = 10;
 tab_tools.helpTip = "Tools Tab";
+// ───────────────── ГЛАВНАЯ ГРУППА ─────────────────
+var compsMasterGroup = tab_tools.add("group");          // ← колонка
+compsMasterGroup.orientation    = "column";
+compsMasterGroup.alignChildren  = ["left", "top"];
+compsMasterGroup.spacing        = 9;
 
-// Добавляем группу для кнопок напрямую в tab_tools
-var compsButtonGroup = tab_tools.add("group");
-compsButtonGroup.orientation = "row";
-compsButtonGroup.alignChildren = ["left", "top"];
-compsButtonGroup.spacing = 8;
+// ──────────────── 1-Я ПОДГРУППА (Sort, Duplicate) ────────────────
+var compsTopGroup = compsMasterGroup.add("group");      // ← ряд
+compsTopGroup.orientation   = "row";
+compsTopGroup.alignChildren = ["left", "top"];
+compsTopGroup.spacing       = 7;
 
-// Добавляем кнопку "Auto Sort Comps"
-var autoSortCompsButton = compsButtonGroup.add("iconbutton", undefined, File.decode(sort_imgString), {
-    name: "sort_comps",
-    style: "toolbutton"
-});
-autoSortCompsButton.text = "Sort Files";
-autoSortCompsButton.preferredSize = [110, 35];
-autoSortCompsButton.helpTip = "Automatically sort project items into folders: Compositions, Footages, Audio, Nulls & Solids, Images";
+// Sort Files
+var autoSortCompsButton = compsTopGroup.add(
+    "iconbutton",
+    undefined,
+    File.decode(sort_imgString),
+    { name: "sort_comps", style: "toolbutton" }
+);
+autoSortCompsButton.text           = "Sort Files";
+autoSortCompsButton.preferredSize  = [105, 35];
+autoSortCompsButton.helpTip        = "Automatically sort project items into folders: Compositions, Footages, Audio, Nulls & Solids, Images";
 
-// Добавляем кнопку "Duplicate Comp"
-var duplicateCompButton = compsButtonGroup.add("iconbutton", undefined, File.decode(duplicate_imgString), {
-    name: "duplicate_button",
-    style: "toolbutton"
-});
-duplicateCompButton.text = "";
-duplicateCompButton.preferredSize = [35, 35];
-duplicateCompButton.helpTip = "Duplicate the active composition. All duplicate comps (including nested ones) will be moved to a folder 'Duplicate (CompName)', a new color label is assigned to each, and the duplicated comp is opened.";
+// Duplicate Comp
+var duplicateCompButton = compsTopGroup.add(
+    "iconbutton",
+    undefined,
+    File.decode(duplicate_imgString),
+    { name: "duplicate_button", style: "toolbutton" }
+);
+duplicateCompButton.text          = "Duplicate Comp";          // только иконка
+duplicateCompButton.preferredSize = [140, 35];
+duplicateCompButton.helpTip       = "Duplicate the active composition…";
 
-// Переносим кнопку "Add Null Objects" в ту же группу
-var add_null_objects_button = compsButtonGroup.add("iconbutton", undefined, File.decode(add_null_imgString), {
-    name: "add_null_objects_button",
-    style: "toolbutton"
-});
-add_null_objects_button.helpTip = "Add Null Object for selected layers";
-add_null_objects_button.text = "";
-add_null_objects_button.preferredSize.width = 35;
-add_null_objects_button.preferredSize.height = 35;
+// ──────────────── 2-Я ПОДГРУППА (Add Null, Track Matte, Aj Mask) ────────────────
+var compsBottomGroup = compsMasterGroup.add("group");   // ← ряд
+compsBottomGroup.orientation   = "row";
+compsBottomGroup.alignChildren = ["left", "top"];
+compsBottomGroup.spacing       = 7;
 
-// Переносим кнопку "Add Track Matte Layer" в ту же группу
-var add_track_matte_button = compsButtonGroup.add("iconbutton", undefined, File.decode(track_matte__imgString), {
-    name: "add_track_matte_button",
-    style: "toolbutton"
-});
-add_track_matte_button.helpTip = "Add Track Matte Layer to the active layer";
-add_track_matte_button.text = "";
-add_track_matte_button.preferredSize.width = 35;
-add_track_matte_button.preferredSize.height = 35;
+// Add Null
+var add_null_objects_button = compsBottomGroup.add(
+    "iconbutton",
+    undefined,
+    File.decode(add_null_imgString),
+    { name: "add_null_objects_button", style: "toolbutton" }
+);
+add_null_objects_button.text           = "NULL";          // только иконка
+add_null_objects_button.preferredSize  = [80, 35];
+add_null_objects_button.helpTip        = "Add Null Object for selected layers";
+
+// Track Matte
+var add_track_matte_button = compsBottomGroup.add(
+    "iconbutton",
+    undefined,
+    File.decode(track_matte__imgString),   // убедитесь в имени переменной!
+    { name: "add_track_matte_button", style: "toolbutton" }
+);
+add_track_matte_button.text          = "TRCK MT";          // только иконка
+add_track_matte_button.preferredSize = [95, 35];
+add_track_matte_button.helpTip       = "Add Track Matte Layer to the active layer";
+
+// Aj Mask
+var add_aj_mask_button = compsBottomGroup.add(
+    "iconbutton",
+    undefined,
+    File.decode(track_matte__imgString),       // лучше отдельная картинка
+    { name: "add_aj_mask_button", style: "toolbutton" }
+);
+add_aj_mask_button.text          = "AJ";          // только иконка
+add_aj_mask_button.preferredSize = [62, 35];
+add_aj_mask_button.helpTip       = "Add AJ Mask Layer to the active layer";
+
 
 // "Create + Unlink" group
 var create_unlink_group = tab_layers.add("group", undefined, { name: "create_unlink_group" });
@@ -1358,6 +1388,490 @@ try {
 }
 }
 
+
+
+
+
+
+//
+// ================== SAVE / LOAD PRESETS ==================
+//
+
+save_my_presets_button.onClick = function () {
+    saveData();
+};
+
+load_my_presets_button.onClick = function () {
+    loadData();
+};
+
+function saveData() {
+    var saveWindow = new Window("dialog", "Save Presets and Settings Project");
+    saveWindow.orientation = "column";
+    saveWindow.alignChildren = ["fill", "top"];
+    saveWindow.spacing = 15;
+    saveWindow.margins = 15;
+    saveWindow.helpTip = "Save the current Layer/Effect groups to a .pgm file";
+
+    var pathGroup = saveWindow.add("group");
+    pathGroup.orientation = "row";
+    pathGroup.add("statictext", undefined, "Save path:");
+    var pathEdit = pathGroup.add("edittext", undefined, "");
+    pathEdit.size = [300, 25];
+    var browseButton = pathGroup.add("button", undefined, "Browse");
+    browseButton.onClick = function () {
+        var folder = Folder.selectDialog("Please select a folder for saving");
+        if (folder) {
+            pathEdit.text = folder.fsName;
+        }
+    };
+
+    var fileGroup = saveWindow.add("group");
+    fileGroup.orientation = "row";
+    fileGroup.add("statictext", undefined, "Preset Name:");
+    var fileEdit = fileGroup.add("edittext", undefined, "My_Preset_Project");
+    fileEdit.size = [375, 25];
+
+    var buttonsGroup = saveWindow.add("group");
+    buttonsGroup.orientation = "row";
+
+    var exportButton = buttonsGroup.add("button", undefined, "Export", { name: "ok" });
+
+    exportButton.onClick = function () {
+        var savePath = pathEdit.text;
+        var fileName = fileEdit.text;
+
+        if (savePath === "" || fileName === "") {
+            alert("Please specify the path and file name.");
+            return;
+        }
+
+        // Добавляем расширение .pgm, если его нет
+        if (!/\.pgm$/i.test(fileName)) {
+            fileName += ".pgm";
+        }
+
+        var fullPath = savePath + "/" + fileName;
+        var file = new File(fullPath);
+        if (file.open("w")) {
+            try {
+                var dataLines = [];
+                dataLines.push("LayerGroups:");
+                for (var i = 0; i < layerGroups.length; i++) {
+                    var lg = layerGroups[i];
+                    dataLines.push("GroupType: LayerGroup");
+                    dataLines.push("Name: " + lg.name);
+                    dataLines.push("Prefix: " + lg.prefix);
+                    dataLines.push("LabelColorIndex: " + lg.labelColorIndex);
+                    dataLines.push("DisableLabelColor: " + lg.disableLabelColor);
+                    dataLines.push("");
+                }
+
+                dataLines.push("EffectGroups:");
+                for (var j = 0; j < effectGroups.length; j++) {
+                    var eg = effectGroups[j];
+                    dataLines.push("GroupType: EffectGroup");
+                    dataLines.push("Name: " + eg.name);
+                    dataLines.push("Prefix: " + eg.prefix);
+                    dataLines.push("");
+                }
+
+                var data = dataLines.join("\n");
+                file.write(data);
+                file.close();
+                alert("Preset successfully saved.");
+                presetFilePath = fullPath;
+                autoSaveEnabled = true;
+                saveWindow.close();
+
+            } catch (e) {
+                alert("Error saving the preset: " + e.toString());
+            }
+        } else {
+            alert("Failed to save the Preset.");
+        }
+    };
+
+    var cancelButton = buttonsGroup.add("button", undefined, "Cancel", { name: "cancel" });
+    cancelButton.onClick = function () {
+        saveWindow.close();
+    };
+
+    saveWindow.center();
+    saveWindow.show();
+}
+
+function loadData() {
+    // Создаём диалог импорта
+    var importWindow = new Window("dialog", "Load Preset and Settings Project");
+    importWindow.orientation = "column";
+    importWindow.alignChildren = ["fill", "top"];
+    importWindow.spacing = 10;
+    importWindow.margins = 15;
+
+    // Группа для выбора .pgm файла
+    var fileGroup = importWindow.add("group");
+    fileGroup.orientation = "row";
+    fileGroup.alignChildren = ["left", "center"];
+    fileGroup.add("statictext", undefined, "Preset to import:");
+    var fileEdit = fileGroup.add("edittext", undefined, "");
+    fileEdit.size = [300, 25];
+    fileEdit.helpTip = "Select the .pgm file with previously saved settings";
+
+    var browseButton = fileGroup.add("button", undefined, "Browse");
+    browseButton.helpTip = "Click to find .pgm file";
+
+    browseButton.onClick = function () {
+        var file = File.openDialog("Please select a file to import", "*.pgm");
+        if (file) {
+            fileEdit.text = file.fsName;
+        }
+    };
+    // Группа настроек Options (колонка)
+    var optionsGroup = importWindow.add("group");
+    optionsGroup.orientation = "row";
+    optionsGroup.alignChildren = ["left", "centrer"];
+    optionsGroup.spacing = 10;
+
+    optionsGroup.add("statictext", undefined, "Options:");
+
+    // Кнопка Clear All Panels
+    var clear_all_panels_button = optionsGroup.add("iconbutton", undefined, File.decode(clear_all_panels_button_imgString), {
+        name: "clear_all_panels_button",
+        style: "toolbutton"
+    });
+    clear_all_panels_button.helpTip = "Clear All Panels";
+    clear_all_panels_button.text = "Clear All Panels";
+    clear_all_panels_button.preferredSize.width = 140;
+    clear_all_panels_button.preferredSize.height = 30;
+
+    clear_all_panels_button.onClick = function () {
+        var confirmClear = confirm("Are you sure you want to clear all groups and reset layer and effect prefixes? This action cannot be undone.");
+        if (!confirmClear) return;
+        try {
+            app.beginUndoGroup("Clear All Groups and Reset Names");
+
+            if (!tab_layers || !tab_effects) {
+                alert("Error: 'tab_layers' or 'tab_effects' is not defined.");
+                app.endUndoGroup();
+                return;
+            }
+
+            // Очистка групп слоёв
+            for (var i = layerGroups.length - 1; i >= 0; i--) {
+                var lg = layerGroups[i];
+                var comps = getAllCompositions();
+                for (var c = 0; c < comps.length; c++) {
+                    var comp = comps[c];
+                    for (var l = comp.numLayers; l >= 1; l--) {
+                        var layer = comp.layer(l);
+                        if (layer.name.indexOf("[" + lg.prefix + "]") === 0) {
+                            var originalName = layer.name.replace("[" + lg.prefix + "] ", "");
+                            layer.name = originalName;
+                        }
+                    }
+                }
+                if (lg.panel && lg.panel.parent === tab_layers) {
+                    try {
+                        tab_layers.remove(lg.panel);
+                    } catch (removeError) {
+                        alert("Failed to remove layer group panel for '" + lg.name + "': " + removeError.toString());
+                    }
+                } else {
+                    alert("Layer group panel for '" + lg.name + "' has already been removed or does not exist.");
+                }
+                layerGroups.splice(i, 1);
+            }
+
+            // Очистка групп эффектов
+            for (var i = effectGroups.length - 1; i >= 0; i--) {
+                var eg = effectGroups[i];
+                var comps = getAllCompositions();
+                for (var c = 0; c < comps.length; c++) {
+                    var comp = comps[c];
+                    for (var l = 1; l <= comp.numLayers; l++) {
+                        var layer = comp.layer(l);
+                        if (layer.property("Effects")) {
+                            for (var e = layer.property("Effects").numProperties; e >= 1; e--) {
+                                var effect = layer.property("Effects").property(e);
+                                if (effect.name.indexOf("[" + eg.prefix + "]") === 0) {
+                                    var originalName = effect.name.replace("[" + eg.prefix + "] ", "");
+                                    effect.name = originalName;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (eg.panel && eg.panel.parent === tab_effects) {
+                    try {
+                        tab_effects.remove(eg.panel);
+                    } catch (removeError) {
+                        alert("Failed to remove effect group panel for '" + eg.name + "': " + removeError.toString());
+                    }
+                } else {
+                    alert("Effect group panel for '" + eg.name + "' has already been removed or does not exist.");
+                }
+                effectGroups.splice(i, 1);
+            }
+
+            palette.layout.layout(true);
+            palette.layout.resize();
+
+            alert("All groups have been cleared and layer and effect prefixes have been reset.");
+            app.endUndoGroup();
+        } catch (error) {
+            alert("An error occurred while clearing groups: " + error.toString());
+            app.endUndoGroup();
+        }
+    };
+    // Группа кнопок (Import/Cancel)
+    var buttonsGroup = importWindow.add("group");
+    buttonsGroup.orientation = "row";
+    buttonsGroup.alignChildren = ["fill", "center"];
+
+    // Кнопка Import
+    var importButton = buttonsGroup.add("button", undefined, "Import", { name: "ok" });
+    importButton.helpTip = "Load the selected .pgm preset";
+
+    importButton.onClick = function () {
+        var filePath = fileEdit.text;
+
+        if (filePath === "") {
+            alert("Please select a file to import.");
+            return;
+        }
+
+        var file = new File(filePath);
+        if (file.exists && file.open("r")) {
+            try {
+                var content = file.read();
+                file.close();
+
+                // Разделяем содержимое файла по строкам
+                var lines = content.split(/\r\n|\n|\r/);
+                var currentSection = "";
+                var currentGroup = {};
+
+                // Начинаем группу Undo для очистки и импорта
+                app.beginUndoGroup("Import Preset and Reset Groups");
+
+                // Сохраняем копии текущих групп, чтобы безопасно очистить
+                var layerGroupsCopy = layerGroups.slice();
+                var effectGroupsCopy = effectGroups.slice();
+
+                for (var i = layerGroupsCopy.length - 1; i >= 0; i--) {
+                    var lg = layerGroupsCopy[i];
+
+                    // Сброс префиксов слоёв
+                    var comps = getAllCompositions();
+                    for (var c = 0; c < comps.length; c++) {
+                        var comp = comps[c];
+                        for (var l = comp.numLayers; l >= 1; l--) {
+                            var layer = comp.layer(l);
+                            if (layer.name.indexOf("[" + lg.prefix + "]") === 0) {
+                                var originalName = layer.name.replace("[" + lg.prefix + "] ", "");
+                                layer.name = originalName;
+                            }
+                        }
+                    }
+
+                    // Удаление UI панели группы слоёв
+                    if (lg.panel && lg.panel.parent === tab_layers) {
+                        try {
+                            tab_layers.remove(lg.panel);
+                        } catch (removeError) {
+                            alert("Failed to remove layer group panel for '" + lg.name + "': " + removeError.toString());
+                        }
+                    }
+                    // Удаляем из массива layerGroups позже (ниже), а пока просто удалили панели
+                }
+                // Полностью обнуляем массив
+                layerGroups = [];
+
+                for (var k = effectGroupsCopy.length - 1; k >= 0; k--) {
+                    var eg = effectGroupsCopy[k];
+
+                    // Сброс префиксов эффектов
+                    var comps = getAllCompositions();
+                    for (var c = 0; c < comps.length; c++) {
+                        var comp = comps[c];
+                        for (var l = 1; l <= comp.numLayers; l++) {
+                            var layer = comp.layer(l);
+                            if (layer.property("Effects")) {
+                                for (var e = layer.property("Effects").numProperties; e >= 1; e--) {
+                                    var effect = layer.property("Effects").property(e);
+                                    if (effect.name.indexOf("[" + eg.prefix + "]") === 0) {
+                                        var originalName = effect.name.replace("[" + eg.prefix + "] ", "");
+                                        effect.name = originalName;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // Удаление UI панели группы эффектов
+                    if (eg.panel && eg.panel.parent === tab_effects) {
+                        try {
+                            tab_effects.remove(eg.panel);
+                        } catch (removeError) {
+                            alert("Failed to remove effect group panel for '" + eg.name + "': " + removeError.toString());
+                        }
+                    }
+                }
+                // Обнуляем массив
+                effectGroups = [];
+
+                // Обновляем интерфейс после удаления групп
+                palette.layout.layout(true);
+                palette.layout.resize();
+
+                //--------------------------------------------------------
+                // (3) Разбор файла и создание новых групп
+                //--------------------------------------------------------
+                for (var i = 0; i < lines.length; i++) {
+                    var line = trim(lines[i]);
+                    if (line === "LayerGroups:") {
+                        currentSection = "LayerGroups";
+                        continue;
+                    } else if (line === "EffectGroups:") {
+                        currentSection = "EffectGroups";
+                        continue;
+                    }
+
+                    // --- (A) Если читаем секцию LayerGroups ---
+                    if (currentSection === "LayerGroups") {
+                        if (line.indexOf("GroupType:") === 0) {
+                            currentGroup = {};
+                            currentGroup.type = trim(line.split(":")[1]);
+                        } else if (line.indexOf("Name:") === 0) {
+                            currentGroup.name = trim(line.split(":")[1]);
+                        } else if (line.indexOf("Prefix:") === 0) {
+                            currentGroup.prefix = trim(line.split(":")[1]);
+                        } else if (line.indexOf("LabelColorIndex:") === 0) {
+                            currentGroup.labelColorIndex = parseInt(trim(line.split(":")[1]), 10);
+                        } else if (line.indexOf("DisableLabelColor:") === 0) {
+                            currentGroup.disableLabelColor = (trim(line.split(":")[1]).toLowerCase() === "true");
+                        }
+
+                        // Если собраны все поля для LayerGroup
+                        if (
+                            currentGroup.name &&
+                            currentGroup.prefix &&
+                            typeof currentGroup.labelColorIndex !== 'undefined' &&
+                            typeof currentGroup.disableLabelColor !== 'undefined' &&
+                            currentGroup.type === "LayerGroup"
+                        ) {
+                            // Проверяем уникальность префикса сразу в layerGroups и effectGroups
+                            if (isPrefixUsedAcrossAll(currentGroup.prefix)) {
+                                // Генерируем новый уникальный префикс
+                                currentGroup.prefix = generateUniquePrefix(currentGroup.name);
+                                alert(
+                                    "Prefix for group '" + currentGroup.name +
+                                    "' was already in use. A new unique prefix '" +
+                                    currentGroup.prefix + "' has been generated."
+                                );
+                            }
+
+                            // Создаём группу
+                            createLayerGroupUI(
+                                currentGroup.name,
+                                currentGroup.prefix,
+                                currentGroup.labelColorIndex,
+                                currentGroup.disableLabelColor,
+                                false, // guideCheckboxValue
+                                false  // lockCheckboxValue
+                            );
+                            // Сброс объекта
+                            currentGroup = {};
+                        }
+                    }
+                    // --- (B) Если читаем секцию EffectGroups ---
+                    else if (currentSection === "EffectGroups") {
+                        if (line.indexOf("GroupType:") === 0) {
+                            currentGroup = {};
+                            currentGroup.type = trim(line.split(":")[1]);
+                        } else if (line.indexOf("Name:") === 0) {
+                            currentGroup.name = trim(line.split(":")[1]);
+                        } else if (line.indexOf("Prefix:") === 0) {
+                            currentGroup.prefix = trim(line.split(":")[1]);
+                        }
+
+                        // Если собраны все поля для EffectGroup
+                        if (
+                            currentGroup.name &&
+                            currentGroup.prefix &&
+                            currentGroup.type === "EffectGroup"
+                        ) {
+                            // Проверяем уникальность префикса сразу в layerGroups и effectGroups
+                            if (isPrefixUsedAcrossAll(currentGroup.prefix)) {
+                                currentGroup.prefix = generateUniquePrefix(currentGroup.name);
+                                alert(
+                                    "Prefix for effect group '" + currentGroup.name +
+                                    "' was already in use. A new unique prefix '" +
+                                    currentGroup.prefix + "' has been generated."
+                                );
+                            }
+
+                            // Создаём группу
+                            createEffectGroupUI(
+                                currentGroup.name,
+                                currentGroup.prefix
+                            );
+                            currentGroup = {};
+                        }
+                    }
+                }
+
+                // После импорта заново перерисовываем окно
+                palette.layout.layout(true);
+                palette.layout.resize();
+
+                alert("Preset successfully loaded and all existing groups have been cleared.");
+                app.endUndoGroup();
+                importWindow.close();
+
+            } catch (e) {
+                alert("Error reading the preset: " + e.toString());
+                app.endUndoGroup();
+            }
+        } else {
+            alert("The file does not exist or cannot be opened.");
+        }
+    };
+
+    // Кнопка Cancel
+    var cancelButton = buttonsGroup.add("button", undefined, "Cancel", { name: "cancel" });
+    cancelButton.helpTip = "Cancel the upload and close the window";
+    cancelButton.onClick = function () {
+        importWindow.close();
+    };
+
+    importWindow.center();
+    importWindow.show();
+}
+
+
+function trim(str) {
+    return str.replace(/^\s+|\s+$/g, '');
+}
+
+function isPrefixUsedAcrossAll(prefix) {
+    // Сначала проверяем в layerGroups
+    for (var i = 0; i < layerGroups.length; i++) {
+        if (layerGroups[i].prefix === prefix) {
+            return true;
+        }
+    }
+    // Затем в effectGroups
+    for (var j = 0; j < effectGroups.length; j++) {
+        if (effectGroups[j].prefix === prefix) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 //
 // ===================== EFFECT GROUP =====================
 //
@@ -1870,6 +2384,20 @@ create_group_effects_button.onClick = function () {
     effectDropdown.selection = 0;
     effectDropdown.preferredSize.width = 120;
 
+        // вот здесь — префиксируем выбор в зависимости от ранее переданного имени
+        if (_defaultCreateGroupEffectName) {
+            var idx = projectEffects.indexOf(_defaultCreateGroupEffectName);
+            if (idx >= 0) {
+                effectDropdown.selection = idx;
+            } else {
+                effectDropdown.selection = 0;
+            }
+        } else {
+            effectDropdown.selection = 0;
+        }
+        // сбросим, чтобы не «залипало» на следующий раз
+        _defaultCreateGroupEffectName = "";
+
     effectDropdown.onChange = function () {
         var chosenEffect = effectDropdown.selection ? effectDropdown.selection.text : "";
         if (chosenEffect && chosenEffect !== "None") {
@@ -1989,7 +2517,7 @@ effects_manager_button.onClick = function () {
 };
 
 function openEffectsManager() {
-    var win = new Window("dialog", "Effects Manager Tool V1.5");
+    var win = new Window("dialog", "Effects Manager Tool V1.6");
     win.orientation = "column";
     win.alignChildren = ["fill", "top"];
     win.spacing = 10;
@@ -2034,7 +2562,7 @@ function openEffectsManager() {
     var disableEffectBtn = btnGroup.add(
         "iconbutton",
         undefined,
-        File.decode(disable_effect_button_imgString),
+        File.decode(view_button_off_imgString),
         { name: "disableEffectBtn", style: "toolbutton" }
     );
     disableEffectBtn.text = "Disable";
@@ -2263,6 +2791,46 @@ function openEffectsManager() {
             groupDropdown.add("item", "No groups available");
             groupDropdown.selection = 0;
         }
+
+// ─── ВСТАВЬТЕ СЮДА ───
+var createGroupEffectsButton = dlg.add("button", undefined, "Create Effects Group");
+createGroupEffectsButton.helpTip = "Create a new effects group from the selected effect";
+createGroupEffectsButton.onClick = function () {
+    var selItemMain = effectsList.selection;
+    if (!selItemMain) {
+        alert("Please select an effect group in the main window first!");
+        return;
+    }
+    // Извлекаем чистое имя эффекта без префикса "[XXX] "
+    var baseName = selItemMain.__groupName.replace(/^\[[^\]]+\]\s*/, "");
+    if (baseName === "None" || !baseName) {
+        alert("Cannot create a group from 'None'.");
+        return;
+    }
+
+    // Генерируем имя группы и префикс
+    var groupName = baseName;
+    var prefix    = generateUniquePrefix(groupName);
+
+    // Создаём UI-группу и добавляем все эффекты этого типа
+    createEffectGroupUI(groupName, prefix, baseName);
+    addAllEffectsOfThisTypeToGroup(prefix, baseName);
+
+    // Оповещаем и закрываем оба окна
+    alert(
+        "New Effects Group Created:\n" +
+        "  Name:   " + groupName + "\n" +
+        "  Prefix: [" + prefix + "]\n" +
+        "  Effect: " + baseName
+    );
+    dlg.close();   // закрываем Add to Group
+    //win.close();   // закрываем Effects Manager
+    // Обновляем списки в основном окне
+    fillEffectsList();
+    updateCompositionsList();
+};
+
+
         var btnGroupDlg = dlg.add("group");
         btnGroupDlg.alignment = "center";
         var okBtn = btnGroupDlg.add("button", undefined, "OK");
@@ -2474,24 +3042,35 @@ function sortProjectFiles() {
         var videoFmt  = ["mov","mp4"];
         var audioFmt  = ["mp3","wav","aif","aiff","ogg","aac"];
 
-        function makePanel(title, formats) {
-            var p = formatsGroup.add("panel", undefined, title);
-            p.orientation = "column";
+        // обновлённая версия makePanel: теперь первый параметр – родитель
+        function makePanel(parent, title, formats) {
+            var p = parent.add("panel", undefined, title);
+            p.orientation   = "column";
             p.alignChildren = "left";
-            p.spacing = 5;
+            p.spacing       = 5;
             var cbs = [];
             for (var f = 0; f < formats.length; f++) {
                 var cnt2 = countFilesWithExtension(formats[f]);
                 cbs.push(p.add("checkbox", undefined,
-                               formats[f] + " : " + cnt2 + " Files"));
+                            formats[f] + " : " + cnt2 + " Files"));
             }
             return { formats: formats, cbs: cbs };
         }
 
-        var raster = makePanel("Raster Images", rasterFmt);
-        var vector = makePanel("Vector Formats", vectorFmt);
-        var video  = makePanel("Video Formats", videoFmt);
-        var audio  = makePanel("Audio Formats", audioFmt);
+        // 1-й столбец — Raster
+        var raster = makePanel(formatsGroup, "Raster Images", rasterFmt);
+
+        // 2-й столбец — два блока в столбик: Vector и Video
+        var midGroup = formatsGroup.add("group");
+        midGroup.orientation   = "column";
+        midGroup.alignChildren = "fill";
+        midGroup.spacing       = 10;
+
+        var vector = makePanel(midGroup, "Vector Formats", vectorFmt);
+        var video  = makePanel(midGroup, "Video Formats",  videoFmt);
+
+        // 3-й столбец — Audio
+        var audio  = makePanel(formatsGroup, "Audio Formats", audioFmt);
 
         var btnGrp = customDlg.add("group");
         btnGrp.alignment = "center";
@@ -2782,76 +3361,79 @@ function duplicateCompRecursively(compItem, targetFolder, newColor, cache) {
 }
 
 
-//// Null Object Tool//
+//// Null Object Tool ////
 
 add_null_objects_button.onClick = function () {
-    var comp = app.project.activeItem;
-    if (!(comp instanceof CompItem)) {
-        alert("Active item is not a composition.");
-        return;
-    }
-    var selectedLayers = [];
-    for (var i = 1; i <= comp.numLayers; i++) {
-        var layer = comp.layer(i);
-        if (layer.selected) { selectedLayers.push(layer); }
-    }
-    if (selectedLayers.length === 0) {
-        alert("Please select layers in the active composition.");
-        return;
-    }
-
-    // Вычисляем среднюю позицию выбранных слоёв (учитывая X, Y и Z)
-    var sumX = 0, sumY = 0, sumZ = 0;
-    for (var i = 0; i < selectedLayers.length; i++) {
-        var pos = selectedLayers[i].property("Position").value;
-        sumX += pos[0];
-        sumY += pos[1];
-        var zVal = (pos.length > 2) ? pos[2] : 0;
-        sumZ += zVal;
-    }
-    var avgPos = [
-        sumX / selectedLayers.length,
-        sumY / selectedLayers.length,
-        sumZ / selectedLayers.length
-    ];
-
-    // Проверяем наличие 3D или камеры среди выбранных слоёв
-    var is3D = false;
-    for (var i = 0; i < selectedLayers.length; i++) {
-        if (selectedLayers[i].matchName === "ADBE Camera Layer" || (selectedLayers[i].threeDLayer && selectedLayers[i].threeDLayer === true)) {
-            is3D = true;
-            break;
-        }
-    }
-
-    app.beginUndoGroup("Add Null Object for Selected Layers");
-    var nullLayer = comp.layers.addNull();
-    // Формируем название согласно формату: NULL | (Имя слоя)
-    nullLayer.name = "NULL | " + selectedLayers[0].name;
-
-    if (is3D) {
-        nullLayer.threeDLayer = true;
-        nullLayer.property("Position").setValue(avgPos);
-    } else {
-        nullLayer.property("Position").setValue([avgPos[0], avgPos[1]]);
-    }
-
-    for (var i = 0; i < selectedLayers.length; i++) {
-        selectedLayers[i].parent = nullLayer;
-    }
-    app.endUndoGroup();
-};
-
-
-function getLayerIndices(layersArray) {
-    var indices = [];
-    for (var i = 0; i < layersArray.length; i++) {
-        indices.push(layersArray[i].index);
-    }
-    return indices;
+var comp = app.project.activeItem;
+if (!(comp instanceof CompItem)) {
+    alert("Active item is not a composition.");
+    return;
 }
 
-//Track Matte Tool//
+// --- выбранные слои ---
+var selectedLayers = [];
+for (var i = 1; i <= comp.numLayers; i++) {
+    if (comp.layer(i).selected) selectedLayers.push(comp.layer(i));
+}
+if (selectedLayers.length === 0) {
+    alert("Please select layers in the active composition.");
+    return;
+}
+
+// --- индексы выбранных ---
+var indices = [];
+for (var j = 0; j < selectedLayers.length; j++) indices.push(selectedLayers[j].index);
+var minIndex = Math.min.apply(null, indices);   // верхний из выбранных
+var maxIndex = Math.max.apply(null, indices);   // нижний из выбранных
+
+// --- средняя позиция ---
+var sumX = 0, sumY = 0, sumZ = 0;
+for (var k = 0; k < selectedLayers.length; k++) {
+    var p = selectedLayers[k].property("Position").value;
+    sumX += p[0];  sumY += p[1];  sumZ += (p.length > 2) ? p[2] : 0;
+}
+var avgPos = [sumX/selectedLayers.length, sumY/selectedLayers.length, sumZ/selectedLayers.length];
+
+// --- нужно ли 3D? (любой 3D-слой, камера или свет) ---
+var is3D = false;
+for (var m = 0; m < selectedLayers.length; m++) {
+var L = selectedLayers[m];
+if (
+    L.threeDLayer ||                          // обычные 3D-слои
+    L.matchName === "ADBE Camera Layer" ||    // камеры
+    L.matchName === "ADBE Light Layer"        // 💡 свет
+){
+    is3D = true;
+    break;
+}
+}
+
+app.beginUndoGroup("Add Null Object for Selected Layers");
+
+// --- создаём нуль (он появляется самым верхним, index = 1) ---
+var nullLayer = comp.layers.addNull();
+
+// --- корректируем целевой индекс с учётом сдвига +1 ---
+if (selectedLayers.length > 1) {
+    // нужно *над* группой → перед слоем, чей новый индекс = minIndex + 1
+    nullLayer.moveBefore(comp.layer(minIndex + 1));
+} else {
+    // нужно *под* одиночным слоем → после слоя, чей новый индекс = maxIndex + 1
+    nullLayer.moveAfter(comp.layer(maxIndex + 1));
+}
+
+// --- имя, позиция, parent ---
+nullLayer.name = "NULL | " + selectedLayers[0].name;
+if (is3D) {
+    nullLayer.threeDLayer = true;
+    nullLayer.property("Position").setValue(avgPos);
+} else {
+    nullLayer.property("Position").setValue([avgPos[0], avgPos[1]]);
+}
+for (var n = 0; n < selectedLayers.length; n++) selectedLayers[n].parent = nullLayer;
+
+app.endUndoGroup();
+};
 
 add_track_matte_button.onClick = function () {
     var comp = app.project.activeItem;
@@ -2860,33 +3442,114 @@ add_track_matte_button.onClick = function () {
         return;
     }
 
-    if (comp.selectedLayers.length === 0) {
+    var sel = comp.selectedLayers;
+    if (sel.length === 0) {
         alert("Please select one or more layers.");
         return;
     }
 
-    app.beginUndoGroup("Add Track Matte Layer");
+    app.beginUndoGroup("Add Shared Track Matte");
     var solidColor = [1, 1, 1]; // белый цвет
 
-    if (comp.selectedLayers.length > 1) {
-        var baseName = comp.selectedLayers[0].name;
-        var indices = getLayerIndices(comp.selectedLayers);
-        var precomp = comp.layers.precompose(indices, "Precomp (" + baseName + ")", true);
-        var matteLayerName = "TRMT (" + baseName + ")";
-        var matteLayer = comp.layers.addSolid(solidColor, matteLayerName, comp.width, comp.height, comp.pixelAspect, comp.duration);
-        matteLayer.moveBefore(precomp);
-        precomp.trackMatteType = TrackMatteType.ALPHA;
+    // найдём самый «верхний» слой (с минимальным index)
+    var topLayer = sel[0];
+    for (var i = 1; i < sel.length; i++) {
+        if (sel[i].index < topLayer.index) {
+            topLayer = sel[i];
+        }
+    }
+
+    // определяем имя солид-матта
+    var matteName;
+    if (sel.length > 1) {
+        matteName = "TRMT (Layers Group)";
     } else {
-        var activeLayer = comp.selectedLayers[0];
-        var matteLayerName = "TRMT (" + activeLayer.name + ")";
-        var matteLayer = comp.layers.addSolid(solidColor, matteLayerName, comp.width, comp.height, comp.pixelAspect, comp.duration);
-        matteLayer.moveBefore(activeLayer);
-        activeLayer.trackMatteType = TrackMatteType.ALPHA;
+        matteName = "TRMT (" + topLayer.name + ")";
+    }
+
+    // создаём один солид-матт над topLayer
+    var matteLayer = comp.layers.addSolid(
+        solidColor,
+        matteName,
+        comp.width,
+        comp.height,
+        comp.pixelAspect,
+        comp.duration
+    );
+    matteLayer.moveBefore(topLayer);
+    matteLayer.label = 16; // по желанию — чёрная метка
+
+    // назначаем этот matteLayer как альфа-трек-мэтт для всех выбранных слоёв
+    for (i = 0; i < sel.length; i++) {
+        var layer = sel[i];
+        if (typeof layer.setTrackMatte === "function") {
+            // AE 2023+ API
+            layer.setTrackMatte(matteLayer, TrackMatteType.ALPHA);
+        } else {
+            // для старых версий AE
+            layer.trackMatteType = TrackMatteType.ALPHA;
+        }
     }
 
     app.endUndoGroup();
 };
 
+
+//Ajustment Matte Tool//
+add_aj_mask_button.onClick = function () {
+    var comp = app.project.activeItem;
+    if (!(comp instanceof CompItem)) {
+        alert("Active item is not a composition.");
+        return;
+    }
+    var sel = comp.selectedLayers;
+    if (sel.length === 0) {
+        alert("Please select one or more layers.");
+        return;
+    }
+
+    app.beginUndoGroup("Add Adjustment Matte Layer");
+
+    // Проходим снизу-вверх, чтобы новые слои не сбили индексы
+    for (var i = sel.length - 1; i >= 0; i--) {
+        var baseLayer = sel[i];
+
+        // 1) Если базовый слой - 3D, отключаем, иначе Track Matte не сработает
+        if (baseLayer.threeDLayer) {
+            baseLayer.threeDLayer = false;
+        }
+
+        // 2) Создаём Solid-слой и делаем его Adjustment
+        var adj = comp.layers.addSolid(
+            [1, 1, 1],
+            "AJ (" + baseLayer.name + ")",
+            comp.width,
+            comp.height,
+            comp.pixelAspect,
+            comp.duration
+        );
+        adj.adjustmentLayer = true;
+        adj.threeDLayer     = false;  // 2D обязательно
+        adj.enabled         = true;
+
+        // 3) Перемещаем Adjustment-слой **выше** исходного
+        adj.moveBefore(baseLayer);
+
+        // 4) Назначаем Adjustment-слою Track Matte по альфе базового
+        if (typeof adj.setTrackMatte === "function") {
+            // в AE 2023+ можно явно указать слой-матт
+            adj.setTrackMatte(baseLayer, TrackMatteType.ALPHA);
+        } else {
+            // для старых версий (CC2018 и ниже)
+            adj.trackMatteType = TrackMatteType.ALPHA;
+        }
+
+        // 5) Гарантируем, что базовый слой остаётся видимым
+        baseLayer.enabled = true;
+    }
+
+    app.endUndoGroup();
+};
 
 //
 // "Create a New Layer Group" кнопка
@@ -4711,484 +5374,4 @@ if (autoSaveEnabled) {
     autoSavePreset();
 }
 
-
-
-
-//
-// ================== SAVE / LOAD PRESETS ==================
-//
-
-save_my_presets_button.onClick = function () {
-    saveData();
-};
-
-load_my_presets_button.onClick = function () {
-    loadData();
-};
-
-function saveData() {
-    var saveWindow = new Window("dialog", "Save Presets and Settings Project");
-    saveWindow.orientation = "column";
-    saveWindow.alignChildren = ["fill", "top"];
-    saveWindow.spacing = 15;
-    saveWindow.margins = 15;
-    saveWindow.helpTip = "Save the current Layer/Effect groups to a .pgm file";
-
-    var pathGroup = saveWindow.add("group");
-    pathGroup.orientation = "row";
-    pathGroup.add("statictext", undefined, "Save path:");
-    var pathEdit = pathGroup.add("edittext", undefined, "");
-    pathEdit.size = [300, 25];
-    var browseButton = pathGroup.add("button", undefined, "Browse");
-    browseButton.onClick = function () {
-        var folder = Folder.selectDialog("Please select a folder for saving");
-        if (folder) {
-            pathEdit.text = folder.fsName;
-        }
-    };
-
-    var fileGroup = saveWindow.add("group");
-    fileGroup.orientation = "row";
-    fileGroup.add("statictext", undefined, "Preset Name:");
-    var fileEdit = fileGroup.add("edittext", undefined, "My_Preset_Project");
-    fileEdit.size = [375, 25];
-
-    var buttonsGroup = saveWindow.add("group");
-    buttonsGroup.orientation = "row";
-
-    var exportButton = buttonsGroup.add("button", undefined, "Export", { name: "ok" });
-
-    exportButton.onClick = function () {
-        var savePath = pathEdit.text;
-        var fileName = fileEdit.text;
-
-        if (savePath === "" || fileName === "") {
-            alert("Please specify the path and file name.");
-            return;
-        }
-
-        // Добавляем расширение .pgm, если его нет
-        if (!/\.pgm$/i.test(fileName)) {
-            fileName += ".pgm";
-        }
-
-        var fullPath = savePath + "/" + fileName;
-        var file = new File(fullPath);
-        if (file.open("w")) {
-            try {
-                var dataLines = [];
-                dataLines.push("LayerGroups:");
-                for (var i = 0; i < layerGroups.length; i++) {
-                    var lg = layerGroups[i];
-                    dataLines.push("GroupType: LayerGroup");
-                    dataLines.push("Name: " + lg.name);
-                    dataLines.push("Prefix: " + lg.prefix);
-                    dataLines.push("LabelColorIndex: " + lg.labelColorIndex);
-                    dataLines.push("DisableLabelColor: " + lg.disableLabelColor);
-                    dataLines.push("");
-                }
-
-                dataLines.push("EffectGroups:");
-                for (var j = 0; j < effectGroups.length; j++) {
-                    var eg = effectGroups[j];
-                    dataLines.push("GroupType: EffectGroup");
-                    dataLines.push("Name: " + eg.name);
-                    dataLines.push("Prefix: " + eg.prefix);
-                    dataLines.push("");
-                }
-
-                var data = dataLines.join("\n");
-                file.write(data);
-                file.close();
-                alert("Preset successfully saved.");
-                presetFilePath = fullPath;
-                autoSaveEnabled = true;
-                saveWindow.close();
-
-            } catch (e) {
-                alert("Error saving the preset: " + e.toString());
-            }
-        } else {
-            alert("Failed to save the Preset.");
-        }
-    };
-
-    var cancelButton = buttonsGroup.add("button", undefined, "Cancel", { name: "cancel" });
-    cancelButton.onClick = function () {
-        saveWindow.close();
-    };
-
-    saveWindow.center();
-    saveWindow.show();
-}
-
-function loadData() {
-    // Создаём диалог импорта
-    var importWindow = new Window("dialog", "Load Preset and Settings Project");
-    importWindow.orientation = "column";
-    importWindow.alignChildren = ["fill", "top"];
-    importWindow.spacing = 10;
-    importWindow.margins = 15;
-
-    // Группа для выбора .pgm файла
-    var fileGroup = importWindow.add("group");
-    fileGroup.orientation = "row";
-    fileGroup.alignChildren = ["left", "center"];
-    fileGroup.add("statictext", undefined, "Preset to import:");
-    var fileEdit = fileGroup.add("edittext", undefined, "");
-    fileEdit.size = [300, 25];
-    fileEdit.helpTip = "Select the .pgm file with previously saved settings";
-
-    var browseButton = fileGroup.add("button", undefined, "Browse");
-    browseButton.helpTip = "Click to find .pgm file";
-
-    browseButton.onClick = function () {
-        var file = File.openDialog("Please select a file to import", "*.pgm");
-        if (file) {
-            fileEdit.text = file.fsName;
-        }
-    };
-    // Группа настроек Options (колонка)
-    var optionsGroup = importWindow.add("group");
-    optionsGroup.orientation = "row";
-    optionsGroup.alignChildren = ["left", "centrer"];
-    optionsGroup.spacing = 10;
-
-    optionsGroup.add("statictext", undefined, "Options:");
-
-    // Кнопка Clear All Panels
-    var clear_all_panels_button = optionsGroup.add("iconbutton", undefined, File.decode(clear_all_panels_button_imgString), {
-        name: "clear_all_panels_button",
-        style: "toolbutton"
-    });
-    clear_all_panels_button.helpTip = "Clear All Panels";
-    clear_all_panels_button.text = "Clear All Panels";
-    clear_all_panels_button.preferredSize.width = 140;
-    clear_all_panels_button.preferredSize.height = 30;
-
-    clear_all_panels_button.onClick = function () {
-        var confirmClear = confirm("Are you sure you want to clear all groups and reset layer and effect prefixes? This action cannot be undone.");
-        if (!confirmClear) return;
-        try {
-            app.beginUndoGroup("Clear All Groups and Reset Names");
-
-            if (!tab_layers || !tab_effects) {
-                alert("Error: 'tab_layers' or 'tab_effects' is not defined.");
-                app.endUndoGroup();
-                return;
-            }
-
-            // Очистка групп слоёв
-            for (var i = layerGroups.length - 1; i >= 0; i--) {
-                var lg = layerGroups[i];
-                var comps = getAllCompositions();
-                for (var c = 0; c < comps.length; c++) {
-                    var comp = comps[c];
-                    for (var l = comp.numLayers; l >= 1; l--) {
-                        var layer = comp.layer(l);
-                        if (layer.name.indexOf("[" + lg.prefix + "]") === 0) {
-                            var originalName = layer.name.replace("[" + lg.prefix + "] ", "");
-                            layer.name = originalName;
-                        }
-                    }
-                }
-                if (lg.panel && lg.panel.parent === tab_layers) {
-                    try {
-                        tab_layers.remove(lg.panel);
-                    } catch (removeError) {
-                        alert("Failed to remove layer group panel for '" + lg.name + "': " + removeError.toString());
-                    }
-                } else {
-                    alert("Layer group panel for '" + lg.name + "' has already been removed or does not exist.");
-                }
-                layerGroups.splice(i, 1);
-            }
-
-            // Очистка групп эффектов
-            for (var i = effectGroups.length - 1; i >= 0; i--) {
-                var eg = effectGroups[i];
-                var comps = getAllCompositions();
-                for (var c = 0; c < comps.length; c++) {
-                    var comp = comps[c];
-                    for (var l = 1; l <= comp.numLayers; l++) {
-                        var layer = comp.layer(l);
-                        if (layer.property("Effects")) {
-                            for (var e = layer.property("Effects").numProperties; e >= 1; e--) {
-                                var effect = layer.property("Effects").property(e);
-                                if (effect.name.indexOf("[" + eg.prefix + "]") === 0) {
-                                    var originalName = effect.name.replace("[" + eg.prefix + "] ", "");
-                                    effect.name = originalName;
-                                }
-                            }
-                        }
-                    }
-                }
-                if (eg.panel && eg.panel.parent === tab_effects) {
-                    try {
-                        tab_effects.remove(eg.panel);
-                    } catch (removeError) {
-                        alert("Failed to remove effect group panel for '" + eg.name + "': " + removeError.toString());
-                    }
-                } else {
-                    alert("Effect group panel for '" + eg.name + "' has already been removed or does not exist.");
-                }
-                effectGroups.splice(i, 1);
-            }
-
-            palette.layout.layout(true);
-            palette.layout.resize();
-
-            alert("All groups have been cleared and layer and effect prefixes have been reset.");
-            app.endUndoGroup();
-        } catch (error) {
-            alert("An error occurred while clearing groups: " + error.toString());
-            app.endUndoGroup();
-        }
-    };
-    // Группа кнопок (Import/Cancel)
-    var buttonsGroup = importWindow.add("group");
-    buttonsGroup.orientation = "row";
-    buttonsGroup.alignChildren = ["fill", "center"];
-
-    // Кнопка Import
-    var importButton = buttonsGroup.add("button", undefined, "Import", { name: "ok" });
-    importButton.helpTip = "Load the selected .pgm preset";
-
-    importButton.onClick = function () {
-        var filePath = fileEdit.text;
-
-        if (filePath === "") {
-            alert("Please select a file to import.");
-            return;
-        }
-
-        var file = new File(filePath);
-        if (file.exists && file.open("r")) {
-            try {
-                var content = file.read();
-                file.close();
-
-                // Разделяем содержимое файла по строкам
-                var lines = content.split(/\r\n|\n|\r/);
-                var currentSection = "";
-                var currentGroup = {};
-
-                // Начинаем группу Undo для очистки и импорта
-                app.beginUndoGroup("Import Preset and Reset Groups");
-
-                // Сохраняем копии текущих групп, чтобы безопасно очистить
-                var layerGroupsCopy = layerGroups.slice();
-                var effectGroupsCopy = effectGroups.slice();
-
-                for (var i = layerGroupsCopy.length - 1; i >= 0; i--) {
-                    var lg = layerGroupsCopy[i];
-
-                    // Сброс префиксов слоёв
-                    var comps = getAllCompositions();
-                    for (var c = 0; c < comps.length; c++) {
-                        var comp = comps[c];
-                        for (var l = comp.numLayers; l >= 1; l--) {
-                            var layer = comp.layer(l);
-                            if (layer.name.indexOf("[" + lg.prefix + "]") === 0) {
-                                var originalName = layer.name.replace("[" + lg.prefix + "] ", "");
-                                layer.name = originalName;
-                            }
-                        }
-                    }
-
-                    // Удаление UI панели группы слоёв
-                    if (lg.panel && lg.panel.parent === tab_layers) {
-                        try {
-                            tab_layers.remove(lg.panel);
-                        } catch (removeError) {
-                            alert("Failed to remove layer group panel for '" + lg.name + "': " + removeError.toString());
-                        }
-                    }
-                    // Удаляем из массива layerGroups позже (ниже), а пока просто удалили панели
-                }
-                // Полностью обнуляем массив
-                layerGroups = [];
-
-                for (var k = effectGroupsCopy.length - 1; k >= 0; k--) {
-                    var eg = effectGroupsCopy[k];
-
-                    // Сброс префиксов эффектов
-                    var comps = getAllCompositions();
-                    for (var c = 0; c < comps.length; c++) {
-                        var comp = comps[c];
-                        for (var l = 1; l <= comp.numLayers; l++) {
-                            var layer = comp.layer(l);
-                            if (layer.property("Effects")) {
-                                for (var e = layer.property("Effects").numProperties; e >= 1; e--) {
-                                    var effect = layer.property("Effects").property(e);
-                                    if (effect.name.indexOf("[" + eg.prefix + "]") === 0) {
-                                        var originalName = effect.name.replace("[" + eg.prefix + "] ", "");
-                                        effect.name = originalName;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    // Удаление UI панели группы эффектов
-                    if (eg.panel && eg.panel.parent === tab_effects) {
-                        try {
-                            tab_effects.remove(eg.panel);
-                        } catch (removeError) {
-                            alert("Failed to remove effect group panel for '" + eg.name + "': " + removeError.toString());
-                        }
-                    }
-                }
-                // Обнуляем массив
-                effectGroups = [];
-
-                // Обновляем интерфейс после удаления групп
-                palette.layout.layout(true);
-                palette.layout.resize();
-
-                //--------------------------------------------------------
-                // (3) Разбор файла и создание новых групп
-                //--------------------------------------------------------
-                for (var i = 0; i < lines.length; i++) {
-                    var line = trim(lines[i]);
-                    if (line === "LayerGroups:") {
-                        currentSection = "LayerGroups";
-                        continue;
-                    } else if (line === "EffectGroups:") {
-                        currentSection = "EffectGroups";
-                        continue;
-                    }
-
-                    // --- (A) Если читаем секцию LayerGroups ---
-                    if (currentSection === "LayerGroups") {
-                        if (line.indexOf("GroupType:") === 0) {
-                            currentGroup = {};
-                            currentGroup.type = trim(line.split(":")[1]);
-                        } else if (line.indexOf("Name:") === 0) {
-                            currentGroup.name = trim(line.split(":")[1]);
-                        } else if (line.indexOf("Prefix:") === 0) {
-                            currentGroup.prefix = trim(line.split(":")[1]);
-                        } else if (line.indexOf("LabelColorIndex:") === 0) {
-                            currentGroup.labelColorIndex = parseInt(trim(line.split(":")[1]), 10);
-                        } else if (line.indexOf("DisableLabelColor:") === 0) {
-                            currentGroup.disableLabelColor = (trim(line.split(":")[1]).toLowerCase() === "true");
-                        }
-
-                        // Если собраны все поля для LayerGroup
-                        if (
-                            currentGroup.name &&
-                            currentGroup.prefix &&
-                            typeof currentGroup.labelColorIndex !== 'undefined' &&
-                            typeof currentGroup.disableLabelColor !== 'undefined' &&
-                            currentGroup.type === "LayerGroup"
-                        ) {
-                            // Проверяем уникальность префикса сразу в layerGroups и effectGroups
-                            if (isPrefixUsedAcrossAll(currentGroup.prefix)) {
-                                // Генерируем новый уникальный префикс
-                                currentGroup.prefix = generateUniquePrefix(currentGroup.name);
-                                alert(
-                                    "Prefix for group '" + currentGroup.name +
-                                    "' was already in use. A new unique prefix '" +
-                                    currentGroup.prefix + "' has been generated."
-                                );
-                            }
-
-                            // Создаём группу
-                            createLayerGroupUI(
-                                currentGroup.name,
-                                currentGroup.prefix,
-                                currentGroup.labelColorIndex,
-                                currentGroup.disableLabelColor,
-                                false, // guideCheckboxValue
-                                false  // lockCheckboxValue
-                            );
-                            // Сброс объекта
-                            currentGroup = {};
-                        }
-                    }
-                    // --- (B) Если читаем секцию EffectGroups ---
-                    else if (currentSection === "EffectGroups") {
-                        if (line.indexOf("GroupType:") === 0) {
-                            currentGroup = {};
-                            currentGroup.type = trim(line.split(":")[1]);
-                        } else if (line.indexOf("Name:") === 0) {
-                            currentGroup.name = trim(line.split(":")[1]);
-                        } else if (line.indexOf("Prefix:") === 0) {
-                            currentGroup.prefix = trim(line.split(":")[1]);
-                        }
-
-                        // Если собраны все поля для EffectGroup
-                        if (
-                            currentGroup.name &&
-                            currentGroup.prefix &&
-                            currentGroup.type === "EffectGroup"
-                        ) {
-                            // Проверяем уникальность префикса сразу в layerGroups и effectGroups
-                            if (isPrefixUsedAcrossAll(currentGroup.prefix)) {
-                                currentGroup.prefix = generateUniquePrefix(currentGroup.name);
-                                alert(
-                                    "Prefix for effect group '" + currentGroup.name +
-                                    "' was already in use. A new unique prefix '" +
-                                    currentGroup.prefix + "' has been generated."
-                                );
-                            }
-
-                            // Создаём группу
-                            createEffectGroupUI(
-                                currentGroup.name,
-                                currentGroup.prefix
-                            );
-                            currentGroup = {};
-                        }
-                    }
-                }
-
-                // После импорта заново перерисовываем окно
-                palette.layout.layout(true);
-                palette.layout.resize();
-
-                alert("Preset successfully loaded and all existing groups have been cleared.");
-                app.endUndoGroup();
-                importWindow.close();
-
-            } catch (e) {
-                alert("Error reading the preset: " + e.toString());
-                app.endUndoGroup();
-            }
-        } else {
-            alert("The file does not exist or cannot be opened.");
-        }
-    };
-
-    // Кнопка Cancel
-    var cancelButton = buttonsGroup.add("button", undefined, "Cancel", { name: "cancel" });
-    cancelButton.helpTip = "Cancel the upload and close the window";
-    cancelButton.onClick = function () {
-        importWindow.close();
-    };
-
-    importWindow.center();
-    importWindow.show();
-}
-
-
-function trim(str) {
-    return str.replace(/^\s+|\s+$/g, '');
-}
-
-function isPrefixUsedAcrossAll(prefix) {
-    // Сначала проверяем в layerGroups
-    for (var i = 0; i < layerGroups.length; i++) {
-        if (layerGroups[i].prefix === prefix) {
-            return true;
-        }
-    }
-    // Затем в effectGroups
-    for (var j = 0; j < effectGroups.length; j++) {
-        if (effectGroups[j].prefix === prefix) {
-            return true;
-        }
-    }
-    return false;
-}
 }
