@@ -1,4 +1,4 @@
-var scriptVersion = "3.9.1";
+var scriptVersion = "3.9.2";
 
 var soloAnimStates = soloAnimStates || {};
 var soloShapesStates = {};
@@ -16,6 +16,7 @@ var layerGroups  = [];
 var EffectGroups = [];
 var currentMode = modes[0]
 var _defaultCreateGroupEffectName = "";
+var suppressPromptForAutoSave = false;
 
 
 var switch_tools_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%5B%00%00%00%20%08%06%00%00%00%7D%C3%93%04%C2%9B%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%055IDATx%01%C3%AD%C2%99%3Bl%1CU%14%C2%86%C3%8F%C2%9Du%C3%BC%C2%B6%C2%B0%0B%C3%AC%C3%98%C3%95F%20%14%C3%89%0F%C3%AC%08%01%5Dv%0B%04%14(%0E%C2%A2%C2%A1s%1AD*%12%C3%B1%C2%90%C3%92%60%C2%BB%C3%A3e%25(U*%C2%9C%12%1AoDc%C2%A0%C3%88%C3%92%C2%A5%40%C3%8A%C3%A2%C2%87%C3%A4.%1B!%C2%A1%C3%85%C2%95%0D~%C3%9B%C2%BB%C3%83%C3%BF%C2%AFgV%C3%AB%C3%B5%C3%8C%C2%BDwf%1D!%C2%A1%C3%B9%C2%A4%C3%91x%C3%AF%C3%9C%C2%B9%C3%A7%C2%9C%C3%BF%C2%9E9s%C3%A7Z%24!!!!!!!%C3%A1%C2%BFDE%C3%A9%3C%0E*%C2%95%C3%8A%15%C3%97u%C3%87%C2%95R%C3%A3%5E%C3%B3%06~%17q~%C2%90J%C2%A5%C3%B2%C2%85B%C2%A1(g%C3%88%C3%A4%C3%B8%C3%AD%5E%C3%87%C2%A9L%C2%89%C2%B8%C2%97%5D%C2%B7f%13%C2%B8E%C3%B8%C3%B0%C2%A0Rqr%C2%B9%C3%82%C3%8D%C2%A2%C2%9C!%08%C2%B3%17qN!%C2%AE%C3%8Buq%0A%C3%A3%C3%84%C3%AF_%1D%C3%87%C2%99%C2%8F%13%C2%A7%C2%95%C3%980%C2%9E.%C2%97%C3%8B%C2%B7%C3%B1%C3%A7%C2%A4q%40%C2%A5f%C2%96%C2%96%C2%96f%C2%A5I%3C%C2%91%C2%A7%11%C3%A0%0DS_%C3%98%C2%9C%C2%87%C3%A8%C2%B3%C3%8D%C2%8A%C3%AE%C2%89%C3%BC%C2%91g%C2%B3%C3%97%C3%90%7D%1E%C3%895%1BEt%C2%A3%C3%98%C3%8Cf%08%C3%BD%C3%90%C3%82x%3DE8%C2%92%C2%8D%C2%9B%C3%A5%10%3A%C2%ADT%056%C3%9D%C2%B4%C3%BD%5D%C2%AA%C3%A8%C2%BAN6%C2%AE%C3%A0L%C2%A8%C2%A3%C2%A3%C2%A3%C2%85%C3%BAL%C2%B6%006%C3%9Dk%2B%2B%2By%C2%9B%C3%8E%C3%8A%C3%A0%40%1C%C2%A1k%C2%8E%C3%84%11%3C%C2%9E%C3%905P%C3%92R%13Q%05%C3%B7%C2%9E%5C%C3%86%C2%99%C2%96%18%40%C3%B0%C2%AC%C2%8D%C3%A0%C2%8E%C3%A8%1DX%C2%90xB%13%C3%9E%C3%BF%C2%9DD%C2%A4%09%C2%A1I%2F%C3%AFg%09%C2%8Ar%13%C3%BC%C2%9C%C2%96%C2%98B%13%3C%0D%0B%2CA%C2%A6~%C3%8E%C2%B3r%C3%80%233%3A%3A%3Ae%C3%9By%C3%B2%C3%92%C3%9C%C2%8D%26%C2%84%C3%B6p%C3%93%C2%8Esd%C2%AC%C3%B3%3E%C2%9E%7FS%C3%92%1C%C2%BD%C3%9E%3BMK%60%19%C3%B1%C2%B2%C3%BAIc%7BKK%C2%8B%C2%B4%C2%B7%C2%B7%C3%8B%C3%A1%C3%A1%C2%A1%C3%AC%C3%AF%C3%AF%C3%97%C3%9A%C2%BB%C2%BB%C2%BB%C2%AB%C3%A7%C2%AD%C2%AD%C2%AD%C2%A0%C3%A1%C3%B2%C3%8B%C3%8B%C3%8BY%C2%B1%C3%A0%C3%AA%C3%84%C3%9C%C2%93%20%C2%B1_%C3%8B%C2%BE(%C3%A9%C2%97%C2%9E%3F%C3%95%7F%C3%BD%C3%8F%C2%BF%C3%A5%C3%A1%C2%8F%C2%ABAC%C2%B1%C2%9C%5C%409%C3%99%10%03ccc%C2%8F%C2%B9%C2%BA%C2%AAokkk%C2%93s%C3%A7%C3%8E%09%5E%C2%96%C2%B2%C2%B3%C2%B3Skomm%C2%AD%1E%C2%8D%C3%AD%3E(%C2%9B%7D(%C2%9B%C2%A16%5B%C2%82%1A!t%26%C2%A4%5D%C2%BA%C2%BA%C2%BAX%C2%A3d%7D%7D%C3%BDx%00L%00%C3%9B%C3%B0r%09%13%3B%C3%83%C3%893%C3%95%C3%AE%C3%B7%5E%C3%B9%3AS.%07g%C3%B5%C2%AB%C2%99%17%24%C3%BB%C3%8E%C3%88%C2%A9%C3%B6%C2%95%C3%9F%C3%BE%08%13%1B%C2%8F%C3%B4%11%05%C3%8C%C2%8B%06%2F%C2%A9N%C2%BD%10%C2%99P%3C%C3%88%C3%9E%C3%9E%5EU%5C%C3%92%C3%93%C3%93S%C2%8D%C2%97%3A%04%C2%89%C3%8D%C3%A5%22Nw%C3%82%C3%AC%C2%85%C2%95%C2%91%2BA%C2%8D%14%C3%B9%C3%A0%C3%A0%C2%805%C2%AA%3A%C3%83%C2%BEcdwwW%C3%82%08%C2%9B%C2%BC%C2%93%C2%8EJh%C2%9F%C2%BB%C3%93%3F%C3%89%C2%BB%C2%97%C3%A6%C3%A4%C3%AE%C3%8C%C2%A2%C3%B7%7B%C2%B1%C3%BA%C3%BB%C3%B3%0F~%08%1DO9%C3%8A%C2%B8L%0D%12%C2%BA%C2%91%C3%8E%C3%8E%C3%8E%C3%AA%C2%99%22%C3%B3%C3%90%01%7D%5E%C3%96%5D%0F%13%3B%C2%B4%C3%98%C3%BB%C3%A5%C2%83%C2%8FZ%C3%BD%C2%B9%C2%BE%C2%AC4%C2%82%C3%89I%C2%8B%01%7C%C2%B0%18%C3%BBD%01%C3%B5%C3%B19c%1F%C3%832%C2%8F%C3%89%C3%A5%C2%8B%C3%8D3%7F%C3%B3%C3%90%C2%90%C3%96%5Dt%24%22%C3%8C%60%1A%C3%AC%C3%A8%C3%A8%60%C2%8D%C2%AA%C3%8E6K%08%1F%C2%AD%C3%BF%1B%2C%15%7C%C2%8A%19%2B%0F%26%C2%94_R%C3%A2%10%26vh%C2%91%C2%A7%C3%90%7CA%C3%92%09%C3%96j%C2%A2%2B!%C2%A6%C3%B1j(%C2%8B%3E%11%40%C3%BEmZt%C3%93%C3%9Ad%C3%89d%C2%BC%C2%AC%C3%95%C3%84%22N-%C2%81bC%C3%88%C2%A7%C2%BA%C2%9B%C3%B8%C3%92%20%C2%9Cm%C2%A2%2B!%04%C3%99P%10%03%C2%AE(c%C2%9F(%C2%A8%C2%8Ay%3C%1B%C2%BF%C3%BC%C3%AC%C3%A6%C2%93K%C3%B1%C2%B56%C2%95%C3%BA%5Dw%C3%9D%09q%22%C2%A7%C2%BB%C2%89b%C3%BB%C2%B5%C3%8B%C2%A2%C2%84lX%7D%C3%8EbCI%C3%8E%C2%90%C2%8A8yS%1F%C2%94%40%C2%8A%C2%AD%C3%8D%C3%AE%C3%AD%C3%AD%C3%AD%13g%C2%ADM%C2%83n%C2%A1%C2%9F%C3%ABX%C3%AC%C3%B3%C3%B35%13v%C2%9D%C3%B5%C2%9APtC%1D%C2%9B%C3%87%3A%C3%BB%C2%9AXpu%C3%A2%1B%C2%AD%C3%8D%C2%AE%C2%9E%C2%B6%C3%AA%C2%B1%C3%BD%C3%8F~%C3%B5%C3%90%C2%90_x%C3%BC%C2%89%C3%95%C3%9A%1E%C3%AB%C3%AC%19%C3%840%5D%C3%9F%C2%86%5D%C2%BDj6%07%C3%85%C3%A6%C3%87%C3%9D%C2%98%60%C3%A8_%C3%84%06%C3%9C%05%C2%9D%C2%AD%C3%90%17%24%0Ciw%C3%AEh%C2%8C%C2%87Nh8%C2%B0%C3%81%C2%9D1%C2%B1%C3%84u%2B7u%C3%97)0%3Fd%0CBc%C2%9C%C2%94%C3%95%C3%A4%12%08%C3%8Bu%C3%B1%C2%89%C3%ACfLa%C2%B1%C3%B9q%C2%9F%C2%B6%C3%A9%1A%C3%A3L%C2%85%5D%C3%80GK%C2%B1%C2%BF%C2%BF%C2%BF%0F%C2%82%C2%BD.1%C2%81%C2%B3%C2%B7%C2%90%C3%95%C2%8B%C2%B6%C3%BD%C3%97J%C2%BF%C2%94.%C2%9E%7Fs%13I%C3%B5%C2%96%C3%84%C2%84A%C3%A7%0A%1F%5B%C2%97%C2%A4R%C2%A9%C2%B4700%C3%B0%C2%97Xl%1Fkl~%C2%8BR%C3%B9%C2%85%C2%A9_Jw%11%C2%82%2F%C3%82%11%3E%1AQ%C2%B6%1D%7D%07fWWW%C2%8D%0E4%C2%B2V%C3%BA%C3%B9%C3%91%C3%85%C3%B3o%60%C2%8EUF%22r%2C%C3%B4%C2%A73%12%11%C3%84Y%40b%C3%85%C2%B2%09%C3%AEC%C3%A8%0Fm%3A%C2%A6L%1D%C3%A0H.%C2%8A%23%2C%1D%C3%88%C3%A8%C3%AB%10%C3%BA%C2%8E%C3%84%04%19%C2%9E%C3%B72%C2%9COU%C2%BB%C3%B9%0E%C3%85%C3%BF%16%C3%9D%C2%82%C3%90%C2%91'%C3%97%07q%C3%A6%C2%91XO%C2%BD%0F%1D%C2%AB%5DC%2F%C2%A3%C2%AD%C2%84%26F%C2%B1%7DG%C2%86%C2%86%C2%86%C3%AEc%C3%B0%3E%C3%AFk%C3%B0%C2%94%00%14%19%C3%97%C2%BFD%C2%8D~%1F%C2%A5%C3%A3%C2%914%C3%89q%C2%86%C2%BF%C3%BD%C2%BDRn%1FFg%C3%B0%01%02%C2%A8%0D%C2%BC%C3%A2%C3%AF%C2%B1F%C2%A3tX%C2%97%C2%AB0%C2%98%C3%A1%C2%83%C2%83%C2%83%C3%B8W%5Be%13%C2%B5%3C%1Dd%C3%93%C2%8B%C3%B3%1EV2%C3%97%C3%B1B%C2%9C%C2%97%08D%C3%BA%1F%C2%A4%C3%8F%C3%88%C3%88H%06Fk%02%C3%A0%23'%C2%BF%C2%B6%C2%B6V%C2%94g%C3%88%C3%A4%C3%B8W%C3%888%0A%C2%A0%3C%01%C3%8A%C2%85%5C%C3%A1%C2%B33%5D%C2%9B72%3C%3C%3C%5E%2F%3A%C3%97%C3%A5%C3%98%0D%2C%C3%AAv%C3%B6%12%12%12%12%12%12%12%22%C3%B2%2FCG%C2%AF%04%C3%B7j%2F%C2%AD%00%00%00%00IEND%C2%AEB%60%C2%82"; 
@@ -1342,18 +1343,20 @@ function isPrefixUsed(prefix) {
     return false;
 }
 
-
 function promptForAutoSave() {
-// Если нет ни одной группы (слоёв и эффектов)
-    if ((layerGroups.length + effectGroups.length) === 0) {
-        var response = confirm("This is the first group.\nDo you want to save the project settings now?");
-        if (response) {
-            // Вызов функции сохранения, которая откроет окно диалога сохранения
-            saveData();
-        }
-    }
+  // во время импорта ничего не спрашиваем
+   if (suppressPromptForAutoSave) return;
+
+   // если ни одной группы — предложить сохранить
+  if ((layerGroups.length + effectGroups.length) === 0) {
+       var response = confirm("This is the first group.\nDo you want to save the project settings now?");
+      if (response) {
+          saveData();
+      }
+  }
 }
 
+// Функция для автоматического сохранения пресета
 function autoSavePreset() {
 if (!autoSaveEnabled || presetFilePath === "") return;
 var file = new File(presetFilePath);
@@ -1368,6 +1371,7 @@ try {
         dataLines.push("Prefix: " + lg.prefix);
         dataLines.push("LabelColorIndex: " + lg.labelColorIndex);
         dataLines.push("DisableLabelColor: " + lg.disableLabelColor);
+        dataLines.push("DisableVolumePresets: " + (lg.disableVolumePresets || false));
         dataLines.push("");
     }
     dataLines.push("EffectGroups:");
@@ -1376,6 +1380,7 @@ try {
         dataLines.push("GroupType: EffectGroup");
         dataLines.push("Name: " + eg.name);
         dataLines.push("Prefix: " + eg.prefix);
+        dataLines.push("TrackedEffect: " + (eg.effectName || ""));
         dataLines.push("");
     }
     var data = dataLines.join("\n");
@@ -1464,6 +1469,7 @@ function saveData() {
                     dataLines.push("Prefix: " + lg.prefix);
                     dataLines.push("LabelColorIndex: " + lg.labelColorIndex);
                     dataLines.push("DisableLabelColor: " + lg.disableLabelColor);
+                    dataLines.push("DisableVolumePresets: " + (lg.disableVolumePresets || false));
                     dataLines.push("");
                 }
 
@@ -1473,6 +1479,7 @@ function saveData() {
                     dataLines.push("GroupType: EffectGroup");
                     dataLines.push("Name: " + eg.name);
                     dataLines.push("Prefix: " + eg.prefix);
+                    dataLines.push("TrackedEffect: " + (eg.effectName || ""));
                     dataLines.push("");
                 }
 
@@ -1635,6 +1642,7 @@ function loadData() {
 
     importButton.onClick = function () {
         var filePath = fileEdit.text;
+        suppressPromptForAutoSave = true;
 
         if (filePath === "") {
             alert("Please select a file to import.");
@@ -1751,7 +1759,9 @@ function loadData() {
                             currentGroup.labelColorIndex = parseInt(trim(line.split(":")[1]), 10);
                         } else if (line.indexOf("DisableLabelColor:") === 0) {
                             currentGroup.disableLabelColor = (trim(line.split(":")[1]).toLowerCase() === "true");
-                        }
+                         } else if (line.indexOf("DisableVolumePresets:") === 0) {
+                               currentGroup.disableVolumePresets = (trim(line.split(":")[1]).toLowerCase() === "true");
+                         }
 
                         // Если собраны все поля для LayerGroup
                         if (
@@ -1759,6 +1769,7 @@ function loadData() {
                             currentGroup.prefix &&
                             typeof currentGroup.labelColorIndex !== 'undefined' &&
                             typeof currentGroup.disableLabelColor !== 'undefined' &&
+                            typeof currentGroup.disableVolumePresets !== 'undefined' &&
                             currentGroup.type === "LayerGroup"
                         ) {
                             // Проверяем уникальность префикса сразу в layerGroups и effectGroups
@@ -1779,47 +1790,61 @@ function loadData() {
                                 currentGroup.labelColorIndex,
                                 currentGroup.disableLabelColor,
                                 false, // guideCheckboxValue
-                                false  // lockCheckboxValue
+                                false,  // lockCheckboxValue
+                                currentGroup.disableVolumePresets
                             );
                             // Сброс объекта
                             currentGroup = {};
                         }
                     }
-                    // --- (B) Если читаем секцию EffectGroups ---
-                    else if (currentSection === "EffectGroups") {
-                        if (line.indexOf("GroupType:") === 0) {
-                            currentGroup = {};
-                            currentGroup.type = trim(line.split(":")[1]);
-                        } else if (line.indexOf("Name:") === 0) {
-                            currentGroup.name = trim(line.split(":")[1]);
-                        } else if (line.indexOf("Prefix:") === 0) {
-                            currentGroup.prefix = trim(line.split(":")[1]);
-                        }
+// --- (B) Если читаем секцию EffectGroups ---
+else if (currentSection === "EffectGroups") {
+    if (line.indexOf("GroupType:") === 0) {
+        currentGroup = {};
+        currentGroup.type = trim(line.split(":")[1]);
+    } else if (line.indexOf("Name:") === 0) {
+        currentGroup.name = trim(line.split(":")[1]);
+    } else if (line.indexOf("Prefix:") === 0) {
+        currentGroup.prefix = trim(line.split(":")[1]);
+    } else if (line.indexOf("TrackedEffect:") === 0) {
+        currentGroup.effectName = trim(line.split(":")[1]);
+    }
 
-                        // Если собраны все поля для EffectGroup
-                        if (
-                            currentGroup.name &&
-                            currentGroup.prefix &&
-                            currentGroup.type === "EffectGroup"
-                        ) {
-                            // Проверяем уникальность префикса сразу в layerGroups и effectGroups
-                            if (isPrefixUsedAcrossAll(currentGroup.prefix)) {
-                                currentGroup.prefix = generateUniquePrefix(currentGroup.name);
-                                alert(
-                                    "Prefix for effect group '" + currentGroup.name +
-                                    "' was already in use. A new unique prefix '" +
-                                    currentGroup.prefix + "' has been generated."
-                                );
-                            }
+   // создаём группу только после того, как прочитали и TrackedEffect
+  if (
+          currentGroup.name &&
+          currentGroup.prefix &&
+          currentGroup.type === "EffectGroup" &&
+          typeof currentGroup.effectName !== 'undefined'
+      ) {
+        // Проверяем уникальность префикса
+        if (isPrefixUsedAcrossAll(currentGroup.prefix)) {
+            currentGroup.prefix = generateUniquePrefix(currentGroup.name);
+            alert(
+                "Prefix for effect group '" + currentGroup.name +
+                "' was already in use. A new unique prefix '" +
+                currentGroup.prefix + "' has been generated."
+            );
+        }
 
-                            // Создаём группу
-                            createEffectGroupUI(
-                                currentGroup.name,
-                                currentGroup.prefix
-                            );
-                            currentGroup = {};
-                        }
-                    }
+        // Создаём группу, передаём tracked effect
+        createEffectGroupUI(
+            currentGroup.name,
+            currentGroup.prefix,
+            currentGroup.effectName || ""
+        );
+
+        // Если был задан трекинг-эффект — сразу префиксим все такие эффекты
+        if (currentGroup.effectName) {
+            addAllEffectsOfThisTypeToGroup(
+                currentGroup.prefix,
+                currentGroup.effectName
+            );
+        }
+
+        currentGroup = {};
+    }
+}
                 }
 
                 // После импорта заново перерисовываем окно
@@ -1828,6 +1853,10 @@ function loadData() {
 
                 alert("Preset successfully loaded and all existing groups have been cleared.");
                 app.endUndoGroup();
+                // включаем автосохранение в только-что загруженный файл
+            presetFilePath = filePath;
+            autoSaveEnabled = true;
+            suppressPromptForAutoSave = false;
                 importWindow.close();
 
             } catch (e) {
@@ -2199,7 +2228,7 @@ function createEffectGroupUI(groupName, prefix, effectName) {
         };
 
         if (groupData.effectName && groupData.effectName !== "") {
-            var updateButton = dialog.add("button", undefined, "Update Group Effects");
+            var updateButton = dialog.add("button", undefined, "Refresh Effect Group: " + groupData.effectName);
             updateButton.helpTip = "Re-scan the project for '" + groupData.effectName + "' and prefix them.";
 
             updateButton.onClick = function () {
@@ -5212,7 +5241,7 @@ function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColo
 
 // Если это первая группа (слоёв и эффектов)
 if ((layerGroups.length + effectGroups.length) === 0) {
-    promptForAutoSave();
+     promptForAutoSave();
 }
 
 
