@@ -1,4 +1,4 @@
-var scriptVersion = "3.9.2";
+var scriptVersion = "3.9.5";
 
 var soloAnimStates = soloAnimStates || {};
 var soloShapesStates = {};
@@ -165,7 +165,7 @@ var save_my_presets_button = head_panel.add("iconbutton", undefined, File.decode
     name: "save_my_presets_button",
     style: "toolbutton"
 });
-save_my_presets_button.helpTip = "Save current Layer and Effect Groups to a .pgm file";
+save_my_presets_button.helpTip = "Save current Layer and Effect Groups to a .pgmf file";
 save_my_presets_button.text = "";
 save_my_presets_button.preferredSize.width = 32;
 save_my_presets_button.preferredSize.height = 32;
@@ -175,7 +175,7 @@ var load_my_presets_button = head_panel.add("iconbutton", undefined, File.decode
     name: "load_my_presets_button",
     style: "toolbutton"
 });
-load_my_presets_button.helpTip = "Load Layer and Effect Groups from a .pgm file";
+load_my_presets_button.helpTip = "Load Layer and Effect Groups from a .pgmf file";
 load_my_presets_button.text = "";
 load_my_presets_button.preferredSize.width = 32;
 load_my_presets_button.preferredSize.height = 32;
@@ -1343,6 +1343,9 @@ function isPrefixUsed(prefix) {
     return false;
 }
 
+
+// Функция для автоматического сохранения пресета
+
 function promptForAutoSave() {
   // во время импорта ничего не спрашиваем
    if (suppressPromptForAutoSave) return;
@@ -1363,6 +1366,11 @@ var file = new File(presetFilePath);
 if (file.open("w")) {
 try {
     var dataLines = [];
+    dataLines.push("ProjectName: " + app.project.file.name);
+                dataLines.push("ProjectPath: " + app.project.file.fsName);
+                dataLines.push("Date: " + new Date().toString());
+                dataLines.push( "Group Matcher " + scriptVersion);
+                dataLines.push("");
     dataLines.push("LayerGroups:");
     for (var i = 0; i < layerGroups.length; i++) {
         var lg = layerGroups[i];
@@ -1372,6 +1380,16 @@ try {
         dataLines.push("LabelColorIndex: " + lg.labelColorIndex);
         dataLines.push("DisableLabelColor: " + lg.disableLabelColor);
         dataLines.push("DisableVolumePresets: " + (lg.disableVolumePresets || false));
+        var guideVal = (lg.guideCheckbox && lg.guideCheckbox.value);
+        dataLines.push("GuideLayer: " + (guideVal || false));
+        dataLines.push("VolumeStateIndex: " + lg.currentVolumeIndex);
+        dataLines.push("ViewState: " + lg.viewState);
+        dataLines.push("SoloState: " + lg.soloState);
+        dataLines.push("HideState: " + lg.hideState);
+        dataLines.push("LockState: "          + (lg.lockState               || false));
+        dataLines.push("CollapseState: "      + (lg.collapseTransformationsState || false));
+        dataLines.push("MotionBlurState: "    + (lg.motionBlurState         || false));
+        dataLines.push("ThreeDState: "        + (lg.threeDState             || false));
         dataLines.push("");
     }
     dataLines.push("EffectGroups:");
@@ -1381,6 +1399,8 @@ try {
         dataLines.push("Name: " + eg.name);
         dataLines.push("Prefix: " + eg.prefix);
         dataLines.push("TrackedEffect: " + (eg.effectName || ""));
+        dataLines.push("ViewState: "  + (eg.viewState  || false));
+        dataLines.push("SoloState: "  + (eg.soloState  || false));
         dataLines.push("");
     }
     var data = dataLines.join("\n");
@@ -1416,13 +1436,21 @@ function saveData() {
     saveWindow.alignChildren = ["fill", "top"];
     saveWindow.spacing = 15;
     saveWindow.margins = 15;
-    saveWindow.helpTip = "Save the current Layer/Effect groups to a .pgm file";
+    saveWindow.helpTip = "Save the current Layer/Effect groups to a .pgmf file";
 
+    // Группа для выбора папки
     var pathGroup = saveWindow.add("group");
     pathGroup.orientation = "row";
     pathGroup.add("statictext", undefined, "Save path:");
-    var pathEdit = pathGroup.add("edittext", undefined, "");
+
+    // --- подставляем папку, где лежит AEP-проект ---
+    var defaultPath = "";
+    if (app.project.file && app.project.file.path) {
+        defaultPath = app.project.file.path; 
+    }
+    var pathEdit = pathGroup.add("edittext", undefined, defaultPath);
     pathEdit.size = [300, 25];
+
     var browseButton = pathGroup.add("button", undefined, "Browse");
     browseButton.onClick = function () {
         var folder = Folder.selectDialog("Please select a folder for saving");
@@ -1431,10 +1459,19 @@ function saveData() {
         }
     };
 
+    // Группа для имени пресета
     var fileGroup = saveWindow.add("group");
     fileGroup.orientation = "row";
     fileGroup.add("statictext", undefined, "Preset Name:");
-    var fileEdit = fileGroup.add("edittext", undefined, "My_Preset_Project");
+
+    // вычисляем дефолтное имя: из названия проекта без расширения, или «My_Preset_Project»
+    var defaultPresetName = "My_Preset_Project";
+    if (app.project.file && app.project.file.name) {
+        defaultPresetName = app.project.file.name.replace(/\.[^\.]+$/, "");
+    }
+
+    // поле ввода с этим дефолтом
+    var fileEdit = fileGroup.add("edittext", undefined, defaultPresetName);
     fileEdit.size = [375, 25];
 
     var buttonsGroup = saveWindow.add("group");
@@ -1451,9 +1488,9 @@ function saveData() {
             return;
         }
 
-        // Добавляем расширение .pgm, если его нет
-        if (!/\.pgm$/i.test(fileName)) {
-            fileName += ".pgm";
+        // Добавляем расширение .pgmf, если его нет
+        if (!/\.pgmf$/i.test(fileName)) {
+            fileName += ".pgmf";
         }
 
         var fullPath = savePath + "/" + fileName;
@@ -1461,6 +1498,11 @@ function saveData() {
         if (file.open("w")) {
             try {
                 var dataLines = [];
+                dataLines.push("ProjectName: " + app.project.file.name);
+                dataLines.push("ProjectPath: " + app.project.file.fsName);
+                dataLines.push("Date: " + new Date().toString());
+                dataLines.push( "Group Matcher " + scriptVersion);
+                dataLines.push("");
                 dataLines.push("LayerGroups:");
                 for (var i = 0; i < layerGroups.length; i++) {
                     var lg = layerGroups[i];
@@ -1470,6 +1512,16 @@ function saveData() {
                     dataLines.push("LabelColorIndex: " + lg.labelColorIndex);
                     dataLines.push("DisableLabelColor: " + lg.disableLabelColor);
                     dataLines.push("DisableVolumePresets: " + (lg.disableVolumePresets || false));
+                    var guideVal = (lg.guideCheckbox && lg.guideCheckbox.value);
+                    dataLines.push("GuideLayer: " + (guideVal || false));
+                    dataLines.push("VolumeStateIndex: " + lg.currentVolumeIndex);
+                    dataLines.push("ViewState: " + lg.viewState);
+                    dataLines.push("SoloState: " + lg.soloState);
+                    dataLines.push("HideState: " + lg.hideState);
+                    dataLines.push("LockState: "       + (lg.lockState               || false));
+                    dataLines.push("CollapseState: "   + (lg.collapseTransformationsState || false));
+                    dataLines.push("MotionBlurState: " + (lg.motionBlurState         || false));
+                    dataLines.push("ThreeDState: "     + (lg.threeDState             || false));
                     dataLines.push("");
                 }
 
@@ -1480,6 +1532,8 @@ function saveData() {
                     dataLines.push("Name: " + eg.name);
                     dataLines.push("Prefix: " + eg.prefix);
                     dataLines.push("TrackedEffect: " + (eg.effectName || ""));
+                    dataLines.push("ViewState: "  + (eg.viewState  || false));
+                    dataLines.push("SoloState: "  + (eg.soloState  || false));
                     dataLines.push("");
                 }
 
@@ -1529,7 +1583,7 @@ function loadData() {
     browseButton.helpTip = "Click to find .pgm file";
 
     browseButton.onClick = function () {
-        var file = File.openDialog("Please select a file to import", "*.pgm");
+        var file = File.openDialog("Please select a file to import", "*.pgmf");
         if (file) {
             fileEdit.text = file.fsName;
         }
@@ -1552,251 +1606,286 @@ function loadData() {
     clear_all_panels_button.preferredSize.width = 140;
     clear_all_panels_button.preferredSize.height = 30;
 
-    clear_all_panels_button.onClick = function () {
-        var confirmClear = confirm("Are you sure you want to clear all groups and reset layer and effect prefixes? This action cannot be undone.");
-        if (!confirmClear) return;
+clear_all_panels_button.onClick = function () {
+var confirmClear = confirm("Are you sure you want to clear all groups and reset layer and effect prefixes? This action cannot be undone.");
+if (!confirmClear) return;
+try {
+app.beginUndoGroup("Clear All Groups and Reset Names");
+
+if (!tab_layers || !tab_effects) {
+alert("Error: 'tab_layers' or 'tab_effects' is not defined.");
+app.endUndoGroup();
+return;
+}
+
+// Очистка групп слоёв
+for (var i = layerGroups.length - 1; i >= 0; i--) {
+var lg = layerGroups[i];
+var comps = getAllCompositions();
+for (var c = 0; c < comps.length; c++) {
+    var comp = comps[c];
+    for (var l = comp.numLayers; l >= 1; l--) {
+        var layer = comp.layer(l);
+        if (layer.name.indexOf("[" + lg.prefix + "]") === 0) {
+            var originalName = layer.name.replace("[" + lg.prefix + "] ", "");
+            layer.name = originalName;
+        }
+    }
+}
+if (lg.panel && lg.panel.parent === tab_layers) {
+    try {
+        tab_layers.remove(lg.panel);
+    } catch (removeError) {
+        alert("Failed to remove layer group panel for '" + lg.name + "': " + removeError.toString());
+    }
+} else {
+    alert("Layer group panel for '" + lg.name + "' has already been removed or does not exist.");
+}
+layerGroups.splice(i, 1);
+}
+
+// Очистка групп эффектов
+for (var i = effectGroups.length - 1; i >= 0; i--) {
+var eg = effectGroups[i];
+var comps = getAllCompositions();
+for (var c = 0; c < comps.length; c++) {
+    var comp = comps[c];
+    for (var l = 1; l <= comp.numLayers; l++) {
+        var layer = comp.layer(l);
+        if (layer.property("Effects")) {
+            for (var e = layer.property("Effects").numProperties; e >= 1; e--) {
+                var effect = layer.property("Effects").property(e);
+                if (effect.name.indexOf("[" + eg.prefix + "]") === 0) {
+                    var originalName = effect.name.replace("[" + eg.prefix + "] ", "");
+                    effect.name = originalName;
+                }
+            }
+        }
+    }
+}
+if (eg.panel && eg.panel.parent === tab_effects) {
+    try {
+        tab_effects.remove(eg.panel);
+    } catch (removeError) {
+        alert("Failed to remove effect group panel for '" + eg.name + "': " + removeError.toString());
+    }
+} else {
+    alert("Effect group panel for '" + eg.name + "' has already been removed or does not exist.");
+}
+effectGroups.splice(i, 1);
+}
+
+palette.layout.layout(true);
+palette.layout.resize();
+
+alert("All groups have been cleared and layer and effect prefixes have been reset.");
+app.endUndoGroup();
+} catch (error) {
+alert("An error occurred while clearing groups: " + error.toString());
+app.endUndoGroup();
+}
+};
+// Группа кнопок (Import/Cancel)
+var buttonsGroup = importWindow.add("group");
+buttonsGroup.orientation = "row";
+buttonsGroup.alignChildren = ["fill", "center"];
+
+// Кнопка Import
+var importButton = buttonsGroup.add("button", undefined, "Import", { name: "ok" });
+importButton.helpTip = "Load the selected .pgmf preset";
+
+importButton.onClick = function () {
+var filePath = fileEdit.text;
+suppressPromptForAutoSave = true;
+
+if (filePath === "") {
+alert("Please select a file to import.");
+return;
+}
+
+var file = new File(filePath);
+if (file.exists && file.open("r")) {
+try {
+var content = file.read();
+file.close();
+
+// Разделяем содержимое файла по строкам
+var lines = content.split(/\r\n|\n|\r/);
+var currentSection = "";
+var currentGroup = {};
+
+// Начинаем группу Undo для очистки и импорта
+app.beginUndoGroup("Import Preset and Reset Groups");
+
+// Сохраняем копии текущих групп, чтобы безопасно очистить
+var layerGroupsCopy = layerGroups.slice();
+var effectGroupsCopy = effectGroups.slice();
+
+for (var i = layerGroupsCopy.length - 1; i >= 0; i--) {
+    var lg = layerGroupsCopy[i];
+
+    // Сброс префиксов слоёв
+    var comps = getAllCompositions();
+    for (var c = 0; c < comps.length; c++) {
+        var comp = comps[c];
+        for (var l = comp.numLayers; l >= 1; l--) {
+            var layer = comp.layer(l);
+            if (layer.name.indexOf("[" + lg.prefix + "]") === 0) {
+                var originalName = layer.name.replace("[" + lg.prefix + "] ", "");
+                layer.name = originalName;
+            }
+        }
+    }
+
+    // Удаление UI панели группы слоёв
+    if (lg.panel && lg.panel.parent === tab_layers) {
         try {
-            app.beginUndoGroup("Clear All Groups and Reset Names");
-
-            if (!tab_layers || !tab_effects) {
-                alert("Error: 'tab_layers' or 'tab_effects' is not defined.");
-                app.endUndoGroup();
-                return;
-            }
-
-            // Очистка групп слоёв
-            for (var i = layerGroups.length - 1; i >= 0; i--) {
-                var lg = layerGroups[i];
-                var comps = getAllCompositions();
-                for (var c = 0; c < comps.length; c++) {
-                    var comp = comps[c];
-                    for (var l = comp.numLayers; l >= 1; l--) {
-                        var layer = comp.layer(l);
-                        if (layer.name.indexOf("[" + lg.prefix + "]") === 0) {
-                            var originalName = layer.name.replace("[" + lg.prefix + "] ", "");
-                            layer.name = originalName;
-                        }
-                    }
-                }
-                if (lg.panel && lg.panel.parent === tab_layers) {
-                    try {
-                        tab_layers.remove(lg.panel);
-                    } catch (removeError) {
-                        alert("Failed to remove layer group panel for '" + lg.name + "': " + removeError.toString());
-                    }
-                } else {
-                    alert("Layer group panel for '" + lg.name + "' has already been removed or does not exist.");
-                }
-                layerGroups.splice(i, 1);
-            }
-
-            // Очистка групп эффектов
-            for (var i = effectGroups.length - 1; i >= 0; i--) {
-                var eg = effectGroups[i];
-                var comps = getAllCompositions();
-                for (var c = 0; c < comps.length; c++) {
-                    var comp = comps[c];
-                    for (var l = 1; l <= comp.numLayers; l++) {
-                        var layer = comp.layer(l);
-                        if (layer.property("Effects")) {
-                            for (var e = layer.property("Effects").numProperties; e >= 1; e--) {
-                                var effect = layer.property("Effects").property(e);
-                                if (effect.name.indexOf("[" + eg.prefix + "]") === 0) {
-                                    var originalName = effect.name.replace("[" + eg.prefix + "] ", "");
-                                    effect.name = originalName;
-                                }
-                            }
-                        }
-                    }
-                }
-                if (eg.panel && eg.panel.parent === tab_effects) {
-                    try {
-                        tab_effects.remove(eg.panel);
-                    } catch (removeError) {
-                        alert("Failed to remove effect group panel for '" + eg.name + "': " + removeError.toString());
-                    }
-                } else {
-                    alert("Effect group panel for '" + eg.name + "' has already been removed or does not exist.");
-                }
-                effectGroups.splice(i, 1);
-            }
-
-            palette.layout.layout(true);
-            palette.layout.resize();
-
-            alert("All groups have been cleared and layer and effect prefixes have been reset.");
-            app.endUndoGroup();
-        } catch (error) {
-            alert("An error occurred while clearing groups: " + error.toString());
-            app.endUndoGroup();
+            tab_layers.remove(lg.panel);
+        } catch (removeError) {
+            alert("Failed to remove layer group panel for '" + lg.name + "': " + removeError.toString());
         }
-    };
-    // Группа кнопок (Import/Cancel)
-    var buttonsGroup = importWindow.add("group");
-    buttonsGroup.orientation = "row";
-    buttonsGroup.alignChildren = ["fill", "center"];
+    }
+    // Удаляем из массива layerGroups позже (ниже), а пока просто удалили панели
+}
+// Полностью обнуляем массив
+layerGroups = [];
 
-    // Кнопка Import
-    var importButton = buttonsGroup.add("button", undefined, "Import", { name: "ok" });
-    importButton.helpTip = "Load the selected .pgm preset";
+for (var k = effectGroupsCopy.length - 1; k >= 0; k--) {
+    var eg = effectGroupsCopy[k];
 
-    importButton.onClick = function () {
-        var filePath = fileEdit.text;
-        suppressPromptForAutoSave = true;
+    // Сброс префиксов эффектов
+    var comps = getAllCompositions();
+    for (var c = 0; c < comps.length; c++) {
+        var comp = comps[c];
+        for (var l = 1; l <= comp.numLayers; l++) {
+            var layer = comp.layer(l);
+            if (layer.property("Effects")) {
+                for (var e = layer.property("Effects").numProperties; e >= 1; e--) {
+                    var effect = layer.property("Effects").property(e);
+                    if (effect.name.indexOf("[" + eg.prefix + "]") === 0) {
+                        var originalName = effect.name.replace("[" + eg.prefix + "] ", "");
+                        effect.name = originalName;
+                    }
+                }
+            }
+        }
+    }
 
-        if (filePath === "") {
-            alert("Please select a file to import.");
-            return;
+    // Удаление UI панели группы эффектов
+    if (eg.panel && eg.panel.parent === tab_effects) {
+        try {
+            tab_effects.remove(eg.panel);
+        } catch (removeError) {
+            alert("Failed to remove effect group panel for '" + eg.name + "': " + removeError.toString());
+        }
+    }
+}
+// Обнуляем массив
+effectGroups = [];
+
+// Обновляем интерфейс после удаления групп
+palette.layout.layout(true);
+palette.layout.resize();
+
+//--------------------------------------------------------
+// (3) Разбор файла и создание новых групп
+//--------------------------------------------------------
+for (var i = 0; i < lines.length; i++) {
+    var line = trim(lines[i]);
+    if (line === "LayerGroups:") {
+        currentSection = "LayerGroups";
+        continue;
+    } else if (line === "EffectGroups:") {
+        currentSection = "EffectGroups";
+        continue;
+    }
+
+    // --- (A) Если читаем секцию LayerGroups ---
+    if (currentSection === "LayerGroups") {
+        if (line.indexOf("GroupType:") === 0) {
+            currentGroup = {};
+            currentGroup.type = trim(line.split(":")[1]);
+        } else if (line.indexOf("Name:") === 0) {
+            currentGroup.name = trim(line.split(":")[1]);
+        } else if (line.indexOf("Prefix:") === 0) {
+            currentGroup.prefix = trim(line.split(":")[1]);
+        } else if (line.indexOf("LabelColorIndex:") === 0) {
+            currentGroup.labelColorIndex = parseInt(trim(line.split(":")[1]), 10);
+        } else if (line.indexOf("DisableLabelColor:") === 0) {
+            currentGroup.disableLabelColor = (trim(line.split(":")[1]).toLowerCase() === "true");
+        } else if (line.indexOf("DisableVolumePresets:") === 0) {
+            currentGroup.disableVolumePresets = (trim(line.split(":")[1]).toLowerCase() === "true");
+        } else if (line.indexOf("GuideLayer:") === 0) {
+            currentGroup.guideLayer = (trim(line.split(":")[1]).toLowerCase() === "true");
+        } else if (line.indexOf("VolumeStateIndex:") === 0) {
+            currentGroup.volumeStateIndex = parseInt(trim(line.split(":")[1]), 10);
+        } else if (line.indexOf("ViewState:") === 0) {
+            currentGroup.viewState = (trim(line.split(":")[1]).toLowerCase() === "true");
+        } else if (line.indexOf("SoloState:") === 0) {
+            currentGroup.soloState = (trim(line.split(":")[1]).toLowerCase() === "true");
+        } else if (line.indexOf("HideState:") === 0) {
+            currentGroup.hideState = (trim(line.split(":")[1]).toLowerCase() === "true");
+        } else if (line.indexOf("LockState:") === 0) {
+            currentGroup.lockState = (trim(line.split(":")[1]).toLowerCase() === "true");
+        } else if (line.indexOf("CollapseState:") === 0) {
+            currentGroup.collapseTransformationsState = (trim(line.split(":")[1]).toLowerCase() === "true");
+        } else if (line.indexOf("MotionBlurState:") === 0) {
+            currentGroup.motionBlurState = (trim(line.split(":")[1]).toLowerCase() === "true");
+        } else if (line.indexOf("ThreeDState:") === 0) {
+            currentGroup.threeDState = (trim(line.split(":")[1]).toLowerCase() === "true");
         }
 
-        var file = new File(filePath);
-        if (file.exists && file.open("r")) {
-            try {
-                var content = file.read();
-                file.close();
+        // Если собраны все поля для LayerGroup
+        if (
+            currentGroup.name &&
+            currentGroup.prefix &&
+            typeof currentGroup.labelColorIndex !== 'undefined' &&
+            typeof currentGroup.disableLabelColor !== 'undefined' &&
+            typeof currentGroup.disableVolumePresets !== 'undefined' &&
+            typeof currentGroup.guideLayer           !== 'undefined' &&
+            typeof currentGroup.volumeStateIndex   !== 'undefined' &&
+            typeof currentGroup.viewState          !== 'undefined' &&
+            typeof currentGroup.soloState          !== 'undefined' &&
+            typeof currentGroup.hideState          !== 'undefined' &&
+            typeof currentGroup.lockState          !== 'undefined' &&
+            typeof currentGroup.collapseTransformationsState !== 'undefined' &&
+            typeof currentGroup.motionBlurState     !== 'undefined' &&
+            typeof currentGroup.threeDState         !== 'undefined' &&
+            currentGroup.type === "LayerGroup"
+        ) {
+            // Проверяем уникальность префикса сразу в layerGroups и effectGroups
+            if (isPrefixUsedAcrossAll(currentGroup.prefix)) {
+                // Генерируем новый уникальный префикс
+                currentGroup.prefix = generateUniquePrefix(currentGroup.name);
+                alert(
+                    "Prefix for group '" + currentGroup.name +
+                    "' was already in use. A new unique prefix '" +
+                    currentGroup.prefix + "' has been generated."
+                );
+            }
 
-                // Разделяем содержимое файла по строкам
-                var lines = content.split(/\r\n|\n|\r/);
-                var currentSection = "";
-                var currentGroup = {};
-
-                // Начинаем группу Undo для очистки и импорта
-                app.beginUndoGroup("Import Preset and Reset Groups");
-
-                // Сохраняем копии текущих групп, чтобы безопасно очистить
-                var layerGroupsCopy = layerGroups.slice();
-                var effectGroupsCopy = effectGroups.slice();
-
-                for (var i = layerGroupsCopy.length - 1; i >= 0; i--) {
-                    var lg = layerGroupsCopy[i];
-
-                    // Сброс префиксов слоёв
-                    var comps = getAllCompositions();
-                    for (var c = 0; c < comps.length; c++) {
-                        var comp = comps[c];
-                        for (var l = comp.numLayers; l >= 1; l--) {
-                            var layer = comp.layer(l);
-                            if (layer.name.indexOf("[" + lg.prefix + "]") === 0) {
-                                var originalName = layer.name.replace("[" + lg.prefix + "] ", "");
-                                layer.name = originalName;
-                            }
-                        }
-                    }
-
-                    // Удаление UI панели группы слоёв
-                    if (lg.panel && lg.panel.parent === tab_layers) {
-                        try {
-                            tab_layers.remove(lg.panel);
-                        } catch (removeError) {
-                            alert("Failed to remove layer group panel for '" + lg.name + "': " + removeError.toString());
-                        }
-                    }
-                    // Удаляем из массива layerGroups позже (ниже), а пока просто удалили панели
-                }
-                // Полностью обнуляем массив
-                layerGroups = [];
-
-                for (var k = effectGroupsCopy.length - 1; k >= 0; k--) {
-                    var eg = effectGroupsCopy[k];
-
-                    // Сброс префиксов эффектов
-                    var comps = getAllCompositions();
-                    for (var c = 0; c < comps.length; c++) {
-                        var comp = comps[c];
-                        for (var l = 1; l <= comp.numLayers; l++) {
-                            var layer = comp.layer(l);
-                            if (layer.property("Effects")) {
-                                for (var e = layer.property("Effects").numProperties; e >= 1; e--) {
-                                    var effect = layer.property("Effects").property(e);
-                                    if (effect.name.indexOf("[" + eg.prefix + "]") === 0) {
-                                        var originalName = effect.name.replace("[" + eg.prefix + "] ", "");
-                                        effect.name = originalName;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    // Удаление UI панели группы эффектов
-                    if (eg.panel && eg.panel.parent === tab_effects) {
-                        try {
-                            tab_effects.remove(eg.panel);
-                        } catch (removeError) {
-                            alert("Failed to remove effect group panel for '" + eg.name + "': " + removeError.toString());
-                        }
-                    }
-                }
-                // Обнуляем массив
-                effectGroups = [];
-
-                // Обновляем интерфейс после удаления групп
-                palette.layout.layout(true);
-                palette.layout.resize();
-
-                //--------------------------------------------------------
-                // (3) Разбор файла и создание новых групп
-                //--------------------------------------------------------
-                for (var i = 0; i < lines.length; i++) {
-                    var line = trim(lines[i]);
-                    if (line === "LayerGroups:") {
-                        currentSection = "LayerGroups";
-                        continue;
-                    } else if (line === "EffectGroups:") {
-                        currentSection = "EffectGroups";
-                        continue;
-                    }
-
-                    // --- (A) Если читаем секцию LayerGroups ---
-                    if (currentSection === "LayerGroups") {
-                        if (line.indexOf("GroupType:") === 0) {
-                            currentGroup = {};
-                            currentGroup.type = trim(line.split(":")[1]);
-                        } else if (line.indexOf("Name:") === 0) {
-                            currentGroup.name = trim(line.split(":")[1]);
-                        } else if (line.indexOf("Prefix:") === 0) {
-                            currentGroup.prefix = trim(line.split(":")[1]);
-                        } else if (line.indexOf("LabelColorIndex:") === 0) {
-                            currentGroup.labelColorIndex = parseInt(trim(line.split(":")[1]), 10);
-                        } else if (line.indexOf("DisableLabelColor:") === 0) {
-                            currentGroup.disableLabelColor = (trim(line.split(":")[1]).toLowerCase() === "true");
-                         } else if (line.indexOf("DisableVolumePresets:") === 0) {
-                               currentGroup.disableVolumePresets = (trim(line.split(":")[1]).toLowerCase() === "true");
-                         }
-
-                        // Если собраны все поля для LayerGroup
-                        if (
-                            currentGroup.name &&
-                            currentGroup.prefix &&
-                            typeof currentGroup.labelColorIndex !== 'undefined' &&
-                            typeof currentGroup.disableLabelColor !== 'undefined' &&
-                            typeof currentGroup.disableVolumePresets !== 'undefined' &&
-                            currentGroup.type === "LayerGroup"
-                        ) {
-                            // Проверяем уникальность префикса сразу в layerGroups и effectGroups
-                            if (isPrefixUsedAcrossAll(currentGroup.prefix)) {
-                                // Генерируем новый уникальный префикс
-                                currentGroup.prefix = generateUniquePrefix(currentGroup.name);
-                                alert(
-                                    "Prefix for group '" + currentGroup.name +
-                                    "' was already in use. A new unique prefix '" +
-                                    currentGroup.prefix + "' has been generated."
-                                );
-                            }
-
-                            // Создаём группу
-                            createLayerGroupUI(
-                                currentGroup.name,
-                                currentGroup.prefix,
-                                currentGroup.labelColorIndex,
-                                currentGroup.disableLabelColor,
-                                false, // guideCheckboxValue
-                                false,  // lockCheckboxValue
-                                currentGroup.disableVolumePresets
-                            );
-                            // Сброс объекта
-                            currentGroup = {};
-                        }
-                    }
+            // Создаём группу
+            createLayerGroupUI(
+                currentGroup.name,
+                currentGroup.prefix,
+                currentGroup.labelColorIndex,
+                currentGroup.disableLabelColor,
+                currentGroup.guideLayer, // <- восстанавливаем guide state              // ← новый
+                currentGroup.disableVolumePresets,
+                currentGroup.volumeStateIndex,      // <— новый параметр
+                currentGroup.viewState,             // <— новый параметр
+                currentGroup.soloState,             // <— новый параметр
+                currentGroup.hideState, 
+                currentGroup.lockState,
+                currentGroup.lockState,                 // <— новый параметр
+                currentGroup.collapseTransformationsState, // ← новый
+                currentGroup.motionBlurState,              // ← новый
+                currentGroup.threeDState                   // ← новый
+            );
+            // Сброс объекта
+            currentGroup = {};
+        }
+    }
 // --- (B) Если читаем секцию EffectGroups ---
 else if (currentSection === "EffectGroups") {
     if (line.indexOf("GroupType:") === 0) {
@@ -1809,14 +1898,21 @@ else if (currentSection === "EffectGroups") {
     } else if (line.indexOf("TrackedEffect:") === 0) {
         currentGroup.effectName = trim(line.split(":")[1]);
     }
+    else if (line.indexOf("ViewState:") === 0) {
+    currentGroup.viewState = (trim(line.split(":")[1]).toLowerCase() === "true");
+    } else if (line.indexOf("SoloState:") === 0) {
+        currentGroup.soloState = (trim(line.split(":")[1]).toLowerCase() === "true");
+    }
 
    // создаём группу только после того, как прочитали и TrackedEffect
   if (
-          currentGroup.name &&
-          currentGroup.prefix &&
-          currentGroup.type === "EffectGroup" &&
-          typeof currentGroup.effectName !== 'undefined'
-      ) {
+    currentGroup.name &&
+    currentGroup.prefix &&
+    currentGroup.type === "EffectGroup" &&
+    typeof currentGroup.effectName   !== 'undefined' &&
+    typeof currentGroup.viewState    !== 'undefined' &&
+    typeof currentGroup.soloState    !== 'undefined'
+) {
         // Проверяем уникальность префикса
         if (isPrefixUsedAcrossAll(currentGroup.prefix)) {
             currentGroup.prefix = generateUniquePrefix(currentGroup.name);
@@ -1831,7 +1927,9 @@ else if (currentSection === "EffectGroups") {
         createEffectGroupUI(
             currentGroup.name,
             currentGroup.prefix,
-            currentGroup.effectName || ""
+            currentGroup.effectName,
+            currentGroup.viewState,  // ← новый
+            currentGroup.soloState   // ← новый || ""
         );
 
         // Если был задан трекинг-эффект — сразу префиксим все такие эффекты
@@ -1845,38 +1943,38 @@ else if (currentSection === "EffectGroups") {
         currentGroup = {};
     }
 }
-                }
+}
 
-                // После импорта заново перерисовываем окно
-                palette.layout.layout(true);
-                palette.layout.resize();
+// После импорта заново перерисовываем окно
+palette.layout.layout(true);
+palette.layout.resize();
 
-                alert("Preset successfully loaded and all existing groups have been cleared.");
-                app.endUndoGroup();
-                // включаем автосохранение в только-что загруженный файл
-            presetFilePath = filePath;
-            autoSaveEnabled = true;
-            suppressPromptForAutoSave = false;
-                importWindow.close();
+alert("Preset successfully loaded and all existing groups have been cleared.");
+app.endUndoGroup();
+// включаем автосохранение в только-что загруженный файл
+presetFilePath = filePath;
+autoSaveEnabled = true;
+suppressPromptForAutoSave = false;
+importWindow.close();
 
-            } catch (e) {
-                alert("Error reading the preset: " + e.toString());
-                app.endUndoGroup();
-            }
-        } else {
-            alert("The file does not exist or cannot be opened.");
-        }
-    };
+} catch (e) {
+alert("Error reading the preset: " + e.toString());
+app.endUndoGroup();
+}
+} else {
+alert("The file does not exist or cannot be opened.");
+}
+};
 
-    // Кнопка Cancel
-    var cancelButton = buttonsGroup.add("button", undefined, "Cancel", { name: "cancel" });
-    cancelButton.helpTip = "Cancel the upload and close the window";
-    cancelButton.onClick = function () {
-        importWindow.close();
-    };
+// Кнопка Cancel
+var cancelButton = buttonsGroup.add("button", undefined, "Cancel", { name: "cancel" });
+cancelButton.helpTip = "Cancel the upload and close the window";
+cancelButton.onClick = function () {
+    importWindow.close();
+};
 
-    importWindow.center();
-    importWindow.show();
+importWindow.center();
+importWindow.show();
 }
 
 
@@ -1899,6 +1997,10 @@ function isPrefixUsedAcrossAll(prefix) {
     }
     return false;
 }
+
+
+
+
 
 
 //
@@ -1977,7 +2079,14 @@ function updateEffectGroupPanelTitle(groupData) {
     groupData.panel.text = groupName + " [" + prefix + "] | " + top3String + " (" + totalCount + ")";
 }
 
-function createEffectGroupUI(groupName, prefix, effectName) {
+function createEffectGroupUI(
+    groupName,
+    prefix,
+    effectName,
+    initialViewState,   // ← новый
+    initialSoloState    // ← новый
+) {
+    
     var groupPanel = tab_effects.add("panel", undefined, undefined, { name: "effect_group_" + prefix });
     groupPanel.text = groupName + " [" + prefix + "]"; // Изначально
     groupPanel.orientation = "row";
@@ -2048,6 +2157,51 @@ function createEffectGroupUI(groupName, prefix, effectName) {
     delete_group_effects_button.preferredSize.width = 30;
     delete_group_effects_button.preferredSize.height = 30;
 
+    // ————————————————————————————————————————————————
+    //  Инициализация из импортированных состояний:
+    // ————————————————————————————————————————————————
+
+    // Подменяем дефолтные viewState/soloState
+// Если initialViewState передан — используем его, иначе включаем View по-умолчанию
+    viewState = (typeof initialViewState !== "undefined") ? initialViewState : true;
+    // Если initialSoloState передан — используем его, иначе Solo по-умолчанию выключён
+    soloState = (typeof initialSoloState !== "undefined") ? initialSoloState : false;
+
+    // Сразу ставим правильные иконки
+    setViewButtonIconEffects(
+        view_button,
+        viewState ? view_button_fx_on_imgString : view_button_fx_off_imgString
+    );
+    setSoloButtonIconEffects(
+        solo_button,
+        soloState ? solo_on_button_imgString : solo_off_button_imgString
+    );
+
+    // И применяем к эффектам в проекте
+    app.beginUndoGroup("Apply initial FX states for " + groupName);
+    var comps = getAllCompositions();
+    for (var c = 0; c < comps.length; c++) {
+        var comp = comps[c];
+        for (var l = 1; l <= comp.numLayers; l++) {
+            var layer = comp.layer(l);
+            var fx = layer.property("Effects");
+            if (!fx) continue;
+            for (var e = 1; e <= fx.numProperties; e++) {
+                var eff = fx.property(e);
+                if (eff.name.indexOf("[" + prefix + "]") === 0) {
+                    // включаем/выключаем саму группу
+                    eff.enabled = viewState;
+                } else if (viewState && soloState) {
+                    // в режиме Solo выключаем все остальные
+                    eff.enabled = false;
+                }
+            }
+        }
+    }
+    app.endUndoGroup();
+    // ————————————————————————————————————————————————
+
+
     // Собираем все данные
     var groupData = {
         name: groupName,
@@ -2096,6 +2250,9 @@ function createEffectGroupUI(groupName, prefix, effectName) {
         }
 
         app.endUndoGroup();
+        if (autoSaveEnabled) {
+        autoSavePreset();
+    }
     };
 
     // SOLO onClick
@@ -2139,6 +2296,9 @@ function createEffectGroupUI(groupName, prefix, effectName) {
             }
         }
         app.endUndoGroup();
+        if (autoSaveEnabled) {
+        autoSavePreset();
+    }
     };
 
     // ADD EFFECT onClick
@@ -2171,6 +2331,9 @@ function createEffectGroupUI(groupName, prefix, effectName) {
         }
         app.endUndoGroup();
         updateEffectGroupPanelTitle(groupData);
+        if (autoSaveEnabled) {
+        autoSavePreset();
+    }
     };
 
     // EDIT onClick
@@ -2281,6 +2444,10 @@ function createEffectGroupUI(groupName, prefix, effectName) {
             palette.layout.layout(true);
             palette.layout.resize();
             app.endUndoGroup();
+            // Автосохранение после редактирования группы
+            if (autoSaveEnabled) {
+                autoSavePreset();
+            }
             dialog.close();
         };
 
@@ -2294,8 +2461,14 @@ function createEffectGroupUI(groupName, prefix, effectName) {
 
     // DELETE onClick
     delete_group_effects_button.onClick = function () {
-        app.beginUndoGroup("Delete Effect Group " + groupName);
-        var effectsFound = false;
+    var g = groupData;
+    // подтверждение удаления
+    if (!confirm("Are you sure you want to delete the group '" + g.name + "'?")) {
+        return;
+    }
+
+    app.beginUndoGroup("Delete Effect Group " + g.name);
+    var effectsFound = false;
 
         var comps = getAllCompositions();
         for (var c = 0; c < comps.length; c++) {
@@ -2320,6 +2493,13 @@ function createEffectGroupUI(groupName, prefix, effectName) {
         }
 
         tab_effects.remove(groupPanel);
+         // удаляем из массива effectGroups
+    for (var j = 0; j < effectGroups.length; j++) {
+        if (effectGroups[j] === g) {
+            effectGroups.splice(j, 1);
+            break;
+        }
+    }
         palette.layout.layout(true);
         palette.layout.resize();
 
@@ -2331,7 +2511,7 @@ function createEffectGroupUI(groupName, prefix, effectName) {
         }
         app.endUndoGroup();
     };
-    updateEffectGroupPanelTitle(groupData);
+    updateAllGroups(currentMode);
     palette.layout.layout(true);
     palette.layout.resize();
 
@@ -2939,6 +3119,20 @@ function getAllEffectsInProject() {
 
 //TOOLS//
 
+// ─── Полифилл для Array.indexOf ────────────────────────────────────
+if (!Array.prototype.indexOf) {
+  Array.prototype.indexOf = function(searchElement /*, fromIndex */) {
+    var len = this.length >>> 0;
+    var from = Number(arguments[1]) || 0;
+    from = (from < 0) ? Math.max(len + from, 0) : from;
+    for (var i = from; i < len; i++) {
+      if (this[i] === searchElement) return i;
+    }
+    return -1;
+  };
+}
+// ─────────────────────────────────────────────────────────────────────
+
 function sortProjectFiles() {
     if (!app || !app.project) {
         return;
@@ -3066,9 +3260,9 @@ function sortProjectFiles() {
         formatsGroup.alignChildren = "fill";
         formatsGroup.spacing = 10;
 
-        var rasterFmt = ["psd","jpg","jpeg","png","tif","gif","exr"];
+        var rasterFmt = ["psd","jpg","jpeg","png","tif","tiff","gif","exr","webp"];
         var vectorFmt = ["ai","pdf"];
-        var videoFmt  = ["mov","mp4"];
+        var videoFmt  = ["mov","mp4","mxf","webm"];
         var audioFmt  = ["mp3","wav","aif","aiff","ogg","aac"];
 
         // обновлённая версия makePanel: теперь первый параметр – родитель
@@ -3580,6 +3774,10 @@ add_aj_mask_button.onClick = function () {
     app.endUndoGroup();
 };
 
+
+
+
+
 //
 // "Create a New Layer Group" кнопка
 //
@@ -3698,7 +3896,15 @@ if (prefix === "") {
     }
 }
 
-createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColor, false, false, disableVolumePresets);
+createLayerGroupUI(
+            groupName,
+            prefix,
+            labelColorIndex,
+            disableLabelColor,
+            false,
+            disableVolumePresets,
+      
+        );
 dialog.close();
 };
 
@@ -3796,6 +4002,7 @@ var color_label_icon = panel.add("image", undefined, undefined, { name: "color_l
 color_label_icon.preferredSize = [8,28];
 setColorLabelButtonIcon(color_label_icon, groupData.labelColorIndex);
 groupData.colorLabelButton = color_label_icon;
+
 
 // Volume
 var volumeAudioButton = panel.add("iconbutton", undefined, undefined, {
@@ -3896,7 +4103,12 @@ switch (nextState) {
 if (!foundAny) {
 alert("No audio layers found for group [" + p + "]");
 }
-app.endUndoGroup();
+ app.endUndoGroup();
+
+    // autosave:// Volume
+    if (autoSaveEnabled) {
+        autoSavePreset();
+    }
 };
 
 // (C) View
@@ -3931,6 +4143,9 @@ for (var c = 0; c < comps.length; c++) {
 }
 if (!found) alert("Layers for group '" + n + "' not found.");
 app.endUndoGroup();
+if (autoSaveEnabled) {
+        autoSavePreset();
+    }
 };
 
 // (D) Solo
@@ -3996,6 +4211,9 @@ groupData.preSoloStates = null;
 }
 
 app.endUndoGroup();
+if (autoSaveEnabled) {
+        autoSavePreset();
+    }
 };
 
 // (E) Hide
@@ -4051,6 +4269,9 @@ if (!found) {
 }
 
 app.endUndoGroup();
+if (autoSaveEnabled) {
+        autoSavePreset();
+    }
 };
 
 // Divider + Add
@@ -4061,6 +4282,7 @@ name: "add_layer_button_" + pfx, style: "toolbutton"
 add_layer_button.preferredSize = [60,30];
 add_layer_button.helpTip = "Add selected layers to group: " + groupData.name;
 groupData.addButton = add_layer_button;
+
 //Add Layer Button
 add_layer_button.onClick = function() {
 var p = groupData.prefix;
@@ -4070,12 +4292,62 @@ for (var i = 0; i < layers.length; i++) {
     var layer = layers[i];
     var base = layer.name.replace(/^\[.*?\]\s*/, "");
     layer.name = "[" + p + "] " + base;
-    if (!groupData.disableLabelColor) layer.label = groupData.labelColorIndex;
-    if (groupData.guideCheckbox.value) layer.guideLayer = true;
-    if (groupData.lockCheckbox.value) layer.locked = true;
+    if (!groupData.disableLabelColor)    layer.label               = groupData.labelColorIndex;
+    if (groupData.guideCheckbox.value)   layer.guideLayer         = true;
+    if (groupData.collapseTransformationsState) layer.collapseTransformation = true;
+    if (groupData.motionBlurState)       layer.motionBlur         = true;
+    if (groupData.threeDState)           layer.threeDLayer        = true;
+    if (groupData.lockState)             layer.locked             = true;
+    if (groupData.shyState)              layer.shy                = true;
     layer.enabled = groupData.viewState;
+    // Применяем к только что добавленному слою текущий пресет громкости
+    if (layer instanceof AVLayer && layer.hasAudio) {
+        var volState = groupData.volumeStates[groupData.currentVolumeIndex];
+        switch (volState) {
+            case "off":
+                layer.audioEnabled = false;
+                break;
+            case "on":
+                layer.audioEnabled = true;
+                break;
+            case "min":
+                layer.audioEnabled = true;
+                var grpMin = layer.property("ADBE Audio Group");
+                if (grpMin) {
+                    var lvlMin = grpMin.property("ADBE Audio Levels");
+                    if (lvlMin) {
+                        var cur = lvlMin.value;
+                        lvlMin.setValue([cur[0] - 11, cur[1] - 11]);
+                    }
+                }
+                break;
+            case "normal":
+                layer.audioEnabled = true;
+                var grpNorm = layer.property("ADBE Audio Group");
+                if (grpNorm) {
+                    var lvlNorm = grpNorm.property("ADBE Audio Levels");
+                    if (lvlNorm) {
+                        lvlNorm.setValue([0, 0]);
+                    }
+                }
+                break;
+            case "high":
+                layer.audioEnabled = true;
+                var grpHigh = layer.property("ADBE Audio Group");
+                if (grpHigh) {
+                    var lvlHigh = grpHigh.property("ADBE Audio Levels");
+                    if (lvlHigh) {
+                        lvlHigh.setValue([3, 3]);
+                    }
+                }
+                break;
+        }
+    }
 }
 app.endUndoGroup();
+if (autoSaveEnabled) {
+        autoSavePreset();
+    }
 
 // обновляем доступность аудио-кнопки по новому префиксу
 var hasAudio = groupHasAudio(p);
@@ -4767,16 +5039,16 @@ delete_group_layers_button.text = "DLT";
 delete_group_layers_button.helpTip = "Delete this group";
 groupData.deleteButton = delete_group_layers_button;
 
+// ===== Обработчик удаления группы слоёв =====
 delete_group_layers_button.onClick = function() {
-    var g = groupData;  
-    // окно подтверждения на английском
+    var g = groupData;
     if (!confirm("Are you sure you want to delete the group '" + g.name + "'?")) {
         return;
     }
 
     app.beginUndoGroup("Delete Layer Group " + g.name);
 
-    // удалить префикс у слоёв
+    // Снимаем префиксы с самих слоёв
     var layersFound = false;
     var comps = getAllCompositions();
     for (var c = 0; c < comps.length; c++) {
@@ -4790,13 +5062,14 @@ delete_group_layers_button.onClick = function() {
             }
         }
     }
-    // если нужно — предупреждаем
     if (!layersFound) {
         alert("Layers for group '" + g.name + "' not found in any composition.");
     }
 
-    // удаляем UI-панель и из массива
+    // Удаляем панель из UI
     tab_layers.remove(g.panel);
+
+    // Удаляем из массива layerGroups
     for (var i = 0; i < layerGroups.length; i++) {
         if (layerGroups[i] === g) {
             layerGroups.splice(i, 1);
@@ -4806,10 +5079,15 @@ delete_group_layers_button.onClick = function() {
 
     app.endUndoGroup();
 
-    // обновляем оставшиеся группы в том же режиме
+    // Обновляем остальной UI
     updateAllGroups(currentMode);
     palette.layout.layout(true);
     palette.layout.resize();
+
+    // Автосохранение после удаления
+    if (autoSaveEnabled) {
+        autoSavePreset();
+    }
 };
 }
 
@@ -4835,6 +5113,8 @@ setLockButtonIcon(
       : lock_off_imgString
   );
 groupData.lockButton = lock_button;
+
+
 // --- Lock Button ---
 lock_button.onClick = function () {
 var p = groupData.prefix, n = groupData.name;
@@ -4854,6 +5134,9 @@ if (ly.name.indexOf("[" + p + "]") === 0) ly.locked = groupData.lockState;
 }
 }
 app.endUndoGroup();
+if (autoSaveEnabled) {
+        autoSavePreset();
+    }
 };
 
 // Collapse
@@ -4894,6 +5177,10 @@ if (ly instanceof AVLayer && ly.name.indexOf("[" + p + "]") === 0) {
 }
 if (!found) alert("Group [" + p + "] not found.");
 app.endUndoGroup();
+
+if (autoSaveEnabled) {
+        autoSavePreset();
+    }
 };
 
 // Motion Blur
@@ -4930,6 +5217,9 @@ if (ly instanceof AVLayer && ly.name.indexOf("[" + p + "]") === 0) {
 }
 }
 app.endUndoGroup();
+if (autoSaveEnabled) {
+        autoSavePreset();
+    }
 };
 
 
@@ -4967,6 +5257,10 @@ if (ly instanceof AVLayer && ly.name.indexOf("[" + p + "]") === 0) {
 }
 }
 app.endUndoGroup();
+
+if (autoSaveEnabled) {
+        autoSavePreset();
+    }
 };
 
 addDivider(panel);
@@ -5173,7 +5467,7 @@ edit_group_layers_button.onClick = function () {
     groupData.guideCheckbox.value = newGuideLayer;
     groupData.disableVolumePresets = disableVolumePresetsCheckboxEdit.value;
     groupData.volumeStates = groupData.disableVolumePresets ? ["off", "on"] : ["off", "min", "normal", "high"];
-    groupData.currentVolumeIndex = groupData.disableVolumePresets ? 0 : 2;
+    groupData.currentVolumeIndex = groupData.disableVolumePresets ? 1 : 2;
     
     groupPanel.text = newGroupName + " [" + newPrefix + "]";
     groupPanel.name = "layer_group_" + newPrefix;
@@ -5237,7 +5531,22 @@ function updateAllGroups(newMode) {
 //
 // ===================== CREATE LAYER GROUP UI =====================
 //
-function createLayerGroupUI(groupName, prefix, labelColorIndex, disableLabelColor, guideCheckboxValue, lockCheckboxValue, disableVolumePresets) {
+// Новое:
+function createLayerGroupUI(
+    groupName, prefix,
+    labelColorIndex, disableLabelColor,
+    guideCheckboxValue, 
+    disableVolumePresets,
+    initialVolumeIndex,    // новый
+    initialViewState,      // новый
+    initialSoloState,      // новый
+    initialHideState,
+    lockCheckboxValue,
+    initialLockState, 
+    initialCollapseState,     // новый — состояние Collapse Transformations
+    initialMotionBlurState,   // новый — состояние Motion Blur
+    initialThreeDState        // новый — состояние 3D Layer     // новый
+) {
 
 // Если это первая группа (слоёв и эффектов)
 if ((layerGroups.length + effectGroups.length) === 0) {
@@ -5275,7 +5584,7 @@ if (!hasAudio) {
 }
 // Четыре состояния (или два, если пресеты отключены)
 var volumeStates = disableVolumePresets ? ["off", "on"] : ["off", "min", "normal", "high"];
-var currentVolumeIndex = disableVolumePresets ? 0 : 2; // По умолчанию "off" или "normal"
+var currentVolumeIndex = disableVolumePresets ? 1 : 2; // По умолчанию "off" или "normal"
 
 // --- (C) Кнопка View
 var view_button = groupPanel.add("iconbutton", undefined, undefined, { name: "view_button_" + prefix, style: "toolbutton" });
@@ -5298,30 +5607,48 @@ setHideButtonIcon(hide_button, hide_off_button_imgString);
 //lock button
 var lock_button = groupPanel.add("iconbutton", undefined, undefined,
     { name: "lock_button_" + prefix, style: "toolbutton" });
-var lockState = false;
+var lockState = (lockCheckboxValue != null) ? lockCheckboxValue : false;
+setLockButtonIcon(
+    lock_button,
+    lockState
+      ? lock_on_imgString
+      : lock_off_imgString
+);
 setLockButtonIcon(lock_button, lock_off_imgString);
 
 
 /* ---------- COLLAPSE TRANSFORMATIONS ------------------ */
 var collapse_button = groupPanel.add("iconbutton", undefined, undefined,
     { name: "collapse_button_" + prefix, style: "toolbutton" });
-var collapseState = false;
-setCollapseTransformationsButtonIcon(collapse_button, collapse_transformation_off_imgString);
-
+var collapseState = (initialCollapseState != null) ? initialCollapseState : false;
+setCollapseTransformationsButtonIcon(
+    collapse_button,
+    collapseState
+      ? collapse_transformation_on_imgString
+      : collapse_transformation_off_imgString
+);
 
 /* ---------- MOTION BLUR -------------------------------- */
 var motion_button = groupPanel.add("iconbutton", undefined, undefined,
     { name: "motion_button_" + prefix, style: "toolbutton" });
-var motionState = false;
-setMotionBlurButtonIcon(motion_button, motion_off_imgString);
-
+var motionState = (initialMotionBlurState != null) ? initialMotionBlurState : false;
+setMotionBlurButtonIcon(
+    motion_button,
+    motionState
+      ? motion_on_imgString
+      : motion_off_imgString
+);
 
 /* ---------- 3-D LAYER ---------------------------------- */
 var layer3D_button = groupPanel.add("iconbutton", undefined, undefined,
     { name: "layer3D_button_" + prefix, style: "toolbutton" });
-var threeDState = false;
-set3DLayerButtonIcon(layer3D_button, layer_3d_off_imgString);
-
+var threeDState = (initialThreeDState != null) ? initialThreeDState : false;
+set3DLayerButtonIcon(
+    layer3D_button,
+    threeDState
+      ? layer_3d_on_imgString
+      : layer_3d_off_imgString
+);
 
 var viewer_button = groupPanel.add("iconbutton", undefined,
     File.decode(group_viewer_imgString),
@@ -5361,6 +5688,24 @@ var add_layer_button = groupPanel.add("iconbutton", undefined, File.decode(add_l
 // --- (G) Кнопка Edit
 var edit_group_layers_button = groupPanel.add("iconbutton", undefined, File.decode(edit_group_layers_button_imgString), { name: "edit_group_layers_button_" + prefix, style: "toolbutton" });
 
+// вместо «по умолчанию»:
+var volumeStates = disableVolumePresets
+? ["off","on"]
+: ["off","min","normal","high"];
+// если при загрузке передали initialVolumeIndex — используем его, иначе дефолт:
+var currentVolumeIndex = (initialVolumeIndex != null)
+? initialVolumeIndex
+: (disableVolumePresets ? 1 : 2);
+
+var viewState = (initialViewState != null)
+? initialViewState
+: true;
+var soloState = (initialSoloState != null)
+? initialSoloState
+: false;
+var hideState = (initialHideState != null)
+? initialHideState
+: false;
 
 var groupData = {
 /* базовые свойства */
@@ -5379,12 +5724,18 @@ deleteButton: delete_group_layers_button,
 
 /* состояния */
 volumeStates: disableVolumePresets ? ["off","on"] : ["off","min","normal","high"],
-currentVolumeIndex: disableVolumePresets ? 0 : 2,
+currentVolumeIndex: disableVolumePresets ? 1 : 2,
 viewState: true,  soloState: false,  hideState: false,
 lockState: lockState,
 collapseTransformationsState: collapseState,
 motionBlurState: motionState,
 threeDState: threeDState,
+
+volumeStates: volumeStates,
+currentVolumeIndex: currentVolumeIndex,
+viewState: viewState,
+soloState: soloState,
+hideState: hideState,
 
 /* настройки для новых слоёв */
 labelColorIndex: labelColorIndex,
