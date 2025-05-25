@@ -1,4 +1,4 @@
-var scriptVersion = "3.9.5";
+var scriptVersion = "3.9.7";
 
 var soloAnimStates = soloAnimStates || {};
 var soloShapesStates = {};
@@ -4382,11 +4382,7 @@ viewer_button.onClick = function() {
 
 //GROUP VIEWER///
 
-/**
- * Основная функция, которую вы вызываете.
- * @param {Object} groupData Параметры группы:
- *                          {name: "...", prefix: "..."}
- */
+
 function showGroupCompositions(groupData) {
     var groupName = groupData.name;    // напр. "MyGroup"
     var groupPrefix = groupData.prefix;  // напр. "LR"
@@ -4595,6 +4591,98 @@ function showGroupCompositions(groupData) {
     export_ffx.preferredSize.width = 120;
     export_ffx.preferredSize.height = 40;
     export_ffx.enabled = false; // по умолчанию отключена
+
+    /**
+ * Включает/выключает Import/Export-кнопки
+ * в зависимости от того, выбран ли слой или эффект.
+ */
+    function updateFFXButtons() {
+    var hasLayer  = layers_list.selection      != null;
+    var hasEffect = effects_layer_list.selection != null;
+    import_ffx.enabled = hasLayer || hasEffect;
+    export_ffx.enabled = hasLayer || hasEffect;
+    }
+
+import_ffx.onClick = function() {
+  try {
+    var compObj = compsWithGroup[compositions_list.selection.index].comp;
+    compObj.openInViewer();
+    compObj.time = compObj.workAreaStart; // ставим playhead на первый кадр
+
+    var f = File.openDialog("Select FFX preset to import", "*.ffx", false);
+    if (!f) return;
+
+    // Сброс выделений
+    for (var i = 1; i <= compObj.numLayers; i++) {
+      compObj.layer(i).selected = false;
+    }
+
+    // Выбираем слой
+    var ly = compObj.layer(layers_list.selection.index + 1);
+    ly.selected = true;
+
+    // Применяем пресет
+    ly.applyPreset(f);
+
+    // Обновляем список эффектов
+    effects_layer_list.removeAll();
+    var effGroup = ly.property("ADBE Effect Parade");
+    if (effGroup) {
+      for (var k = 1; k <= effGroup.numProperties; k++) {
+        effects_layer_list.add("item", effGroup.property(k).name);
+      }
+    }
+
+    // Обновляем состояние кнопок
+    updateFFXButtons();
+
+  } catch (e) {
+    alert("Import FFX error:\n" + e.toString());
+  }
+};
+
+export_ffx.onClick = function() {
+  try {
+    // 1) Открываем композицию
+    var compObj = compsWithGroup[ compositions_list.selection.index ].comp;
+    compObj.openInViewer();
+
+    // 2) Сброс выделений слоёв и эффектов
+    for (var i = 1; i <= compObj.numLayers; i++) {
+      var lyr = compObj.layer(i);
+      lyr.selected = false;
+      var EG = lyr.property("ADBE Effect Parade");
+      if (EG) for (var j = 1; j <= EG.numProperties; j++) {
+        EG.property(j).selected = false;
+      }
+    }
+
+    // 3) Выделяем нужный слой
+    var ly = compObj.layer( layers_list.selection.index + 1 );
+    ly.selected = true;
+
+    // 4) Выделяем эффект(ы)
+    var EG = ly.property("ADBE Effect Parade");
+    if (effects_layer_list.selection) {
+      var nm = effects_layer_list.selection.text;
+      for (var j = 1; j <= EG.numProperties; j++) {
+        if (EG.property(j).name === nm) {
+          EG.property(j).selected = true;
+        }
+      }
+    } else if (EG) {
+      for (var j = 1; j <= EG.numProperties; j++) {
+        EG.property(j).selected = true;
+      }
+    }
+
+    // 5) Открываем диалог сохранения пресета (ID 3075)
+    app.executeCommand(3075);
+
+  } catch (e) {
+    alert("Export FFX error:\n" + e.toString());
+  }
+};
     
     /**
      * Сортирует массив compsWithGroup по количеству слоёв (возр/убыв).
@@ -4744,6 +4832,7 @@ function showGroupCompositions(groupData) {
     }
     
     disable_effect_button.text = anyEnabled ? "Disable Select Effect" : "Enable Select Effect";
+     updateFFXButtons();
     };
     
     // (C3) Обработка выбора композиции — заполнить список слоёв
@@ -4797,6 +4886,7 @@ function showGroupCompositions(groupData) {
     for (var e = 0; e < effectNamesForLayer.length; e++) {
     effects_layer_list.add("item", effectNamesForLayer[e]);
     }
+     updateFFXButtons();
     };
     
     // Кнопка "Open Selected Composition"
@@ -4965,67 +5055,124 @@ rename_button.helpTip = "Rename layers in this group";
 groupData.renameButton = rename_button;
 
 
-// --- Rename Layers Tool ---
+/**
+ * Расширенная функция переименования слоёв с пресетами
+ * Пресеты генерируются из согласных букв названия (до 4 символов)
+ */
+/**
+ * Расширенная функция переименования слоёв с пресетами
+ * Пресеты генерируются из согласных букв названия (до 4 символов)
+ * Добавлен флаг "Append Preset Only"
+ */
 rename_button.onClick = function () {
     var cp = groupData.prefix;
     var cn = groupData.name;
-    
-    // Открываем диалог переименования
+
+    // Создаём диалог
     var renameDialog = new Window("dialog", "Rename Layers In Group: " + cn);
     renameDialog.orientation = "column";
     renameDialog.alignChildren = ["fill","top"];
-    renameDialog.margins = 16;
-    
+    renameDialog.margins = 10;
+
     // Поля ввода
     var fields = renameDialog.add("group");
     fields.orientation = "row";
     fields.add("statictext", undefined, "Prefix:");
     var prefixField = fields.add("edittext", undefined, "[" + cp + "]");
+    prefixField.characters = 6;
     prefixField.enabled = false;
     fields.add("statictext", undefined, "New Name:");
-    var newNameField = fields.add("edittext", undefined, "");
+    var newNameField = fields.add("edittext", undefined, cn);
     newNameField.characters = 20;
-    
-    var useGroupName = renameDialog.add("checkbox", undefined, "Use Group Name for Rename");
+
+    // Выпадающий список пресетов
+    fields.add("statictext", undefined, "Add Preset:");
+    var presetDropdown = fields.add("dropdownlist", undefined, ["Effects","Transform"]);
+    presetDropdown.selection = 0;
+
+    // Checkbox: использовать имя группы
+    var useGroupName = renameDialog.add("checkbox", undefined, "Use Group Name");
     useGroupName.onClick = function() {
-    newNameField.text = useGroupName.value ? cn : "";
+        newNameField.text = useGroupName.value ? cn : "";
     };
-    
+
+    // Checkbox: Append Preset Only
+    var appendOnly = renameDialog.add("checkbox", undefined, "Append Preset Only");
+    appendOnly.value = false;
+
     // Кнопки
     var btns = renameDialog.add("group");
     btns.alignment = "right";
     var okBtn     = btns.add("button", undefined, "OK");
     var cancelBtn = btns.add("button", undefined, "Cancel");
-    
-    okBtn.onClick = function () {
-    var newName = newNameField.text;
-    if (!newName) {
-        alert("Please enter a new name.");
-        return;
+
+    // Функция сокращения по согласным (до 4 букв)
+    function abbreviate(name) {
+        var onlyLetters = name.replace(/[^A-Za-z]/g, "");
+        var consonants = onlyLetters.replace(/[AEIOUYaeiouy]/g, "");
+        return consonants.toUpperCase().substr(0, 4);
     }
-    app.beginUndoGroup("Rename Layers In Group " + cn);
-    var comps = getAllCompositions();
-    for (var i = 0; i < comps.length; i++) {
-        var comp = comps[i];
-        for (var j = 1; j <= comp.numLayers; j++) {
-            var layer = comp.layer(j);
-            if (layer.name.indexOf("[" + cp + "]") === 0) {
-                layer.name = "[" + cp + "] " + newName;
+
+    okBtn.onClick = function () {
+        var newName = newNameField.text;
+        if (!newName && !appendOnly.value) {
+            alert("Please enter a new name.");
+            return;
+        }
+
+        app.beginUndoGroup("Rename Layers In Group " + cn);
+        var comps = getAllCompositions();
+
+        for (var i = 0; i < comps.length; i++) {
+            var comp = comps[i];
+            for (var j = 1; j <= comp.numLayers; j++) {
+                var layer = comp.layer(j);
+                if (layer.name.indexOf("[" + cp + "]") === 0) {
+                    // Определяем базу: либо сохраняем текущее имя, либо формируем новое
+                    var base = appendOnly.value
+                        ? layer.name
+                        : ("[" + cp + "] " + newName);
+                    var suffix = [];
+
+                    if (presetDropdown.selection.text === "Effects") {
+                        var effGroup = layer.property("ADBE Effect Parade");
+                        if (effGroup) {
+                            for (var e = 1; e <= effGroup.numProperties; e++) {
+                                suffix.push(abbreviate(effGroup.property(e).name));
+                            }
+                        }
+                    } else {
+                        var tx = layer.property("ADBE Transform Group");
+                        var props = ["Position","Scale","Rotation","Opacity","Anchor Point","Skew","Skew Axis","Orientation","X Rotation","Y Rotation","Z Rotation"];
+                        for (var p = 0; p < props.length; p++) {
+                            var prop = tx.property(props[p]);
+                            if (prop && prop.numKeys > 0) {
+                                suffix.push(abbreviate(props[p]));
+                            }
+                        }
+                    }
+
+                    // Собираем окончательное имя
+                    var fullName = base;
+                    if (suffix.length) {
+                        fullName += " | (" + suffix.join(", ") + ")";
+                    }
+                    layer.name = fullName;
+                }
             }
         }
-    }
-    app.endUndoGroup();
-    renameDialog.close();
+
+        app.endUndoGroup();
+        renameDialog.close();
     };
-    
+
     cancelBtn.onClick = function () {
-    renameDialog.close();
+        renameDialog.close();
     };
-    
+
     renameDialog.center();
     renameDialog.show();
-    };
-    
+};
 
 // Divider + Add/Edit
 addDivider(panel);
