@@ -1,4 +1,4 @@
-var scriptVersion = "3.9.7";
+var scriptVersion = "3.9.8";
 
 var soloAnimStates = soloAnimStates || {};
 var soloShapesStates = {};
@@ -2726,7 +2726,7 @@ effects_manager_button.onClick = function () {
 };
 
 function openEffectsManager() {
-    var win = new Window("dialog", "Effects Manager Tool V1.6");
+    var win = new Window("dialog", "Effects Manager Tool V1.7");
     win.orientation = "column";
     win.alignChildren = ["fill", "top"];
     win.spacing = 10;
@@ -2758,7 +2758,7 @@ function openEffectsManager() {
     compsPanel.margins = 10;
 
     var compsList = compsPanel.add("listbox", undefined, undefined);
-    compsList.preferredSize.width = 270;
+    compsList.preferredSize.width = 340;
     compsList.preferredSize.height = 350;
 
     // Группа для кнопок (располагаются в один ряд) – ниже основных панелей
@@ -2774,7 +2774,7 @@ function openEffectsManager() {
         File.decode(view_button_off_imgString),
         { name: "disableEffectBtn", style: "toolbutton" }
     );
-    disableEffectBtn.text = "Disable";
+    disableEffectBtn.text = "Disable FX";
     disableEffectBtn.helpTip = "Disable the currently selected effect";
     disableEffectBtn.preferredSize.width = 90;
     disableEffectBtn.preferredSize.height = 35;
@@ -2868,88 +2868,116 @@ function openEffectsManager() {
 
     fillEffectsList();
 
-    // Функция для заполнения списка композиций для выбранного эффекта.
-    function updateCompositionsList() {
-        compsList.removeAll();
-        compsWithGroup = [];
-        var selItem = effectsList.selection;
-        if (!selItem) return;
-        var effGroup = selItem.__effectDataGroup;
-        if (!effGroup || effGroup.length === 0) return;
-        var compsFound = {};
-        // Проходим по всем экземплярам эффекта и собираем уникальные композиции
-        for (var i = 0; i < effGroup.length; i++) {
-            var comp = effGroup[i].comp;
-            compsFound[comp.name] = comp;
+    // Заменяем текущую функцию updateCompositionsList на эту:
+function updateCompositionsList() {
+    compsList.removeAll();
+    compsWithGroup = [];
+    var selItem = effectsList.selection;
+    if (!selItem) return;
+    var effGroup = selItem.__effectDataGroup;
+    if (!effGroup || effGroup.length === 0) return;
+
+    // Собираем по композициям: { comp: Comp, layers: [layerName, ...] }
+    var compsFound = {};
+    for (var i = 0; i < effGroup.length; i++) {
+        var item = effGroup[i];
+        var comp = item.comp;
+        var compName = comp.name;
+        var layerName = comp.layer(item.layerIndex).name; // имя слоя
+
+        if (!compsFound[compName]) {
+            compsFound[compName] = { comp: comp, layers: [] };
         }
-        // Добавляем найденные композиции в список и массив compsWithGroup
-        for (var compName in compsFound) {
-            // Здесь можно добавить дополнительную информацию в названии (например, группу) если требуется
-            var displayName = compName; // Если нужно, можно добавить " [info]"
-            compsWithGroup.push({ comp: compsFound[compName] });
-            compsList.add("item", displayName);
+        // Добавляем имя слоя, если ещё нет
+        if (compsFound[compName].layers.indexOf(layerName) === -1) {
+            compsFound[compName].layers.push(layerName);
         }
     }
 
-    // При изменении выбора эффекта обновляем список композиций
-    effectsList.onChange = function () {
-        updateCompositionsList();
-        // Обновляем подсказку для кнопки Disable/Enable
-        var selItem = effectsList.selection;
-        if (!selItem) {
-            disableEffectBtn.helpTip = "Disable/Enable";
-            return;
+    // Заполняем listbox
+    for (var compName in compsFound) {
+        var data = compsFound[compName];
+        var displayName = compName;
+        if (data.layers.length) {
+            displayName += " | " + data.layers.join(", ");
         }
-        var effGroup = selItem.__effectDataGroup;
-        if (!effGroup || effGroup.length === 0) {
-            disableEffectBtn.helpTip = "Disable/Enable";
-            return;
-        }
-        var anyEnabled = false;
-        for (var i = 0; i < effGroup.length; i++) {
-            if (effGroup[i].effectProp.enabled) {
-                anyEnabled = true;
-                break;
-            }
-        }
-        disableEffectBtn.helpTip = anyEnabled ? "Disable Select Effect" : "Enable Select Effect";
-    };
+        compsWithGroup.push({ comp: data.comp });
+        compsList.add("item", displayName);
+    }
+}
 
-    // Обработчик кнопки Disable/Enable
-    disableEffectBtn.onClick = function () {
-        var selItem = effectsList.selection;
-        if (!selItem) {
-            alert("Select an effect group from the list first!");
-            return;
+    // --- ЗАМЕНА effectsList.onChange ---
+effectsList.onChange = function () {
+    updateCompositionsList();
+
+    var selItem = effectsList.selection;
+    if (!selItem) {
+        disableEffectBtn.text    = "Disable FX";
+        disableEffectBtn.helpTip = "Disable/Enable";
+        win.layout.layout();          // обновляем UI
+        return;
+    }
+
+    var effGroup = selItem.__effectDataGroup;
+    var anyEnabled = false;
+    for (var i = 0; i < effGroup.length; i++) {
+        if (effGroup[i].effectProp.enabled) {
+            anyEnabled = true;
+            break;
         }
-        var effGroup = selItem.__effectDataGroup;
-        if (!effGroup || effGroup.length === 0) {
-            alert("No effect data found!");
-            return;
+    }
+
+    disableEffectBtn.text    = anyEnabled ? "Disable FX" : "Enable FX";
+    disableEffectBtn.helpTip = anyEnabled
+        ? "Disable Selected Effect"
+        : "Enable Selected Effect";
+
+    //win.layout.layout();  // принудительный релоут
+};
+
+    // --- ЗАМЕНА disableEffectBtn.onClick ---
+disableEffectBtn.onClick = function () {
+    var selItem = effectsList.selection;
+    if (!selItem) {
+        alert("Select an effect group from the list first!");
+        return;
+    }
+
+    var effGroup = selItem.__effectDataGroup;
+    var anyEnabled = false;
+    for (var i = 0; i < effGroup.length; i++) {
+        if (effGroup[i].effectProp.enabled) {
+            anyEnabled = true;
+            break;
         }
-        var anyEnabled = false;
-        for (var i = 0; i < effGroup.length; i++) {
-            if (effGroup[i].effectProp.enabled) {
-                anyEnabled = true;
-                break;
-            }
+    }
+
+    var count = effGroup.length;
+    if (anyEnabled) {
+        // выключаем
+        for (var j = 0; j < effGroup.length; j++) {
+            effGroup[j].effectProp.enabled = false;
+            effGroup[j].isEnabled          = false;
         }
-        var count = effGroup.length;
-        if (anyEnabled) {
-            for (var j = 0; j < effGroup.length; j++) {
-                effGroup[j].effectProp.enabled = false;
-                effGroup[j].isEnabled = false;
-            }
-            selItem.text = selItem.__groupName + " (" + count + ") | Off";
-        } else {
-            for (var j = 0; j < effGroup.length; j++) {
-                effGroup[j].effectProp.enabled = true;
-                effGroup[j].isEnabled = true;
-            }
-            selItem.text = selItem.__groupName + " (" + count + ")";
+        selItem.text = selItem.__groupName + " (" + count + ") | Off";
+    } else {
+        // включаем
+        for (var j = 0; j < effGroup.length; j++) {
+            effGroup[j].effectProp.enabled = true;
+            effGroup[j].isEnabled          = true;
         }
-        updateCompositionsList();
-    };
+        selItem.text = selItem.__groupName + " (" + count + ")";
+    }
+
+    // обновляем саму кнопку
+    disableEffectBtn.text    = anyEnabled ? "Enable FX" : "Disable FX";
+    disableEffectBtn.helpTip = anyEnabled
+        ? "Enable Selected Effect"
+        : "Disable Selected Effect";
+
+    //win.layout.layout();      // а это релоутим диалог
+    updateCompositionsList(); // и обновляем список композиций
+};
 
     // Обработчик кнопки Delete
     deleteEffectBtn.onClick = function () {
@@ -3065,20 +3093,20 @@ createGroupEffectsButton.onClick = function () {
         dlg.show();
     };
 
-    // *** Интегрированный готовый код для кнопки "Open Selected Composition" ***
+    // --- ЗАМЕНА open_selected_comp_button.onClick ---
     open_selected_comp_button.onClick = function () {
         var sel = compsList.selection;
         if (!sel) {
             alert("Select a composition first!");
             return;
         }
-        var compName = sel.text.split(" [")[0];
-        for (var i = 0; i < compsWithGroup.length; i++) {
-            var compObj = compsWithGroup[i].comp;
-            if (compObj && compObj.name === compName) {
-                compObj.openInViewer();
-                break;
-            }
+        // Берём композицию по индексу выбранного пункта
+        var idx = compsList.selection.index;
+        var compObj = compsWithGroup[idx] && compsWithGroup[idx].comp;
+        if (compObj) {
+            compObj.openInViewer();
+        } else {
+            alert("Не удалось найти композицию!");
         }
     };
 
@@ -3139,7 +3167,7 @@ function sortProjectFiles() {
     }
 
     // ─── UI setup ──────────────────────────────────────────────────────────
-    var dlg = new Window("dialog", "Sort Project Files Tool  –  V1.6");
+    var dlg = new Window("dialog", "Sort Project Files Tool  –  V1.7");
     dlg.orientation   = "column";    // теперь одна колонка
     dlg.alignChildren = "fill";
     dlg.spacing       = 10;
@@ -3168,26 +3196,49 @@ function sortProjectFiles() {
     var rmDisabledFXChk = optPanel.add("checkbox", undefined,
                                        "Remove disabled Effects");
 
-    // ─── Сразу под Additional options — Exclude folders ───────────────────
-    var excludePanel = dlg.add("panel", undefined, "Exclude folders");
-    excludePanel.orientation   = "column";
-    excludePanel.alignChildren = "left";
-    excludePanel.spacing       = 4;
-    excludePanel.preferredSize = [300, 30];
+    // ─── Exclude folders ────────────────────────────────────────────────────
+var excludePanel = dlg.add("panel", undefined, "Exclude folders");
+excludePanel.orientation   = "row";
+excludePanel.alignChildren = ["left","top"];
+excludePanel.spacing       = 10;
+excludePanel.margins       = [10,10,10,10];
 
-    var folderChecks = [];
-    for (var i = 1; i <= app.project.numItems; i++) {
-        var itm = app.project.item(i);
-        if (!(itm instanceof FolderItem)) continue;
-        var cnt = 0;
-        for (var j = 1; j <= app.project.numItems; j++) {
-            if (app.project.item(j).parentFolder === itm) cnt++;
-        }
-        var cb = excludePanel.add("checkbox", undefined,
-                                  itm.name + "   |   " + cnt + " items");
-        folderChecks.push({ cb: cb, name: itm.name });
+// создаём два внутренних «столбца»
+var col1 = excludePanel.add("group");
+    col1.orientation   = "column";
+    col1.alignChildren = ["left","top"];
+    col1.spacing       = 4;
+var col2 = excludePanel.add("group");
+    col2.orientation   = "column";
+    col2.alignChildren = ["left","top"];
+    col2.spacing       = 4;
+
+var folderChecks = [];
+// сначала собираем все папки в массив, чтобы знать общее число
+var folders = [];
+for (var i = 1; i <= app.project.numItems; i++) {
+    var itm = app.project.item(i);
+    if (!(itm instanceof FolderItem)) continue;
+    // считаем детей
+    var cnt = 0;
+    for (var j = 1; j <= app.project.numItems; j++) {
+        if (app.project.item(j).parentFolder === itm) cnt++;
     }
+    folders.push({ name: itm.name, count: cnt });
+}
 
+// разбиваем пополам
+var half = Math.ceil(folders.length / 2);
+for (var k = 0; k < folders.length; k++) {
+    var target = (k < half) ? col1 : col2;
+    var f = folders[k];
+    var cb = target.add(
+        "checkbox",
+        undefined,
+        f.name + "   |   " + f.count + " items"
+    );
+    folderChecks.push({ cb: cb, name: f.name });
+}
     // кнопки
     var btns = dlg.add("group");
     btns.alignment = "center";
