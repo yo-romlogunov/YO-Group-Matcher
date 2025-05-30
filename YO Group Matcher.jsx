@@ -1,4 +1,4 @@
-var scriptVersion = "3.9.8";
+var scriptVersion = "3.9.9";
 
 var soloAnimStates = soloAnimStates || {};
 var soloShapesStates = {};
@@ -18,6 +18,50 @@ var currentMode = modes[0]
 var _defaultCreateGroupEffectName = "";
 var suppressPromptForAutoSave = false;
 
+function ensureWriteNetworkEnabled() {
+    var sections = ["Main Pref Section", "Main Pref Section v2"];
+    var key      = "Pref_SCRIPTING_FILE_NETWORK_SECURITY";
+    var enabled  = 0;
+
+    for (var s = 0; s < sections.length; s++) {
+        if (app.preferences.havePref(sections[s], key)) {
+            enabled = app.preferences.getPrefAsLong(sections[s], key);
+            break;
+        }
+    }
+
+    if (enabled !== 1) {
+        var dlg = new Window("dialog", "Warning: Scripting Security YO Group Matcher");
+        dlg.orientation   = "column";
+        dlg.alignChildren = "fill";
+        dlg.spacing       = 8;
+        dlg.margins       = 15;
+
+        dlg.add("statictext", undefined,
+            "The “Allow Scripts To Write Files And Access Network” option");
+        dlg.add("statictext", undefined,
+            "in After Effects preferences is currently DISABLED.");
+        dlg.add("statictext", undefined,
+            "Without it, the script cannot save files or make network requests."
+        
+        );
+        dlg.add("statictext", undefined,
+            "Preferences > Scripting & Expressions > Allow Scripts To Write Files And Access Network "
+        
+        );
+
+        // Единая кнопка OK
+        var okBtn = dlg.add("button", undefined, "OK", { name: "ok" });
+        okBtn.onClick = function() {
+            dlg.close();
+        };
+
+        dlg.show();
+        return false;
+    }
+
+    return true;
+}
 
 var switch_tools_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%5B%00%00%00%20%08%06%00%00%00%7D%C3%93%04%C2%9B%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%055IDATx%01%C3%AD%C2%99%3Bl%1CU%14%C2%86%C3%8F%C2%9Du%C3%BC%C2%B6%C2%B0%0B%C3%AC%C3%98%C3%95F%20%14%C3%89%0F%C3%AC%08%01%5Dv%0B%04%14(%0E%C2%A2%C2%A1s%1AD*%12%C3%B1%C2%90%C3%92%60%C2%BB%C3%A3e%25(U*%C2%9C%12%1AoDc%C2%A0%C3%88%C3%92%C2%A5%40%C3%8A%C3%A2%C2%87%C3%A4.%1B!%C2%A1%C3%85%C2%95%0D~%C3%9B%C2%BB%C3%83%C3%BF%C2%AFgV%C3%AB%C3%B5%C3%8C%C2%BDwf%1D!%C2%A1%C3%B9%C2%A4%C3%91x%C3%AF%C3%9C%C2%B9%C3%A7%C2%9C%C3%BF%C2%9E9s%C3%A7Z%24!!!!!!!%C3%A1%C2%BFDE%C3%A9%3C%0E*%C2%95%C3%8A%15%C3%97u%C3%87%C2%95R%C3%A3%5E%C3%B3%06~%17q~%C2%90J%C2%A5%C3%B2%C2%85B%C2%A1(g%C3%88%C3%A4%C3%B8%C3%AD%5E%C3%87%C2%A9L%C2%89%C2%B8%C2%97%5D%C2%B7f%13%C2%B8E%C3%B8%C3%B0%C2%A0Rqr%C2%B9%C3%82%C3%8D%C2%A2%C2%9C!%08%C2%B3%17qN!%C2%AE%C3%8Buq%0A%C3%A3%C3%84%C3%AF_%1D%C3%87%C2%99%C2%8F%13%C2%A7%C2%95%C3%980%C2%9E.%C2%97%C3%8B%C2%B7%C3%B1%C3%A7%C2%A4q%40%C2%A5f%C2%96%C2%96%C2%96f%C2%A5I%3C%C2%91%C2%A7%11%C3%A0%0DS_%C3%98%C2%9C%C2%87%C3%A8%C2%B3%C3%8D%C2%8A%C3%AE%C2%89%C3%BC%C2%91g%C2%B3%C3%97%C3%90%7D%1E%C3%895%1BEt%C2%A3%C3%98%C3%8Cf%08%C3%BD%C3%90%C3%82x%3DE8%C2%92%C2%8D%C2%9B%C3%A5%10%3A%C2%ADT%056%C3%9D%C2%B4%C3%BD%5D%C2%AA%C3%A8%C2%BAN6%C2%AE%C3%A0L%C2%A8%C2%A3%C2%A3%C2%A3%C2%85%C3%BAL%C2%B6%006%C3%9Dk%2B%2B%2By%C2%9B%C3%8E%C3%8A%C3%A0%40%1C%C2%A1k%C2%8E%C3%84%11%3C%C2%9E%C3%905P%C3%92R%13Q%05%C3%B7%C2%9E%5C%C3%86%C2%99%C2%96%18%40%C3%B0%C2%AC%C2%8D%C3%A0%C2%8E%C3%A8%1DX%C2%90xB%13%C3%9E%C3%BF%C2%9DD%C2%A4%09%C2%A1I%2F%C3%AFg%09%C2%8Ar%13%C3%BC%C2%9C%C2%96%C2%98B%13%3C%0D%0B%2CA%C2%A6~%C3%8E%C2%B3r%C3%80%233%3A%3A%3Ae%C3%9By%C3%B2%C3%92%C3%9C%C2%8D%26%C2%84%C3%B6p%C3%93%C2%8Esd%C2%AC%C3%B3%3E%C2%9E%7FS%C3%92%1C%C2%BD%C3%9E%3BMK%60%19%C3%B1%C2%B2%C3%BAIc%7BKK%C2%8B%C2%B4%C2%B7%C2%B7%C3%8B%C3%A1%C3%A1%C2%A1%C3%AC%C3%AF%C3%AF%C3%97%C3%9A%C2%BB%C2%BB%C2%BB%C2%AB%C3%A7%C2%AD%C2%AD%C2%AD%C2%A0%C3%A1%C3%B2%C3%8B%C3%8B%C3%8BY%C2%B1%C3%A0%C3%AA%C3%84%C3%9C%C2%93%20%C2%B1_%C3%8B%C2%BE(%C3%A9%C2%97%C2%9E%3F%C3%95%7F%C3%BD%C3%8F%C2%BF%C3%A5%C3%A1%C2%8F%C2%ABAC%C2%B1%C2%9C%5C%409%C3%99%10%03ccc%C2%8F%C2%B9%C2%BA%C2%AAokkk%C2%93s%C3%A7%C3%8E%09%5E%C2%96%C2%B2%C2%B3%C2%B3Skomm%C2%AD%1E%C2%8D%C3%AD%3E(%C2%9B%7D(%C2%9B%C2%A16%5B%C2%82%1A!t%26%C2%A4%5D%C2%BA%C2%BA%C2%BAX%C2%A3d%7D%7D%C3%BDx%00L%00%C3%9B%C3%B0r%09%13%3B%C3%83%C3%893%C3%95%C3%AE%C3%B7%5E%C3%B9%3AS.%07g%C3%B5%C2%AB%C2%99%17%24%C3%BB%C3%8E%C3%88%C2%A9%C3%B6%C2%95%C3%9F%C3%BE%08%13%1B%C2%8F%C3%B4%11%05%C3%8C%C2%8B%06%2F%C2%A9N%C2%BD%10%C2%99P%3C%C3%88%C3%9E%C3%9E%5EU%5C%C3%92%C3%93%C3%93S%C2%8D%C2%97%3A%04%C2%89%C3%8D%C3%A5%22Nw%C3%82%C3%AC%C2%85%C2%95%C2%91%2BA%C2%8D%14%C3%B9%C3%A0%C3%A0%C2%805%C2%AA%3A%C3%83%C2%BEcdwwW%C3%82%08%C2%9B%C2%BC%C2%93%C2%8EJh%C2%9F%C2%BB%C3%93%3F%C3%89%C2%BB%C2%97%C3%A6%C3%A4%C3%AE%C3%8C%C2%A2%C3%B7%7B%C2%B1%C3%BA%C3%BB%C3%B3%0F~%08%1DO9%C3%8A%C2%B8L%0D%12%C2%BA%C2%91%C3%8E%C3%8E%C3%8E%C3%AA%C2%99%22%C3%B3%C3%90%01%7D%5E%C3%96%5D%0F%13%3B%C2%B4%C3%98%C3%BB%C3%A5%C2%83%C2%8FZ%C3%BD%C2%B9%C2%BE%C2%AC4%C2%82%C3%89I%C2%8B%01%7C%C2%B0%18%C3%BBD%01%C3%B5%C3%B19c%1F%C3%832%C2%8F%C3%89%C3%A5%C2%8B%C3%8D3%7F%C3%B3%C3%90%C2%90%C3%96%5Dt%24%22%C3%8C%60%1A%C3%AC%C3%A8%C3%A8%60%C2%8D%C2%AA%C3%8E6K%08%1F%C2%AD%C3%BF%1B%2C%15%7C%C2%8A%19%2B%0F%26%C2%94_R%C3%A2%10%26vh%C2%91%C2%A7%C3%90%7CA%C3%92%09%C3%96j%C2%A2%2B!%C2%A6%C3%B1j(%C2%8B%3E%11%40%C3%BEmZt%C3%93%C3%9Ad%C3%89d%C2%BC%C2%AC%C3%95%C3%84%22N-%C2%81bC%C3%88%C2%A7%C2%BA%C2%9B%C3%B8%C3%92%20%C2%9Cm%C2%A2%2B!%04%C3%99P%10%03%C2%AE(c%C2%9F(%C2%A8%C2%8Ay%3C%1B%C2%BF%C3%BC%C3%AC%C3%A6%C2%93K%C3%B1%C2%B56%C2%95%C3%BA%5Dw%C3%9D%09q%22%C2%A7%C2%BB%C2%89b%C3%BB%C2%B5%C3%8B%C2%A2%C2%84lX%7D%C3%8EbCI%C3%8E%C2%90%C2%8A8yS%1F%C2%94%40%C2%8A%C2%AD%C3%8D%C3%AE%C3%AD%C3%AD%C3%AD%13g%C2%ADM%C2%83n%C2%A1%C2%9F%C3%ABX%C3%AC%C3%B3%C3%B35%13v%C2%9D%C3%B5%C2%9APtC%1D%C2%9B%C3%87%3A%C3%BB%C2%9AXpu%C3%A2%1B%C2%AD%C3%8D%C2%AE%C2%9E%C2%B6%C3%AA%C2%B1%C3%BD%C3%8F~%C3%B5%C3%90%C2%90_x%C3%BC%C2%89%C3%95%C3%9A%1E%C3%AB%C3%AC%19%C3%840%5D%C3%9F%C2%86%5D%C2%BDj6%07%C3%85%C3%A6%C3%87%C3%9D%C2%98%60%C3%A8_%C3%84%06%C3%9C%05%C2%9D%C2%AD%C3%90%17%24%0Ciw%C3%AEh%C2%8C%C2%87Nh8%C2%B0%C3%81%C2%9D1%C2%B1%C3%84u%2B7u%C3%97)0%3Fd%0CBc%C2%9C%C2%94%C3%95%C3%A4%12%08%C3%8Bu%C3%B1%C2%89%C3%ACfLa%C2%B1%C3%B9q%C2%9F%C2%B6%C3%A9%1A%C3%A3L%C2%85%5D%C3%80GK%C2%B1%C2%BF%C2%BF%C2%BF%0F%C2%82%C2%BD.1%C2%81%C2%B3%C2%B7%C2%90%C3%95%C2%8B%C2%B6%C3%BD%C3%97J%C2%BF%C2%94.%C2%9E%7Fs%13I%C3%B5%C2%96%C3%84%C2%84A%C3%A7%0A%1F%5B%C2%97%C2%A4R%C2%A9%C2%B4700%C3%B0%C2%97Xl%1Fkl~%C2%8BR%C3%B9%C2%85%C2%A9_Jw%11%C2%82%2F%C3%82%11%3E%1AQ%C2%B6%1D%7D%07fWWW%C2%8D%0E4%C2%B2V%C3%BA%C3%B9%C3%91%C3%85%C3%B3o%60%C2%8EUF%22r%2C%C3%B4%C2%A73%12%11%C3%84Y%40b%C3%85%C2%B2%09%C3%AEC%C3%A8%0Fm%3A%C2%A6L%1D%C3%A0H.%C2%8A%23%2C%1D%C3%88%C3%A8%C3%AB%10%C3%BA%C2%8E%C3%84%04%19%C2%9E%C3%B72%C2%9COU%C2%BB%C3%B9%0E%C3%85%C3%BF%16%C3%9D%C2%82%C3%90%C2%91'%C3%97%07q%C3%A6%C2%91XO%C2%BD%0F%1D%C2%AB%5DC%2F%C2%A3%C2%AD%C2%84%26F%C2%B1%7DG%C2%86%C2%86%C2%86%C3%AEc%C3%B0%3E%C3%AFk%C3%B0%C2%94%00%14%19%C3%97%C2%BFD%C2%8D~%1F%C2%A5%C3%A3%C2%914%C3%89q%C2%86%C2%BF%C3%BD%C2%BDRn%1FFg%C3%B0%01%02%C2%A8%0D%C2%BC%C3%A2%C3%AF%C2%B1F%C2%A3tX%C2%97%C2%AB0%C2%98%C3%A1%C2%83%C2%83%C2%83%C3%B8W%5Be%13%C2%B5%3C%1Dd%C3%93%C2%8B%C3%B3%1EV2%C3%97%C3%B1B%C2%9C%C2%97%08D%C3%BA%1F%C2%A4%C3%8F%C3%88%C3%88H%06Fk%02%C3%A0%23'%C2%BF%C2%B6%C2%B6V%C2%94g%C3%88%C3%A4%C3%B8W%C3%888%0A%C2%A0%3C%01%C3%8A%C2%85%5C%C3%A1%C2%B33%5D%C2%9B72%3C%3C%3C%5E%2F%3A%C3%97%C3%A5%C3%98%0D%2C%C3%AAv%C3%B6%12%12%12%12%12%12%12%22%C3%B2%2FCG%C2%AF%04%C3%B7j%2F%C2%AD%00%00%00%00IEND%C2%AEB%60%C2%82"; 
 var switch_mode_imgString = "%C2%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%5B%00%00%00!%08%06%00%00%00%C2%B6%C2%8F%C3%97%3E%00%00%00%09pHYs%00%00%0B%13%00%00%0B%13%01%00%C2%9A%C2%9C%18%00%00%00%01sRGB%00%C2%AE%C3%8E%1C%C3%A9%00%00%00%04gAMA%00%00%C2%B1%C2%8F%0B%C3%BCa%05%00%00%04TIDATx%01%C3%AD%C2%99%C3%81R%C3%93%40%18%C3%87%C2%BF%0D%C2%95%C3%B4%C3%96v%C2%86%C2%83%C3%87%C3%B2%00%60%C3%B1%09%C2%8AG%2F%C2%A2%2F%20%3C%C2%81zC%2Fm%0F%C2%8E%5E%1C%C3%8B%13X_%40%C3%BB%06%C3%A4%C2%A4G%0B%0C%C2%A37%C3%A2%C3%89%19%C2%86%C2%A1%05%06(%C3%906%C3%BE%C2%BFm%C3%A3%60Iv7)%12%C3%86%C3%89o%26%C2%B3%C3%89f%C2%93%7F%C3%B7%C2%9F%2F_v%C2%B7D))))))))I%22(%22%C2%A5R)%C2%8F%C2%A2%3C%18%0C%C2%8A(y%C2%BFcYV%0B8%C3%B4%C2%8FHB%C2%93%C2%AA%C3%AD%3Cu%C2%A9%04%C2%87J%C3%A4ASP%07%C2%B5.%C3%B6%5B%C3%B4%C2%B6%C3%A0R%0C%C2%8C%C3%8DF%C2%87%C3%8B%C3%BD~%C2%BF%C2%82%C3%9D%C2%B2%C2%A2Ycjj%C2%AA%06%13%5C%C2%BA%06%0C4%C3%99%C2%80%C3%A6uj%C3%92j%C2%BBH%C3%82zF%C3%A4-K%C2%93%C2%83qp%C2%BE%06%C3%93%1D%C2%8A%C2%80%C3%96l%C2%8E*DT%C3%85%C3%B3%C2%BC%C3%A7d%C2%88%10%C2%A2%C2%BA%C2%B9%C2%B9Y%C2%A3%C2%98%24%C2%A1)yu%C3%B0%C2%8C%3C%C2%AF%C2%AA0y%5C%C2%B4N%C3%B6%C2%A0F%C3%95B%C3%87%C2%A8%C2%B9%C3%AA%24w%C2%BA%C3%97%C3%AB%C2%AD%C2%A3%23%25%C2%8AH%C3%9C%C3%8E'%C2%A1)Y%3D%C3%80%1B%04%C2%A3%23%C2%8B%22%C2%AD%C3%98%C3%9E%C2%A2%C2%89%C3%A1%C2%96%C3%AA%24%5E%C3%A1%C3%B7q%3A%C3%8D%20*%C2%AB%C3%B3%C3%B3%C3%B3%C3%86%C2%91%C2%99%C2%A4fl%C2%A3%C2%A5(rzW%7C6i%1A%1A%C3%99sss%C3%8B(%3E%C3%90dt%C2%90O%17L%C3%B3i%12%C2%9A2G%C2%93%C3%98%C2%A1I%11%C3%9E%0BzS%C2%A8%C2%AB%C2%9A%C2%A8%22%C2%BBr%C2%A5%C2%B1e%11%3A%22%C3%8B%C3%8Bp%1Do%01%C3%A4G%1F8S%02%C3%9B%C3%BA%C2%BA%C3%A3%C3%9B%C3%B8%C3%AF%C3%B05%C2%91%C3%AF%23D%C2%B7uE3%C2%9F%15T%C3%8C%0BY%06%C3%95%C3%B3v%15%C2%A1%C3%ADg%60d%C2%8FF%01%C3%AB%C3%A3%C3%B5%C3%93%C3%93%C3%93T(%14%C3%B8U%C2%A7%C2%BD%C2%BD%3DY%C3%87%C2%9D%C2%9E%C2%99%C2%99%C3%A1W%C2%98vww%C2%83n%C3%87%C2%916%C2%8BHS%C3%A6%C2%B40M%26%C2%97%C3%8BQ6%C2%9B%C2%BDR%7FqqA%C3%BB%C3%BB%C3%BB%C2%B15%C2%87%C3%83%3B%C3%91%1E%C2%AFn%3C%C2%B6%C3%A9%C3%A9%C3%BD%0Cu%C2%BA%1E%15%5E%C2%9F%C3%BC%C2%A9%C3%BF%C3%B0%C3%84%C2%A6%C3%A5%C2%85%0C%C2%B9%1D%C2%8Ff%C3%9F%C2%9D%04%C3%9C%10%C2%B9%5B1B%09%0C%0DD%C3%86RP%C3%BD%C3%B9%C3%B9%C2%B94%C3%BAr%24%C3%B3%03%60%C3%8E%C3%8E%C3%8E(%04%C2%8E%C3%AE2i%08%C3%93dNOO%C3%A9%C3%B0%C3%B0%C2%90%C2%BA%C3%9D%C2%AE%3C%C3%A6%C2%92%C2%8F%C2%8F%C2%8F%C2%8FC5%C3%B1%C2%91%C3%95%C3%A7%7D%1EG%2B%C3%A0H.%C3%8F%0E%C3%BB%C3%89%C3%91%C3%8CFkXR%C2%9D%0C4%1BQz%2F%C3%AC%02%C2%BF%C3%83%C2%B6m%C3%BFU%C2%B2!a%C3%A0%C2%83W%24%0D*M~%C3%88%7C%7F.%2F%1F%2B%1E0%C2%A7%18%C2%BD%C3%99Bm6Gve%C3%B1%C2%8E%C3%9C%C3%B7M%C3%97PT%C2%9DT%C2%8EF%C2%82%C3%B0%3B%C3%AC%C2%9B%C3%8C%C2%91%C3%8D%C3%91%C3%AE%C3%97%C2%87%606n%C2%BD%5E%C3%B4%C2%9A%C2%9A%C3%B1t%C3%AB%C3%97%40%C2%9A%5C%C2%BA%2B%C2%A8%C3%B2%C3%A0%0E9%3B%7D%C2%A4%C2%90%C2%81%C3%A2%0A%C2%91S%C3%9D%2F%C2%96%C3%99l.%C2%9B%C3%8C%C2%86%23je%C3%AE%C3%BC%1FY%C3%BB%C3%9A%C2%93%C3%A5%C3%BB%C2%876%C3%92%C2%88E%1F%C2%BF%C3%B5h%12%02%C3%8D%C2%86%C2%81%3FU%17%C3%B9%C2%A9%C2%84%3F%5C%C2%8C*%C2%850H%11-%C3%92%C2%A0%C3%93%C2%8C%C2%8A%C2%89%26%C3%B1Z%C2%87%02N%23%1C%C3%8D%1C%C3%9D%C2%BC%C3%9F%C3%90%C2%9A%C3%AD%1D%C2%A8%C3%8E%C2%86%C3%A5lGu%C2%91%C2%9F28%C2%AA%0DR%08%7FLM%3An%C3%92%C3%86%18%23%C3%8D%2C5uMj%C3%AB%C3%83%C2%B7%C2%B6%C3%B9%C2%BDO%06(%C3%AF%17%C3%B8y%C3%85%0Fm%C3%B2L%C2%8EB%C3%B2%1E%C2%9B%7Btt%24%C3%87%C2%B9l%C2%B6%06%C3%87d%C2%82%C2%81%7B5Fc%C3%B2%C3%90%3C%C3%8A%C3%A9%C2%8AG%20%18i%C3%90uh%C3%8A)%C3%B6j%C3%87%C2%A1%C2%B1%C2%85%C2%AE%C3%A6%C2%8Fanv%C3%9B%039%C3%8C%5B%C3%B9t%26%23%C2%9CY%C3%BB%C2%A2L%C2%99%C2%8E%C3%AAd%C3%A8%0C%12%C3%93%C3%9E*%22%3C%C3%8A%C2%84%24%C2%8C%C2%95%C2%AD%C2%AD%C2%AD%C2%86I%C3%83%2441%C2%83%2C%C3%83%C2%86u%C2%9A%18%C3%91%C2%A0%C2%B7%C2%B9%15U%C2%8B%C3%90%0F%24%22%C2%AD%C2%8E4%C3%A1%C3%92d4%C2%8C%3B%C2%9D%C2%90%C3%A6p%12%C3%A2%7D%C2%A4%C3%89p1S%C3%90.%C2%80%C2%85%C2%9A%C3%8D%C2%B3%2Ft~%C2%91%C2%86k%C3%86%C2%91a%C3%93%C2%90%C2%8E%5ED%C2%B9%C2%865%C2%91J%1E%C3%9F%C2%A4%C2%A6%24K%C3%8F%C3%A5%C3%AA%5D%2CQ%C3%BE%C2%ADr%C3%A6%C3%A8%C3%AA%C2%9A*%C2%87~%C2%9C%C3%B7xQ'F%C2%B49xP%0B%C3%9A%C3%A9r%00%C3%9B%C3%9B%C3%9B%C2%AD%C2%9B%C3%96%C2%94%C2%B9%C2%9B%C2%97I597%00%17%0BP%C2%8B%C2%A6%C3%BF%C3%9C%18%C3%BDS%C2%83u%C2%8B%22%22%C2%AE%C2%8A%C3%9D%C2%A7%C3%8A%C2%9B%09%C3%81%C2%91Y%C2%83au%C2%9A%C2%90%244%25%C2%AB%C3%AD%C3%A5%C3%91%C2%A2R1%C2%B4%0DG%C2%B3%C3%A7%C2%AD%C3%A1%C2%8D%C2%A8%C2%9B%C3%BEq0%C2%BC%2C%02%23%03%C3%8A%C3%98%7D%C2%84-%C2%8F%C2%8E%C3%A6%C3%B1A%C3%AB%60%C3%9B%C3%80q3%C2%93%C3%89%C2%B4bE%C3%96-%C3%93%C2%94%C2%BCl%2Fa%C2%86Y%C2%86E%C3%B7%C3%A0R%1E%C3%BB%C3%90%C3%80%C3%9B%26%06%1BdS%23%C2%8A%C3%89))))))))%C2%B7%C2%83%C3%9F%07%3CJ%C3%93%C2%8AV%C2%BD%40%00%00%00%00IEND%C2%AEB%60%C2%82"; 
@@ -396,6 +440,9 @@ var bmpTools = switch_tools_imgString;
 var bmpMode  = switch_mode_imgString;
 
 switch_button.onClick = function() {
+    if (!ensureWriteNetworkEnabled()) {
+        return;  // пользователь либо отменил, либо открыл настройки
+    }
 // 1.1) циклически переключаем индекс иконки
 currentIcon = (currentIcon + 1) % modes.length;
 // 1.2) обновляем саму иконку кнопки
@@ -531,6 +578,10 @@ checkForUpdatesQuietlyForHeadPanel(check_update_button);
 // ======== Обработчик "About" / "Check for Updates" ========
 
 check_update_button.onClick = function () {
+    if (!ensureWriteNetworkEnabled()) {
+        return;  // пользователь либо отменил, либо открыл настройки
+    }
+
 var dialog = new Window("dialog", "About | Group Matcher");
 dialog.orientation = "column";
 dialog.alignChildren = ["center", "top"];
@@ -660,6 +711,9 @@ function checkForUpdatesQuietlyForHeadPanel(headPanelButton) {
 }
 
 function checkForUpdates(Status_update, check_updates) {
+    if (!ensureWriteNetworkEnabled()) {
+        return;  // пользователь либо отменил, либо открыл настройки
+    }
     var githubApiUrl = "https://api.github.com/repos/yo-romlogunov/YO-Group-Matcher/releases/latest";
 
     try {
@@ -755,6 +809,9 @@ function updateSoloForComp(comp) {
 }
 
 solo_anim_button.onClick = function () {
+    if (!ensureWriteNetworkEnabled()) {
+        return;  // пользователь либо отменил, либо открыл настройки
+    }
     var comp = app.project.activeItem;
     if (!(comp instanceof CompItem)) {
         alert("Active item is not a composition.");
@@ -838,6 +895,9 @@ function hasMoreThanOneKey(prop) {
 }
 
 solo_mask_button.onClick = function () {
+    if (!ensureWriteNetworkEnabled()) {
+        return;  // пользователь либо отменил, либо открыл настройки
+    }
     var comp = app.project.activeItem;
     if (!(comp instanceof CompItem)) {
         alert("Active item is not a composition.");
@@ -856,6 +916,9 @@ solo_mask_button.onClick = function () {
 };
 
 solo_trackmatte_button.onClick = function () {
+    if (!ensureWriteNetworkEnabled()) {
+        return;  // пользователь либо отменил, либо открыл настройки
+    }
     var comp = app.project.activeItem;
     if (!(comp instanceof CompItem)) {
         alert("Active item is not a composition.");
@@ -872,6 +935,9 @@ solo_trackmatte_button.onClick = function () {
 };
 
 solo_shapes_button.onClick = function () {
+    if (!ensureWriteNetworkEnabled()) {
+        return;  // пользователь либо отменил, либо открыл настройки
+    }
     var comp = app.project.activeItem;
     if (!(comp instanceof CompItem)) {
         alert("Active item is not a composition.");
@@ -888,6 +954,9 @@ solo_shapes_button.onClick = function () {
 };
 
 solo_text_button.onClick = function () {
+    if (!ensureWriteNetworkEnabled()) {
+        return;  // пользователь либо отменил, либо открыл настройки
+    }
     var comp = app.project.activeItem;
     if (!(comp instanceof CompItem)) {
         alert("Active item is not a composition.");
@@ -904,6 +973,9 @@ solo_text_button.onClick = function () {
 };
 
 solo_null_button.onClick = function () {
+    if (!ensureWriteNetworkEnabled()) {
+        return;  // пользователь либо отменил, либо открыл настройки
+    }
     var comp = app.project.activeItem;
     if (!(comp instanceof CompItem)) {
         alert("Active item is not a composition.");
@@ -920,6 +992,9 @@ solo_null_button.onClick = function () {
 };
 
 solo_adjust_button.onClick = function () {
+    if (!ensureWriteNetworkEnabled()) {
+        return;  // пользователь либо отменил, либо открыл настройки
+    }
     var comp = app.project.activeItem;
     if (!(comp instanceof CompItem)) {
         alert("Active item is not a composition.");
@@ -1423,10 +1498,16 @@ try {
 //
 
 save_my_presets_button.onClick = function () {
+    if (!ensureWriteNetworkEnabled()) {
+        return;  // пользователь либо отменил, либо открыл настройки
+    }
     saveData();
 };
 
 load_my_presets_button.onClick = function () {
+    if (!ensureWriteNetworkEnabled()) {
+        return;  // пользователь либо отменил, либо открыл настройки
+    }
     loadData();
 };
 
@@ -2525,6 +2606,9 @@ function createEffectGroupUI(
 //
 
 create_group_effects_button.onClick = function () {
+    if (!ensureWriteNetworkEnabled()) {
+        return;  // пользователь либо отменил, либо открыл настройки
+    }
     var dialog = new Window("dialog", "Add New Effects Group");
     dialog.orientation = "column";
     dialog.alignChildren = ["fill", "top"];
@@ -2722,6 +2806,9 @@ function addAllEffectsOfThisTypeToGroup(prefix, effectName) {
 // EFFECTS MANAGER///
 
 effects_manager_button.onClick = function () {
+    if (!ensureWriteNetworkEnabled()) {
+        return;  // пользователь либо отменил, либо открыл настройки
+    }
     openEffectsManager();
 };
 
@@ -3833,6 +3920,9 @@ add_aj_mask_button.onClick = function () {
 // "Create a New Layer Group" кнопка
 //
 create_group_layers_button.onClick = function () {
+    if (!ensureWriteNetworkEnabled()) {
+        return;  // пользователь либо отменил, либо открыл настройки
+    }
 var dialog = new Window("dialog", "Add New Layer Group");
 dialog.orientation = "column";
 dialog.alignChildren = ["fill", "top"];
